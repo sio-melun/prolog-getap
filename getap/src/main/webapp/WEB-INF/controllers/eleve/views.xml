@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- Pages -->
+	<definition name="eleve/index" extends="standard-layout">
+		<put-attribute name="title" value="Cas d'utilisation Eleve" />
+		<put-attribute name="body" value="/WEB-INF/controllers/eleve/index.jsp" />
+	</definition>
+
+  <definition name="eleve/mesdctap" extends="standard-layout">
+    <put-attribute name="title" value="Mes demandes de consommation TAP" />
+    <put-attribute name="body" value="/WEB-INF/controllers/eleve/mesdctap.jsp" />
+  </definition>
+
+  <definition name="eleve/edit" extends="standard-layout">
+    <put-attribute name="title" value="Modification d'une DCTAP" />
+    <put-attribute name="body" value="/WEB-INF/controllers/eleve/edit.jsp" />
+  </definition>
+
+  <definition name="eleve/doedit" extends="standard-layout">
+    <put-attribute name="title" value="Modification d'une DCTAP" />
+    <put-attribute name="body" value="/WEB-INF/controllers/eleve/doedit.jsp" />
+  </definition>
+
+	
+</tiles-definitions>
