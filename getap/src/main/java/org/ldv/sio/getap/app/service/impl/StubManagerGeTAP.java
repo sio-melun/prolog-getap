@@ -24,40 +24,46 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 	static {
 
 		AccPersonalise[] lesAPs = { new AccPersonalise(1, "SOS Matières"),
-		    new AccPersonalise(2, "Sortie Théatre"),
-		    new AccPersonalise(3, "Methodologie de travail") };
+				new AccPersonalise(2, "Sortie Théatre"),
+				new AccPersonalise(3, "Methodologie de travail") };
 
 		listeAP = new ArrayList<AccPersonalise>();
 		Collections.addAll(listeAP, lesAPs);
 
 		Classe noclasse = null;
 		listeProfs = new ArrayList<User>();
+		listeProfs.add(new User(1L, "bambou", "Ritchie", noclasse, "admin"));
 		listeProfs.add(new User(2L, "Jean David", "Ichbiah", noclasse,
-		    "prof-intervenant"));
+				"prof-intervenant"));
 		listeProfs.add(new User(3L, "Guido ", "van Rossum", noclasse,
-		    "prof-intervenant"));
-		listeProfs
-		    .add(new User(4L, "Gérard", "Berry", noclasse, "prof-intervenant"));
-		listeProfs.add(new User(5L, "Ada", "Lovelace", noclasse, "prof-principal"));
+				"prof-intervenant"));
+		listeProfs.add(new User(4L, "Gérard", "Berry", noclasse,
+				"prof-intervenant"));
+		listeProfs.add(new User(5L, "Ada", "Lovelace", noclasse,
+				"prof-principal"));
 		listeProfs.add(new User(6L, "Yukihiro", "Matsumoto", noclasse,
-		    "prof-intervenant"));
+				"prof-intervenant"));
 
 		listeEleves = new ArrayList<User>();
 		Random alea = new Random();
 		listeClasses = new ArrayList<Classe>();
 		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(1, "SIO11"),
-		    new Classe(1, "ES"), new Classe(1, "STI") };
+				new Classe(1, "ES"), new Classe(1, "STI") };
 		Collections.addAll(listeClasses, desClasses);
 
 		// 30 eleves
 		for (long i = 10; i < 40; i++)
-			listeEleves.add(new User(i, "prenom" + i, "nom" + i, desClasses[alea
-			    .nextInt(desClasses.length)], "eleve"));
+			listeEleves.add(new User(i, "prenom" + i, "nom" + i,
+					desClasses[alea.nextInt(desClasses.length)], "eleve"));
 
-		listeEleves.add(new User(40L, "James", "Gosling", desClasses[0], "eleve"));
-		listeEleves.add(new User(41L, "Bertrand", "Meyer", desClasses[0], "eleve"));
-		listeEleves.add(new User(42L, "Niklaus", "Wirth", desClasses[1], "eleve"));
-		listeEleves.add(new User(43L, "Rasmus", "Lerdorf", desClasses[1], "eleve"));
+		listeEleves.add(new User(40L, "James", "Gosling", desClasses[0],
+				"eleve"));
+		listeEleves.add(new User(41L, "Bertrand", "Meyer", desClasses[0],
+				"eleve"));
+		listeEleves.add(new User(42L, "Niklaus", "Wirth", desClasses[1],
+				"eleve"));
+		listeEleves.add(new User(43L, "Rasmus", "Lerdorf", desClasses[1],
+				"eleve"));
 
 		String anneScolaire = "2011-2012";
 
@@ -65,30 +71,30 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		listeDCTAP = new ArrayList<DemandeConsoTempsAccPers>();
 
 		listeDCTAP.add(new DemandeConsoTempsAccPers(100L, "2011-2012",
-		    java.sql.Date.valueOf("2011-01-21"), 60, getProfById(2L), getAPbyId(1),
-		    40L, 0));
+				java.sql.Date.valueOf("2011-01-21"), 60, getProfById(2L),
+				getAPbyId(1), 40L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(101L, anneScolaire,
-		    java.sql.Date.valueOf("2011-01-22"), 60, getProfById(2L), getAPbyId(2),
-		    40L, 0));
+				java.sql.Date.valueOf("2011-01-22"), 60, getProfById(2L),
+				getAPbyId(2), 40L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(102L, anneScolaire,
-		    java.sql.Date.valueOf("2011-01-23"), 120, getProfById(5L),
-		    getAPbyId(2), 40L, 0));
+				java.sql.Date.valueOf("2011-01-23"), 120, getProfById(5L),
+				getAPbyId(2), 40L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(103L, anneScolaire,
-		    java.sql.Date.valueOf("2011-01-24"), 120, getProfById(6L),
-		    getAPbyId(0), 40L, 0));
+				java.sql.Date.valueOf("2011-01-24"), 120, getProfById(6L),
+				getAPbyId(0), 40L, 0));
 
 		listeDCTAP.add(new DemandeConsoTempsAccPers(104L, "2011-2012",
-		    java.sql.Date.valueOf("2011-02-21"), 60, getProfById(2L), getAPbyId(1),
-		    41L, 0));
+				java.sql.Date.valueOf("2011-02-21"), 60, getProfById(2L),
+				getAPbyId(1), 41L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(105L, anneScolaire,
-		    java.sql.Date.valueOf("2011-02-22"), 60, getProfById(2L), getAPbyId(2),
-		    41L, 0));
+				java.sql.Date.valueOf("2011-02-22"), 60, getProfById(2L),
+				getAPbyId(2), 41L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(106L, anneScolaire,
-		    java.sql.Date.valueOf("2011-02-23"), 120, getProfById(5L),
-		    getAPbyId(2), 42L, 0));
+				java.sql.Date.valueOf("2011-02-23"), 120, getProfById(5L),
+				getAPbyId(2), 42L, 0));
 		listeDCTAP.add(new DemandeConsoTempsAccPers(107L, anneScolaire,
-		    java.sql.Date.valueOf("2011-02-24"), 120, getProfById(6L),
-		    getAPbyId(0), 42L, 0));
+				java.sql.Date.valueOf("2011-02-24"), 120, getProfById(6L),
+				getAPbyId(0), 42L, 0));
 
 	}
 
@@ -198,7 +204,8 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfPrinc(User profprinc) {
 		// TODO Auto-generated method stub
 
-		// prendre tous les dctap des eleves appartenant a la classe dont profprinc
+		// prendre tous les dctap des eleves appartenant a la classe dont
+		// profprinc
 		// est pp.
 
 		return null;
@@ -208,7 +215,7 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		List<DemandeConsoTempsAccPers> result = new ArrayList<DemandeConsoTempsAccPers>();
 		for (int i = 0; i < listeDCTAP.size(); i++) {
 			String classeName = getUserById(listeDCTAP.get(i).getIdEleve())
-			    .getClasse().getNom();
+					.getClasse().getNom();
 			if (classeName.equals(classe))
 				result.add(listeDCTAP.get(i));
 		}
