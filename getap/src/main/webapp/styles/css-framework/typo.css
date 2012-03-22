@@ -45,17 +45,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     a,
     a:link,
     a:active {
-        text-decoration: underline;     
+        text-decoration: underline;
+        
         color: blue;
+
     }
     a:visited {
         color: purple;
-        background-color: transparent;
+
     }
     a:hover {
         text-decoration: none;
         
-        color: black;
+        color: red;
+
     }
 /* END LINKS */
     
@@ -63,7 +66,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     h1 {
         margin: 0 0 0.5em 0;
         padding: 0;
-        
+        text-align: left;
         font-size: 2em;
         line-height: 1.5em;
         
@@ -84,6 +87,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         
         font-size: 1.3em;
         line-height: 1.3em;
+        text-align: left;
         
         color: black;
     }

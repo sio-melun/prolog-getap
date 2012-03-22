@@ -27,13 +27,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* FORM ELEMENTS */
     form {
-        margin:30px;
-        
+        margin:0;
+        padding:0;
     }
     form div,
     form p {
         margin: 0 0 1em 0;
         padding: 0;
+        
         font-size: 1em;
     }
     label {
@@ -42,16 +43,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     fieldset {
         padding: 5px 10px;
         margin: 0 0 1.5em 0;
+        
         border: 1px solid #eee;
     }
     fieldset legend {
         margin: 0 0 0 0px;
         padding: 0;
+        
         font-size: 1.1em;
         font-weight: bold;
         
         color: #666;
-        background-color: grey;
+        background-color: white;
     }
     * html fieldset legend {
         margin: 0 0 10px -10px;

@@ -11,31 +11,31 @@
 			<tiles:getAsString name="title" />
 		</title>
 		<style type="text/css" media="screen">
-			@import url("<c:url value="/styles/css-framework/tools.css" />");
 			@import url("<c:url value="/styles/css-framework/typo.css" />");
-			@import url("<c:url value="/styles/css-framework/forms.css" />");
-			@import url("<c:url value="/styles/css-framework/layout-navtop-subright.css" />");
 			@import url("<c:url value="/styles/css-framework/layout.css" />");
+			@import url("<c:url value="/styles/css-framework/menu.css" />");
 			@import url("<c:url value="/styles/standard.css" />");
 		</style>
+		<script type="text/javascript" src="/styles/javascript/prefix.js"></script>
 	</head>
+	
 	<body>
+		<div id="banniere">
+			<img src="<c:url value="/images/header3.png"/>" />
+		</div>
 		<div id="page">
-			<div id="header" class="clearfix">
+			<div id="header">
 				<tiles:insertAttribute name="header" />
 			</div><!-- end header -->
-			<div id="content" class="clearfix">
-				<div id="sub">
-					<img src="<c:url value="/images/diplomat.jpg"/>"/>
-				</div>
-				<div id="main">
-					<tiles:insertAttribute name="body" />
-				</div>
-				<div id="nav">
+			<div>
+				<div>
 					<tiles:insertAttribute name="navigation" />
 				</div>
+				<div>
+					<tiles:insertAttribute name="body" />
+				</div>
 			</div><!-- end content -->
-			<div id="footer" class="clearfix">
+			<div id="footer">
 				<tiles:insertAttribute name="footer" />
 			</div><!-- end footer -->
 		</div><!-- end page -->

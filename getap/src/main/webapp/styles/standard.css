@@ -1,60 +1,27 @@
 
-a, a:link a:active {
-	color: black;
-	text-decoration: underline;
-	background: none;
-}
-
-a:visited {
-	color: black;
-	background: none;	
-}
 
 body {
-	background-color: grey;/*#9cac7c*/
+	background: url("../images/fond.jpg") no-repeat top center;
+	background-attachment:fixed;
 }
 
 div#page {
-	width: 759px;
+	width: 900px;
+	height-min: 1000px;
 }
 
 div#header { 
 	margin: 0 0 1em 0;
 	padding: 0px 0px;
-	background-color: #C8CACA;/*#414f23*/
-	color: black;
+	background: transparent;
 }
 
-div#branding {
-	float: none;
-	width: 100%;
-	margin: 10px 0 0 0;
-	padding: 0 0 0 0;
+div#banniere {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-div#welcome {
-	padding: 10px 10px;
-}
-
-div#welcome div.left {
-	float: left;
-}
-
-div#welcome div.right {
-	float: right;
-}
-
-div#content {
-	width: 100%;
-	background: #fff;/**/
-	margin: 0;
-	padding: 0;
-}
-
-div#content .section {
-	width: 500px;
-	float: left;
-}
 
 div#content input[type="submit"],
 div#content input[type="button"] {
@@ -66,48 +33,6 @@ div#content input[type="button"] {
 	vertical-align: middle;
 }
 
-div#sub {
-	margin-top: 20px;
-	float: left;
-}
-
-div#main {
-	margin-top: 20px;
-	margin-left: 20px
-}
-
-div#nav {
-	top: -1.3em;
-	background: grey;/*#414f23*/
-}
-
-div#nav ul {
-	margin-left: 1em;
-	border-left: 1px solid #4f5d2c;
-}
-
-div#nav ul li {
-	border-top: 1px solid #4f5d2c;
-	border-right: 1px solid #4f5d2c;
-	background: #C8CACA;/*#9cac7c*/
-}
-div#nav ul li:active,
-div#nav ul li:hover {
-	background: white;
-}
-
-
-
-div#nav a,
-div#nav a:link,
-div#nav a:active,
-div#nav a:visited {
-	background: none;
-}
-
-div#nav a:hover {
-	background: none;
-}
 
 .errors {
 	font-weight: bold;
@@ -119,82 +44,6 @@ div#nav a:hover {
 	list-style: none;
 }
 
-#content .field {
-	float:left;
-}
-
-#content .field .label {
-	float: left;
-	padding-top: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-	width: 150px;
-	text-align: right;
-}
-
-#content .field .output {
-	float: left;
-	width: 250px;
-	padding-top: 5px;
-	text-align: left;
-}
-
-#content .field .input {
-	float: left;
-	width: 250px;
-	text-align: left;
-}
-
-#content .searchGroup {
-	width: 35%;
-	text-align: right;
-}
-
-div#content .buttonGroup {
-	width: 90%;
-	float: left;
-	text-align: center;
-}
-
-div#content .buttonGroup input[type="submit"],
-div#content .buttonGroup input[type="button"] {
-	margin-right: 5px;
-}
-
-div#content .prev {
-	float: right;
-}
-
-div#content .next {
-	float: right;	
-}
-
-div#content .next a {
-	margin-left: 20px;
-}
-
-div#content .summary {
-	width: 100%;
-	border: 1px solid #414f23;
-	border-collapse: collapse;
-}
-
-div#content .summary thead th {
-	border-left: 1px solid #414f23;
-	background: #fff url(../images/th.bg.gif) 0 100% repeat-x;
-	border-bottom: 1px solid #414f23;
-	padding: 6px;
-	text-align: left;
-	font-size: small;
-}
-
-div#content .summary tbody td {
-	border-left: 1px solid #9cac7c;
-	padding: 4px;
-	border-bottom: 1px solid #9cac7c;
-	font-size: 8pt;
-}
-
 div#sub {
 	width: 215px;
 }
@@ -202,11 +51,16 @@ div#sub {
 div#footer {
 	padding: 25px 0;
 	margin-top: 2em;
-	background-color: white;
 	border-top: 1px solid #c3bbb6;
 }
 
-div#footer img {
+div#footer img.spring {
 	float: right;
-	padding-right: 20px;
+	box-shadow: 0px 1px 2px #000;
+	border-radius: 7px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+div#footer img.prolog {
+
 }
