@@ -57,26 +57,28 @@ public class ElevesController {
 
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String editDCTAPById(@RequestParam("id") String id,
-	    FormDemandeConsoTempsAccPers dctap, Model model) {
+			FormDemandeConsoTempsAccPers formDctap, Model model) {
 
-		System.out.println("TEST id recu :" + dctap.getId());
+		System.out.println("TEST id recu :" + formDctap.getId());
 
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
-		    .valueOf(id));
+				.valueOf(id));
 
 		// valorise le bean de vue avec le dctap courant
-		dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
-		dctap.setDateAction(currentDctap.getDateAction());
-		dctap.setProfId(currentDctap.getProf().getId());
-		dctap.setProfNom(currentDctap.getProf().getNom());
-		dctap.setIdEleve(currentDctap.getIdEleve());
+		formDctap.setId(currentDctap.getId()); // en provenance d'un champ caché
+		formDctap.setDateAction(currentDctap.getDateAction());
+		formDctap.setProfId(currentDctap.getProf().getId());
+		// formDctap.setProfNom(currentDctap.getProf().getNom());
+		formDctap.setIdEleve(currentDctap.getEleve().getId());
+
+		model.addAttribute("lesProfs", manager.getAllProf());
 
 		return "eleve/edit";
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
 	public String doeditDCTAPById(FormDemandeConsoTempsAccPers formDctap,
-	    BindingResult bindResult, Model model) {
+			BindingResult bindResult, Model model) {
 		System.out.println("TEST :" + formDctap.getId());
 		System.out.println("TEST id eleve :" + formDctap.getIdEleve());
 		System.out.println("TEST :" + model);
@@ -85,20 +87,20 @@ public class ElevesController {
 		User prof = manager.getUserById(formDctap.getProfId());
 		if (prof == null)
 			bindResult.rejectValue("profId", "required",
-			    "Erreur d'identifiant de professeur");
-		else {
-			String nomProf = formDctap.getProfNom();
-			if (!nomProf.equalsIgnoreCase(prof.getNom()))
-				bindResult.rejectValue("profNom", "required",
-				    "Le nom du professeur ne correspond pas");
-		}
+					"Erreur d'identifiant de professeur");
+		// else {
+		// String nomProf = formDctap.getProfNom();
+		// if (!nomProf.equalsIgnoreCase(prof.getNom()))
+		// bindResult.rejectValue("profNom", "required",
+		// "Le nom du professeur ne correspond pas");
+		// }
 
 		if (bindResult.hasErrors())
 			return "eleve/edit";
 		else {
 
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
-			    .valueOf(formDctap.getId()));
+					.valueOf(formDctap.getId()));
 
 			// valorise l'objet de la base à partir du bean de vue
 			dctapForUpdate.setDateAction(formDctap.getDateAction());

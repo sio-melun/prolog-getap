@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <h1>Edition</h1>
@@ -17,6 +16,11 @@
         </div>
       </div>
       <div class="form-row">
+       <label for="profId">Les professeurs :</label>
+       <form:select path="profId" items="${lesProfs}" itemValue="id" itemLabel="nom"></form:select>
+      </div>
+      <%--
+      <div class="form-row">
         <label for="profNom">Professeur :</label>
         <div class="input">
           <form:input path="profNom" />
@@ -26,7 +30,7 @@
           <form:input path="profId" />
         </div>
       </div>
-
+ --%>
     </fieldset>
 
         

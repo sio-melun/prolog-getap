@@ -50,13 +50,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         color: blue;
 
     }
-    a:visited {
-        color: purple;
 
-    }
     a:hover {
         text-decoration: none;
-        
         color: red;
 
     }

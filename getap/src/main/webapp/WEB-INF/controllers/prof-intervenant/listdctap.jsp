@@ -9,7 +9,7 @@
 <c:if test="${not empty listdctaps}">
 	<ul>
 		<c:forEach items="${listdctaps}" var="dctap">
-			<li>${dctap.dateAction} ${dctap.idEleve}
+			<li>${dctap.dateAction} (${dctap.eleve.nom})
 				<a href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />">modification         
         		</a>  --
 				<a href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />">valider		  					
