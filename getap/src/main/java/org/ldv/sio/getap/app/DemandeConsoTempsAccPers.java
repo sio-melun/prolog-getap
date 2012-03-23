@@ -17,7 +17,8 @@ public class DemandeConsoTempsAccPers {
 	}
 
 	public DemandeConsoTempsAccPers(Long id, String anneeScolaire, Date date,
-	    Integer minutes, User prof, AccPersonalise accPers, Long idEleve, int etat) {
+			Integer minutes, User prof, AccPersonalise accPers, Long idEleve,
+			int etat) {
 		super();
 		this.id = id;
 		this.anneeScolaire = anneeScolaire;
@@ -98,9 +99,9 @@ public class DemandeConsoTempsAccPers {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-		    + ((anneeScolaire == null) ? 0 : anneeScolaire.hashCode());
+				+ ((anneeScolaire == null) ? 0 : anneeScolaire.hashCode());
 		result = prime * result
-		    + ((dateAction == null) ? 0 : dateAction.hashCode());
+				+ ((dateAction == null) ? 0 : dateAction.hashCode());
 		result = prime * result + ((idEleve == null) ? 0 : idEleve.hashCode());
 		return result;
 	}
@@ -135,9 +136,9 @@ public class DemandeConsoTempsAccPers {
 	@Override
 	public String toString() {
 		return "DemandeConsoTempsAccPers [id=" + id + ", anneeScolaire="
-		    + anneeScolaire + ", dateAction=" + dateAction + ", minutes=" + minutes
-		    + ", prof=" + prof + ", accPers=" + accPers + ", idEleve=" + idEleve
-		    + ", etat=" + etat + "]";
+				+ anneeScolaire + ", dateAction=" + dateAction + ", minutes="
+				+ minutes + ", prof=" + prof + ", accPers=" + accPers
+				+ ", idEleve=" + idEleve + ", etat=" + etat + "]";
 	}
 
 }
