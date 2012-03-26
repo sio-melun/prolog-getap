@@ -10,8 +10,8 @@
 <body>
 	<h1>Ajout d'un utilisateur</h1>
 
-	<form:form modelAttribute="formAjoutUser"
-		action="doajout" method="post">
+	<form:form modelAttribute="formAjoutUser" action="doajout"
+		method="post">
 		<form:errors path="*" cssClass="errors" />
 
 		<div class="section">
@@ -35,10 +35,8 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="classe">Classe : </label>
-					<div class="input">
-						<form:input path="classe" />
-					</div>
+					<label for="classe">Les classes :</label><br>
+					<form:select path="classeId" items="${lesClasses}" itemValue="id" itemLabel="nom"></form:select>
 				</div>
 				<div class="form-row">
 					<label for="role">Role : </label>
@@ -47,11 +45,6 @@
 					</div>
 				</div>
 			</fieldset>
-
-
-			<form:hidden path="id" />
-
-
 			<div id="buttonGroup">
 				<input type="submit" value="Ajouter" />
 			</div>

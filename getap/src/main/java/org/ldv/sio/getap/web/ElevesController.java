@@ -88,16 +88,11 @@ public class ElevesController {
 		if (prof == null)
 			bindResult.rejectValue("profId", "required",
 					"Erreur d'identifiant de professeur");
-		// else {
-		// String nomProf = formDctap.getProfNom();
-		// if (!nomProf.equalsIgnoreCase(prof.getNom()))
-		// bindResult.rejectValue("profNom", "required",
-		// "Le nom du professeur ne correspond pas");
-		// }
 
-		if (bindResult.hasErrors())
+		if (bindResult.hasErrors()) {
+			model.addAttribute("lesProfs", manager.getAllProf());
 			return "eleve/edit";
-		else {
+		} else {
 
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));

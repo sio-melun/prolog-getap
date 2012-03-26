@@ -48,8 +48,8 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		listeEleves = new ArrayList<User>();
 		Random alea = new Random();
 		listeClasses = new ArrayList<Classe>();
-		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(1, "SIO11"),
-				new Classe(1, "ES"), new Classe(1, "STI") };
+		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(2, "SIO11"),
+				new Classe(3, "ES"), new Classe(4, "STI") };
 		Collections.addAll(listeClasses, desClasses);
 
 		// 30 eleves

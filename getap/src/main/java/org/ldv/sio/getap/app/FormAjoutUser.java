@@ -2,21 +2,22 @@ package org.ldv.sio.getap.app;
 
 public class FormAjoutUser {
 
-	private long id;
+	private Long id;
 	private String nom;
 	private String prenom;
-	private String classe;
+	private Integer classeId;
+	private String classeNom;
 	private String role;
 
 	public FormAjoutUser() {
 
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -36,19 +37,33 @@ public class FormAjoutUser {
 		this.prenom = prenom;
 	}
 
-	public String getClasse() {
-		return classe;
-	}
-
-	public void setClasse(String classe) {
-		this.classe = classe;
-	}
-
 	public String getRole() {
 		return role;
 	}
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Integer getClasseId() {
+		return classeId;
+	}
+
+	public void setClasseId(Integer classeId) {
+		this.classeId = classeId;
+	}
+
+	public String getClasseNom() {
+		return classeNom;
+	}
+
+	public void setClasseNom(String classeNom) {
+		this.classeNom = classeNom;
+	}
+
+	public String classe() {
+		String str = "ID : " + this.getClasseId();
+		str += "\nNom : " + this.getClasseNom();
+		return str;
 	}
 }
