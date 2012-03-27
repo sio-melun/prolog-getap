@@ -20,25 +20,28 @@
 	</head>
 	
 	<body>
-		<div id="banniere">
-			<img src="<c:url value="/images/header3.png"/>" />
+	<div id="banniere">
+		<img src="<c:url value="/images/header3.png"/>" />
+	</div>
+
+	<div id="page">
+		<div>
+			<tiles:insertAttribute name="navigation" />
 		</div>
-		<div id="page">
-			<div id="header">
-				<tiles:insertAttribute name="header" />
-			</div><!-- end header -->
-			<div>
-				<div>
-					<tiles:insertAttribute name="navigation" />
-				</div>
-				<div>
-					<tiles:insertAttribute name="body" />
-				</div>
-			</div><!-- end content -->
-			<div id="footer">
-				<tiles:insertAttribute name="footer" />
-			</div><!-- end footer -->
-		</div><!-- end page -->
+		<div id="header">
+			<tiles:insertAttribute name="header" />
+		</div>
+		<!-- end header -->
+		<div>
+			<tiles:insertAttribute name="body" />
+		</div>
+		<!-- end content -->
+		<div id="footer">
+			<tiles:insertAttribute name="footer" />
+		</div>
+		<!-- end footer -->
+	</div>
+	<!-- end page -->
 		<div id="extra1">&nbsp;</div>
 		<div id="extra2">&nbsp;</div>
 	</body>

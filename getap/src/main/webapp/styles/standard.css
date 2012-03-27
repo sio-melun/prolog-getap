@@ -10,7 +10,10 @@ div#page {
 	height-min: 1000px;
 }
 
+
 div#header { 
+	position: relative;
+	top:-35px;
 	margin: 0 0 1em 0;
 	padding: 0px 0px;
 	background: transparent;
