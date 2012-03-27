@@ -40,7 +40,7 @@
 				</div>
 				<div class="form-row">
 					<label for="role">Role : </label><br>
-					<form:select path="roleId" items="${lesRoles}" itemValue="id" itemLabel="nom"></form:select>
+					<form:select path="roleNom" items="${lesRoles}" itemValue="nom" itemLabel="nom"></form:select>
 				</div>
 			</fieldset>
 			<div id="buttonGroup">

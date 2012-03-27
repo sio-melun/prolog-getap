@@ -49,6 +49,7 @@ public class AdminController {
 			BindingResult bindResult, Model model) {
 		System.out.println("TEST :" + formAjout.getId());
 		System.out.println("TEST classe :" + formAjout.classe());
+		System.out.println("TEST role :" + formAjout.getRoleNom());
 		System.out.println("TEST :" + model);
 
 		if (bindResult.hasErrors())
