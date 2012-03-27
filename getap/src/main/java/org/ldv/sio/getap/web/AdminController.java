@@ -39,6 +39,7 @@ public class AdminController {
 	public String ajoutUser(FormAjoutUser formAjout, Model model) {
 
 		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesRoles", manager.getAllRole());
 
 		return "admin/ajoutUser";
 	}
@@ -57,7 +58,7 @@ public class AdminController {
 			System.out.println(classe);
 
 			User user = new User(formAjout.getId(), formAjout.getPrenom(),
-					formAjout.getNom(), classe, formAjout.getRole());
+					formAjout.getNom(), classe, formAjout.getRoleNom());
 
 			manager.addUser(user);
 

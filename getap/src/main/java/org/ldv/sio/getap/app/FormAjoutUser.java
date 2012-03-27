@@ -7,7 +7,8 @@ public class FormAjoutUser {
 	private String prenom;
 	private Integer classeId;
 	private String classeNom;
-	private String role;
+	private int roleId;
+	private String roleNom;
 
 	public FormAjoutUser() {
 
@@ -37,12 +38,20 @@ public class FormAjoutUser {
 		this.prenom = prenom;
 	}
 
-	public String getRole() {
-		return role;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleNom() {
+		return roleNom;
+	}
+
+	public void setRoleNom(String roleNom) {
+		this.roleNom = roleNom;
 	}
 
 	public Integer getClasseId() {

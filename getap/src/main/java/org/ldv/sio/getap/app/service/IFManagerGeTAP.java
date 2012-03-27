@@ -5,6 +5,7 @@ import java.util.List;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 
 /**
@@ -72,6 +73,9 @@ public interface IFManagerGeTAP {
 	public void upDateClasse(Classe classe);
 
 	public void deleteClasse(Classe classe);
+
+	// CRUD des roles
+	public List<Role> getAllRole();
 
 	// Opération sur annee scolaire (mise à jour lors d'une importation)
 	public String getCurrentAnneeScolaire();
