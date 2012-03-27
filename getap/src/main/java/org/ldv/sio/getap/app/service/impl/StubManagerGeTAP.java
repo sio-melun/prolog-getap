@@ -8,6 +8,7 @@ import java.util.Random;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 	static private List<User> listeEleves;
 	static private List<Classe> listeClasses;
 	static private List<AccPersonalise> listeAP;
+	static private List<Role> listeRoles;
 
 	static {
 
@@ -29,6 +31,13 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 
 		listeAP = new ArrayList<AccPersonalise>();
 		Collections.addAll(listeAP, lesAPs);
+
+		listeRoles = new ArrayList<Role>();
+
+		listeRoles.add(new Role(1, "eleve"));
+		listeRoles.add(new Role(2, "prof-intervenant"));
+		listeRoles.add(new Role(3, "prof-principal"));
+		listeRoles.add(new Role(4, "admin"));
 
 		Classe noclasse = null;
 		listeProfs = new ArrayList<User>();
@@ -337,6 +346,11 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		List<String> as = new ArrayList<String>();
 		as.add("2011-2012");
 		return as;
+	}
+
+	public List<Role> getAllRole() {
+
+		return listeRoles;
 	}
 
 }

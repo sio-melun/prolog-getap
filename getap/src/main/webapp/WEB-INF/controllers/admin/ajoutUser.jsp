@@ -39,10 +39,8 @@
 					<form:select path="classeId" items="${lesClasses}" itemValue="id" itemLabel="nom"></form:select>
 				</div>
 				<div class="form-row">
-					<label for="role">Role : </label>
-					<div class="input">
-						<form:input path="role" />
-					</div>
+					<label for="role">Role : </label><br>
+					<form:select path="roleId" items="${lesRoles}" itemValue="id" itemLabel="nom"></form:select>
 				</div>
 			</fieldset>
 			<div id="buttonGroup">
