@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h1>Welcome in your home !</h1>
+<h3>Gérer les demandes de TAP</h3>
 
-<a href="<c:url value="/app/eleve/mesdctap" />">voir mes demandes de consommation de TAP</a><br>
-<a href="<c:url value="/app/eleve/ajoutdctap" />">Ajouter une demande de consommation de TAP</a>
+<a href="<c:url value="/app/eleve/mesdctap" />" style="text-decoration:none"><input type="button" value="Voir et éditer"></a>
+<a href="<c:url value="/app/eleve/ajoutdctap" />" style="text-decoration:none"><input type="button" value="Ajouter"></a>

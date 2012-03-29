@@ -36,18 +36,18 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="minutes">Minutes : </label>
+					<label for="minutes">Temps d'aide personnalisée : </label>
 					<div class="input">
 						<form:input path="minutes" />
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="profs">Les profs :</label><br>
+					<label for="profs">Les professeurs :</label><br>
 					<form:select path="profId" items="${lesProfs}" itemValue="id" itemLabel="nom"></form:select>
 				</div>
 				<div class="form-row">
 					<label for="accPers">Type d'aide personnalisée : </label><br>
-					<form:select path="accPersNom" items="${lesAP}" itemValue="id" itemLabel="nom"></form:select>
+					<form:select path="accPersId" items="${lesAP}" itemValue="id" itemLabel="nom"></form:select>
 				</div>
 			</fieldset>
 			

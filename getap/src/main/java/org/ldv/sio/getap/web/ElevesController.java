@@ -114,6 +114,15 @@ public class ElevesController {
 		model.addAttribute("lesProfs", manager.getAllProf());
 		model.addAttribute("lesAP", manager.getAllAP());
 
+		Long nb = 0L;
+		for (DemandeConsoTempsAccPers user : manager
+				.getAllDCTAPByEleve(UtilSession.getUserInSession())) {
+			if (nb < user.getId())
+				nb = user.getId();
+		}
+		nb++;
+
+		formAjout.setId(nb);
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);
@@ -126,7 +135,8 @@ public class ElevesController {
 			BindingResult bindResult, Model model) {
 		System.out.println("TEST :" + formAjout.getId());
 		System.out.println("TEST id eleve :" + formAjout.getEleveId());
-		System.out.println("TEST etat :" + formAjout.getEtat());
+		System.out.println("TEST AP :"
+				+ manager.getAPById(formAjout.getAccPersId() - 1).getNom());
 		System.out.println("TEST :" + model);
 
 		if (bindResult.hasErrors())
