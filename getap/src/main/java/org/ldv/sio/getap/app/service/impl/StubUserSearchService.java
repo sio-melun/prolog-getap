@@ -46,28 +46,6 @@ public class StubUserSearchService implements UserSearchService {
 		users.addAll(tools.getAllProf());
 		users.addAll(tools.getAllEleve());
 
-		/*
-		 * Classe noclasse = null; Classe[] desClasses = { new Classe(1,
-		 * "SIO12"), new Classe(2, "SIO11"), new Classe(3, "ES"), new Classe(4,
-		 * "STI") };
-		 * 
-		 * List<User> users = new ArrayList<User>();
-		 * 
-		 * users.add(new User(1L, "Jean", "Ritchie", noclasse, "admin"));
-		 * users.add(new User(2L, "Jean David", "Ichbiah", noclasse,
-		 * "prof-intervenant")); users.add(new User(3L, "Guido ", "van Rossum",
-		 * noclasse, "prof-intervenant")); users.add(new User(4L, "Gérard",
-		 * "Berry", noclasse, "prof-intervenant")); users.add(new User(5L,
-		 * "Ada", "Lovelace", noclasse, "prof-principal")); users.add(new
-		 * User(6L, "Yukihiro", "Matsumoto", noclasse, "prof-intervenant"));
-		 * 
-		 * users.add(new User(40L, "James", "Gosling", desClasses[0], "eleve"));
-		 * users.add(new User(41L, "Bertrand", "Meyer", desClasses[0],
-		 * "eleve")); users.add(new User(42L, "Niklaus", "Wirth", desClasses[1],
-		 * "eleve")); users.add(new User(43L, "Rasmus", "Lerdorf",
-		 * desClasses[1], "eleve"));
-		 */
-
 		return users;
 
 	}

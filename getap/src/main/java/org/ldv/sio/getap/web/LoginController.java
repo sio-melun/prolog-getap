@@ -31,7 +31,7 @@ public class LoginController {
 	 * Default action, displays the login page.
 	 * 
 	 * @param UserLoginCriteria
-	 *          The criteria to authenticate
+	 *            The criteria to authenticate
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(UserLoginCriteria userSearchCriteria) {
@@ -42,20 +42,20 @@ public class LoginController {
 	 * Valide user puis l'authentifie via le bean injecté hauthLoginService
 	 * 
 	 * @param userLoginCriteria
-	 *          The criteria to validate for
+	 *            The criteria to validate for
 	 * @param bindResult
-	 *          Holds userLoginCriteria validation errors
+	 *            Holds userLoginCriteria validation errors
 	 * @param model
-	 *          Holds the resulting user (is authenticate)
+	 *            Holds the resulting user (is authenticate)
 	 * @return Success or index view
 	 */
 	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
 	public String authenticate(UserLoginCriteria userLoginCriteria,
-	    BindingResult bindResult, Model model) {
+			BindingResult bindResult, Model model) {
 		if (userLoginCriteria.getLogin() == null
-		    || "".equals(userLoginCriteria.getLogin().trim())) {
+				|| "".equals(userLoginCriteria.getLogin().trim())) {
 			bindResult.rejectValue("login", "required",
-			    "SVP un identifiant est attendu !");
+					"SVP un identifiant est attendu !");
 		}
 		if (bindResult.hasErrors()) {
 			return "login/index";
@@ -63,10 +63,11 @@ public class LoginController {
 			User user = hauthLoginService.getAuthUser(userLoginCriteria);
 			if (user == null) {
 				bindResult.rejectValue("login", "required",
-				    "SVP entrez un identifiant valide");
+						"SVP entrez un identifiant valide");
 				return "login/index";
 			}
 			UtilSession.setUserInSession(user);
+			UtilSession.setAnneeScolaireInSession("2011-2012");
 			model.addAttribute("userAuth", user);
 			return "login/authenticate";
 		}
@@ -76,7 +77,7 @@ public class LoginController {
 	 * supprime user de la session, et retourne au login
 	 * 
 	 * @param userLoginCriteria
-	 *          (pour fournir cette instance à la vue 'login/index')
+	 *            (pour fournir cette instance à la vue 'login/index')
 	 * @return Success view
 	 */
 	@RequestMapping(value = "logout", method = RequestMethod.GET)

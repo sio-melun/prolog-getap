@@ -1,6 +1,7 @@
 package org.ldv.sio.getap.web;
 
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormDemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -104,6 +105,45 @@ public class ElevesController {
 			manager.updateDCTAP(dctapForUpdate);
 
 			return "redirect:/app/eleve/mesdctap";
+		}
+	}
+
+	@RequestMapping(value = "ajoutdctap", method = RequestMethod.GET)
+	public String ajoutUser(FormAjoutDctap formAjout, Model model) {
+
+		model.addAttribute("lesProfs", manager.getAllProf());
+		model.addAttribute("lesAP", manager.getAllAP());
+
+		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
+		formAjout.setEleveId(UtilSession.getUserInSession().getId());
+		formAjout.setEtat(0);
+
+		return "eleve/ajoutdctap";
+	}
+
+	@RequestMapping(value = "doajout", method = RequestMethod.POST)
+	public String doajoutUser(FormAjoutDctap formAjout,
+			BindingResult bindResult, Model model) {
+		System.out.println("TEST :" + formAjout.getId());
+		System.out.println("TEST id eleve :" + formAjout.getEleveId());
+		System.out.println("TEST etat :" + formAjout.getEtat());
+		System.out.println("TEST :" + model);
+
+		if (bindResult.hasErrors())
+			return "eleve/ajoutdctap";
+		else {
+
+			DemandeConsoTempsAccPers dctap = new DemandeConsoTempsAccPers(
+					formAjout.getId(), formAjout.getAnneeScolaire(),
+					formAjout.getDate(), formAjout.getMinutes(),
+					manager.getUserById(formAjout.getProfId()),
+					manager.getAPById(formAjout.getAccPersId()),
+					manager.getUserById(formAjout.getEleveId()),
+					formAjout.getEtat());
+
+			manager.addDCTAP(dctap);
+
+			return "redirect:/app/eleve/index";
 		}
 	}
 }

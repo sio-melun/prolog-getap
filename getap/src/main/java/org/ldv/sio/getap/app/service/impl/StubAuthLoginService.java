@@ -31,10 +31,13 @@ public class StubAuthLoginService implements IFHauthLoginService {
 	}
 
 	private List<User> getStubUsers() {
+		if (users != null)
+			return users;
+
 		users = new ArrayList<User>();
 		users.addAll(stubManagerGeTAP.getListeProfs());
 		users.addAll(stubManagerGeTAP.getListeEleves());
-
+		users.add(new User(1L, "Dennis", "Ritchie", null, "admin"));
 		return users;
 	}
 
