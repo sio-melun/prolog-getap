@@ -18,9 +18,22 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/ajoutUser.jsp" />
 	</definition>
+
+	<definition name="admin/searchUser" extends="standard-layout">
+		<put-attribute name="title" value="Recherche d'un utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchUser.jsp" />
+	</definition>
 	
+	<definition name="admin/dosearchUser" extends="standard-layout">
+		<put-attribute name="title" value="Resultat recherche d'un utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/dosearchUser.jsp" />
+	</definition>
+
 	<definition name="admin/doajout" extends="standard-layout">
-    <put-attribute name="title" value="Ajout d'un utilisateur" />
-    <put-attribute name="body" value="/WEB-INF/controllers/admin/doajout.jsp" />
-  </definition>
+		<put-attribute name="title" value="Ajout d'un utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/doajout.jsp" />
+	</definition>
 </tiles-definitions>

@@ -33,7 +33,6 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		Collections.addAll(listeAP, lesAPs);
 
 		listeRoles = new ArrayList<Role>();
-
 		listeRoles.add(new Role(1, "eleve"));
 		listeRoles.add(new Role(2, "prof-intervenant"));
 		listeRoles.add(new Role(3, "prof-principal"));
@@ -54,12 +53,13 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		listeProfs.add(new User(6L, "Yukihiro", "Matsumoto", noclasse,
 				"prof-intervenant"));
 
-		listeEleves = new ArrayList<User>();
 		Random alea = new Random();
 		listeClasses = new ArrayList<Classe>();
 		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(2, "SIO11"),
 				new Classe(3, "ES"), new Classe(4, "STI") };
 		Collections.addAll(listeClasses, desClasses);
+
+		listeEleves = new ArrayList<User>();
 
 		// 30 eleves
 		for (long i = 10; i < 40; i++)

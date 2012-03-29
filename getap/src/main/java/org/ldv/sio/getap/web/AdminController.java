@@ -3,7 +3,9 @@ package org.ldv.sio.getap.web;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.User;
+import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.ldv.sio.getap.app.service.UserSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,15 @@ public class AdminController {
 	@Autowired
 	private IFManagerGeTAP manager;
 
+	@Autowired
+	private UserSearchService userSearchService;
+
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
+	}
+
+	public void setUserSearchService(UserSearchService userSearchService) {
+		this.userSearchService = userSearchService;
 	}
 
 	/**
@@ -64,6 +73,35 @@ public class AdminController {
 			manager.addUser(user);
 
 			return "redirect:/app/admin/index";
+		}
+	}
+
+	@RequestMapping(value = "searchUser", method = RequestMethod.GET)
+	public void searchUser(UserSearchCriteria userSearchCriteria) {
+
+	}
+
+	/**
+	 * @param userSearchCriteria
+	 * @param bindResult
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "dosearchUser", method = RequestMethod.GET)
+	public String search(UserSearchCriteria userSearchCriteria,
+			BindingResult bindResult, Model model) {
+		if (userSearchCriteria.getQuery() == null
+				|| "".equals(userSearchCriteria.getQuery())) {
+			bindResult.rejectValue("query", "required",
+					"Please enter valid search criteria");
+		}
+		if (bindResult.hasErrors()) {
+			return "admin/searchUser";
+		} else {
+			// System.out.println(userSearchService.getStubUsers());
+			model.addAttribute("users",
+					userSearchService.search(userSearchCriteria));
+			return "admin/dosearchUser";
 		}
 	}
 

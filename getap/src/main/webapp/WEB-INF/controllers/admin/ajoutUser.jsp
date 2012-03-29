@@ -20,29 +20,29 @@
 					<label for="id">ID : </label>
 					<div class="input">
 						<form:input path="id" />
-					</div>
+					</div><br>
 				</div>
 				<div class="form-row">
 					<label for="prenom">Prénom : </label>
 					<div class="input">
 						<form:input path="prenom" />
-					</div>
+					</div><br>
 				</div>
 				<div class="form-row">
 					<label for="nom">Nom : </label>
 					<div class="input">
 						<form:input path="nom" />
-					</div>
+					</div><br>
 				</div>
 				<div class="form-row">
 					<label for="classe">Les classes :</label><br>
 					<form:select path="classeId" items="${lesClasses}" itemValue="id" itemLabel="nom"></form:select>
-				</div>
+				</div><br>
 				<div class="form-row">
 					<label for="role">Role : </label><br>
 					<form:select path="roleNom" items="${lesRoles}" itemValue="nom" itemLabel="nom"></form:select>
 				</div>
-			</fieldset>
+			</fieldset><br>
 			<div id="buttonGroup">
 				<input type="submit" value="Ajouter" />
 			</div>
