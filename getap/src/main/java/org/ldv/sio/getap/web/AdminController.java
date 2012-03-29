@@ -5,7 +5,6 @@ import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
-import org.ldv.sio.getap.app.service.UserSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +22,8 @@ public class AdminController {
 	@Autowired
 	private IFManagerGeTAP manager;
 
-	@Autowired
-	private UserSearchService userSearchService;
-
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
-	}
-
-	public void setUserSearchService(UserSearchService userSearchService) {
-		this.userSearchService = userSearchService;
 	}
 
 	/**
@@ -98,9 +90,8 @@ public class AdminController {
 		if (bindResult.hasErrors()) {
 			return "admin/searchUser";
 		} else {
-			// System.out.println(userSearchService.getStubUsers());
-			model.addAttribute("users",
-					userSearchService.search(userSearchCriteria));
+			// System.out.println(manager.getStubUsers());
+			model.addAttribute("users", manager.search(userSearchCriteria));
 			return "admin/dosearchUser";
 		}
 	}

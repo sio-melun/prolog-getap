@@ -7,6 +7,7 @@ import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
+import org.ldv.sio.getap.app.UserSearchCriteria;
 
 /**
  * Contrat de services pour les cas d'utilisation
@@ -81,4 +82,10 @@ public interface IFManagerGeTAP {
 	public String getCurrentAnneeScolaire();
 
 	public List<String> getAllAnneeScolaire();
+
+	// Opération Search User
+	public List<User> search(UserSearchCriteria userSearchCriteria);
+
+	public User getUser(Long id);
+
 }

@@ -2,6 +2,7 @@ package org.ldv.sio.getap.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
+import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.springframework.stereotype.Service;
 
@@ -350,6 +352,41 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 	public List<Role> getAllRole() {
 
 		return listeRoles;
+	}
+
+	public List<User> search(UserSearchCriteria userSearchCriteria) {
+		List<User> users = this.getStubUsers();
+		List<User> foundUsers = new ArrayList<User>();
+
+		User user = null;
+
+		Iterator<User> userIt = users.iterator();
+
+		while (userIt.hasNext()) {
+			user = userIt.next();
+			if (user.getNom().contains(userSearchCriteria.getQuery())) {
+				foundUsers.add(user);
+			}
+		}
+
+		return foundUsers;
+	}
+
+	public User getUser(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<User> getStubUsers() {
+		// TODO Faire la fonction qui retourne tous les users
+
+		List<User> users = new ArrayList<User>();
+
+		users.addAll(getAllProf());
+		users.addAll(getAllEleve());
+
+		return users;
+
 	}
 
 }
