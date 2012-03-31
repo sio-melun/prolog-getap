@@ -78,6 +78,7 @@ public class ProfInterController {
 			// valorise l'objet de la base à partir du bean de vue
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
 			dctapForUpdate.setMinutes(formDctap.getMinutes());
+			dctapForUpdate.setEtat(2);
 
 			return "redirect:/app/prof-intervenant/listdctap";
 		}

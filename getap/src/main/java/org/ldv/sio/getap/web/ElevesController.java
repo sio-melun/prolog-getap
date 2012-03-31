@@ -1,5 +1,7 @@
 package org.ldv.sio.getap.web;
 
+import javax.swing.JOptionPane;
+
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormDemandeConsoTempsAccPers;
@@ -48,8 +50,10 @@ public class ElevesController {
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String deleteDCTAPById(@PathVariable String id, Model model) {
-
-		if (!manager.deleteDCTAPById(Long.valueOf(id))) {
+		int del = JOptionPane.showConfirmDialog(null, "Êtes vous sur ?",
+				"Vérification", JOptionPane.YES_NO_OPTION);
+		System.out.println("DEL : " + del);
+		if (del != 1 && !manager.deleteDCTAPById(Long.valueOf(id))) {
 			return "redirect:/app/eleve/index";
 		}
 
@@ -71,8 +75,13 @@ public class ElevesController {
 		formDctap.setProfId(currentDctap.getProf().getId());
 		// formDctap.setProfNom(currentDctap.getProf().getNom());
 		formDctap.setIdEleve(currentDctap.getEleve().getId());
+		formDctap.setAccPersId(currentDctap.getAccPers().getId());
+		formDctap.setMinutes(currentDctap.getMinutes());
 
 		model.addAttribute("lesProfs", manager.getAllProf());
+		model.addAttribute("etat", manager.getDCTAPById(formDctap.getId())
+				.getEtat());
+		model.addAttribute("lesAP", manager.getAllAP());
 
 		return "eleve/edit";
 	}
@@ -83,6 +92,9 @@ public class ElevesController {
 		System.out.println("TEST :" + formDctap.getId());
 		System.out.println("TEST id eleve :" + formDctap.getIdEleve());
 		System.out.println("TEST :" + model);
+		System.out.println("TEST AP :"
+				+ manager.getAPById(formDctap.getAccPersId() - 1).getNom());
+		System.out.println("TEST minutes :" + formDctap.getMinutes());
 
 		// java.sql.Date.valueOf(formDctap.getDateAction());
 		User prof = manager.getUserById(formDctap.getProfId());
@@ -100,8 +112,11 @@ public class ElevesController {
 
 			// valorise l'objet de la base à partir du bean de vue
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
+			dctapForUpdate.setMinutes(formDctap.getMinutes());
 
 			dctapForUpdate.setProf(manager.getUserById(formDctap.getProfId()));
+			dctapForUpdate.setAccPers(manager.getAPById(formDctap
+					.getAccPersId() - 1));
 			manager.updateDCTAP(dctapForUpdate);
 
 			return "redirect:/app/eleve/mesdctap";

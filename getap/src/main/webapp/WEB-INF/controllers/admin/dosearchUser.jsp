@@ -17,7 +17,7 @@
 
 	<c:if test="${not empty users}">
 		<ul>
-			<c:forEach items="${users}" var="user" begin="0" end="2" step="1">
+			<c:forEach items="${users}" var="user">
 				<li><%-- <a href="<c:url value="/app/admin/details?id=${user.id}" />"> --%> 
 					<c:out value="${user.nom} (${user.prenom}, ${user.role})" />
 					<%-- </a>--%>
