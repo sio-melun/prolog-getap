@@ -40,6 +40,8 @@ public class ProfInterController {
 
 		System.out.println("TEST id recu :" + dctap.getId());
 
+		model.addAttribute("lesAP", manager.getAllAP());
+
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
 
@@ -47,7 +49,7 @@ public class ProfInterController {
 		dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
 		dctap.setDateAction(currentDctap.getDateAction());
 		dctap.setMinutes(currentDctap.getMinutes());
-		dctap.setAccPersNom(currentDctap.getAccPers().getNom());
+		dctap.setAccPersId(currentDctap.getAccPers().getId());
 
 		return "prof-intervenant/edit";
 	}
@@ -78,6 +80,8 @@ public class ProfInterController {
 			// valorise l'objet de la base à partir du bean de vue
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
 			dctapForUpdate.setMinutes(formDctap.getMinutes());
+			dctapForUpdate.setAccPers(manager.getAPById(formDctap
+					.getAccPersId() - 1));
 			dctapForUpdate.setEtat(2);
 
 			return "redirect:/app/prof-intervenant/listdctap";

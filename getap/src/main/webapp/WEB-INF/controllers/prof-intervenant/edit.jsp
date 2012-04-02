@@ -21,10 +21,8 @@
         <div class="input">
           <form:input path="minutes" />
         </div>
-        <label for="accPersNom">Type d'aide personnalisée :</label>
-        <div class="input">
-          <form:input path="accPersNom" />
-        </div>
+        <label for="accPersId">Type d'aide personnalisée :</label><br>
+        <form:select path="accPersId" items="${lesAP}" itemValue="id" itemLabel="nom"></form:select>
       </div>
 
     </fieldset>

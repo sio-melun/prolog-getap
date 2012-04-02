@@ -40,6 +40,12 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 		listeRoles.add(new Role(3, "prof-principal"));
 		listeRoles.add(new Role(4, "admin"));
 
+		Random alea = new Random();
+		listeClasses = new ArrayList<Classe>();
+		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(2, "SIO11"),
+				new Classe(3, "ES"), new Classe(4, "STI") };
+		Collections.addAll(listeClasses, desClasses);
+
 		Classe noclasse = null;
 		listeProfs = new ArrayList<User>();
 		listeProfs.add(new User(2L, "Jean David", "Ichbiah", noclasse,
@@ -49,16 +55,10 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 				"prof-intervenant"));
 		listeProfs.add(new User(4L, "Gérard", "Berry", noclasse,
 				"prof-intervenant"));
-		listeProfs.add(new User(5L, "Ada", "Lovelace", noclasse,
+		listeProfs.add(new User(5L, "Ada", "Lovelace", desClasses[1],
 				"prof-principal"));
 		listeProfs.add(new User(6L, "Yukihiro", "Matsumoto", noclasse,
 				"prof-intervenant"));
-
-		Random alea = new Random();
-		listeClasses = new ArrayList<Classe>();
-		Classe[] desClasses = { new Classe(1, "SIO12"), new Classe(2, "SIO11"),
-				new Classe(3, "ES"), new Classe(4, "STI") };
-		Collections.addAll(listeClasses, desClasses);
 
 		listeEleves = new ArrayList<User>();
 

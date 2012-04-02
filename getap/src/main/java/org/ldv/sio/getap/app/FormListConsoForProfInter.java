@@ -5,7 +5,7 @@ public class FormListConsoForProfInter {
 	private long id;
 	private java.sql.Date dateAction;
 	private int minutes;
-	private long accPersId;
+	private int accPersId;
 	private String accPersNom;
 	private String accPers;
 
@@ -45,7 +45,7 @@ public class FormListConsoForProfInter {
 		this.minutes = minutes;
 	}
 
-	public long getAccPersId() {
+	public int getAccPersId() {
 		return accPersId;
 	}
 

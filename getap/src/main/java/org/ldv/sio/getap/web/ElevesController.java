@@ -52,7 +52,6 @@ public class ElevesController {
 	public String deleteDCTAPById(@PathVariable String id, Model model) {
 		int del = JOptionPane.showConfirmDialog(null, "Êtes vous sur ?",
 				"Vérification", JOptionPane.YES_NO_OPTION);
-		System.out.println("DEL : " + del);
 		if (del != 1 && !manager.deleteDCTAPById(Long.valueOf(id))) {
 			return "redirect:/app/eleve/index";
 		}

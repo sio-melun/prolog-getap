@@ -20,6 +20,8 @@
 			<c:forEach items="${users}" var="user">
 				<li><%-- <a href="<c:url value="/app/admin/details?id=${user.id}" />"> --%> 
 					<c:out value="${user.nom} (${user.prenom}, ${user.role})" />
+					<a href="<c:url value="/app/admin/editUser?id=${user.id}" />" style="text-decoration:none"><input type="button" value="Editer"></a>
+					<a href="<c:url value="/app/admin/delUser/${user.id}" />" style="text-decoration:none"><input type="button" value="Supprimer"></a>
 					<%-- </a>--%>
 				</li>
 			</c:forEach>
