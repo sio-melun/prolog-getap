@@ -50,12 +50,17 @@ public class ElevesController {
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String deleteDCTAPById(@PathVariable String id, Model model) {
-		int del = JOptionPane.showConfirmDialog(null, "Êtes vous sur ?",
-				"Vérification", JOptionPane.YES_NO_OPTION);
-		if (del != 1 && !manager.deleteDCTAPById(Long.valueOf(id))) {
-			return "redirect:/app/eleve/index";
+		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
+				.valueOf(id));
+		// Test que la DCTAP appartient à la bonne personne
+		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
+			if (!manager.deleteDCTAPById(Long.valueOf(id))) {
+				return "redirect:/app/eleve/index";
+			}
+		} else {
+			JOptionPane
+					.showMessageDialog(null, "Cette DCTAP est inexistante !");
 		}
-
 		return "redirect:/app/eleve/mesdctap";
 	}
 

@@ -7,19 +7,20 @@
 </c:if>
 
 <c:if test="${not empty mesdctaps}">
-	<ul>
+	<table>
 		<c:forEach items="${mesdctaps}" var="dctap">
-			<li>${dctap.dateAction} (${dctap.prof.nom}) 
-				<a href="<c:url value="/app/eleve/delete/${dctap.id}" />" style="text-decoration: none"><input type="button" value="Supprimer"></a>
+			<tr>
+				<td>${dctap.dateAction} (${dctap.prof.nom}) </td>
+				<td><a href="javascript:if(confirm('')){window.location.href='delete/${dctap.id}';}" style="text-decoration: none"><input type="button" value="Supprimer"></a></td>
 				<c:if test="${dctap.etat < 2 }">
-					<a href="<c:url value="/app/eleve/edit?id=${dctap.id}" />" style="text-decoration: none"><input type="button" value="Modifier"></a>
+					<td><a href="<c:url value="/app/eleve/edit?id=${dctap.id}" />" style="text-decoration: none"><input type="button" value="Modifier"></a></td>
 				</c:if>
 				<c:if test="${dctap.etat > 1 }">
-					<input title="Modifié par le professeur" type="button" value="Modifier" disabled="true">
+					<td><input title="Modifié par le professeur" type="button" value="Modifier" disabled="true"></td>
 				</c:if>
-			</li>
+			</tr>
 		</c:forEach>
-	</ul>
+	</table>
 </c:if>
 
 <div class="buttonGroup">
@@ -27,3 +28,11 @@
 		style="text-decoration: none"><input type="button" value="Retour">
 	</a>
 </div>
+
+<script type="text/javascript">
+function confirmSupp(){
+	if(confirm('EXIT  NOW??????')){
+		window.location.href='delete/'${dctap.id};
+	}
+}
+</script>
