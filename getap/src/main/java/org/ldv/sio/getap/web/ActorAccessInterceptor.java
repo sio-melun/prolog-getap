@@ -41,6 +41,12 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 			ok = false;
 		}
 
+		else if (controllerName.equals("login") && null != userInSession) {
+			response.sendRedirect(request.getContextPath() + "/app/" + role
+					+ "/index");
+
+		}
+
 		// Redirige l'user vers son répertoire si page != de son role pour le
 		// cas eleve ou prof-intervenant
 		else if (!controllerName.equals(role)
