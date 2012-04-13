@@ -11,7 +11,7 @@
 		<c:forEach items="${mesdctaps}" var="dctap">
 			<tr>
 				<td>${dctap.dateAction} (${dctap.prof.nom}) </td>
-				<td><a href="javascript:if(confirm('Voulez vous suppimez cette demande ?')){window.location.href='delete/${dctap.id}';}" style="text-decoration: none"><input type="button" value="Supprimer"></a></td>
+				<td><a href="javascript:if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}" style="text-decoration: none"><input type="button" value="Supprimer"></a></td>
 				<c:if test="${dctap.etat < 2 }">
 					<td><a href="<c:url value="/app/eleve/edit?id=${dctap.id}" />" style="text-decoration: none"><input type="button" value="Modifier"></a></td>
 				</c:if>
@@ -28,3 +28,11 @@
 		style="text-decoration: none"><input type="button" value="Retour">
 	</a>
 </div>
+
+<script type="text/javascript">
+function confirmSupp(){
+	if(confirm('EXIT  NOW??????')){
+		window.location.href='delete/'${dctap.id};
+	}
+}
+</script>

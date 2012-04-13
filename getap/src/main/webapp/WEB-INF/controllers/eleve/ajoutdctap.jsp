@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h1>Ajout d'une demande de consommation de TAP</h1>
+	<h1>Ajouter une demande</h1>
 
 	<form:form modelAttribute="formAjoutDctap" action="doajout"
 		method="post">
@@ -23,30 +23,46 @@
 						<form:input path="id" />
 					</div>
 				</div>
+				
+				<br/>
 				<div class="form-row">
 					<div class="input">
-						<form:label path="anneeScolaire">Année scolaire courrante : </form:label>
+						<form:label path="anneeScolaire">Année scolaire courante : </form:label>
 						<br>
 						<form:input path="anneeScolaire" disabled="true" />
 					</div>
 				</div>
+				
+				<br/>
+				
+				
 				<div class="form-row">
 					<label for="date">Date : </label>
 					<div class="input">
 						<form:input path="date" />
 					</div>
 				</div>
+				
+				<br/>
+				
 				<div class="form-row">
 					<label for="minutes">Temps d'aide personnalisée : </label>
 					<div class="input">
 						<form:input path="minutes" />
 					</div>
 				</div>
+				
+				<br/>
+				
+			
 				<div class="form-row">
 					<label for="profs">Les professeurs :</label><br>
 					<form:select path="profId" items="${lesProfs}" itemValue="id"
 						itemLabel="nom"></form:select>
 				</div>
+				
+				<br/>
+				
 				<div class="form-row">
 					<label for="accPers">Type d'aide personnalisée : </label><br>
 					<form:select path="accPersId" items="${lesAP}" itemValue="id"
@@ -56,10 +72,13 @@
 
 			<form:hidden path="eleveId" />
 			<form:hidden path="etat" />
-
+			
+			<br/>
+			
 			<div id="buttonGroup">
-				<input type="submit" value="Ajouter" />
 				<a href="index" style="text-decoration:none"><input type="button" value="Retour"></a>
+				<input type="submit" value="Ajouter" />
+				
 			</div>
 		</div>
 	</form:form>

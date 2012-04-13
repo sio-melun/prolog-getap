@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -8,7 +9,7 @@
 <title>Ajout utilisateur</title>
 </head>
 <body>
-	<h1>Ajout d'un utilisateur</h1>
+	<h1>Ajouter un utilisateur</h1>
 
 	<form:form modelAttribute="formAjoutUser" action="doajout"
 		method="post">
@@ -20,31 +21,44 @@
 					<label for="id">ID : </label>
 					<div class="input">
 						<form:input path="id" />
-					</div><br>
+					</div>
+					<br>
 				</div>
 				<div class="form-row">
 					<label for="prenom">Prénom : </label>
 					<div class="input">
 						<form:input path="prenom" />
-					</div><br>
+					</div>
+					<br>
 				</div>
 				<div class="form-row">
 					<label for="nom">Nom : </label>
 					<div class="input">
 						<form:input path="nom" />
-					</div><br>
+					</div>
+					<br>
 				</div>
 				<div class="form-row">
 					<label for="classeId">Les classes :</label><br>
-					<form:select path="classeId" items="${lesClasses}" itemValue="id" itemLabel="nom"></form:select>
-				</div><br>
+					<form:select path="classeId" items="${lesClasses}" itemValue="id"
+						itemLabel="nom"></form:select>
+				</div>
+				<br>
 				<div class="form-row">
 					<label for="role">Role : </label><br>
-					<form:select path="roleNom" items="${lesRoles}" itemValue="nom" itemLabel="nom"></form:select>
+					<form:select path="roleNom" items="${lesRoles}" itemValue="nom"
+						itemLabel="nom"></form:select>
 				</div>
-			</fieldset><br>
+			</fieldset>
+			<br>
+
 			<div id="buttonGroup">
+				<a href="<c:url value="/app/admin/index" />"
+					style="text-decoration: none"><input type="button"
+					value="Retour"> 
+				</a> 
 				<input type="submit" value="Ajouter" />
+				<a href="javascript:if(alert('Utilisateur ajouté.')){window.location.href='admin/index.jsp';}"></a>
 			</div>
 		</div>
 	</form:form>

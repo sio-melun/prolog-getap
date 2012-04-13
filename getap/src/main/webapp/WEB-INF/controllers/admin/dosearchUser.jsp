@@ -10,26 +10,37 @@
 </head>
 <body>
 
-<h1>Resultat</h1>
+<h1>Résultat</h1>
 <c:if test="${empty users}">
-	No users found
+	Aucun utilisateur trouvé.
+	<br/>
+	<br/>
 </c:if>
 
 	<c:if test="${not empty users}">
-		<ul>
+		<table>
 			<c:forEach items="${users}" var="user">
-				<li><%-- <a href="<c:url value="/app/admin/details?id=${user.id}" />"> --%> 
-					<c:out value="${user.nom} (${user.prenom}, ${user.role})" />
-					<a href="<c:url value="/app/admin/editUser?id=${user.id}" />" style="text-decoration:none"><input type="button" value="Editer"></a>
-					<a href="<c:url value="/app/admin/delUser/${user.id}" />" style="text-decoration:none"><input type="button" value="Supprimer"></a>
-					<%-- </a>--%>
-				</li>
+				<tr>
+					<td><c:out value="${user.nom} (${user.prenom}, ${user.role})" /></td>
+					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" style="text-decoration:none"><input type="button" value="Editer"></a></td>
+					<td><a href="<c:url value="/app/admin/delUser/${user.id}" />" style="text-decoration:none"><input type="button" value="Supprimer"></a></td>
+				</tr>
 			</c:forEach>
-		</ul>
+		</table>
 	</c:if>
 
 	<div class="buttonGroup">
-		<a href="<c:url value="/app/admin/searchUser" />"> New Search </a>
+		
+		
+		<a href="<c:url value="/app/admin/index" />"style="text-decoration: none">
+		 	<input type="button" value="Retour à l'index">
+		</a>
+		
+		<a href="<c:url value="/app/admin/searchUser" />"style="text-decoration: none">
+		 	<input type="button" value="Nouvelle recherche">
+		</a>
+		
+		
 	</div>
 
 </body>
