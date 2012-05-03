@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
+	<br/>
 	Bienvenue sur GeTAP
 	<% Object user = session.getAttribute("user");  %>
    <div style="text-align: right;">	

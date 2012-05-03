@@ -57,8 +57,7 @@
 					style="text-decoration: none"><input type="button"
 					value="Retour"> 
 				</a> 
-				<input type="submit" value="Ajouter" />
-				<a href="javascript:if(alert('Utilisateur ajouté.')){window.location.href='admin/index.jsp';}"></a>
+				<input type="submit" value="Ajouter"/>
 			</div>
 		</div>
 	</form:form>
