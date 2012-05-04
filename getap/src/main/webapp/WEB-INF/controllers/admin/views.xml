@@ -49,4 +49,16 @@
 			value="/WEB-INF/controllers/admin/doEditUser.jsp" />
 	</definition>
 	
+	<definition name="admin/ajoutUsers" extends="standard-layout">
+		<put-attribute name="title" value="Ajouter plusieurs utilisateurs" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/ajoutUsers.jsp" />
+	</definition>
+	
+	<definition name="admin/doajouts" extends="standard-layout">
+		<put-attribute name="title" value="Ajouter plusieurs utilisateurs" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/doajouts.jsp" />
+	</definition>
+	
 </tiles-definitions>

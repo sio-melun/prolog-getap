@@ -10,22 +10,18 @@
 		</c:if>
 
 
-		<c:if test="${user.role == 'prof-intervenant'}">
+		<c:if test="${user.role == 'prof-principal'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/prof-intervenant/index" />"
-					target="_self"><b>Prof intervenant</b> </a></li>
+				<li><a href="<c:url value="/app/prof-principal/index" />" target="_self"><b>Prof
+						principal</b></a></li>
 			</ul>
 		</c:if>
 
 
-		<c:if test="${user.role == 'prof-principal'}">
+		<c:if test="${user.role == 'prof-intervenant' or user.role == 'prof-principal'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/prof-principal/index" />"
-					target="_self"><b>Prof principal</b> </a></li>
-			</ul>
-			<ul class="select">
-				<li><a href="<c:url value="/app/prof-intervenant/index" />"
-					target="_self"><b>Prof intervenant</b> </a></li>
+				<li><a href="<c:url value="/app/prof-intervenant/index" />" target="_self"><b>Prof
+						intervenant</b></a></li>
 			</ul>
 		</c:if>
 
@@ -45,16 +41,16 @@
 
 		<c:if test="${user.role == null}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/login/index" />" target="_self">
-						<img src="<c:url value="../../images/CoNoir.png"/>" /> </a>
+				<li><a class="co" href="<c:url value="/app/login/index" />" target="_self">
+						<img src="<c:url value="../../images/CoTransparent.png"/>" /> </a>
 				</li>
 			</ul>
 		</c:if>
 
 		<c:if test="${user.role != null}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/login/logout" />"
-					target="_self"><img class="deco" src="<c:url value="../../images/CoTransparent.png"/>" />
+				<li><a class="deco" href="<c:url value="/app/login/logout" />"
+					target="_self"><img src="<c:url value="../../images/CoTransparent.png"/>" />
 				</a>
 				</li>
 				

@@ -6,6 +6,9 @@ import java.util.List;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserLoginCriteria;
 import org.ldv.sio.getap.app.service.IFHauthLoginService;
+import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,27 +17,37 @@ import org.springframework.stereotype.Service;
 @Service("serviceAuth")
 public class StubAuthLoginService implements IFHauthLoginService {
 
-	StubManagerGeTAP stubManagerGeTAP;
+	@Autowired
+	@Qualifier("DBServiceMangager")
+	IFManagerGeTAP managerGeTAP;
+
 	List<User> users;
 
+	public void setManagerEleve(IFManagerGeTAP serviceManager) {
+		this.managerGeTAP = serviceManager;
+	}
+
 	public StubAuthLoginService() {
-		stubManagerGeTAP = new StubManagerGeTAP();
+
 	}
 
 	public User getAuthUser(UserLoginCriteria user) {
-		List<User> users = this.getStubUsers();
-		for (User userIndb : users) {
-			if (userIndb.getNom().equals(user.getLogin()))
-				return userIndb;
-		}
-		return null;
+		User userdb = managerGeTAP.getUserByLogin(user.getLogin(),
+				user.getPassword());
+		return userdb;
+		//
+		// List<User> users = this.getStubUsers();
+		// for (User userIndb : users) {
+		// if (userIndb.getNom().equals(user.getLogin()))
+		// return userIndb;
+		// }
+		// return null;
 	}
 
 	private List<User> getStubUsers() {
-
 		users = new ArrayList<User>();
-		users.addAll(stubManagerGeTAP.getListeProfs());
-		users.addAll(stubManagerGeTAP.getListeEleves());
+		users.addAll(managerGeTAP.getAllEleve());
+		users.addAll(managerGeTAP.getAllProf());
 		users.add(new User(1L, "Dennis", "Ritchie", null, "admin"));
 		return users;
 	}

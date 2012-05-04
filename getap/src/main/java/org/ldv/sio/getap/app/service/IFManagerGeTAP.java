@@ -88,4 +88,14 @@ public interface IFManagerGeTAP {
 
 	public User getUser(Long id);
 
+	/**
+	 * 
+	 * @param login
+	 *            login to test
+	 * @param pw
+	 *            password to test
+	 * @return User havin login and pw or null
+	 */
+	public User getUserByLogin(String login, String pw);
+
 }

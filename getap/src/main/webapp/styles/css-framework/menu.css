@@ -36,8 +36,8 @@
 	display: block;
 	height: 35px;
 	float: left;
-	font-weight: bold;
-	font-family: "Comic sans MS";
+	font: 16px bolder;
+	font-family: arial;
 	padding: 0 30px 0 30px;
 	text-decoration: none;
 	line-height: 35px;
@@ -46,9 +46,23 @@
 }
 
 .deco {
-	background: url(../../images/BoutonVert.png) no-repeat;
+	background: url(../../images/DecoVert.png) no-repeat;
+	position: absolute;
+	left: 760px;
+	top: 5px;
 }
 
 .deco:hover{
-	background: url(../../images/BoutonRouge.png) no-repeat;
+	background: url(../../images/DecoRouge.png) no-repeat;
+}
+
+.co {
+	background: url(../../images/CoNoir.png) no-repeat;
+	position: relative;
+	left: 400px;
+	top: 5px;
+}
+
+.co:hover{
+	background: url(../../images/CoVert.png) no-repeat;
 }

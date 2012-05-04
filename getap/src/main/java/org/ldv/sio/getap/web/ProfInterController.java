@@ -6,6 +6,7 @@ import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProfInterController {
 
 	@Autowired
+	@Qualifier("DBServiceMangager")
 	private IFManagerGeTAP manager;
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {

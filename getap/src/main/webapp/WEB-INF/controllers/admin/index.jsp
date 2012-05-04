@@ -7,6 +7,12 @@
 	</a>
 </p>
 		 
+
+<p><a href="<c:url value="/app/admin/ajoutUsers" />"style="text-decoration: none">
+		 <input type="button" value="Ajouter plusieurs utilisateurs">
+	</a>
+</p>
+
 		 
 <p><a href="<c:url value="/app/admin/searchUser" />"style="text-decoration: none">
 	<input type="button" value="Rechercher un utilisateur">

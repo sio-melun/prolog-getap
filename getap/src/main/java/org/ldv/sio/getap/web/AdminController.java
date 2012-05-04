@@ -4,11 +4,14 @@ import javax.swing.JOptionPane;
 
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.FormAjoutUser;
+import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
+import org.ldv.sio.getap.app.JDBC;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 
 	@Autowired
+	@Qualifier("DBServiceMangager")
 	private IFManagerGeTAP manager;
+	private JDBC jdbc;
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
@@ -112,17 +117,21 @@ public class AdminController {
 		System.out.println("TEST id recu :" + formUser.getId());
 
 		User currentUser = manager.getUserById(Long.valueOf(id));
+		System.out.println(currentUser);
 
 		formUser.setId(currentUser.getId());
+		System.out.println("TEST id : " + currentUser.getId());
 		formUser.setNom(currentUser.getNom());
+		System.out.println("TEST nom : " + currentUser.getNom());
 		formUser.setPrenom(currentUser.getPrenom());
+		System.out.println("TEST prenom : " + currentUser.getPrenom());
 		if (!currentUser.getRole().equals("prof-intervenant")
 				|| !currentUser.getRole().equals("admin")) {
 			formUser.setClasseId(currentUser.getClasse().getId());
 		}
-		formUser.setRole(currentUser.getRole());
 
 		System.out.println("TEST role : " + currentUser.getRole());
+		formUser.setRole(currentUser.getRole());
 
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesRoles", manager.getAllRole());
@@ -153,6 +162,8 @@ public class AdminController {
 			}
 			userForUpdate.setRole(formUser.getRole());
 
+			manager.updateUser(userForUpdate);
+
 			return "redirect:/app/admin/searchUser";
 		}
 	}
@@ -172,5 +183,28 @@ public class AdminController {
 			return "redirect:/app/admin/dosearchUser?query=" + user.getNom();
 
 		return "redirect:/app/admin/searchUser";
+	}
+
+	@RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
+	public String ajoutUsers(FormAjoutUsers file, Model model) {
+
+		return "admin/ajoutUsers";
+	}
+
+	@RequestMapping(value = "doajouts", method = RequestMethod.POST)
+	public String doajouts(FormAjoutUsers file, BindingResult bindResult,
+			Model model) {
+		System.out.println("TEST :" + model);
+
+		if (bindResult.hasErrors())
+			return "admin/ajoutUsers";
+		else {
+			// String[] fichiers = file.getNom().split("\\");
+			String fichier = file.getNom();
+			System.out.println("TEST nom : " + fichier);
+			jdbc = new JDBC();
+			jdbc.feedBDD(fichier);
+			return "redirect:/app/admin/index";
+		}
 	}
 }
