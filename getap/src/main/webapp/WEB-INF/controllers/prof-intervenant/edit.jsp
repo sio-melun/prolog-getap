@@ -12,9 +12,9 @@
     <fieldset>
       
       <div class="form-row">
-        <label for="dateaction">Date de l'action :</label>
+        <label for="datepicker">Date de l'action :</label>
         <div class="input">
-          <form:input path="dateAction" />
+          <form:input id="datepicker" path="dateAction" />
         </div>
         <br/>
       

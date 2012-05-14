@@ -16,8 +16,32 @@
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
 			@import url("<c:url value="/styles/standard.css" />");
 		</style>
-		<script type="text/javascript" src="/styles/javascript/prefix.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script  src="http://dev.jquery.com/view/trunk/plugins/tablesorter/2.0/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
+		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
+		
+     
+       <script>
+		  $(document).ready(function() {
+		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd", 
+		    	                          monthNames: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+		    	                          dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+		    	                          dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"] 
+		    });
+		  }); 
+		</script>
+		<script type="text/javascript">
+	$(function() {		
+		$("#myTable").tablesorter({sortList:[[0,0],[4,1]], widgets: ['zebra']});
+		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
+	});	
+	</script>
+		
 	</head>
 	
 	<body>

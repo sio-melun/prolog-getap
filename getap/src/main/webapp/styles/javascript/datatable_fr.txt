@@ -1,0 +1,18 @@
+{
+    "sProcessing":     "Traitement en cours...",
+    "sLengthMenu":     "Afficher _MENU_ &eacutel&eacutements",
+    "sZeroRecords":    "Aucun élément à afficher",
+    "sInfo":           "Affichage de l'&eacutelement _START_ &agrave _END_ sur _TOTAL_ &eacutel&eacutements",
+    "sInfoEmpty":      "Affichage de l'&eacutelement 0 &agrave 0 sur 0 &eacutel&eacutements",
+    "sInfoFiltered":   "(filtr&eacute de _MAX_ &eacutel&eacutements au total)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Rechercher :",
+    "sLoadingRecords": "T&eacutel&eacutechargement...",
+    "sUrl":            "",
+    "oPaginate": {
+        "sFirst":    "Premier",
+        "sPrevious": "Pr&eacutec&eacutedent",
+        "sNext":     "Suivant",
+        "sLast":     "Dernier"
+    }
+}

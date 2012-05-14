@@ -1,18 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ajout d'une DCTAP</title>
-</head>
-<body>
+
 
 	<h1>Ajouter une demande</h1>
 
 	<form:form modelAttribute="formAjoutDctap" action="doajout"
-		method="post">
+		method="post" id="formulaireAjoutDCTAP">
 		<form:errors path="*" cssClass="errors" />
 
 		<div class="section">
@@ -29,9 +23,9 @@
 				
 				
 				<div class="form-row">
-					<label for="date">Date (AAAA-MM-JJ) : </label>
+					<label for="datepicker">Date : </label>
 					<div class="input">
-						<form:input path="date" />
+						<form:input id="datepicker" path="date" />
 					</div>
 				</div>
 				
@@ -75,5 +69,3 @@
 		</div>
 	</form:form>
 
-</body>
-</html>
