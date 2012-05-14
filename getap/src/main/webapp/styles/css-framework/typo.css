@@ -42,20 +42,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
     
 /* LINKS */
-    a,
-    a:link,
-    a:active {
-        text-decoration: underline;
-        
-        color: blue;
 
-    }
+a, a:hover, a:visited, a:focus {
+	text-decoration:none;
+}
 
-    a:hover {
-        text-decoration: none;
-        color: red;
-
-    }
 /* END LINKS */
     
 /* HEADINGS */

@@ -10,22 +10,41 @@ public class User {
 	private String prenom;
 	private Classe classe;
 	private String role;
+	private String login;
+	private String pass;
+	private String mail;
 
 	public User() {
 	}
 
 	public User(Long id, String firstName, String lastName, Classe classe,
-	    String role) {
+			String role, String login, String pass, String mail) {
 		this.id = id;
 		this.prenom = firstName;
 		this.nom = lastName;
 		this.classe = classe;
 		this.role = role;
+		this.login = login;
+		this.pass = pass;
+		this.mail = mail;
+	}
+
+	public User(Long id, String firstName, String lastName, Classe classe,
+			String role) {
+		this.id = id;
+		this.prenom = firstName;
+		this.nom = lastName;
+		this.classe = classe;
+		this.role = role;
+		this.login = getLogin();
+		this.pass = getPass();
+		this.mail = getMail();
 	}
 
 	@Override
 	public String toString() {
-		return "User(" + prenom + ":" + nom + "," + role + "," + classe + ")";
+		return "User(" + prenom + ":" + nom + "," + role + "," + classe + ","
+				+ login + "," + mail + ")";
 	}
 
 	public Long getId() {
@@ -66,6 +85,30 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@Override

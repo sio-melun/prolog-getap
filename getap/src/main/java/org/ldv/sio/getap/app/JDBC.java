@@ -1,14 +1,29 @@
 package org.ldv.sio.getap.app;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service("ServiceJDBC")
 public class JDBC {
+	private DataSource ds;
+
+	public DataSource getDs() {
+		return ds;
+	}
+
+	@Autowired
+	public void setDs(DataSource ds) {
+		this.ds = ds;
+	}
 
 	public void feedBDD(String file) {
 		/*
@@ -18,9 +33,11 @@ public class JDBC {
 		 */String QUOTE = "\'";
 
 		try { // chargement du pilote
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://172.17.253.143/getap", "test", "secret");
+				// Class.forName("com.mysql.jdbc.Driver").newInstance();
+				// Connection con =
+				// DriverManager.getConnection("jdbc:mysql://localhost/getap",
+				// "prolog", "secret");
+			Connection con = ds.getConnection();
 
 			// Insertion dans la base de donn�es d'une liste
 			String lien = file;
@@ -50,7 +67,7 @@ public class JDBC {
 					String requete = "";
 					st = con.createStatement();
 					String classe = QUOTE + listUser.get(i).classe + QUOTE;
-					requete = "INSERT INTO classe(libelle) VALUES(" + classe
+					requete = "INSERT INTO Classe(libelle) VALUES(" + classe
 							+ ");";
 					st.executeUpdate(requete);
 				}
@@ -137,7 +154,7 @@ public class JDBC {
 
 				// Requete retournant l'id de la classe de l'utilisateur
 				Statement classe = con.createStatement();
-				String sql = "SELECT id FROM classe WHERE libelle = " + QUOTE
+				String sql = "SELECT id FROM Classe WHERE libelle = " + QUOTE
 						+ listUser.get(i).classe + QUOTE;
 				ResultSet result = classe.executeQuery(sql);
 				if (result.next()) {
@@ -161,15 +178,6 @@ public class JDBC {
 				ex = ex.getNextException();
 				System.out.println("");
 			}
-		} catch (java.lang.ClassNotFoundException e) {
-			System.err.print("ClassNotFoundException: ");
-			System.err.println(e.getMessage());
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}

@@ -32,10 +32,10 @@
 				</a>
 				</li>
 			</ul>
-			<ul class="select">
+			<%-- <ul class="select">
 				<li><a href="<c:url value="/app/hotels/index" />"
 					target="_self"><b>Hotels</b> </a></li>
-			</ul>
+			</ul> --%>
 		</c:if>
 
 
@@ -49,6 +49,7 @@
 
 		<c:if test="${user.role != null}">
 			<ul class="select">
+				<li><a href="<c:url value="/app/profil/index"/>" taget="_self"><b>Profil</b></a></li>
 				<li><a class="deco" href="<c:url value="/app/login/logout" />"
 					target="_self"><img src="<c:url value="../../images/CoTransparent.png"/>" />
 				</a>

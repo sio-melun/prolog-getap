@@ -10,10 +10,10 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
- 
+
 	<mvc:annotation-driven />
 
- 
+
 	<!-- Scan for annotation based controllers -->
 	<context:component-scan base-package="org.ldv.sio.getap" />
 
@@ -29,6 +29,7 @@
 				<value>/WEB-INF/controllers/prof-principal/views.xml</value>
 				<value>/WEB-INF/controllers/admin/views.xml</value>
 				<value>/WEB-INF/controllers/login/views.xml</value>
+				<value>/WEB-INF/controllers/profil/views.xml</value>
 				<value>/WEB-INF/controllers/hotels/views.xml</value>
 			</list>
 		</property>
@@ -40,18 +41,18 @@
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</bean>
- 
+
 	<mvc:interceptors>
-		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />  
+		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
 	</mvc:interceptors>
 
-	  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driverClassName}"/>
-    <property name="url" value="${jdbc.url}"/>
-    <property name="username" value="${jdbc.username}"/>
-    <property name="password" value="${jdbc.password}"/>
-  </bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 
-  <context:property-placeholder location="classpath:jdbc.properties"/>
-
+	<context:property-placeholder location="classpath:jdbc.properties" />
 </beans>

@@ -13,9 +13,7 @@ import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
-import org.springframework.stereotype.Service;
 
-@Service("mockServiceManagerInMemory")
 public class StubManagerGeTAP implements IFManagerGeTAP {
 
 	static private List<DemandeConsoTempsAccPers> listeDCTAP;
@@ -27,12 +25,14 @@ public class StubManagerGeTAP implements IFManagerGeTAP {
 
 	static {
 
-		AccPersonalise[] lesAPs = { new AccPersonalise(1, "SOS Matières"),
-				new AccPersonalise(2, "Sortie Théatre"),
-				new AccPersonalise(3, "Methodologie de travail") };
-
-		listeAP = new ArrayList<AccPersonalise>();
-		Collections.addAll(listeAP, lesAPs);
+		/*
+		 * AccPersonalise[] lesAPs = { new AccPersonalise(1, "SOS Matières"),
+		 * new AccPersonalise(2, "Sortie Théatre"), new AccPersonalise(3,
+		 * "Methodologie de travail") };
+		 * 
+		 * listeAP = new ArrayList<AccPersonalise>();
+		 * Collections.addAll(listeAP, lesAPs);
+		 */
 
 		listeRoles = new ArrayList<Role>();
 		listeRoles.add(new Role(1, "eleve"));

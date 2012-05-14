@@ -24,8 +24,9 @@ div#header {
 }
 
 div#banniere {
-	text-align: left;
-	margin-left: 21em;
+	text-align: center;
+	position:relative;
+	right: 380px;
 	margin-top: 50px;
 	margin-bottom: -33px;
 }
@@ -59,7 +60,6 @@ div#sub {
 div#footer {
 	padding: 25px 0;
 	margin-top: 2em;
-	border-top: 1px solid #c3bbb6;
 }
 
 div#footer img.spring {
@@ -71,4 +71,75 @@ div#footer img.spring {
 }
 div#footer img.prolog {
 
+}
+
+a{
+	color:black;
+}
+
+table.listDctap{
+	text-align: center;
+}
+
+tr:hover{
+	-moz-transition-property: background-color;
+	-moz-transition-duration: 500ms;
+	-moz-transition-timing-function: ease;
+	background-color: transparent;
+}
+
+th{
+	font-size: 13px;
+}
+
+td, th{
+	text-align: center;
+}
+
+td.Ftext{
+	width: 150px;
+}
+
+td.Fbutton{
+	border: 0px;
+}
+
+.creer{
+	background: url(../images/IconeCreerDemande.png) no-repeat;	
+}
+
+.creer:hover{
+	background: url(../images/IconeCreerDemandeHover2.png) no-repeat;
+}
+
+.editer{
+	background: url(../images/IconeEditerDemande.png) no-repeat;
+}
+
+.editer:hover{
+	background: url(../images/IconeEditerDemandeHover2.png) no-repeat;
+}
+
+.ligne{
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+.centerButton{
+	text-align: center;
+}
+
+.ajoutUser{
+	padding-right: 25px;
+	border-right: 1px solid grey;
+}
+
+.ajoutUsers{
+	padding-left: 25px;
+	padding-right: 25px;
+	border-right: 1px solid grey;
+}
+
+.searchUser{
+	padding-left: 25px;
 }

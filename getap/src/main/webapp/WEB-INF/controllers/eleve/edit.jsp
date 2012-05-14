@@ -57,7 +57,7 @@
 	</form:form>
 </c:if>
 <c:if test="${etat > 1 }">
-	<SCRIPT LANGUAGE="JavaScript"/>
-	window.location="mesdctap"
-	</SCRIPT>
+	<script type="text/javascript">
+		window.location="mesdctap"
+	</script>
 </c:if>

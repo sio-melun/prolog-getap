@@ -1,7 +1,5 @@
 package org.ldv.sio.getap.web;
 
-import javax.swing.JOptionPane;
-
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormDemandeConsoTempsAccPers;
@@ -56,13 +54,12 @@ public class ElevesController {
 				.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			if (!manager.deleteDCTAPById(Long.valueOf(id))) {
+			if (manager.deleteDCTAPById(Long.valueOf(id))) {
+				manager.deleteDCTAP(currentDctap);
 				return "redirect:/app/eleve/index";
 			}
-		} else {
-			JOptionPane
-					.showMessageDialog(null, "Cette DCTAP est inexistante !");
 		}
+
 		return "redirect:/app/eleve/mesdctap";
 	}
 
@@ -74,6 +71,8 @@ public class ElevesController {
 
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
+
+		System.out.println("DCTAP : " + currentDctap);
 
 		// valorise le bean de vue avec le dctap courant
 		formDctap.setId(currentDctap.getId()); // en provenance d'un champ caché
@@ -99,7 +98,7 @@ public class ElevesController {
 		System.out.println("TEST id eleve :" + formDctap.getIdEleve());
 		System.out.println("TEST :" + model);
 		System.out.println("TEST AP :"
-				+ manager.getAPById(formDctap.getAccPersId() - 1).getNom());
+				+ manager.getAPById(formDctap.getAccPersId()).getNom());
 		System.out.println("TEST minutes :" + formDctap.getMinutes());
 
 		// java.sql.Date.valueOf(formDctap.getDateAction());
@@ -122,7 +121,7 @@ public class ElevesController {
 
 			dctapForUpdate.setProf(manager.getUserById(formDctap.getProfId()));
 			dctapForUpdate.setAccPers(manager.getAPById(formDctap
-					.getAccPersId() - 1));
+					.getAccPersId()));
 			manager.updateDCTAP(dctapForUpdate);
 
 			return "redirect:/app/eleve/mesdctap";
@@ -152,18 +151,27 @@ public class ElevesController {
 	@RequestMapping(value = "doajout", method = RequestMethod.POST)
 	public String doajoutUser(FormAjoutDctap formAjout,
 			BindingResult bindResult, Model model) {
+		model.addAttribute("lesProfs", manager.getAllProf());
+		model.addAttribute("lesAP", manager.getAllAP());
+
+		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
+		formAjout.setEleveId(UtilSession.getUserInSession().getId());
+		formAjout.setEtat(0);
+
 		System.out.println("TEST :" + formAjout.getId());
 		System.out.println("TEST id eleve :" + formAjout.getEleveId());
 		System.out.println("TEST AP :"
-				+ manager.getAPById(formAjout.getAccPersId() - 1).getNom());
+				+ manager.getAPById(formAjout.getAccPersId()).getNom());
 		System.out.println("TEST :" + model);
+		System.out.println("TEST annee scolaire : "
+				+ manager.getCurrentAnneeScolaire());
 
 		if (bindResult.hasErrors())
 			return "eleve/ajoutdctap";
 		else {
 
 			DemandeConsoTempsAccPers dctap = new DemandeConsoTempsAccPers(
-					formAjout.getId(), formAjout.getAnneeScolaire(),
+					formAjout.getId(), manager.getCurrentAnneeScolaire(),
 					formAjout.getDate(), formAjout.getMinutes(),
 					manager.getUserById(formAjout.getProfId()),
 					manager.getAPById(formAjout.getAccPersId()),

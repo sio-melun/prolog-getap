@@ -8,7 +8,7 @@
 	
 	<!-- Pages -->
 	<definition name="eleve/index" extends="standard-layout">
-		<put-attribute name="title" value="Cas d'utilisation Eleve" />
+		<put-attribute name="title" value="Eleve" />
 		<put-attribute name="body" value="/WEB-INF/controllers/eleve/index.jsp" />
 	</definition>
 
@@ -28,7 +28,7 @@
   </definition>
   
   <definition name="eleve/ajoutdctap" extends="standard-layout">
-    <put-attribute name="title" value="Modification d'une DCTAP" />
+    <put-attribute name="title" value="Ajout d'une DCTAP" />
     <put-attribute name="body" value="/WEB-INF/controllers/eleve/ajoutdctap.jsp" />
   </definition>
 

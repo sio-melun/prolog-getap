@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,10 +84,26 @@ public class ProfInterController {
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
 			dctapForUpdate.setMinutes(formDctap.getMinutes());
 			dctapForUpdate.setAccPers(manager.getAPById(formDctap
-					.getAccPersId() - 1));
+					.getAccPersId()));
 			dctapForUpdate.setEtat(2);
+
+			manager.updateDCTAP(dctapForUpdate);
 
 			return "redirect:/app/prof-intervenant/listdctap";
 		}
+	}
+
+	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
+	public String deleteDCTAPById(@PathVariable String id, Model model) {
+		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+
+		// Test que la DCTAP appartient à la bonne personne
+		if (dctap.getProf().equals(UtilSession.getUserInSession())) {
+			dctap.setEtat(3);
+			manager.updateDCTAP(dctap);
+			return "redirect:/app/prof-intervenant/index";
+		}
+
+		return "redirect:/app/prof-intervenant/listdctap";
 	}
 }

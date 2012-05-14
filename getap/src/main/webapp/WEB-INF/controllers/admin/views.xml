@@ -8,7 +8,7 @@
 
 	<!-- Pages -->
 	<definition name="admin/index" extends="standard-layout">
-		<put-attribute name="title" value="Main of Administrateur" />
+		<put-attribute name="title" value="Administration" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/index.jsp" />
 	</definition>

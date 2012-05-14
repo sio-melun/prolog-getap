@@ -18,14 +18,6 @@
 		<div class="section">
 			<fieldset>
 				<div class="form-row">
-					<label for="id">ID : </label>
-					<div class="input">
-						<form:input path="id" />
-					</div>
-				</div>
-				
-				<br/>
-				<div class="form-row">
 					<div class="input">
 						<form:label path="anneeScolaire">Année scolaire courante : </form:label>
 						<br>
@@ -33,11 +25,11 @@
 					</div>
 				</div>
 				
-				<br/>
+				<br/>                                             
 				
 				
 				<div class="form-row">
-					<label for="date">Date : </label>
+					<label for="date">Date (AAAA-MM-JJ) : </label>
 					<div class="input">
 						<form:input path="date" />
 					</div>
@@ -46,7 +38,7 @@
 				<br/>
 				
 				<div class="form-row">
-					<label for="minutes">Temps d'aide personnalisée : </label>
+					<label for="minutes">Temps d'aide personnalisée (minutes) : </label>
 					<div class="input">
 						<form:input path="minutes" />
 					</div>

@@ -30,10 +30,16 @@ public class AdminController {
 	@Autowired
 	@Qualifier("DBServiceMangager")
 	private IFManagerGeTAP manager;
+
+	@Autowired
 	private JDBC jdbc;
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
+	}
+
+	public void setJdbc(JDBC jdbc) {
+		this.jdbc = jdbc;
 	}
 
 	/**
@@ -125,13 +131,13 @@ public class AdminController {
 		System.out.println("TEST nom : " + currentUser.getNom());
 		formUser.setPrenom(currentUser.getPrenom());
 		System.out.println("TEST prenom : " + currentUser.getPrenom());
+		System.out.println("TEST role : " + currentUser.getRole());
+		formUser.setRole(currentUser.getRole());
+
 		if (!currentUser.getRole().equals("prof-intervenant")
 				|| !currentUser.getRole().equals("admin")) {
 			formUser.setClasseId(currentUser.getClasse().getId());
 		}
-
-		System.out.println("TEST role : " + currentUser.getRole());
-		formUser.setRole(currentUser.getRole());
 
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesRoles", manager.getAllRole());
@@ -155,12 +161,13 @@ public class AdminController {
 
 			userForUpdate.setNom(formUser.getNom());
 			userForUpdate.setPrenom(formUser.getPrenom());
+			userForUpdate.setRole(formUser.getRole());
+
 			if (!formUser.getRole().equals("prof-intervenant")
 					|| !formUser.getRole().equals("admin")) {
 				userForUpdate.setClasse(manager.getClasseById(formUser
 						.getClasseId()));
 			}
-			userForUpdate.setRole(formUser.getRole());
 
 			manager.updateUser(userForUpdate);
 
@@ -202,7 +209,6 @@ public class AdminController {
 			// String[] fichiers = file.getNom().split("\\");
 			String fichier = file.getNom();
 			System.out.println("TEST nom : " + fichier);
-			jdbc = new JDBC();
 			jdbc.feedBDD(fichier);
 			return "redirect:/app/admin/index";
 		}

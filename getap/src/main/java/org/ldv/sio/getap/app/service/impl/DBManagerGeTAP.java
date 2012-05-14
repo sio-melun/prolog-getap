@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.app.service.impl;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service("DBServiceMangager")
 public class DBManagerGeTAP implements IFManagerGeTAP {
 
-	private JdbcTemplate jdbcTemplate;
+	private static JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -31,48 +32,83 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByEleve(User eleve) {
-		// TODO Auto-generated method stub
-		return null;
+		Long id = eleve.getId();
+		return this.jdbcTemplate.query("select * from DCTAP where idEleve = "
+				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfInterv(User profi) {
-		// TODO Auto-generated method stub
-		return null;
+		Long id = profi.getId();
+		return this.jdbcTemplate.query("select * from DCTAP where idProf = "
+				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp) {
-		// TODO Auto-generated method stub
-		return null;
+		Long id = profp.getId();
+		return this.jdbcTemplate.query("select * from DCTAP where idProf = "
+				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByClasse(String nomClasse) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcTemplate
+				.query("select * from DCTAP d, user u, Classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
+						new DemandeMapper());
 	}
 
 	public DemandeConsoTempsAccPers getDCTAPById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcTemplate.queryForObject(
+				"select * from DCTAP where id = ?", new Object[] { id },
+				new DemandeMapper());
 	}
 
 	public void addDCTAP(DemandeConsoTempsAccPers dctap) {
-		// TODO Auto-generated method stub
+		String anneeScolaire = dctap.getAnneeScolaire();
+		Date dateAction = dctap.getDateAction();
+		int dureeAP = dctap.getMinutes();
+		int etat = dctap.getEtat();
+		Long idProf = dctap.getProf().getId();
+		Long idEleve = dctap.getEleve().getId();
+		int idAP = dctap.getAccPers().getId();
+
+		this.jdbcTemplate
+				.update("insert into DCTAP(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
+						new Object[] { anneeScolaire, dateAction, dureeAP,
+								etat, idProf, idEleve, idAP });
 
 	}
 
 	public void updateDCTAP(DemandeConsoTempsAccPers dctap) {
-		// TODO Auto-generated method stub
+		Long id = dctap.getId();
+		String anneeScolaire = dctap.getAnneeScolaire();
+		Date dateAction = dctap.getDateAction();
+		int dureeAP = dctap.getMinutes();
+		int etat = dctap.getEtat();
+		Long idProf = dctap.getProf().getId();
+		Long idEleve = dctap.getEleve().getId();
+		int idAP = dctap.getAccPers().getId();
+
+		this.jdbcTemplate
+				.update("update DCTAP set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
+						new Object[] { anneeScolaire, dateAction, dureeAP,
+								etat, idProf, idEleve, idAP, id });
 
 	}
 
 	public void deleteDCTAP(DemandeConsoTempsAccPers dctap) {
-		// TODO Auto-generated method stub
+		Long id = dctap.getId();
+		this.jdbcTemplate.update("delete from DCTAP where id = ?",
+				new Object[] { id });
 
 	}
 
 	public boolean deleteDCTAPById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = this.jdbcTemplate
+				.queryForInt("select count(id) from DCTAP where id = ?",
+						new Object[] { id });
+		if (result == 0)
+			return false;
+		else
+			return true;
 	}
 
 	public List<User> getAllProf() {
@@ -104,10 +140,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user = this.jdbcTemplate.queryForObject(
 					"select * from user where id = ?", new Object[] { id },
 					new UserMapper());
+
 		} catch (EmptyResultDataAccessException e) {
 			user = null;
 		}
-
 		return user;
 	}
 
@@ -115,16 +151,62 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String nom = user.getNom();
 		String prenom = user.getPrenom();
 		String login = user.getPrenom().charAt(0) + user.getNom();
+		String mail = user.getMail();
+		try {
+			User user2 = this.jdbcTemplate
+					.queryForObject(
+							"select * from user where login like "
+									+ "'"
+									+ login
+									+ "%'"
+									+ " and nom = ? and prenom = ? order by id desc limit 0,1",
+							new Object[] { nom, prenom }, new UserMapper());
+
+			if (user2 != null) {
+				int max = 2;
+				String log = user2.getLogin();
+				String sNb = log.charAt(log.length() - 1) + "";
+
+				if (isInteger(sNb)) {
+					int nb = Integer.parseInt(sNb);
+					max = nb + 1;
+				}
+				String sMax = String.valueOf(max);
+				login += sMax;
+			}
+		} catch (EmptyResultDataAccessException e) {
+
+		}
 		String mdp = login;
 		String role = user.getRole();
 		int classe = user.getClasse().getId();
 
 		this.jdbcTemplate
-				.queryForObject(
-						"insert into user(nom,prenom,login,mdp,role,idClasse) values(?,?,?,?,?,?)",
-						new Object[] { nom, prenom, login, mdp, role, classe },
-						new UserMapper());
+				.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
+						new Object[] { nom, prenom, login, mdp, role, classe,
+								mail });
 
+		if (role.equals("prof-principal")) {
+			User user3 = this.jdbcTemplate
+					.queryForObject(
+							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
+							new Object[] { login, mdp }, new UserMapper());
+			Long idUser = user3.getId();
+			System.out.println(idUser);
+			this.jdbcTemplate.update(
+					"insert into profPrincipal(idUser,idClasse) values(?,?)",
+					new Object[] { idUser, classe });
+		}
+
+	}
+
+	public boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
 	}
 
 	public void updateUser(User user) {
@@ -132,43 +214,93 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String nom = user.getNom();
 		String prenom = user.getPrenom();
 		String role = user.getRole();
+		int idClasse = user.getClasse().getId();
+		String login = user.getLogin();
+		String pass = user.getPass();
+		String mail = user.getMail();
 
-		this.jdbcTemplate.update(
-				"update user set nom = ?, prenom = ?, role = ? where id = ?",
-				new Object[] { nom, prenom, role, id });
+		if (!role.equals("prof-principal")) {
+			this.jdbcTemplate
+					.update("delete from profPrincipal where idUser = ? and idClasse = ?",
+							new Object[] { id, idClasse });
+		} else {
+			int result = this.jdbcTemplate.queryForInt(
+					"select count(idUser) from profPrincipal where idUser = ?",
+					new Object[] { id });
+			if (result == 0) {
+				this.jdbcTemplate
+						.update("insert into profPrincipal(idUser, idClasse) values(?,?)",
+								new Object[] { id, idClasse });
+			} else {
+				this.jdbcTemplate
+						.update("update profPrincipal set idClasse = ? where idUser = ?",
+								new Object[] { idClasse, id });
+			}
+		}
+
+		this.jdbcTemplate
+				.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ? where id = ?",
+						new Object[] { nom, prenom, role, idClasse, login,
+								pass, mail, id });
 
 	}
 
 	public void deleteUser(User user) {
 		Long id = user.getId();
+
+		if (user.getRole().equals("prof-principal")) {
+			this.jdbcTemplate
+					.update("delete from profPrincipal where idUser = ? and idClasse = ?",
+							new Object[] { id, user.getClasse().getId() });
+		}
 		this.jdbcTemplate.update("delete from user where id = ?",
 				new Object[] { id });
 
 	}
 
 	public List<AccPersonalise> getAllAP() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcTemplate.query("select * from AP", new AccMapper());
 	}
 
 	public AccPersonalise getAPById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		AccPersonalise acc;
+		try {
+			acc = this.jdbcTemplate.queryForObject(
+					"select * from AP where id = ?", new Object[] { id },
+					new AccMapper());
+		} catch (EmptyResultDataAccessException e) {
+			acc = null;
+		}
+
+		return acc;
 	}
 
 	public void addAP(AccPersonalise ap) {
-		// TODO Auto-generated method stub
+		String libelle = ap.getNom();
+		int origineEtat = ap.getOrigineEtat();
+		int idUser = ap.getIdUser();
+
+		this.jdbcTemplate.update(
+				"insert into AP(libelle, origineEtat, idUser) values(?,?,?)",
+				new Object[] { libelle, origineEtat, idUser });
 
 	}
 
 	public void upDateAP(AccPersonalise ap) {
-		// TODO Auto-generated method stub
+		int id = ap.getId();
+		String libelle = ap.getNom();
+		int origineEtat = ap.getOrigineEtat();
+
+		this.jdbcTemplate
+				.update("update AP set libelle = ?, origineEtat = ? where id = ? values(?,?,?)",
+						new Object[] { libelle, origineEtat, id });
 
 	}
 
 	public void deleteAP(AccPersonalise ap) {
-		// TODO Auto-generated method stub
-
+		int id = ap.getId();
+		this.jdbcTemplate.update("delete from AP where id = ?",
+				new Object[] { id });
 	}
 
 	public List<Classe> getAllClasse() {
@@ -192,29 +324,39 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public void addClasse(Classe classe) {
 		int id = classe.getId();
 		String libelle = classe.getNom();
-		this.jdbcTemplate.queryForObject(
-				"insert into classe(id, libelle) values(?,?)", new Object[] {
-						id, libelle }, new ClasseMapper());
+		this.jdbcTemplate.update("insert into classe(id, libelle) values(?,?)",
+				new Object[] { id, libelle });
 
 	}
 
 	public void upDateClasse(Classe classe) {
-		// TODO Auto-generated method stub
+		int id = classe.getId();
+		String libelle = classe.getNom();
+		this.jdbcTemplate.update("update classe set libelle = ? where id = ?",
+				new Object[] { libelle, id });
 
 	}
 
 	public void deleteClasse(Classe classe) {
 		int id = classe.getId();
 		String libelle = classe.getNom();
-		this.jdbcTemplate.queryForObject(
+		this.jdbcTemplate.update(
 				"delete from classe where id = ? and libelle = ?",
-				new Object[] { id, libelle }, new UserMapper());
+				new Object[] { id, libelle });
 
 	}
 
 	public String getCurrentAnneeScolaire() {
-		// TODO Auto-generated method stub
-		return null;
+		String annee;
+		try {
+			annee = this.jdbcTemplate.queryForObject(
+					"select * from paramAnnee order by id desc limit 0,1",
+					new Object[] {}, new StringMapper());
+		} catch (EmptyResultDataAccessException e) {
+			annee = null;
+		}
+
+		return annee;
 	}
 
 	public List<String> getAllAnneeScolaire() {
@@ -243,12 +385,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user.setPrenom(rs.getString("prenom"));
 			user.setNom(rs.getString("nom"));
 			user.setRole(rs.getString("role"));
-			// TODO relation avec Classe
-			Classe classe = new Classe(1, "null");
-			// if rs.getString("idClasse")
-			// classe.setId(Integer.parseInt(rs.getString("idClasse")));
-			// classe.setNom("bidon");
+
+			DBManagerGeTAP manager = new DBManagerGeTAP();
+			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
 			user.setClasse(classe);
+			user.setLogin(rs.getString("login"));
+			user.setPass(rs.getString("mdp"));
+			user.setMail(rs.getString("mail"));
 			return user;
 		}
 	}
@@ -259,6 +402,55 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			classe.setId(rs.getInt("id"));
 			classe.setNom(rs.getString("libelle"));
 			return classe;
+		}
+	}
+
+	private static final class AccMapper implements RowMapper<AccPersonalise> {
+		public AccPersonalise mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			AccPersonalise acc = new AccPersonalise();
+			acc.setId(rs.getInt("id"));
+			acc.setNom(rs.getString("libelle"));
+			acc.setOrigineEtat(rs.getInt("origineEtat"));
+			acc.setIdUser(rs.getInt("idUser"));
+			return acc;
+		}
+	}
+
+	private static final class DemandeMapper implements
+			RowMapper<DemandeConsoTempsAccPers> {
+		public DemandeConsoTempsAccPers mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			DemandeConsoTempsAccPers dctap = new DemandeConsoTempsAccPers();
+			dctap.setId(rs.getLong("id"));
+			dctap.setAnneeScolaire(rs.getString("anneeScolaire"));
+			dctap.setDateAction(rs.getDate("dateAction"));
+			dctap.setMinutes(rs.getInt("dureeAP"));
+			dctap.setEtat(rs.getInt("Etat"));
+
+			Long idProf = rs.getLong("idProf");
+			Long idEleve = rs.getLong("idEleve");
+			int idAP = rs.getInt("idAP");
+
+			DBManagerGeTAP manager = new DBManagerGeTAP();
+			User prof = manager.getUserById(idProf);
+			User eleve = manager.getUserById(idEleve);
+			AccPersonalise ap = manager.getAPById(idAP);
+
+			dctap.setProf(prof);
+			dctap.setEleve(eleve);
+			dctap.setAccPers(ap);
+
+			return dctap;
+		}
+	}
+
+	private static final class StringMapper implements RowMapper<String> {
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			String annee = null;
+			annee = rs.getString("anneeScolaire");
+
+			return annee;
 		}
 	}
 

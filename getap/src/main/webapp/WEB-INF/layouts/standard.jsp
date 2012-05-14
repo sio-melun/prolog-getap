@@ -17,6 +17,7 @@
 			@import url("<c:url value="/styles/standard.css" />");
 		</style>
 		<script type="text/javascript" src="/styles/javascript/prefix.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>
 	</head>
 	
 	<body>

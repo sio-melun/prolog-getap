@@ -51,7 +51,8 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 		// cas eleve ou prof-intervenant
 		else if (!controllerName.equals(role)
 				&& !controllerName.equals("login") && !role.equals("admin")
-				&& !role.equals("prof-principal")) {
+				&& !role.equals("prof-principal")
+				&& !controllerName.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;
@@ -60,7 +61,8 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 		// cas spécial admin
 		else if (!controllerName.equals(role)
 				&& !controllerName.equals("hotels")
-				&& !controllerName.equals("login") && role.equals("admin")) {
+				&& !controllerName.equals("login") && role.equals("admin")
+				&& !controllerName.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;
@@ -70,7 +72,8 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 		else if (!controllerName.equals(role)
 				&& !controllerName.equals("prof-intervenant")
 				&& !controllerName.equals("login")
-				&& role.equals("prof-principal")) {
+				&& role.equals("prof-principal")
+				&& !controllerName.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;

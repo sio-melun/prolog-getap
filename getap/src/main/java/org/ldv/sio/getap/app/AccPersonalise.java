@@ -9,14 +9,18 @@ package org.ldv.sio.getap.app;
 public class AccPersonalise {
 	private Integer id;
 	private String nom;
+	private int origineEtat;
+	private int idUser;
 
 	public AccPersonalise() {
 	}
 
-	public AccPersonalise(Integer id, String nom) {
+	public AccPersonalise(Integer id, String nom, int origineEtat, int idUser) {
 		super();
 		this.id = id;
 		this.nom = nom;
+		this.origineEtat = origineEtat;
+		this.idUser = idUser;
 	}
 
 	public Integer getId() {
@@ -33,6 +37,22 @@ public class AccPersonalise {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public int getOrigineEtat() {
+		return origineEtat;
+	}
+
+	public void setOrigineEtat(int origineEtat) {
+		this.origineEtat = origineEtat;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 }

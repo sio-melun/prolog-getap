@@ -8,6 +8,9 @@ public class FormEditUser {
 	private int classeId;
 	private String classeNom;
 	private String role;
+	private String login;
+	private String pass;
+	private String mail;
 
 	public String getRole() {
 		return role;
@@ -59,6 +62,30 @@ public class FormEditUser {
 
 	public void setClasseNom(String classeNom) {
 		this.classeNom = classeNom;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 }
