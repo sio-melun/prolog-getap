@@ -47,14 +47,17 @@ public class ProfInterController {
 
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
+		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3
+				|| currentDctap.getEtat() == 4) {
+			// valorise le bean de vue avec le dctap courant
+			dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
+			dctap.setDateAction(currentDctap.getDateAction());
+			dctap.setMinutes(currentDctap.getMinutes());
+			dctap.setAccPersId(currentDctap.getAccPers().getId());
 
-		// valorise le bean de vue avec le dctap courant
-		dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
-		dctap.setDateAction(currentDctap.getDateAction());
-		dctap.setMinutes(currentDctap.getMinutes());
-		dctap.setAccPersId(currentDctap.getAccPers().getId());
-
-		return "prof-intervenant/edit";
+			return "prof-intervenant/edit";
+		}
+		return "prof-intervenant/listdctap";
 	}
 
 	/**
@@ -98,7 +101,9 @@ public class ProfInterController {
 		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
-		if (dctap.getProf().equals(UtilSession.getUserInSession())) {
+		if (dctap.getProf().equals(UtilSession.getUserInSession())
+				&& (dctap.getEtat() == 0 || dctap.getEtat() == 3 || dctap
+						.getEtat() == 4)) {
 			dctap.setEtat(6);
 			manager.updateDCTAP(dctap);
 		}
@@ -111,7 +116,8 @@ public class ProfInterController {
 		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
-		if (dctap.getProf().equals(UtilSession.getUserInSession())) {
+		if (dctap.getProf().equals(UtilSession.getUserInSession())
+				&& (dctap.getEtat() == 0 || dctap.getEtat() == 3)) {
 			dctap.setEtat(5);
 			manager.updateDCTAP(dctap);
 		}

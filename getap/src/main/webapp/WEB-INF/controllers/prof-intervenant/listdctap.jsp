@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h1>Mes demandes de validation</h1>
-
 <c:if test="${empty listdctaps}">
 	Il n'y a encore aucune demande. 
 </c:if>
@@ -127,7 +125,5 @@
 </c:if>
 
 <div class="buttonGroup">
-	<a href="<c:url value="/app/prof-intervenant/index" />"
-		style="text-decoration: none"> <input type="button" value="Retour">
-	</a>
+	<a href="<c:url value="/app/prof-intervenant/index" />"> <input type="button" value="Retour"></a>
 </div>

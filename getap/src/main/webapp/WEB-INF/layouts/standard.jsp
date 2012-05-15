@@ -85,7 +85,5 @@
 		<!-- end footer -->
 	</div>
 	<!-- end page -->
-		<div id="extra1">&nbsp;</div>
-		<div id="extra2">&nbsp;</div>
 	</body>
 </html>
