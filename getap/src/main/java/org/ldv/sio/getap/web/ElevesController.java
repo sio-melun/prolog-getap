@@ -54,7 +54,8 @@ public class ElevesController {
 				.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			if (manager.deleteDCTAPById(Long.valueOf(id))) {
+			if (manager.deleteDCTAPById(Long.valueOf(id))
+					&& (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3)) {
 				manager.deleteDCTAP(currentDctap);
 				return "redirect:/app/eleve/index";
 			}
@@ -114,15 +115,18 @@ public class ElevesController {
 
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));
+			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 3) {
+				// valorise l'objet de la base à partir du bean de vue
+				dctapForUpdate.setDateAction(formDctap.getDateAction());
+				dctapForUpdate.setMinutes(formDctap.getMinutes());
 
-			// valorise l'objet de la base à partir du bean de vue
-			dctapForUpdate.setDateAction(formDctap.getDateAction());
-			dctapForUpdate.setMinutes(formDctap.getMinutes());
-
-			dctapForUpdate.setProf(manager.getUserById(formDctap.getProfId()));
-			dctapForUpdate.setAccPers(manager.getAPById(formDctap
-					.getAccPersId()));
-			manager.updateDCTAP(dctapForUpdate);
+				dctapForUpdate.setProf(manager.getUserById(formDctap
+						.getProfId()));
+				dctapForUpdate.setAccPers(manager.getAPById(formDctap
+						.getAccPersId()));
+				dctapForUpdate.setEtat(3);
+				manager.updateDCTAP(dctapForUpdate);
+			}
 
 			return "redirect:/app/eleve/mesdctap";
 		}
@@ -182,5 +186,33 @@ public class ElevesController {
 
 			return "redirect:/app/eleve/index";
 		}
+	}
+
+	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
+	public String refuseDCTAPById(@PathVariable String id, Model model) {
+		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+
+		// Test que la DCTAP appartient à la bonne personne
+		if (dctap.getEleve().equals(UtilSession.getUserInSession())
+				&& dctap.getEtat() == 4) {
+			dctap.setEtat(2);
+			manager.updateDCTAP(dctap);
+		}
+
+		return "redirect:/app/eleve/mesdctap";
+	}
+
+	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
+	public String validDCTAPById(@PathVariable String id, Model model) {
+		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+
+		// Test que la DCTAP appartient à la bonne personne
+		if (dctap.getEleve().equals(UtilSession.getUserInSession())
+				&& dctap.getEtat() == 4) {
+			dctap.setEtat(1);
+			manager.updateDCTAP(dctap);
+		}
+
+		return "redirect:/app/eleve/mesdctap";
 	}
 }

@@ -54,7 +54,7 @@ public class JDBC {
 			for (int i = 1; i < listUser.size(); i++) {
 				Statement select = con.createStatement();
 				ResultSet rs = select
-						.executeQuery("SELECT libelle FROM classe WHERE libelle = "
+						.executeQuery("SELECT libelle FROM Classe WHERE libelle = "
 								+ QUOTE + listUser.get(i).classe + QUOTE);
 				rs.last();
 				int count = rs.getRow();
@@ -76,18 +76,8 @@ public class JDBC {
 				PreparedStatement param = con
 						.prepareStatement("INSERT INTO getap.user(nom, prenom, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?);");
 
-				String nom = listUser.get(i).nom;
-				if (nom.contains("'")) {
-					nom = nom.replace("'", "\\'");
-				}
-
-				String prenom = listUser.get(i).prenom;
-				if (prenom.contains("'")) {
-					prenom = prenom.replace("'", "\\'");
-				}
-
-				param.setNString(1, nom);
-				param.setNString(2, prenom);
+				param.setNString(1, listUser.get(i).nom);
+				param.setNString(2, listUser.get(i).prenom);
 
 				// d�finition de la base d'un login : 1ere lettre prenom + nom
 				String baseLogin = listUser.get(i).prenom.charAt(0)

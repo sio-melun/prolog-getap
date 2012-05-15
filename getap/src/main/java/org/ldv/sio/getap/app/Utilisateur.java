@@ -10,6 +10,15 @@ public class Utilisateur {
 	protected String mail;
 
 	public Utilisateur(String prenom, String nom) {
+
+		if (nom.contains("'")) {
+			nom = nom.replace("'", "");
+		}
+
+		if (prenom.contains("'")) {
+			prenom = prenom.replace("'", "");
+		}
+
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = prenom.charAt(0) + nom;

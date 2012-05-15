@@ -85,7 +85,7 @@ public class ProfInterController {
 			dctapForUpdate.setMinutes(formDctap.getMinutes());
 			dctapForUpdate.setAccPers(manager.getAPById(formDctap
 					.getAccPersId()));
-			dctapForUpdate.setEtat(2);
+			dctapForUpdate.setEtat(4);
 
 			manager.updateDCTAP(dctapForUpdate);
 
@@ -94,14 +94,26 @@ public class ProfInterController {
 	}
 
 	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
-	public String deleteDCTAPById(@PathVariable String id, Model model) {
+	public String refuseDCTAPById(@PathVariable String id, Model model) {
 		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())) {
-			dctap.setEtat(3);
+			dctap.setEtat(6);
 			manager.updateDCTAP(dctap);
-			return "redirect:/app/prof-intervenant/index";
+		}
+
+		return "redirect:/app/prof-intervenant/listdctap";
+	}
+
+	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
+	public String validDCTAPById(@PathVariable String id, Model model) {
+		DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+
+		// Test que la DCTAP appartient à la bonne personne
+		if (dctap.getProf().equals(UtilSession.getUserInSession())) {
+			dctap.setEtat(5);
+			manager.updateDCTAP(dctap);
 		}
 
 		return "redirect:/app/prof-intervenant/listdctap";

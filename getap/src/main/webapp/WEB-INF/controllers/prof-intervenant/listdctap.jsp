@@ -19,23 +19,23 @@
 		</thead>
 		<tbody>
 		    <c:forEach items="${listdctaps}" var="dctap">
-			
-			    <tr>
-					<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
-					<td>${dctap.dateAction}</td>
-					<td>${dctap.minutes}</td>
-					<td>${dctap.accPers.nom}</td>
-					<td><a
-						href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><input
-							type="button" value="Modifier"></a></td>
-					<td><a
-						href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><input
-							type="button" value="Valider"></a></td>
-					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><input
-							type="button" value="Refuser"></a></td>
-				</tr>
-			
+				<c:if test="${dctap.etat == 0 or dctap.etat == 3}">
+				    <tr>
+						<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+						<td>${dctap.dateAction}</td>
+						<td>${dctap.minutes}</td>
+						<td>${dctap.accPers.nom}</td>
+						<td><a
+							href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><input
+								type="button" value="Modifier"></a></td>
+						<td><a
+							href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><input
+								type="button" value="Valider"></a></td>
+						<td><a href=""
+							onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><input
+								type="button" value="Refuser"></a></td>
+					</tr>
+				</c:if>
 		    </c:forEach>
 		</tbody>
 	</table>

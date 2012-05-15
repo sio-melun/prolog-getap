@@ -26,19 +26,22 @@
 					<td>${dctap.dateAction}</td>
 					<td>${dctap.minutes}</td>
 					<td>${dctap.accPers.nom}</td>
-					<c:if test="${dctap.etat < 2 }">
+					<c:if test="${dctap.etat == 0 or dctap.etat == 3 }">
 						<td><a
 							href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><input
 								type="button" value="Modifier"> </a></td>
+						<td><a href=""
+							onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><input
+								type="button" value="Supprimer"> </a></td>
 					</c:if>
-					<c:if test="${dctap.etat > 1 }">
-						<td><input
-							title="Modifié par le professeur" type="button" value="Modifier"
-							disabled="true"></td>
+					<c:if test="${dctap.etat == 4}">
+						<td><a
+							href="<c:url value="/app/eleve/valid/${dctap.id}" />"><input
+								type="button" value="Valider"> </a></td>
+						<td><a
+							href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><input
+								type="button" value="Refuser"> </a></td>
 					</c:if>
-					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><input
-							type="button" value="Supprimer"> </a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
