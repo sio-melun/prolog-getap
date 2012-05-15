@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <br/>
-	<h3>Gérer mes demandes</h3>
 <br/>
 
 <div class="centerButton" >

@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Edition d'un utilisateur</h1>
 
 	<form:form modelAttribute="formEditUser" action="doEditUser"
 		method="post">

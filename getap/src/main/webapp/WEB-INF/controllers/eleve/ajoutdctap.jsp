@@ -2,9 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-
-	<h1>Ajouter une demande</h1>
-
 	<form:form modelAttribute="formAjoutDctap" action="doajout"
 		method="post" id="formulaireAjoutDCTAP">
 		<form:errors path="*" cssClass="errors" />

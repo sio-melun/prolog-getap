@@ -9,7 +9,6 @@
 <title>Ajout utilisateur</title>
 </head>
 <body>
-	<h1>Ajouter un utilisateur</h1>
 
 	<form:form modelAttribute="formAjoutUser" action="doajout"
 		method="post">

@@ -2,8 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h1>Modifier ma TAP</h1>
-
 <form:form modelAttribute="formListConsoForProfInter" action="doedit"
   method="post">
   <form:errors path="*" cssClass="errors" />
