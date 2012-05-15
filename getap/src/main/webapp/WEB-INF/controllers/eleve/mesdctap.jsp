@@ -12,7 +12,7 @@
 
 	<table id="myTable" class="tablesorter">
 		<thead>
-			<tr>
+			<tr class="header">
 				<th>Professeurs</th>
 				<th>Date</th>
 				<th>Temps (min)</th>

@@ -7,38 +7,37 @@
 </c:if>
 
 <c:if test="${not empty listdctaps}">
-	<% int cpt = 0; %>
-	<table border=1 align="center" class="sortable" id="youhou">
+	
+	<table id="myTable" class="tablesorter">
 		<thead>
-		<tr>
-			<th height=25 class="Ftext"><a href="#" onclick="ts_resortTable(this);return false;">Eleves</a></th>
-			<th class="Ftext"><a href="#" onclick="ts_resortTable(this);return false;">Date</a></th>
-			<th class="Ftext"><a href="#" onclick="ts_resortTable(this);return false;">Temps (min)</a></th>
-			<th class="Ftext"><a href="#" onclick="ts_resortTable(this);return false;">Type d'aide</a></th>
+		<tr class="header">
+			<th>Eleves</th>
+			<th>Date</th>
+			<th>Temps (min)</th>
+			<th>Type d'aide</th>
 		</tr>
 		</thead>
-		<c:forEach items="${listdctaps}" var="dctap">
-			<% if (cpt % 2 == 0) { %>
-				<tr bgcolor="#a4a4a4">
-			<% } else { %>
-				<tr bgcolor="#d6d6d6">
-			<% } %>
-					<td class="Ftext">${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
-					<td class="Ftext">${dctap.dateAction}</td>
-					<td class="Ftext">${dctap.minutes}</td>
-					<td class="Ftext">${dctap.accPers.nom}</td>
-					<td class="Fbutton" bgcolor="#e4e1d9"><a
+		<tbody>
+		    <c:forEach items="${listdctaps}" var="dctap">
+			
+			    <tr>
+					<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+					<td>${dctap.dateAction}</td>
+					<td>${dctap.minutes}</td>
+					<td>${dctap.accPers.nom}</td>
+					<td><a
 						href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><input
 							type="button" value="Modifier"></a></td>
-					<td class="Fbutton" bgcolor="#e4e1d9"><a
+					<td><a
 						href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><input
 							type="button" value="Valider"></a></td>
-					<td class="Fbutton" bgcolor="#e4e1d9"><a href=""
+					<td><a href=""
 						onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><input
 							type="button" value="Refuser"></a></td>
 				</tr>
-			<% cpt++; %>
-		</c:forEach>
+			
+		    </c:forEach>
+		</tbody>
 	</table>
 </c:if>
 
