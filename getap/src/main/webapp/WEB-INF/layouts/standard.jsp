@@ -25,8 +25,12 @@
 		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
 		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 		
-     
-       <script>
+     	<script>
+  			$(document).ready(function() {
+   				$("#accordion").accordion();
+  			});
+  		</script>
+        <script>
 		  $(document).ready(function() {
 		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd", 
 		    	                          monthNames: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
@@ -36,12 +40,25 @@
 		  }); 
 		</script>
 		<script type="text/javascript">
-	$(function() {		
-		$("#myTable").tablesorter({sortList:[[0,0],[4,1]], widgets: ['zebra']});
-		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
-	});	
-	</script>
-		
+		$(document).ready(function() {		
+		        $("#attente").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#valide").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#modif").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#refuse").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
 	</head>
 	
 	<body>
