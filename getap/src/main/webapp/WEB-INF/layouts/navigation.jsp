@@ -49,7 +49,7 @@
 
 		<c:if test="${user.role != null}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/profil/index"/>" taget="_self"><b>Profil</b></a></li>
+				<li><a href="<c:url value="/app/profil/edit?id=${user.id}"/>" taget="_self"><b>Mon compte</b></a></li>
 				<li><a class="deco" href="<c:url value="/app/login/logout" />"
 					target="_self"><img src="<c:url value="../../images/CoTransparent.png"/>" />
 				</a>

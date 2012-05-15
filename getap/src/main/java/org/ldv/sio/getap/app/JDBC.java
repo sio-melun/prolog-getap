@@ -75,8 +75,19 @@ public class JDBC {
 				// Requete d'insertion de l'utilisateur dans la base
 				PreparedStatement param = con
 						.prepareStatement("INSERT INTO getap.user(nom, prenom, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?);");
-				param.setNString(1, listUser.get(i).nom);
-				param.setNString(2, listUser.get(i).prenom);
+
+				String nom = listUser.get(i).nom;
+				if (nom.contains("'")) {
+					nom = nom.replace("'", "\\'");
+				}
+
+				String prenom = listUser.get(i).prenom;
+				if (prenom.contains("'")) {
+					prenom = prenom.replace("'", "\\'");
+				}
+
+				param.setNString(1, nom);
+				param.setNString(2, prenom);
 
 				// d�finition de la base d'un login : 1ere lettre prenom + nom
 				String baseLogin = listUser.get(i).prenom.charAt(0)

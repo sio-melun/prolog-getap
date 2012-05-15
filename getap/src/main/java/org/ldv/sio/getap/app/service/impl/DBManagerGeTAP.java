@@ -194,7 +194,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			Long idUser = user3.getId();
 			System.out.println(idUser);
 			this.jdbcTemplate.update(
-					"insert into profPrincipal(idUser,idClasse) values(?,?)",
+					"insert into ProfPrincipal(idUser,idClasse) values(?,?)",
 					new Object[] { idUser, classe });
 		}
 
@@ -221,19 +221,19 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		if (!role.equals("prof-principal")) {
 			this.jdbcTemplate
-					.update("delete from profPrincipal where idUser = ? and idClasse = ?",
+					.update("delete from ProfPrincipal where idUser = ? and idClasse = ?",
 							new Object[] { id, idClasse });
 		} else {
 			int result = this.jdbcTemplate.queryForInt(
-					"select count(idUser) from profPrincipal where idUser = ?",
+					"select count(idUser) from ProfPrincipal where idUser = ?",
 					new Object[] { id });
 			if (result == 0) {
 				this.jdbcTemplate
-						.update("insert into profPrincipal(idUser, idClasse) values(?,?)",
+						.update("insert into ProfPrincipal(idUser, idClasse) values(?,?)",
 								new Object[] { id, idClasse });
 			} else {
 				this.jdbcTemplate
-						.update("update profPrincipal set idClasse = ? where idUser = ?",
+						.update("update ProfPrincipal set idClasse = ? where idUser = ?",
 								new Object[] { idClasse, id });
 			}
 		}
@@ -250,7 +250,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		if (user.getRole().equals("prof-principal")) {
 			this.jdbcTemplate
-					.update("delete from profPrincipal where idUser = ? and idClasse = ?",
+					.update("delete from ProfPrincipal where idUser = ? and idClasse = ?",
 							new Object[] { id, user.getClasse().getId() });
 		}
 		this.jdbcTemplate.update("delete from user where id = ?",
