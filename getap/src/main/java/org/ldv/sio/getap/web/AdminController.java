@@ -1,5 +1,8 @@
 package org.ldv.sio.getap.web;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -188,23 +192,33 @@ public class AdminController {
 
 	@RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
 	public String ajoutUsers(FormAjoutUsers file, Model model) {
-
+		model.addAttribute(new FormAjoutUsers());
 		return "admin/ajoutUsers";
 	}
 
 	@RequestMapping(value = "doajouts", method = RequestMethod.POST)
-	public String doajouts(FormAjoutUsers file, BindingResult bindResult,
-			Model model) {
+	public String doajouts(
+			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
+			BindingResult result, Model model) {
 		System.out.println("TEST :" + model);
 
-		if (bindResult.hasErrors())
+		if (result.hasErrors())
 			return "admin/ajoutUsers";
 		else {
-			// String[] fichiers = file.getNom().split("\\");
-			String fichier = file.getNom();
-			System.out.println("TEST nom : " + fichier);
-			jdbc.feedBDD(fichier);
-			return "redirect:/app/admin/index";
+			FileOutputStream outputStream = null;
+			String filePath = System.getProperty("java.io.tmpdir")
+					+ form.getFile().getOriginalFilename();
+			try {
+				outputStream = new FileOutputStream(new File(filePath));
+				outputStream.write(form.getFile().getFileItem().get());
+				outputStream.close();
+				jdbc.feedBDD(filePath);
+			} catch (Exception e) {
+				System.out.println("Error while saving file : ");
+				e.printStackTrace();
+				return "admin/index";
+			}
 		}
+		return "admin/index";
 	}
 }

@@ -10,16 +10,16 @@
 </head>
 <body>
 	<h3>Importation d'une liste d'utilisateur</h3>
-	<form:form modelAttribute="formAjoutUsers" action="doajouts"
+	<form:form commandName="formAjoutUsers" enctype="multipart/form-data" action="doajouts"
 		method="post">
 		<form:errors path="*" cssClass="errors" />
 
 		<div class="section">
 			<fieldset>
 				<div class="form-row">
-					<label for="nom">Fichier : </label>
+					<label for="file">Fichier : </label>
 					<div class="input">
-						<form:input properties="file" path="nom" size="75"/>
+						<form:input type="file" path="file" size="75"/>
 					</div>
 					<br>
 				</div>
@@ -27,8 +27,7 @@
 			<br>
 				
 			<div id="buttonGroup">
-				<a href="<c:url value="/app/admin/index" />"
-					style="text-decoration: none"><input type="button"
+				<a href="<c:url value="/app/admin/index" />"><input type="button"
 					value="Retour"> 
 				</a> 
 				<input type="submit" value="Ajouter" />
