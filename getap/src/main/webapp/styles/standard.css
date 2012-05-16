@@ -36,11 +36,10 @@ div#banniere {
 	margin-bottom: -33px;
 }
 div#logolycee {
-	text-align: center;
+	text-align: right;
 	position:relative;
-	left: 380px;
-	margin-bottom: -100px;
-	margin-top: 60px;
+	top:50px;
+	left:20px;
 }
 
 div#content input[type="submit"],

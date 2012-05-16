@@ -16,6 +16,7 @@
 
 		<div class="section">
 			<fieldset>
+				<p>Ligne type : Nom  Prenom  INE  Division (séparateur ;)</p>
 				<div class="form-row">
 					<label for="file">Fichier : </label>
 					<div class="input">
