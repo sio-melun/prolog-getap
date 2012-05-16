@@ -21,10 +21,24 @@ public class Utilisateur {
 
 		this.nom = nom;
 		this.prenom = prenom;
+
 		this.login = prenom.charAt(0) + nom;
-		this.pass = login;
+		this.pass = generate(5);
 		this.classe = null;
 		this.mail = null;
+	}
+
+	public String generate(int length) {
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		String pass = "";
+		for (int x = 0; x < length; x++) {
+			int i = (int) Math.floor(Math.random() * 62); // Si tu supprimes des
+															// lettres tu
+															// diminues ce nb
+			pass += chars.charAt(i);
+		}
+		System.out.println(pass);
+		return pass;
 	}
 
 	public String getLogin() {

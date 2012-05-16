@@ -96,7 +96,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees (${etat2 + etat6})</a></h3>
+		<h3><a href="#">Demandes refusees par l'élève (${etat2})</a></h3>
 		<div>
 			<table id="refuse" class="tablesorter">
 				<thead>
@@ -109,7 +109,32 @@
 				</thead>
 				<tbody>
 				    <c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 2 or dctap.etat == 6}">
+						<c:if test="${dctap.etat == 2}">
+						    <tr>
+								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+								<td>${dctap.dateAction}</td>
+								<td>${dctap.minutes}</td>
+								<td>${dctap.accPers.nom}</td>
+							</tr>
+						</c:if>
+				    </c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<h3><a href="#">Demandes refusees par Vous-même (${etat6})</a></h3>
+		<div>
+			<table id="refuse" class="tablesorter">
+				<thead>
+				<tr class="header">
+					<th>Eleves</th>
+					<th>Date</th>
+					<th>Temps (min)</th>
+					<th>Type d'aide</th>
+				</tr>
+				</thead>
+				<tbody>
+				    <c:forEach items="${listdctaps}" var="dctap">
+						<c:if test="${dctap.etat == 6}">
 						    <tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
