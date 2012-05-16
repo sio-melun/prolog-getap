@@ -53,11 +53,8 @@ public class LectureFichier {
 			while (ligne != null) {
 				String[] params = ligne.split(";"); // TODO
 				if (params.length >= 2) {
-					Utilisateur user = new Utilisateur(params[0], params[1]);
-					if (params.length >= 3)
-						user.setClasse(params[2]);
-					if (params.length == 4)
-						user.setMail(params[3]);
+					Utilisateur user = new Utilisateur(params[0], params[1],
+							params[2], params[3]);
 					listUser.add(user);
 				} else {
 					System.out

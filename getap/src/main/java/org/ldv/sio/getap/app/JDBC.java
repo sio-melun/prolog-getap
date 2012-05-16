@@ -26,20 +26,12 @@ public class JDBC {
 	}
 
 	public void feedBDD(String file) {
-		/*
-		 * String username = "prolog"; String password = "secret"; String driver
-		 * = "com.mysql.jdbc.Driver"; String url =
-		 * "jdbc:mysql://172.17.253.70/getap"; // d�finir la bonne IP
-		 */String QUOTE = "\'";
+		String QUOTE = "\'";
 
-		try { // chargement du pilote
-				// Class.forName("com.mysql.jdbc.Driver").newInstance();
-				// Connection con =
-				// DriverManager.getConnection("jdbc:mysql://localhost/getap",
-				// "prolog", "secret");
+		try {
 			Connection con = ds.getConnection();
 
-			// Insertion dans la base de donn�es d'une liste
+			// Insertion dans la base de donnees d'une liste
 			String lien = file;
 			if (lien.contains('\\' + "")) {
 				file = file.replace('\\', '/');
@@ -50,7 +42,7 @@ public class JDBC {
 					.createListUser(lf.getFileCsv());
 
 			// parcour toute la liste d'utilisateur, les ins�re en base de
-			// donn�es avec leur don�es respectives
+			// donn�es avec leur donees respectives
 			for (int i = 1; i < listUser.size(); i++) {
 				Statement select = con.createStatement();
 				ResultSet rs = select
@@ -74,10 +66,11 @@ public class JDBC {
 
 				// Requete d'insertion de l'utilisateur dans la base
 				PreparedStatement param = con
-						.prepareStatement("INSERT INTO getap.user(nom, prenom, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?);");
+						.prepareStatement("INSERT INTO getap.user(nom, prenom, ine, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?);");
 
 				param.setNString(1, listUser.get(i).nom);
 				param.setNString(2, listUser.get(i).prenom);
+				param.setNString(3, listUser.get(i).ine);
 
 				// d�finition de la base d'un login : 1ere lettre prenom + nom
 				String baseLogin = listUser.get(i).prenom.charAt(0)
@@ -108,7 +101,7 @@ public class JDBC {
 				// ins�re donc le login cr�� au moment de la lecture du fichier
 				// .csv
 				if (count == 0) // GOOD
-					param.setNString(3, listUser.get(i).login);
+					param.setNString(4, listUser.get(i).login);
 
 				// Si un r�sultat est retourn�, le login existe d�j�, on cr�� un
 				// login avec un chiffre en plus avec une incr�mentation
@@ -129,29 +122,13 @@ public class JDBC {
 					max++;
 					String sMax = String.valueOf(max);
 					String log = baseLogin + sMax;
-					param.setNString(3, log);
+					param.setNString(4, log);
 				}
 
-				param.setNString(4, listUser.get(i).pass);
-				// System.out.println("Chemin : " + file);
-				String[] parties = file.split("/");
-				String fichier = parties[parties.length - 1];
+				param.setNString(5, listUser.get(i).pass);
+
 				// System.out.println("Fichier : " + fichier);
-
-				// Si fichier.csv o� fichier commence par "eleve" -> role =
-				// eleve
-				if (fichier.startsWith("eleve"))
-					param.setNString(5, "eleve");
-
-				// Sinon si fichier.csv o� fichier commence par prof : 2 verif
-				// suivant la classe -> si classe (prof principal) sinon (prof
-				// intervenant)
-				else if (fichier.startsWith("prof")) {
-					if (listUser.get(i).classe == null)
-						param.setNString(5, "prof-intervenant");
-					else
-						param.setNString(5, "prof-principal");
-				}
+				param.setNString(6, "eleve");
 
 				// Requete retournant l'id de la classe de l'utilisateur
 				Statement classe = con.createStatement();
@@ -160,7 +137,7 @@ public class JDBC {
 				ResultSet result = classe.executeQuery(sql);
 				if (result.next()) {
 					int clas = result.getInt("id");
-					param.setInt(6, clas);
+					param.setInt(7, clas);
 				}
 
 				// Execution de la requete !

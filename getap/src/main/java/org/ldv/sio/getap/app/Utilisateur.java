@@ -4,12 +4,12 @@ public class Utilisateur {
 
 	protected String nom;
 	protected String prenom;
+	protected String ine;
 	protected String login;
 	protected String pass;
 	protected String classe;
-	protected String mail;
 
-	public Utilisateur(String prenom, String nom) {
+	public Utilisateur(String nom, String prenom, String ine, String classe) {
 
 		if (nom.contains("'")) {
 			nom = nom.replace("'", "");
@@ -21,15 +21,14 @@ public class Utilisateur {
 
 		this.nom = nom;
 		this.prenom = prenom;
-
+		this.ine = ine;
 		this.login = prenom.charAt(0) + nom;
 		this.pass = generate(5);
-		this.classe = null;
-		this.mail = null;
+		this.classe = classe;
 	}
 
 	public String generate(int length) {
-		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-";
 		String pass = "";
 		for (int x = 0; x < length; x++) {
 			int i = (int) Math.floor(Math.random() * 62); // Si tu supprimes des
@@ -37,7 +36,6 @@ public class Utilisateur {
 															// diminues ce nb
 			pass += chars.charAt(i);
 		}
-		System.out.println(pass);
 		return pass;
 	}
 
@@ -55,14 +53,6 @@ public class Utilisateur {
 
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 
 	public String getClasse() {
