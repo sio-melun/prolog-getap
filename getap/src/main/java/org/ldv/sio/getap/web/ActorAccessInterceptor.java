@@ -60,7 +60,6 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 
 		// cas spécial admin
 		else if (!controllerName.equals(role)
-				&& !controllerName.equals("hotels")
 				&& !controllerName.equals("login") && role.equals("admin")
 				&& !controllerName.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role

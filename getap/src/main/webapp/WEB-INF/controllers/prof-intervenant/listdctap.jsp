@@ -6,7 +6,7 @@
 
 <c:if test="${not empty listdctaps}">
 <div id="accordion">
-	<h3><a href="#">Demandes reçues</a></h3>
+	<h3><a href="#">Demandes reçues (${etat0 + etat3})</a></h3>
 		<div>
 			<table id="attente" class="tablesorter">
 				<thead>
@@ -40,7 +40,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes modifiees</a></h3>
+		<h3><a href="#">Demandes modifiees (${etat4})</a></h3>
 		<div>
 			<table id="modif" class="tablesorter">
 				<thead>
@@ -71,7 +71,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes validees</a></h3>
+		<h3><a href="#">Demandes validees (${etat1 + etat5})</a></h3>
 		<div>
 			<table id="valide" class="tablesorter">
 				<thead>
@@ -96,7 +96,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees</a></h3>
+		<h3><a href="#">Demandes refusees (${etat2 + etat6})</a></h3>
 		<div>
 			<table id="refuse" class="tablesorter">
 				<thead>
