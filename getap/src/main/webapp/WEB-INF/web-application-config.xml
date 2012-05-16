@@ -30,7 +30,6 @@
 				<value>/WEB-INF/controllers/admin/views.xml</value>
 				<value>/WEB-INF/controllers/login/views.xml</value>
 				<value>/WEB-INF/controllers/profil/views.xml</value>
-				<value>/WEB-INF/controllers/hotels/views.xml</value>
 			</list>
 		</property>
 	</bean>

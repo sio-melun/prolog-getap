@@ -34,6 +34,13 @@ public class ProfInterController {
 	public String mesdctap(Model model) {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("listdctaps", manager.getAllDCTAPByProfInterv(me));
+		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0));
+		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1));
+		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2));
+		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4));
+		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5));
+		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6));
 		return "prof-intervenant/listdctap";
 	}
 
