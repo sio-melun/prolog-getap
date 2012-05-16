@@ -22,8 +22,9 @@
 			<c:forEach items="${users}" var="user">
 				<tr>
 					<td><c:out value="${user.nom} (${user.prenom}, ${user.role})" /></td>
-					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" style="text-decoration:none"><input type="button" value="Editer"></a></td>
-					<td><a href="<c:url value="/app/admin/delUser/${user.id}" />" style="text-decoration:none"><input type="button" value="Supprimer"></a></td>
+					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><input type="button" value="Editer"></a></td>
+					<td><a href=""
+						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><input type="button" value="Supprimer"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

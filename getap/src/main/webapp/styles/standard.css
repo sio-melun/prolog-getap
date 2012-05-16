@@ -1,10 +1,13 @@
 
 
 body {
-	background: -moz-radial-gradient(center,#F5F2E9 20% ,#79776D 100%);	
+	background: -moz-radial-gradient(center,#F5F2E9 20% ,#79776D 100%);
+	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#79776D 100%);	
 	background-attachment:fixed;
 }
-
+div{
+	margin:10px;
+}
 div#page {
 	width: 850px;
     margin:  0 auto;
@@ -14,7 +17,8 @@ div#page {
     box-sizing: border-box;
 	color: black;
 	z-index:1;
-	background: -moz-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);	
+	background: -moz-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);
+	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);	
 }
 
 div#header { 
@@ -85,13 +89,6 @@ table.listDctap{
 	text-align: center;
 }
 
-tr:hover{
-	-moz-transition-property: background-color;
-	-moz-transition-duration: 500ms;
-	-moz-transition-timing-function: ease;
-	background-color: transparent;
-}
-
 th{
 	font-size: 13px;
 }
@@ -135,7 +132,7 @@ td.Fbutton{
 
 .ajoutUser{
 	padding-right: 25px;
-	border-right: 1px solid grey;
+	/*border-right: 1px solid grey;*/
 }
 
 .ajoutUsers{

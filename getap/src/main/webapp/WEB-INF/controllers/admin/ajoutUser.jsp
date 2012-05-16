@@ -17,13 +17,6 @@
 		<div class="section">
 			<fieldset>
 				<div class="form-row">
-					<label for="id">ID : </label>
-					<div class="input">
-						<form:input path="id" />
-					</div>
-					<br>
-				</div>
-				<div class="form-row">
 					<label for="prenom">Prénom : </label>
 					<div class="input">
 						<form:input path="prenom" />

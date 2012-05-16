@@ -5,6 +5,8 @@
 	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<% String userAgent = request.getHeader("user-agent"); %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<title>
@@ -14,7 +16,11 @@
 			@import url("<c:url value="/styles/css-framework/typo.css" />");
 			@import url("<c:url value="/styles/css-framework/layout.css" />");
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
-			@import url("<c:url value="/styles/standard.css" />");
+			<% if(userAgent.indexOf("Firefox") != -1) { %>
+				@import url("<c:url value="/styles/standard.css" />");
+			<% } else if(userAgent.indexOf("Safari") != -1) { %>
+				@import url("<c:url value="/styles/standardChrome.css" />");
+			<% } %>
 		</style>
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>

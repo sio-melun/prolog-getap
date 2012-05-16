@@ -3,7 +3,13 @@
 <br/><br/>
 
 <div class="centerButton">
-	<a href="<c:url value="/app/admin/ajoutUser" />" style="text-decoration: none"><img class="ajoutUser" src="<c:url value="../../images/AjouterUser.png"/>" /></a>
-	<a href="<c:url value="/app/admin/ajoutUsers" />" style="text-decoration: none"><img class="ajoutUser" src="<c:url value="../../images/AjouterUser.png"/>" /></a>
-	<a href="<c:url value="/app/admin/searchUser" />" style="text-decoration: none"><img class="searchUser" src="<c:url value="../../images/RechercherUser.png"/>" /></a>
+	<div>
+		<a href="<c:url value="/app/admin/ajoutUser" />"><img class="ajoutUser" src="<c:url value="../../images/AjouterUser.png"/>" /><div>Ajouter un Utilisateur</div></a>
+	</div>
+	<div>
+	<a href="<c:url value="/app/admin/ajoutUsers" />"><img class="ajoutUser" src="<c:url value="../../images/AjouterUser.png"/>" /><div>Import Utilisateur via CSV</div></a>
+	</div>
+	<div>
+	<a href="<c:url value="/app/admin/searchUser" />"><img class="searchUser" src="<c:url value="../../images/RechercherUser.png"/>" /><div>Rechercher un Utilisateur</div></a>
+	</div>
 </div>

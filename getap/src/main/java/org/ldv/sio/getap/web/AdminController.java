@@ -1,7 +1,5 @@
 package org.ldv.sio.getap.web;
 
-import javax.swing.JOptionPane;
-
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
@@ -79,7 +77,7 @@ public class AdminController {
 					|| formAjout.getRoleNom().equals("admin"))
 				classe = null;
 
-			User user = new User(formAjout.getId(), formAjout.getPrenom(),
+			User user = new User(null, formAjout.getPrenom(),
 					formAjout.getNom(), classe, formAjout.getRoleNom());
 
 			manager.addUser(user);
@@ -177,19 +175,15 @@ public class AdminController {
 
 	@RequestMapping(value = "delUser/{id}", method = RequestMethod.GET)
 	public String deleteUserById(@PathVariable String id, Model model) {
-		int del = JOptionPane.showConfirmDialog(null,
-				"Voulez-vous continuer cette suppression ?", "Vérification",
-				JOptionPane.YES_NO_OPTION);
 		User user = manager.getUserById(Long.valueOf(id));
 
-		if (user.getId().equals(null))
-			return "redirect:/app/admin/index";
-		else if (del == 0)
+		if (!user.getId().equals(null)) {
 			manager.deleteUser(user);
-		else if (del == 1)
-			return "redirect:/app/admin/dosearchUser?query=" + user.getNom();
+			return "redirect:/app/admin/searchUser";
+		} else {
+			return "redirect:/app/admin/index";
+		}
 
-		return "redirect:/app/admin/searchUser";
 	}
 
 	@RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
