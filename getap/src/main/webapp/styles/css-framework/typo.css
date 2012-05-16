@@ -210,7 +210,7 @@ a, a:hover, a:visited, a:focus {
         
         margin: 1.5em 10px;
         
-        border-bottom: 1px dotted black;
+        border-bottom: 1px solid black;
     }
     
 /* END TYPOGRAPHY */    

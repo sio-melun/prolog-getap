@@ -10,6 +10,7 @@ div{
 }
 div#page {
 	width: 850px;
+	min-height:400px;
     margin:  0 auto;
     padding: 30px;
 	border-radius:20px;
@@ -45,8 +46,6 @@ div#content input[type="button"] {
 	border-style: none;
 	vertical-align: middle;
 }
-
-
 .errors {
 	font-weight: bold;
 	text-align: center;
@@ -132,7 +131,7 @@ td.Fbutton{
 
 .ajoutUser{
 	padding-right: 25px;
-	/*border-right: 1px solid grey;*/
+	border-right: 1px solid grey;
 }
 
 .ajoutUsers{

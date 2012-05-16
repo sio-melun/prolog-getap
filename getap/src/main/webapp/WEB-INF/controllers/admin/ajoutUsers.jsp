@@ -9,7 +9,7 @@
 <title>Ajout utilisateurs</title>
 </head>
 <body>
-
+	<h3>Importation d'une liste d'utilisateur</h3>
 	<form:form modelAttribute="formAjoutUsers" action="doajouts"
 		method="post">
 		<form:errors path="*" cssClass="errors" />

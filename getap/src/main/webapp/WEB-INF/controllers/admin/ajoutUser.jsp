@@ -13,7 +13,7 @@
 	<form:form modelAttribute="formAjoutUser" action="doajout"
 		method="post">
 		<form:errors path="*" cssClass="errors" />
-
+		<h3>Ajout d'un Utilisateur</h3>
 		<div class="section">
 			<fieldset>
 				<div class="form-row">
@@ -21,25 +21,26 @@
 					<div class="input">
 						<form:input path="prenom" />
 					</div>
-					<br>
 				</div>
 				<div class="form-row">
 					<label for="nom">Nom : </label>
 					<div class="input">
 						<form:input path="nom" />
 					</div>
-					<br>
 				</div>
 				<div class="form-row">
-					<label for="classeId">Les classes :</label><br>
-					<form:select path="classeId" items="${lesClasses}" itemValue="id"
-						itemLabel="nom"></form:select>
+					<label for="classeId">Les classes :</label>
+					<div>
+						<form:select path="classeId" items="${lesClasses}" itemValue="id"
+							itemLabel="nom"></form:select>
+					</div>
 				</div>
-				<br>
 				<div class="form-row">
-					<label for="role">Role : </label><br>
-					<form:select path="roleNom" items="${lesRoles}" itemValue="nom"
-						itemLabel="nom"></form:select>
+					<label for="role">Role : </label>
+					<div>
+						<form:select path="roleNom" items="${lesRoles}" itemValue="nom"
+							itemLabel="nom"></form:select>
+					</div>
 				</div>
 			</fieldset>
 			<br>
