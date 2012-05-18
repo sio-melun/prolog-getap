@@ -18,15 +18,30 @@
 </c:if>
 
 	<c:if test="${not empty users}">
-		<table>
+		<table id="search" class="tablesorter">
+			<thead>
+				<tr class="header">
+					<th>Nom et prénom</th>
+					<th>Login</th>
+					<th>Mot de passe</th>
+					<th>Role</th>
+					<th>Classe</th>
+				</tr>
+			</thead>
+			<tbody>
 			<c:forEach items="${users}" var="user">
 				<tr>
-					<td><c:out value="${user.nom} (${user.prenom}, ${user.role})" /></td>
+					<td>${user.nom} ${user.prenom}</td>
+					<td>${user.login}</td>
+					<td>${user.pass}</td>
+					<td>${user.role}</td>
+					<td>${user.classe.nom}</td>
 					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><input type="button" value="Editer"></a></td>
 					<td><a href=""
 						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><input type="button" value="Supprimer"></a></td>
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 	</c:if>
 

@@ -474,8 +474,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public List<User> search(UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate.query("select * from user where nom like "
-				+ "'" + query + "%' or prenom like " + "'" + query + "%'",
-				new UserMapper());
+				+ "'" + query + "%'", new UserMapper());
 	}
 
 	public User getUser(Long id) {
