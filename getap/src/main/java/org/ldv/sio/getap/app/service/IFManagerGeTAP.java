@@ -88,6 +88,10 @@ public interface IFManagerGeTAP {
 	// Opération Search User
 	public List<User> search(UserSearchCriteria userSearchCriteria);
 
+	public List<User> searchProf(UserSearchCriteria userSearchCriteria);
+
+	public List<User> searchClasse(UserSearchCriteria userSearchCriteria);
+
 	public User getUser(Long id);
 
 	/**
