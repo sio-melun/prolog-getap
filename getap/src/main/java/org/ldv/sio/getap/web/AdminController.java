@@ -95,6 +95,16 @@ public class AdminController {
 
 	}
 
+	@RequestMapping(value = "searchProf", method = RequestMethod.GET)
+	public void searchProf(UserSearchCriteria userSearchCriteria) {
+
+	}
+
+	@RequestMapping(value = "searchClasse", method = RequestMethod.GET)
+	public void searchClasse(UserSearchCriteria userSearchCriteria, Model model) {
+		model.addAttribute("lesClasses", manager.getAllClasse());
+	}
+
 	/**
 	 * @param userSearchCriteria
 	 * @param bindResult
@@ -114,6 +124,41 @@ public class AdminController {
 			return "admin/searchUser";
 		} else {
 			model.addAttribute("users", manager.search(userSearchCriteria));
+			return "admin/dosearchUser";
+		}
+	}
+
+	@RequestMapping(value = "dosearchProf", method = RequestMethod.GET)
+	public String searchProf(UserSearchCriteria userSearchCriteria,
+			BindingResult bindResult, Model model) {
+
+		if (userSearchCriteria.getQuery() == null
+				|| "".equals(userSearchCriteria.getQuery())) {
+			bindResult.rejectValue("query", "required",
+					"Entrez un critère de recherche valide");
+		}
+		if (bindResult.hasErrors()) {
+			return "admin/searchProf";
+		} else {
+			model.addAttribute("users", manager.searchProf(userSearchCriteria));
+			return "admin/dosearchUser";
+		}
+	}
+
+	@RequestMapping(value = "dosearchForClasse", method = RequestMethod.GET)
+	public String searchClasse(UserSearchCriteria userSearchCriteria,
+			BindingResult bindResult, Model model) {
+
+		if (userSearchCriteria.getQuery() == null
+				|| "".equals(userSearchCriteria.getQuery())) {
+			bindResult.rejectValue("query", "required",
+					"Entrez un critère de recherche valide");
+		}
+		if (bindResult.hasErrors()) {
+			return "admin/searchClasse";
+		} else {
+			model.addAttribute("users",
+					manager.searchClasse(userSearchCriteria));
 			return "admin/dosearchUser";
 		}
 	}

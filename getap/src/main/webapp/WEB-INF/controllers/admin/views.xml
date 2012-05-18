@@ -30,6 +30,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/dosearchUser.jsp" />
 	</definition>
+	
+	<definition name="admin/searchProf" extends="standard-layout">
+		<put-attribute name="title" value="Recherche d'un professeur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchProf.jsp" />
+	</definition>
+	
+	<definition name="admin/searchClasse" extends="standard-layout">
+		<put-attribute name="title" value="Recherche par classe" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchClasse.jsp" />
+	</definition>
 
 	<definition name="admin/doajout" extends="standard-layout">
 		<put-attribute name="title" value="Ajout d'un utilisateur" />

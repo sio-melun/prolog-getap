@@ -15,11 +15,9 @@
 		<br/>
 	
 	<div id="buttonGroup">
-		<a href="<c:url value="/app/admin/index" />"
-			style="text-decoration: none"><input type="button"
+		<a href="<c:url value="/app/admin/index" />"><input type="button"
 			value="Retour"> 
 		</a> 
 		<input type="submit" value="Rechercher" />
 	</div>
 </form:form>
-

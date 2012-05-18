@@ -14,11 +14,20 @@
 					class="ajoutUser"
 					src="<c:url value="../../images/AjouterUser.png"/>" />
 					<div>Import Utilisateur via CSV</div></a></td>
+		</tr>
+		<tr>
 			<td><a href="<c:url value="/app/admin/searchUser" />"><img
 					class="searchUser"
 					src="<c:url value="../../images/RechercherUser.png"/>" />
-					<div>Rechercher un Utilisateur</div></a>
-			<td>
-		<tr>
+					<div>Rechercher un Utilisateur</div></a></td>
+			<td><a href="<c:url value="/app/admin/searchProf" />"><img
+					class="searchUser"
+					src="<c:url value="../../images/RechercherUser.png"/>" />
+					<div>Rechercher un Professeur</div></a></td>
+			<td><a href="<c:url value="/app/admin/searchClasse" />"><img
+					class="searchUser"
+					src="<c:url value="../../images/RechercherUser.png"/>" />
+					<div>Recherche par classe</div></a></td>
+		</tr>
 	</table>
 </div>

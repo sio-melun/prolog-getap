@@ -21,7 +21,7 @@
 		<table id="search" class="tablesorter">
 			<thead>
 				<tr class="header">
-					<th>Nom et prénom</th>
+					<th>Nom/Prénom</th>
 					<th>Login</th>
 					<th>Mot de passe</th>
 					<th>Role</th>
@@ -48,11 +48,11 @@
 	<div class="buttonGroup">
 		
 		
-		<a href="<c:url value="/app/admin/index" />"style="text-decoration: none">
+		<a href="<c:url value="/app/admin/index" />">
 		 	<input type="button" value="Retour à l'index">
 		</a>
 		
-		<a href="<c:url value="/app/admin/searchUser" />"style="text-decoration: none">
+		<a href="<c:url value="/app/admin/searchUser" />">
 		 	<input type="button" value="Nouvelle recherche">
 		</a>
 		
