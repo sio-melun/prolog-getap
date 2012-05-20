@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.web;
 
+import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormDemandeConsoTempsAccPers;
@@ -46,13 +47,13 @@ public class ElevesController {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("mesdctaps", manager.getAllDCTAPByEleve(me));
 		Long id = me.getId();
-		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
-		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
-		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
-		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
-		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
-		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
-		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
+		model.addAttribute("etat0", manager.getAllDCTAPByEtatAndEleve(0, id));
+		model.addAttribute("etat1", manager.getAllDCTAPByEtatAndEleve(1, id));
+		model.addAttribute("etat2", manager.getAllDCTAPByEtatAndEleve(2, id));
+		model.addAttribute("etat3", manager.getAllDCTAPByEtatAndEleve(3, id));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtatAndEleve(4, id));
+		model.addAttribute("etat5", manager.getAllDCTAPByEtatAndEleve(5, id));
+		model.addAttribute("etat6", manager.getAllDCTAPByEtatAndEleve(6, id));
 		return "eleve/mesdctap";
 	}
 
@@ -172,8 +173,12 @@ public class ElevesController {
 
 		System.out.println("TEST :" + formAjout.getId());
 		System.out.println("TEST id eleve :" + formAjout.getEleveId());
-		System.out.println("TEST AP :"
-				+ manager.getAPById(formAjout.getAccPersId()).getNom());
+		if (manager.getAPById(formAjout.getAccPersId()) != null) {
+			System.out.println("TEST AP :"
+					+ manager.getAPById(formAjout.getAccPersId()).getNom());
+		} else {
+			System.out.println("TEST AP : " + formAjout.getAccPersNom());
+		}
 		System.out.println("TEST :" + model);
 		System.out.println("TEST annee scolaire : "
 				+ manager.getCurrentAnneeScolaire());
@@ -181,12 +186,17 @@ public class ElevesController {
 		if (bindResult.hasErrors())
 			return "eleve/ajoutdctap";
 		else {
-
+			AccPersonalise acc = new AccPersonalise(null,
+					formAjout.getAccPersNom(), 1, formAjout.getEleveId());
+			if (manager.getAPById(formAjout.getAccPersId()) != null) {
+				acc = manager.getAPById(formAjout.getAccPersId());
+			} else {
+				manager.addAP(acc);
+			}
 			DemandeConsoTempsAccPers dctap = new DemandeConsoTempsAccPers(
 					formAjout.getId(), manager.getCurrentAnneeScolaire(),
 					formAjout.getDate(), formAjout.getMinutes(),
-					manager.getUserById(formAjout.getProfId()),
-					manager.getAPById(formAjout.getAccPersId()),
+					manager.getUserById(formAjout.getProfId()), acc,
 					manager.getUserById(formAjout.getEleveId()),
 					formAjout.getEtat());
 

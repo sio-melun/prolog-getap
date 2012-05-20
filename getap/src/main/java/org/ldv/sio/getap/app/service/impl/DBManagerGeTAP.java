@@ -55,9 +55,16 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						new DemandeMapper());
 	}
 
-	public int getAllDCTAPByEtat(int etat, Long id) {
+	public int getAllDCTAPByEtatAndProf(int etat, Long id) {
 		int count = this.jdbcTemplate.queryForInt(
 				"select count(id) from DCTAP where Etat = ? and idProf = ?",
+				new Object[] { etat, id });
+		return count;
+	}
+
+	public int getAllDCTAPByEtatAndEleve(int etat, Long id) {
+		int count = this.jdbcTemplate.queryForInt(
+				"select count(id) from DCTAP where Etat = ? and idEleve = ?",
 				new Object[] { etat, id });
 		return count;
 	}
@@ -75,7 +82,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		int etat = dctap.getEtat();
 		Long idProf = dctap.getProf().getId();
 		Long idEleve = dctap.getEleve().getId();
-		int idAP = dctap.getAccPers().getId();
+		int idAP;
+		if (dctap.getAccPers().getId() != null) {
+			idAP = dctap.getAccPers().getId();
+		} else {
+			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
+		}
 
 		this.jdbcTemplate
 				.update("insert into DCTAP(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
@@ -282,10 +294,23 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return acc;
 	}
 
+	public AccPersonalise getAPByNom(String nom) {
+		AccPersonalise acc;
+		try {
+			acc = this.jdbcTemplate.queryForObject(
+					"select * from AP where libelle = ?", new Object[] { nom },
+					new AccMapper());
+		} catch (EmptyResultDataAccessException e) {
+			acc = null;
+		}
+
+		return acc;
+	}
+
 	public void addAP(AccPersonalise ap) {
 		String libelle = ap.getNom();
 		int origineEtat = ap.getOrigineEtat();
-		int idUser = ap.getIdUser();
+		Long idUser = ap.getIdUser();
 
 		this.jdbcTemplate.update(
 				"insert into AP(libelle, origineEtat, idUser) values(?,?,?)",
@@ -419,7 +444,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			acc.setId(rs.getInt("id"));
 			acc.setNom(rs.getString("libelle"));
 			acc.setOrigineEtat(rs.getInt("origineEtat"));
-			acc.setIdUser(rs.getInt("idUser"));
+			acc.setIdUser(rs.getLong("idUser"));
 			return acc;
 		}
 	}

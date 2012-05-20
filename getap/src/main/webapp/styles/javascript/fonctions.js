@@ -1,15 +1,15 @@
 
 function testAcc(){
-	var Acc=$("#selectAcc").val();
+	var Acc=$("#accPersId").val();
 	var nomAcc=$('#nomAcc').val();
 	
-	if (Acc=='autre'){		
-		$('#libelleAcc').attr('value',nomAcc);
+	if (Acc=='0'){		
+		$('#accPersNom').attr('value',nomAcc);
 		$("#inputAcc").attr('style','');		
 		}
 	else{
 		$("#inputAcc").attr('style','display: none;visibility: hidden;');
-		$('#libelleAcc').attr('value',Acc);
+		$('#accPersNom').attr('value',Acc);
 		
 	}
 }

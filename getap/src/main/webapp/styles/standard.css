@@ -134,17 +134,6 @@ td.Fbutton{
 	text-align: center;
 }
 
-.ajoutUser{
-	padding-right: 25px;
-	border-right: 1px solid grey;
-}
-
-.ajoutUsers{
-	padding-left: 25px;
-	padding-right: 25px;
-	border-right: 1px solid grey;
-}
-
 .searchUser{
 	padding-left: 25px;
 }

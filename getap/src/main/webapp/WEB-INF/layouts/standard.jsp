@@ -22,14 +22,16 @@
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
-		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
+		
+		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>	
+		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script  src="http://dev.jquery.com/view/trunk/plugins/tablesorter/2.0/jquery.tablesorter.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
-		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 		
      	<script>
   			$(document).ready(function() {

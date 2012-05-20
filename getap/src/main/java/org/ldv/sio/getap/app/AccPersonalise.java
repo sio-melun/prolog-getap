@@ -10,12 +10,12 @@ public class AccPersonalise {
 	private Integer id;
 	private String nom;
 	private int origineEtat;
-	private int idUser;
+	private Long idUser;
 
 	public AccPersonalise() {
 	}
 
-	public AccPersonalise(Integer id, String nom, int origineEtat, int idUser) {
+	public AccPersonalise(Integer id, String nom, int origineEtat, Long idUser) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -47,11 +47,11 @@ public class AccPersonalise {
 		this.origineEtat = origineEtat;
 	}
 
-	public int getIdUser() {
+	public Long getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUser(int idUser) {
+	public void setIdUser(Long idUser) {
 		this.idUser = idUser;
 	}
 
