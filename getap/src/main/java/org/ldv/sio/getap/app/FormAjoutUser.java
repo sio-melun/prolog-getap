@@ -10,11 +10,29 @@ public class FormAjoutUser {
 	private Integer classeId;
 	private String classeNom;
 	private List<Classe> classe;
+	private int disciplineId;
+	private String disciplineNom;
 	private int roleId;
 	private String roleNom;
 
 	public FormAjoutUser() {
 
+	}
+
+	public int getDisciplineId() {
+		return disciplineId;
+	}
+
+	public void setDisciplineId(int disciplineId) {
+		this.disciplineId = disciplineId;
+	}
+
+	public String getDisciplineNom() {
+		return disciplineNom;
+	}
+
+	public void setDisciplineNom(String disciplineNom) {
+		this.disciplineNom = disciplineNom;
 	}
 
 	public Long getId() {

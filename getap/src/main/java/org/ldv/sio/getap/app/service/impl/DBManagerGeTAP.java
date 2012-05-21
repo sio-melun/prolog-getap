@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -349,8 +350,14 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 				new Object[] { id });
 	}
 
+	public List<Discipline> getAllDiscipline() {
+		return this.jdbcTemplate.query(
+				"select * from discipline order by libelle",
+				new DisciplineMapper());
+	}
+
 	public List<Classe> getAllClasse() {
-		return this.jdbcTemplate.query("select * from classe order by id",
+		return this.jdbcTemplate.query("select * from classe order by libelle",
 				new ClasseMapper());
 	}
 
@@ -448,6 +455,16 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			classe.setId(rs.getInt("id"));
 			classe.setNom(rs.getString("libelle"));
 			return classe;
+		}
+	}
+
+	private static final class DisciplineMapper implements
+			RowMapper<Discipline> {
+		public Discipline mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Discipline dis = new Discipline();
+			dis.setId(rs.getInt("id"));
+			dis.setNom(rs.getString("libelle"));
+			return dis;
 		}
 	}
 

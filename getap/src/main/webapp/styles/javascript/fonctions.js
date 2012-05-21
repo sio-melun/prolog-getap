@@ -21,14 +21,22 @@ function testRole(){
 		$('#roleNom').attr('value',role);
 		$("#inputClasse").attr('style','');
 		$("#inputLesClasse").attr('style','display: none;visibility: hidden;');
+		$("#inputDiscipline").attr('style','display: none;visibility: hidden;');
 	}
 	else if (role=="prof-principal"){
 		$("#inputLesClasse").attr('style','');
+		$("#inputDiscipline").attr('style','');
+		$("#inputClasse").attr('style','display: none;visibility: hidden;');
+	}
+	else if (role=="prof-intervenant"){
+		$("#inputDiscipline").attr('style','');
+		$("#inputLesClasse").attr('style','display: none;visibility: hidden;');
 		$("#inputClasse").attr('style','display: none;visibility: hidden;');
 	}
 	else{
 		$("#inputClasse").attr('style','display: none;visibility: hidden;');
 		$("#inputLesClasse").attr('style','display: none;visibility: hidden;');
+		$("#inputDiscipline").attr('style','display: none;visibility: hidden;');
 	}
 }
 

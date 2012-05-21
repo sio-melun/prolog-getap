@@ -35,7 +35,7 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="form-row" id="inputDiscipline">
+				<div class="form-row" id="inputDiscipline" style="display: none;visibility: hidden;">
 					<label for="disciplineId">Discipline :</label>
 					<div>
 						<form:select path="disciplineId" items="${lesDisciplines}" itemValue="id"
@@ -61,7 +61,7 @@
 								int begin = 0;
 								int end = 5;
 							
-							 	for (int i=0;i<5;i++){ 
+							 	for (int i=0;i<20;i++){ 
 							 %>
 									<tr>
 									
@@ -69,7 +69,7 @@
 											
 												<td>
 												<input type="checkbox" name="${classe.nom}"
-														value="${classe.id}" /></td><td> ${classe.nom}</td>
+														value="${classe.id}" id="${classe.nom}"/></td><td> <label for="${classe.nom}" class="checkbox">${classe.nom}</label></td>
 											
 										</c:forEach>
 										

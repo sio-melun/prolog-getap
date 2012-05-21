@@ -58,6 +58,7 @@ public class AdminController {
 	public String ajoutUser(FormAjoutUser formAjout, Model model) {
 
 		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesRoles", manager.getAllRole());
 
 		return "admin/ajoutUser";
