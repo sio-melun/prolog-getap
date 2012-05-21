@@ -24,23 +24,52 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/searchUser.jsp" />
 	</definition>
-	
+
 	<definition name="admin/dosearchUser" extends="standard-layout">
-		<put-attribute name="title" value="Resultat recherche d'un utilisateur" />
+		<put-attribute name="title"
+			value="Resultat recherche d'un utilisateur" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/dosearchUser.jsp" />
 	</definition>
-	
+
 	<definition name="admin/searchProf" extends="standard-layout">
 		<put-attribute name="title" value="Recherche d'un professeur" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/searchProf.jsp" />
 	</definition>
-	
+
 	<definition name="admin/searchClasse" extends="standard-layout">
 		<put-attribute name="title" value="Recherche par classe" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/searchClasse.jsp" />
+	</definition>
+
+	<definition name="admin/searchDctapUser" extends="standard-layout">
+		<put-attribute name="title"
+			value="Recherche des demandes d'un utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchDctapUser.jsp" />
+	</definition>
+	
+	<definition name="admin/searchDctapProf" extends="standard-layout">
+		<put-attribute name="title"
+			value="Recherche des demandes par professeur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchDctapProf.jsp" />
+	</definition>
+	
+	<definition name="admin/searchDctapClasse" extends="standard-layout">
+		<put-attribute name="title"
+			value="Recherche des demandes par classe" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/searchDctapClasse.jsp" />
+	</definition>
+
+	<definition name="admin/doSearchDctap" extends="standard-layout">
+		<put-attribute name="title"
+			value="Resultat recherche des demandes d'utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/doSearchDctap.jsp" />
 	</definition>
 
 	<definition name="admin/doajout" extends="standard-layout">
@@ -48,29 +77,29 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/doajout.jsp" />
 	</definition>
-	
+
 	<definition name="admin/editUser" extends="standard-layout">
 		<put-attribute name="title" value="Edition d'un utilisateur" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/editUser.jsp" />
 	</definition>
-	
+
 	<definition name="admin/doEditUser" extends="standard-layout">
 		<put-attribute name="title" value="Edition d'un utilisateur" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/doEditUser.jsp" />
 	</definition>
-	
+
 	<definition name="admin/ajoutUsers" extends="standard-layout">
 		<put-attribute name="title" value="Ajouter plusieurs utilisateurs" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/ajoutUsers.jsp" />
 	</definition>
-	
+
 	<definition name="admin/doajouts" extends="standard-layout">
 		<put-attribute name="title" value="Ajouter plusieurs utilisateurs" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/doajouts.jsp" />
 	</definition>
-	
+
 </tiles-definitions>

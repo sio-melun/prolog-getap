@@ -35,4 +35,23 @@
 			</tr>
 		</table>
 	</div>
+	<h3><a href="#">Gestion des demandes faites par les eleves</a></h3>
+	<div>
+		<table>
+			<tr>
+				<td><a href="<c:url value="/app/admin/searchDctapUser" />"><img
+						class="searchUser"
+						src="<c:url value="../../images/RechercherUser.png"/>" />
+						<div>Rechercher un Utilisateur</div></a></td>
+				<td><a href="<c:url value="/app/admin/searchDctapProf" />"><img
+						class="searchUser"
+						src="<c:url value="../../images/RechercherUser.png"/>" />
+						<div>Rechercher un Professeur</div></a></td>
+				<td><a href="<c:url value="/app/admin/searchDctapClasse" />"><img
+						class="searchUser"
+						src="<c:url value="../../images/RechercherUser.png"/>" />
+						<div>Recherche par classe</div></a></td>
+			</tr>
+		</table>
+	</div>
 </div>

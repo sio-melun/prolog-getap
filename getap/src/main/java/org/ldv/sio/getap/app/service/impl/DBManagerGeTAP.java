@@ -551,7 +551,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate
-				.query("select * from user u, dctap d where (u.id=d.idProf or u.id=d.idEleve) and nom like "
+				.query("select * from user u, dctap d where (u.id = d.idEleve or u.id = d.idProf) and nom like "
 						+ "'" + query + "%'", new DemandeMapper());
 	}
 
@@ -559,7 +559,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate
-				.query("select * from user u, classe c, dctap d where u.idClasse = c.id and c.libelle = "
+				.query("SELECT dctap.* FROM classe, user, dctap  where classe.id=user.idClasse and user.id=dctap.idEleve and classe.libelle = "
 						+ "'" + query + "'", new DemandeMapper());
 	}
 
