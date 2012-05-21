@@ -32,6 +32,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script  src="http://dev.jquery.com/view/trunk/plugins/tablesorter/2.0/jquery.tablesorter.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.pager.js"></script>
 		
      	<script>
   			$(document).ready(function() {

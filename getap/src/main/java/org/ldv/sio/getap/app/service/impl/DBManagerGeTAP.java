@@ -33,45 +33,45 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByEleve(User eleve) {
 		Long id = eleve.getId();
-		return this.jdbcTemplate.query("select * from DCTAP where idEleve = "
+		return this.jdbcTemplate.query("select * from dctap where idEleve = "
 				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfInterv(User profi) {
 		Long id = profi.getId();
-		return this.jdbcTemplate.query("select * from DCTAP where idProf = "
+		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp) {
 		Long id = profp.getId();
-		return this.jdbcTemplate.query("select * from DCTAP where idProf = "
+		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByClasse(String nomClasse) {
 		return this.jdbcTemplate
-				.query("select * from DCTAP d, user u, Classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
+				.query("select * from dctap d, user u, classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
 						new DemandeMapper());
 	}
 
 	public int getAllDCTAPByEtatAndProf(int etat, Long id) {
 		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from DCTAP where Etat = ? and idProf = ?",
+				"select count(id) from dctap where Etat = ? and idProf = ?",
 				new Object[] { etat, id });
 		return count;
 	}
 
 	public int getAllDCTAPByEtatAndEleve(int etat, Long id) {
 		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from DCTAP where Etat = ? and idEleve = ?",
+				"select count(id) from dctap where Etat = ? and idEleve = ?",
 				new Object[] { etat, id });
 		return count;
 	}
 
 	public DemandeConsoTempsAccPers getDCTAPById(Long id) {
 		return this.jdbcTemplate.queryForObject(
-				"select * from DCTAP where id = ?", new Object[] { id },
+				"select * from dctap where id = ?", new Object[] { id },
 				new DemandeMapper());
 	}
 
@@ -90,7 +90,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 
 		this.jdbcTemplate
-				.update("insert into DCTAP(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
+				.update("insert into dctap(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
 						new Object[] { anneeScolaire, dateAction, dureeAP,
 								etat, idProf, idEleve, idAP });
 
@@ -107,7 +107,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		int idAP = dctap.getAccPers().getId();
 
 		this.jdbcTemplate
-				.update("update DCTAP set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
+				.update("update dctap set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
 						new Object[] { anneeScolaire, dateAction, dureeAP,
 								etat, idProf, idEleve, idAP, id });
 
@@ -115,14 +115,14 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public void deleteDCTAP(DemandeConsoTempsAccPers dctap) {
 		Long id = dctap.getId();
-		this.jdbcTemplate.update("delete from DCTAP where id = ?",
+		this.jdbcTemplate.update("delete from dctap where id = ?",
 				new Object[] { id });
 
 	}
 
 	public boolean deleteDCTAPById(Long id) {
 		int result = this.jdbcTemplate
-				.queryForInt("select count(id) from DCTAP where id = ?",
+				.queryForInt("select count(id) from dctap where id = ?",
 						new Object[] { id });
 		if (result == 0)
 			return false;
@@ -213,7 +213,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			Long idUser = user3.getId();
 			System.out.println(idUser);
 			this.jdbcTemplate.update(
-					"insert into ProfPrincipal(idUser,idClasse) values(?,?)",
+					"insert into prof_principal(idUser,idClasse) values(?,?)",
 					new Object[] { idUser, classe });
 		}
 
@@ -240,19 +240,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		if (!role.equals("prof-principal")) {
 			this.jdbcTemplate
-					.update("delete from ProfPrincipal where idUser = ? and idClasse = ?",
+					.update("delete from prof_principal where idUser = ? and idClasse = ?",
 							new Object[] { id, idClasse });
 		} else {
-			int result = this.jdbcTemplate.queryForInt(
-					"select count(idUser) from ProfPrincipal where idUser = ?",
-					new Object[] { id });
+			int result = this.jdbcTemplate
+					.queryForInt(
+							"select count(idUser) from prof_principal where idUser = ?",
+							new Object[] { id });
 			if (result == 0) {
 				this.jdbcTemplate
-						.update("insert into ProfPrincipal(idUser, idClasse) values(?,?)",
+						.update("insert into prof_principal(idUser, idClasse) values(?,?)",
 								new Object[] { id, idClasse });
 			} else {
 				this.jdbcTemplate
-						.update("update ProfPrincipal set idClasse = ? where idUser = ?",
+						.update("update prof_principal set idClasse = ? where idUser = ?",
 								new Object[] { idClasse, id });
 			}
 		}
@@ -269,7 +270,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		if (user.getRole().equals("prof-principal")) {
 			this.jdbcTemplate
-					.update("delete from ProfPrincipal where idUser = ? and idClasse = ?",
+					.update("delete from prof_principal where idUser = ? and idClasse = ?",
 							new Object[] { id, user.getClasse().getId() });
 		}
 		this.jdbcTemplate.update("delete from user where id = ?",
@@ -278,14 +279,14 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<AccPersonalise> getAllAP() {
-		return this.jdbcTemplate.query("select * from AP", new AccMapper());
+		return this.jdbcTemplate.query("select * from ap", new AccMapper());
 	}
 
 	public AccPersonalise getAPById(int id) {
 		AccPersonalise acc;
 		try {
 			acc = this.jdbcTemplate.queryForObject(
-					"select * from AP where id = ?", new Object[] { id },
+					"select * from ap where id = ?", new Object[] { id },
 					new AccMapper());
 		} catch (EmptyResultDataAccessException e) {
 			acc = null;
@@ -298,7 +299,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		AccPersonalise acc;
 		try {
 			acc = this.jdbcTemplate.queryForObject(
-					"select * from AP where libelle = ?", new Object[] { nom },
+					"select * from ap where libelle = ?", new Object[] { nom },
 					new AccMapper());
 		} catch (EmptyResultDataAccessException e) {
 			acc = null;
@@ -313,7 +314,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		Long idUser = ap.getIdUser();
 
 		this.jdbcTemplate.update(
-				"insert into AP(libelle, origineEtat, idUser) values(?,?,?)",
+				"insert into ap(libelle, origineEtat, idUser) values(?,?,?)",
 				new Object[] { libelle, origineEtat, idUser });
 
 	}
@@ -324,19 +325,19 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		int origineEtat = ap.getOrigineEtat();
 
 		this.jdbcTemplate
-				.update("update AP set libelle = ?, origineEtat = ? where id = ? values(?,?,?)",
+				.update("update ap set libelle = ?, origineEtat = ? where id = ? values(?,?,?)",
 						new Object[] { libelle, origineEtat, id });
 
 	}
 
 	public void deleteAP(AccPersonalise ap) {
 		int id = ap.getId();
-		this.jdbcTemplate.update("delete from AP where id = ?",
+		this.jdbcTemplate.update("delete from ap where id = ?",
 				new Object[] { id });
 	}
 
 	public List<Classe> getAllClasse() {
-		return this.jdbcTemplate.query("select * from Classe order by id",
+		return this.jdbcTemplate.query("select * from classe order by id",
 				new ClasseMapper());
 	}
 
@@ -344,7 +345,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		Classe classe;
 		try {
 			classe = this.jdbcTemplate.queryForObject(
-					"select * from Classe where id = ?", new Object[] { id },
+					"select * from classe where id = ?", new Object[] { id },
 					new ClasseMapper());
 		} catch (EmptyResultDataAccessException e) {
 			classe = null;
@@ -382,7 +383,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String annee;
 		try {
 			annee = this.jdbcTemplate.queryForObject(
-					"select * from paramAnnee order by id desc limit 0,1",
+					"select * from param_annee order by id desc limit 0,1",
 					new Object[] {}, new StringMapper());
 		} catch (EmptyResultDataAccessException e) {
 			annee = null;
@@ -512,7 +513,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public List<User> searchClasse(UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate.query(
-				"select * from user u, Classe c where u.idClasse = c.id and c.libelle = "
+				"select * from user u, classe c where u.idClasse = c.id and c.libelle = "
 						+ "'" + query + "'", new UserMapper());
 	}
 

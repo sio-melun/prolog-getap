@@ -46,7 +46,7 @@ public class JDBC {
 			for (int i = 1; i < listUser.size(); i++) {
 				Statement select = con.createStatement();
 				ResultSet rs = select
-						.executeQuery("SELECT libelle FROM Classe WHERE libelle = "
+						.executeQuery("SELECT libelle FROM classe WHERE libelle = "
 								+ QUOTE + listUser.get(i).classe + QUOTE);
 				rs.last();
 				int count = rs.getRow();
@@ -59,7 +59,7 @@ public class JDBC {
 					String requete = "";
 					st = con.createStatement();
 					String classe = QUOTE + listUser.get(i).classe + QUOTE;
-					requete = "INSERT INTO Classe(libelle) VALUES(" + classe
+					requete = "INSERT INTO classe(libelle) VALUES(" + classe
 							+ ");";
 					st.executeUpdate(requete);
 				}
@@ -132,7 +132,7 @@ public class JDBC {
 
 				// Requete retournant l'id de la classe de l'utilisateur
 				Statement classe = con.createStatement();
-				String sql = "SELECT id FROM Classe WHERE libelle = " + QUOTE
+				String sql = "SELECT id FROM classe WHERE libelle = " + QUOTE
 						+ listUser.get(i).classe + QUOTE;
 				ResultSet result = classe.executeQuery(sql);
 				if (result.next()) {
