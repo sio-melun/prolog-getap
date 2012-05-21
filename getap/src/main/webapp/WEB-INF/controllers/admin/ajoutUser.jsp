@@ -15,7 +15,7 @@
 		<form:errors path="*" cssClass="errors" />
 		<h3>Ajout d'un Utilisateur</h3>
 		<div class="section">
-			<fieldset>
+			<fieldset>	
 				<div class="form-row">
 					<label for="prenom">Prénom : </label>
 					<div class="input">
@@ -29,17 +29,19 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="classeId">Les classes :</label>
+					<label for="role">Role :</label><br>
+					<select id="roleNom" name="roleNom" onchange="testRole()" >		
+						<c:forEach  items="${lesRoles}" var="role">
+							<option value="${role.nom}" label="${role.nom}">${role.nom}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="form-row" id="inputClasse" >
+					<label for="classeId">La classe :</label>
 					<div>
 						<form:select path="classeId" items="${lesClasses}" itemValue="id"
-							itemLabel="nom"></form:select>
-					</div>
-				</div>
-				<div class="form-row">
-					<label for="role">Role : </label>
-					<div>
-						<form:select path="roleNom" items="${lesRoles}" itemValue="nom"
-							itemLabel="nom"></form:select>
+							itemLabel="nom">
+						</form:select>
 					</div>
 				</div>
 			</fieldset>

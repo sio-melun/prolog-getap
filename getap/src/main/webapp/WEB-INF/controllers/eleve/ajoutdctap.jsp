@@ -50,8 +50,6 @@
 
 			<div class="form-row">
 				<label for="accPers">Type d'aide personnalisée : </label><br>
-				<%-- <form:select path="accPersId" items="${lesAP}" itemValue="id"
-						itemLabel="nom"></form:select> --%>
 				<select id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>

@@ -14,6 +14,22 @@ function testAcc(){
 	}
 }
 
+function testRole(){
+	var role = $("#roleNom").val();
+	
+	if (role =="eleve"){		
+		$('#roleNom').attr('value',role);
+		$("#inputClasse").attr('style','');
+	}
+	else if (role="prof-principal"){
+		$("#inputClasse").attr('style','display: none;visibility: hidden;');
+	}
+	else{
+		$("#inputClasse").attr('style','display: none;visibility: hidden;');
+	}
+}
+
+
 function valid(){
 	var SelectAccValue=$('#selectAcc').val();
 	if (SelectAccValue!="autre"){
