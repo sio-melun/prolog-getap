@@ -169,3 +169,8 @@ td .bouton{
 	width: 70px;
 	margin-right: 100px;
 }
+
+#loader{
+	text-align: center;
+	display:none;
+}

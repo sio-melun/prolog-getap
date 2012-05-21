@@ -9,6 +9,12 @@
 <title>Ajout utilisateurs</title>
 </head>
 <body>
+	<script type="text/javascript">
+		function envoye(){
+			document.getElementById("loader").style.display="block";
+			document.getElementById("loader").style.visibility="visible";
+		}
+	</script>
 	<h3>Importation d'une liste d'utilisateur</h3>
 	<form:form commandName="formAjoutUsers" enctype="multipart/form-data" action="doajouts"
 		method="post">
@@ -26,12 +32,14 @@
 				</div>
 			</fieldset>
 			<br>
-				
+			<div id="loader">
+				<img src="../../images/ajax-loader.gif" alt="chargement" width="350px" height="20px"/> 
+			</div>	
 			<div id="buttonGroup">
 				<a href="<c:url value="/app/admin/index" />"><input type="button"
 					value="Retour"> 
 				</a> 
-				<input type="submit" value="Ajouter" />
+				<input type="submit" value="Ajouter" onclick="envoye()"/>
 			</div>
 		</div>
 	</form:form>

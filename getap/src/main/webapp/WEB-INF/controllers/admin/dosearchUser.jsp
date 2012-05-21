@@ -15,7 +15,7 @@
 			<img src="../../images/buttonModif.png"/> : Modifier
 		</td>
 		<td>
-			<img src="../../images/buttonSuppr.png"/> : Supprimer/Refuser
+			<img src="../../images/buttonSuppr.png"/> : Supprimer
 		</td>
 	</tr>
 </table>
@@ -44,9 +44,9 @@
 					<td>${user.pass}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>
-					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><img src="../../images/buttonModif.png" onmouseover="this.src='../../images/buttonModifHover.png';" onmouseout="this.src='../../images/buttonModif.png';" /></a></td>
+					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><img src="../../images/buttonModifHover.png" onmouseover="this.src='../../images/buttonModif.png';" onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img src="../../images/buttonSuppr.png" onmouseover="this.src='../../images/buttonSupprHover.png';" onmouseout="this.src='../../images/buttonSuppr.png';" /></a></td>
+						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -58,13 +58,7 @@
 		
 		<a href="<c:url value="/app/admin/index" />">
 		 	<input type="button" value="Retour à l'index">
-		</a>
-		
-		<a href="<c:url value="/app/admin/searchUser" />">
-		 	<input type="button" value="Nouvelle recherche">
-		</a>
-		
-		
+		</a>		
 	</div>
 
 </body>
