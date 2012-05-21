@@ -11,8 +11,7 @@
 		<fieldset>
 			<div class="form-row">
 				<div class="input">
-					<form:label path="anneeScolaire">Année scolaire courante : </form:label>
-					<br>
+					<label for="anneeScolaire">Année scolaire courante :</label>
 					<form:input path="anneeScolaire" disabled="true" />
 				</div>
 			</div>
@@ -41,7 +40,7 @@
 
 
 			<div class="form-row">
-				<label for="profs">Les professeurs :</label><br>
+				<label for="profs">Les professeurs :</label>
 				<form:select path="profId" items="${lesProfs}" itemValue="id"
 					itemLabel="nom"></form:select>
 			</div>
@@ -49,7 +48,7 @@
 			<br />
 
 			<div class="form-row">
-				<label for="accPers">Type d'aide personnalisée : </label><br>
+				<label for="accPers">Type d'aide personnalisée : </label>
 				<%-- <form:select path="accPersId" items="${lesAP}" itemValue="id"
 						itemLabel="nom"></form:select> --%>
 				<select id="accPersId" name="accPersId" onchange="testAcc()">

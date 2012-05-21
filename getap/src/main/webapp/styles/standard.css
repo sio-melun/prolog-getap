@@ -160,3 +160,8 @@ td .bouton{
 	margin-right:auto;
 	margin-left:auto;
 }
+
+.section label{
+	width: 250px;
+	float: left;
+}
