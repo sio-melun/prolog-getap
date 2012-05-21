@@ -8,17 +8,17 @@
 	
 	<!-- Pages -->
 	<definition name="login/index" extends="standard-layout">
-		<put-attribute name="title" value="Login" />
+		<put-attribute name="title" value="GETAP : connexion" />
 		<put-attribute name="body" value="/WEB-INF/controllers/login/index.jsp" />
 	</definition>
 	
 	<definition name="login/authenticate" extends="standard-layout">
-		<put-attribute name="title" value="Debug Login Results" />
+		<put-attribute name="title" value="GETAP : index" />
 		<put-attribute name="body" value="/WEB-INF/controllers/login/authenticate.jsp" />
 	</definition>
 	
 	<definition name="login/out" extends="standard-layout">
-		<put-attribute name="title" value="Debug Login Results" />
+		<put-attribute name="title" value="GETAP : deconnexion" />
 		<put-attribute name="body" value="/WEB-INF/controllers/login/out.jsp" />
 	</definition>
 </tiles-definitions>

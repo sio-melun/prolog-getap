@@ -95,13 +95,29 @@ public class AdminController {
 
 	}
 
+	@RequestMapping(value = "searchDctapUser", method = RequestMethod.GET)
+	public void searchDctapUser(UserSearchCriteria userSearchCriteria) {
+
+	}
+
 	@RequestMapping(value = "searchProf", method = RequestMethod.GET)
 	public void searchProf(UserSearchCriteria userSearchCriteria) {
 
 	}
 
+	@RequestMapping(value = "searchDctapProf", method = RequestMethod.GET)
+	public void searchDctapProf(UserSearchCriteria userSearchCriteria) {
+
+	}
+
 	@RequestMapping(value = "searchClasse", method = RequestMethod.GET)
 	public void searchClasse(UserSearchCriteria userSearchCriteria, Model model) {
+		model.addAttribute("lesClasses", manager.getAllClasse());
+	}
+
+	@RequestMapping(value = "searchDctapClasse", method = RequestMethod.GET)
+	public void searchDctapClasse(UserSearchCriteria userSearchCriteria,
+			Model model) {
 		model.addAttribute("lesClasses", manager.getAllClasse());
 	}
 
@@ -128,6 +144,23 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value = "doSearchDctap", method = RequestMethod.GET)
+	public String searchDctap(UserSearchCriteria userSearchCriteria,
+			BindingResult bindResult, Model model) {
+
+		if (userSearchCriteria.getQuery() == null
+				|| "".equals(userSearchCriteria.getQuery())) {
+			bindResult.rejectValue("query", "required",
+					"Please enter valid search criteria");
+		}
+		if (bindResult.hasErrors()) {
+			return "admin/searchDctapUser";
+		} else {
+			model.addAttribute("dctap", manager.searchDctap(userSearchCriteria));
+			return "admin/doSearchDctap";
+		}
+	}
+
 	@RequestMapping(value = "dosearchProf", method = RequestMethod.GET)
 	public String searchProf(UserSearchCriteria userSearchCriteria,
 			BindingResult bindResult, Model model) {
@@ -142,6 +175,24 @@ public class AdminController {
 		} else {
 			model.addAttribute("users", manager.searchProf(userSearchCriteria));
 			return "admin/dosearchUser";
+		}
+	}
+
+	@RequestMapping(value = "doSearchDctapClasse", method = RequestMethod.GET)
+	public String searchDctapClasse(UserSearchCriteria userSearchCriteria,
+			BindingResult bindResult, Model model) {
+
+		if (userSearchCriteria.getQuery() == null
+				|| "".equals(userSearchCriteria.getQuery())) {
+			bindResult.rejectValue("query", "required",
+					"Entrez un critère de recherche valide");
+		}
+		if (bindResult.hasErrors()) {
+			return "admin/searchDctapClasse";
+		} else {
+			model.addAttribute("dctap",
+					manager.searchDctapClasse(userSearchCriteria));
+			return "admin/doSearchDctap";
 		}
 	}
 
