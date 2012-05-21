@@ -1,4 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<table class="legend">
+	<tr>
+		<td>
+			<img src="../../images/buttonValide.png"/> : Valider/Confirmer
+		</td>
+		<td>
+			<img src="../../images/buttonModif.png"/> : Modifier
+		</td>
+		<td>
+			<img src="../../images/buttonSuppr.png"/> : Supprimer/Refuser
+		</td>
+	</tr>
+</table>
 
 <c:if test="${empty listdctaps}">
 	Il n'y a encore aucune demande. 
@@ -26,14 +39,11 @@
 								<td>${dctap.minutes}</td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
-									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><input
-										type="button" value="Modifier"></a></td>
+									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img src="../../images/buttonValideHover.png" onmouseover="this.src='../../images/buttonValide.png';" onmouseout="this.src='../../images/buttonValideHover.png';" /></a></td>
 								<td><a
-									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><input
-										type="button" value="Valider"></a></td>
+									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img src="../../images/buttonModifHover.png" onmouseover="this.src='../../images/buttonModif.png';" onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><input
-										type="button" value="Refuser"></a></td>
+									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 							</tr>
 						</c:if>
 				    </c:forEach>
@@ -60,11 +70,9 @@
 								<td>${dctap.minutes}</td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
-									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><input
-										type="button" value="Modifier"></a></td>
+									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img src="../../images/buttonModifHover.png" onmouseover="this.src='../../images/buttonModif.png';" onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><input
-										type="button" value="Refuser"></a></td>
+									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 							</tr>
 						</c:if>
 				    </c:forEach>
