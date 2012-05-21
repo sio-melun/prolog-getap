@@ -163,7 +163,26 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public void addUser(User user) {
 		String nom = user.getNom();
 		String prenom = user.getPrenom();
-		String login = user.getPrenom().charAt(0) + user.getNom();
+		String login;
+		if ((user.getPrenom().charAt(0) + user.getNom()).length() >= 6) {
+			login = (user.getPrenom().charAt(0) + user.getNom()).toLowerCase();
+		} else if ((user.getPrenom() + user.getNom()).length() < 6) {
+			login = (user.getPrenom() + "_" + user.getNom()).toLowerCase();
+
+		} else {
+			login = (user.getPrenom() + user.getNom()).toLowerCase();
+		}
+		if (login.contains('é' + "") || login.contains('è' + "")) {
+			login = login.replace('é', 'e');
+			login = login.replace('è', 'e');
+		}
+		if (login.contains('à' + "") || login.contains('â' + "")) {
+			login = login.replace('à', 'a');
+			login = login.replace('â', 'a');
+		}
+		if (login.contains("'" + "")) {
+			login = login.replace("'", "");
+		}
 		String mail = user.getMail();
 		try {
 			User user2 = this.jdbcTemplate
@@ -509,6 +528,22 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.jdbcTemplate.query(
 				"select * from user u, classe c where u.idClasse = c.id and c.libelle = "
 						+ "'" + query + "'", new UserMapper());
+	}
+
+	public List<DemandeConsoTempsAccPers> searchDctap(
+			UserSearchCriteria userSearchCriteria) {
+		String query = userSearchCriteria.getQuery();
+		return this.jdbcTemplate
+				.query("select * from user u, dctap d where (u.id=d.idProf or u.id=d.idEleve) and nom like "
+						+ "'" + query + "%'", new DemandeMapper());
+	}
+
+	public List<DemandeConsoTempsAccPers> searchDctapClasse(
+			UserSearchCriteria userSearchCriteria) {
+		String query = userSearchCriteria.getQuery();
+		return this.jdbcTemplate
+				.query("select * from user u, classe c, dctap d where u.idClasse = c.id and c.libelle = "
+						+ "'" + query + "'", new DemandeMapper());
 	}
 
 	public User getUser(Long id) {

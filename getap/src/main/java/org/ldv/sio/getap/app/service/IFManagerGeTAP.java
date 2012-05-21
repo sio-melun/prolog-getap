@@ -94,6 +94,12 @@ public interface IFManagerGeTAP {
 
 	public List<User> searchClasse(UserSearchCriteria userSearchCriteria);
 
+	public List<DemandeConsoTempsAccPers> searchDctap(
+			UserSearchCriteria userSearchCriteria);
+
+	public List<DemandeConsoTempsAccPers> searchDctapClasse(
+			UserSearchCriteria userSearchCriteria);
+
 	public User getUser(Long id);
 
 	/**
