@@ -22,6 +22,7 @@ function testRole(){
 		$("#inputClasse").attr('style','');
 	}
 	else if (role="prof-principal"){
+		$("#inputLesClasse").attr('style','');
 		$("#inputClasse").attr('style','display: none;visibility: hidden;');
 	}
 	else{

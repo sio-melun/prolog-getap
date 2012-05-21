@@ -9,13 +9,12 @@
 <title>Ajout utilisateur</title>
 </head>
 <body>
-
 	<form:form modelAttribute="formAjoutUser" action="doajout"
 		method="post">
 		<form:errors path="*" cssClass="errors" />
 		<h3>Ajout d'un Utilisateur</h3>
 		<div class="section">
-			<fieldset>	
+			<fieldset>
 				<div class="form-row">
 					<label for="prenom">Prénom : </label>
 					<div class="input">
@@ -29,19 +28,49 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="role">Role :</label><br>
-					<select id="roleNom" name="roleNom" onchange="testRole()" >		
-						<c:forEach  items="${lesRoles}" var="role">
+					<label for="role">Role :</label> <select id="roleNom"
+						name="roleNom" onchange="testRole()">
+						<c:forEach items="${lesRoles}" var="role">
 							<option value="${role.nom}" label="${role.nom}">${role.nom}</option>
 						</c:forEach>
 					</select>
 				</div>
-				<div class="form-row" id="inputClasse" >
+				<div class="form-row" id="inputClasse">
 					<label for="classeId">La classe :</label>
 					<div>
 						<form:select path="classeId" items="${lesClasses}" itemValue="id"
 							itemLabel="nom">
 						</form:select>
+					</div>
+				</div>
+
+				<div class="form-row" id="inputLesClasse" style="display: none;visibility: hidden;">
+					<label for="classeId">Les Classes :</label>
+					<div>
+						<table>
+							<%
+								int begin = 0;
+								int end = 5;
+							
+							 	for (int i=0;i<5;i++){ 
+							 %>
+									<tr>
+									
+										<c:forEach items="${lesClasses}" var="classe" begin="<%=begin%>" end="<%=end%>">
+											
+												<td>
+												<input type="checkbox" name="${classe.nom}"
+														value="${classe.id}" /></td><td> ${classe.nom}</td>
+											
+										</c:forEach>
+										
+									</tr>
+							<% 
+									begin += 6; 
+									end +=6; 
+								}
+							%>
+						</table>		
 					</div>
 				</div>
 			</fieldset>
@@ -50,9 +79,7 @@
 			<div id="buttonGroup">
 				<a href="<c:url value="/app/admin/index" />"
 					style="text-decoration: none"><input type="button"
-					value="Retour"> 
-				</a> 
-				<input type="submit" value="Ajouter"/>
+					value="Retour"> </a> <input type="submit" value="Ajouter" />
 			</div>
 		</div>
 	</form:form>
