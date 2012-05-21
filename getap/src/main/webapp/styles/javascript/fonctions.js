@@ -20,13 +20,15 @@ function testRole(){
 	if (role =="eleve"){		
 		$('#roleNom').attr('value',role);
 		$("#inputClasse").attr('style','');
+		$("#inputLesClasse").attr('style','display: none;visibility: hidden;');
 	}
-	else if (role="prof-principal"){
+	else if (role=="prof-principal"){
 		$("#inputLesClasse").attr('style','');
 		$("#inputClasse").attr('style','display: none;visibility: hidden;');
 	}
 	else{
 		$("#inputClasse").attr('style','display: none;visibility: hidden;');
+		$("#inputLesClasse").attr('style','display: none;visibility: hidden;');
 	}
 }
 

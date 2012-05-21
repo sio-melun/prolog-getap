@@ -35,6 +35,15 @@
 						</c:forEach>
 					</select>
 				</div>
+				<div class="form-row" id="inputDiscipline">
+					<label for="disciplineId">Discipline :</label>
+					<div>
+						<form:select path="disciplineId" items="${lesDisciplines}" itemValue="id"
+							itemLabel="nom">
+						</form:select>
+					</div>
+				</div>
+				
 				<div class="form-row" id="inputClasse">
 					<label for="classeId">La classe :</label>
 					<div>
