@@ -26,9 +26,7 @@ public interface IFManagerGeTAP {
 
 	public List<DemandeConsoTempsAccPers> getAllDCTAPByClasse(String classe);
 
-	public int getAllDCTAPByEtatAndProf(int etat, Long id);
-
-	public int getAllDCTAPByEtatAndEleve(int etat, Long id);
+	public int getAllDCTAPByEtat(int etat, Long id);
 
 	public DemandeConsoTempsAccPers getDCTAPById(Long id);
 

@@ -55,17 +55,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						new DemandeMapper());
 	}
 
-	public int getAllDCTAPByEtatAndProf(int etat, Long id) {
-		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from dctap where Etat = ? and idProf = ?",
-				new Object[] { etat, id });
-		return count;
-	}
-
-	public int getAllDCTAPByEtatAndEleve(int etat, Long id) {
-		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from dctap where Etat = ? and idEleve = ?",
-				new Object[] { etat, id });
+	public int getAllDCTAPByEtat(int etat, Long id) {
+		int count = this.jdbcTemplate
+				.queryForInt(
+						"select count(id) from dctap where Etat = ? and (idProf = ? or idEleve = ?)",
+						new Object[] { etat, id, id });
 		return count;
 	}
 

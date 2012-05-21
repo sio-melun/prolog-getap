@@ -47,13 +47,13 @@ public class ElevesController {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("mesdctaps", manager.getAllDCTAPByEleve(me));
 		Long id = me.getId();
-		model.addAttribute("etat0", manager.getAllDCTAPByEtatAndEleve(0, id));
-		model.addAttribute("etat1", manager.getAllDCTAPByEtatAndEleve(1, id));
-		model.addAttribute("etat2", manager.getAllDCTAPByEtatAndEleve(2, id));
-		model.addAttribute("etat3", manager.getAllDCTAPByEtatAndEleve(3, id));
-		model.addAttribute("etat4", manager.getAllDCTAPByEtatAndEleve(4, id));
-		model.addAttribute("etat5", manager.getAllDCTAPByEtatAndEleve(5, id));
-		model.addAttribute("etat6", manager.getAllDCTAPByEtatAndEleve(6, id));
+		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
+		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
+		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
+		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
+		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
+		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
 		return "eleve/mesdctap";
 	}
 
