@@ -9,8 +9,16 @@
 <title>Recherche d'un utilisateur</title>
 </head>
 <body>
-
-<h1>Résultat</h1>
+<table class="legend">
+	<tr>
+		<td>
+			<img src="../../images/buttonModif.png"/> : Modifier
+		</td>
+		<td>
+			<img src="../../images/buttonSuppr.png"/> : Supprimer/Refuser
+		</td>
+	</tr>
+</table>
 <c:if test="${empty users}">
 	Aucun utilisateur trouvé.
 	<br/>
@@ -36,9 +44,9 @@
 					<td>${user.pass}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>
-					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><input type="button" value="Editer"></a></td>
+					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><img src="../../images/buttonModif.png" onmouseover="this.src='../../images/buttonModifHover.png';" onmouseout="this.src='../../images/buttonModif.png';" /></a></td>
 					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><input type="button" value="Supprimer"></a></td>
+						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img src="../../images/buttonSuppr.png" onmouseover="this.src='../../images/buttonSupprHover.png';" onmouseout="this.src='../../images/buttonSuppr.png';" /></a></td>
 				</tr>
 			</c:forEach>
 			</tbody>
