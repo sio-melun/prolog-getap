@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.ldv.sio.getap.app.Classe;
+import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
@@ -78,21 +79,23 @@ public class AdminController {
 		else {
 			Classe classe = manager.getClasseById(formAjout.getClasseId());
 			User user = null;
+			Discipline dis = null;
 			System.out.println(classe);
-
+			if (formAjout.getRoleNom().startsWith("prof")) {
+				dis = new Discipline(formAjout.getDisciplineId(),
+						formAjout.getDisciplineNom());
+			}
 			if (formAjout.getRoleNom().equals("prof-intervenant")
 					|| formAjout.getRoleNom().equals("admin"))
 				classe = null;
 			if (formAjout.getRoleNom().equals("prof-principal")) {
 				user = new User(null, formAjout.getPrenom(),
 						formAjout.getNom(), classe, formAjout.getRoleNom(),
-						formAjout.getClasse());
+						formAjout.getClasse(), dis);
 			} else {
 				user = new User(null, formAjout.getPrenom(),
-						formAjout.getNom(), classe, formAjout.getRoleNom());
+						formAjout.getNom(), classe, formAjout.getRoleNom(), dis);
 			}
-
-			System.out.println(formAjout.getClasse()[1]);
 
 			manager.addUser(user);
 
@@ -242,8 +245,7 @@ public class AdminController {
 		System.out.println("TEST role : " + currentUser.getRole());
 		formUser.setRole(currentUser.getRole());
 
-		if (!currentUser.getRole().equals("prof-intervenant")
-				|| !currentUser.getRole().equals("admin")) {
+		if (currentUser.getRole().equals("eleve")) {
 			formUser.setClasseId(currentUser.getClasse().getId());
 		}
 

@@ -167,6 +167,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String login;
 		if ((user.getPrenom().charAt(0) + user.getNom()).length() >= 6) {
 			login = (user.getPrenom().charAt(0) + user.getNom()).toLowerCase();
+		} else if ((user.getPrenom().charAt(0) + user.getNom()).length() == 5) {
+			login = (user.getPrenom().charAt(0) + "_" + user.getNom())
+					.toLowerCase();
 		} else if ((user.getPrenom() + user.getNom()).length() < 6) {
 			login = (user.getPrenom() + "_" + user.getNom()).toLowerCase();
 
@@ -213,26 +216,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		} catch (EmptyResultDataAccessException e) {
 
 		}
-		String mdp = login;
+		String mdp = generate(5);
 		String role = user.getRole();
 		int classe = user.getClasse().getId();
+
+		User user3 = this.jdbcTemplate
+				.queryForObject(
+						"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
+						new Object[] { login, mdp }, new UserMapper());
+
 		if (role.equals("prof-principal")) {
 			this.jdbcTemplate
 					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
 							new Object[] { nom, prenom, login, mdp, role, null,
 									mail });
-		} else {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, role,
-									classe, mail });
-		}
-
-		if (role.equals("prof-principal")) {
-			User user3 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-							new Object[] { login, mdp }, new UserMapper());
 			Long idUser = user3.getId();
 
 			for (int i = 0; i < user.getLesClasses().length; i++) {
@@ -240,6 +237,18 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
 								new Object[] { idUser, user.getLesClasses()[i] });
 			}
+		} else {
+			this.jdbcTemplate
+					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, role,
+									classe, mail });
+		}
+
+		if (role.startsWith("prof")) {
+			this.jdbcTemplate
+					.update("update user set idDiscipline = ? where id = ?",
+							new Object[] { user.getDiscipline().getId(),
+									user3.getId() });
 		}
 
 	}
@@ -251,6 +260,18 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
+	}
+
+	public String generate(int length) {
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-";
+		String pass = "";
+		for (int x = 0; x < length; x++) {
+			int i = (int) Math.floor(Math.random() * 64); // Si tu supprimes des
+															// lettres tu
+															// diminues ce nb
+			pass += chars.charAt(i);
+		}
+		return pass;
 	}
 
 	public void updateUser(User user) {

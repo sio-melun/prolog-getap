@@ -31,7 +31,7 @@ public class Utilisateur {
 		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-";
 		String pass = "";
 		for (int x = 0; x < length; x++) {
-			int i = (int) Math.floor(Math.random() * 62); // Si tu supprimes des
+			int i = (int) Math.floor(Math.random() * 64); // Si tu supprimes des
 															// lettres tu
 															// diminues ce nb
 			pass += chars.charAt(i);

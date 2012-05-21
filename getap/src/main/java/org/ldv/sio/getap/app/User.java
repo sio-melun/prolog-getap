@@ -14,6 +14,7 @@ public class User {
 	private String pass;
 	private String mail;
 	private String[] lesClasses;
+	private Discipline discipline;
 
 	public User() {
 	}
@@ -43,7 +44,20 @@ public class User {
 	}
 
 	public User(Long id, String firstName, String lastName, Classe classe,
-			String role, String[] lesClasses) {
+			String role, Discipline discipline) {
+		this.id = id;
+		this.prenom = firstName;
+		this.nom = lastName;
+		this.classe = classe;
+		this.role = role;
+		this.login = getLogin();
+		this.pass = getPass();
+		this.mail = getMail();
+		this.discipline = discipline;
+	}
+
+	public User(Long id, String firstName, String lastName, Classe classe,
+			String role, String[] lesClasses, Discipline discipline) {
 		this.id = id;
 		this.prenom = firstName;
 		this.nom = lastName;
@@ -53,6 +67,7 @@ public class User {
 		this.pass = getPass();
 		this.mail = getMail();
 		this.lesClasses = lesClasses;
+		this.discipline = discipline;
 	}
 
 	@Override
@@ -131,6 +146,14 @@ public class User {
 
 	public void setLesClasses(String[] lesClasses) {
 		this.lesClasses = lesClasses;
+	}
+
+	public Discipline getDiscipline() {
+		return discipline;
+	}
+
+	public void setDiscipline(Discipline discipline) {
+		this.discipline = discipline;
 	}
 
 	@Override
