@@ -173,6 +173,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		} else {
 			login = (user.getPrenom() + user.getNom()).toLowerCase();
 		}
+		if (login.length() > 10) {
+			login = login.substring(0, 10);
+		}
 		if (login.contains('é' + "") || login.contains('è' + "")) {
 			login = login.replace('é', 'e');
 			login = login.replace('è', 'e');
@@ -213,11 +216,17 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String mdp = login;
 		String role = user.getRole();
 		int classe = user.getClasse().getId();
-
-		this.jdbcTemplate
-				.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
-						new Object[] { nom, prenom, login, mdp, role, classe,
-								mail });
+		if (role.equals("prof-principal")) {
+			this.jdbcTemplate
+					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, role, null,
+									mail });
+		} else {
+			this.jdbcTemplate
+					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, role,
+									classe, mail });
+		}
 
 		if (role.equals("prof-principal")) {
 			User user3 = this.jdbcTemplate
@@ -225,10 +234,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
 							new Object[] { login, mdp }, new UserMapper());
 			Long idUser = user3.getId();
-			System.out.println(idUser);
-			this.jdbcTemplate.update(
-					"insert into prof_principal(idUser,idClasse) values(?,?)",
-					new Object[] { idUser, classe });
+
+			for (int i = 0; i < user.getLesClasses().length; i++) {
+				this.jdbcTemplate
+						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
+								new Object[] { idUser, user.getLesClasses()[i] });
+			}
 		}
 
 	}
@@ -372,6 +383,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 
 		return classe;
+	}
+
+	public int countClasses() {
+		int count = this.jdbcTemplate.queryForInt(
+				"select count(id) from classe order by libelle",
+				new Object[] {});
+		return count;
 	}
 
 	public void addClasse(Classe classe) {

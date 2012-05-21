@@ -80,6 +80,8 @@ public interface IFManagerGeTAP {
 
 	public void deleteClasse(Classe classe);
 
+	public int countClasses();
+
 	// CRUD des roles
 	public List<Role> getAllRole();
 

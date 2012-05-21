@@ -162,6 +162,10 @@ td .bouton{
 }
 
 .section label{
-	width: 100px;
+	width: 250px;
 	float: left;
+}
+.section label.checkbox{
+	width: 70px;
+	margin-right: 100px;
 }

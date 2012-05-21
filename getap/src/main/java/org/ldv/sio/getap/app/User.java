@@ -13,6 +13,7 @@ public class User {
 	private String login;
 	private String pass;
 	private String mail;
+	private String[] lesClasses;
 
 	public User() {
 	}
@@ -39,6 +40,19 @@ public class User {
 		this.login = getLogin();
 		this.pass = getPass();
 		this.mail = getMail();
+	}
+
+	public User(Long id, String firstName, String lastName, Classe classe,
+			String role, String[] lesClasses) {
+		this.id = id;
+		this.prenom = firstName;
+		this.nom = lastName;
+		this.classe = classe;
+		this.role = role;
+		this.login = getLogin();
+		this.pass = getPass();
+		this.mail = getMail();
+		this.lesClasses = lesClasses;
 	}
 
 	@Override
@@ -109,6 +123,14 @@ public class User {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public String[] getLesClasses() {
+		return lesClasses;
+	}
+
+	public void setLesClasses(String[] lesClasses) {
+		this.lesClasses = lesClasses;
 	}
 
 	@Override

@@ -54,29 +54,29 @@
 				</div>
 
 				<div class="form-row" id="inputLesClasse" style="display: none;visibility: hidden;">
-					<label for="classeId">Les Classes :</label>
+					<label for="classeId">Les Classes :</label><br>
 					<div>
 						<table>
 							<%
 								int begin = 0;
-								int end = 5;
+								int end = 3;
 							
-							 	for (int i=0;i<20;i++){ 
+							 	for (int i=0;i<50;i++){ 
 							 %>
 									<tr>
 									
 										<c:forEach items="${lesClasses}" var="classe" begin="<%=begin%>" end="<%=end%>">
 											
 												<td>
-												<input type="checkbox" name="${classe.nom}"
+												<form:checkbox path="classe" name="${classe.nom}"
 														value="${classe.id}" id="${classe.nom}"/></td><td> <label for="${classe.nom}" class="checkbox">${classe.nom}</label></td>
 											
 										</c:forEach>
 										
 									</tr>
 							<% 
-									begin += 6; 
-									end +=6; 
+									begin += 4; 
+									end +=4; 
 								}
 							%>
 						</table>		

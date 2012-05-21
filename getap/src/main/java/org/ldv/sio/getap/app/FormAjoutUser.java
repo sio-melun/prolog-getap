@@ -1,6 +1,5 @@
 package org.ldv.sio.getap.app;
 
-import java.util.List;
 
 public class FormAjoutUser {
 
@@ -9,7 +8,7 @@ public class FormAjoutUser {
 	private String prenom;
 	private Integer classeId;
 	private String classeNom;
-	private List<Classe> classe;
+	private String[] classe;
 	private int disciplineId;
 	private String disciplineNom;
 	private int roleId;
@@ -39,11 +38,11 @@ public class FormAjoutUser {
 		return id;
 	}
 
-	public List<Classe> getClasse() {
+	public String[] getClasse() {
 		return classe;
 	}
 
-	public void setClasse(List<Classe> classe) {
+	public void setClasse(String[] classe) {
 		this.classe = classe;
 	}
 

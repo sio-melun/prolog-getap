@@ -60,6 +60,7 @@ public class AdminController {
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesRoles", manager.getAllRole());
+		model.addAttribute("nbClasse", manager.countClasses());
 
 		return "admin/ajoutUser";
 	}
@@ -76,14 +77,22 @@ public class AdminController {
 			return "admin/ajoutUser";
 		else {
 			Classe classe = manager.getClasseById(formAjout.getClasseId());
+			User user = null;
 			System.out.println(classe);
 
 			if (formAjout.getRoleNom().equals("prof-intervenant")
 					|| formAjout.getRoleNom().equals("admin"))
 				classe = null;
+			if (formAjout.getRoleNom().equals("prof-principal")) {
+				user = new User(null, formAjout.getPrenom(),
+						formAjout.getNom(), classe, formAjout.getRoleNom(),
+						formAjout.getClasse());
+			} else {
+				user = new User(null, formAjout.getPrenom(),
+						formAjout.getNom(), classe, formAjout.getRoleNom());
+			}
 
-			User user = new User(null, formAjout.getPrenom(),
-					formAjout.getNom(), classe, formAjout.getRoleNom());
+			System.out.println(formAjout.getClasse()[1]);
 
 			manager.addUser(user);
 
