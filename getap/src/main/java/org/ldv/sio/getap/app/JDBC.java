@@ -66,7 +66,7 @@ public class JDBC {
 
 				// Requete d'insertion de l'utilisateur dans la base
 				PreparedStatement param = con
-						.prepareStatement("INSERT INTO getap.user(nom, prenom, ine, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?);");
+						.prepareStatement("INSERT INTO user(nom, prenom, ine, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?);");
 
 				param.setNString(1, listUser.get(i).nom);
 				param.setNString(2, listUser.get(i).prenom);

@@ -9,7 +9,6 @@ public class Classe {
 	}
 
 	public Classe(Integer id, String nom) {
-		super();
 		this.id = id;
 		this.nom = nom;
 	}
