@@ -251,6 +251,7 @@ public class AdminController {
 
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesRoles", manager.getAllRole());
+		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 
 		return "admin/editUser";
 	}

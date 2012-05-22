@@ -11,6 +11,33 @@ public class FormEditUser {
 	private String login;
 	private String pass;
 	private String mail;
+	private String[] classe;
+	private int disciplineId;
+	private String disciplineNom;
+
+	public String[] getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String[] classe) {
+		this.classe = classe;
+	}
+
+	public int getDisciplineId() {
+		return disciplineId;
+	}
+
+	public void setDisciplineId(int disciplineId) {
+		this.disciplineId = disciplineId;
+	}
+
+	public String getDisciplineNom() {
+		return disciplineNom;
+	}
+
+	public void setDisciplineNom(String disciplineNom) {
+		this.disciplineNom = disciplineNom;
+	}
 
 	public String getRole() {
 		return role;
