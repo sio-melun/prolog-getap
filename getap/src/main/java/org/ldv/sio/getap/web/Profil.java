@@ -82,7 +82,7 @@ public class Profil {
 			} else {
 				user.setMail(formUser.getMail());
 			}
-			manager.updateUser(user);
+			manager.updateProfil(user);
 
 			return "redirect:/app/profil/index";
 		}

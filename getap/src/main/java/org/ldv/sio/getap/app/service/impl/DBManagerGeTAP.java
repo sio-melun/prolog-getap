@@ -150,7 +150,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<User> getAllEleveByClasse() {
 		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.duree) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id order by classe.libelle",
+				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) order by classe.libelle",
 						new UserMapper());
 	}
 
@@ -226,16 +226,17 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String role = user.getRole();
 		int classe = user.getClasse().getId();
 
-		User user3 = this.jdbcTemplate
-				.queryForObject(
-						"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-						new Object[] { login, mdp }, new UserMapper());
+		User user3;
 
 		if (role.equals("prof-principal")) {
 			this.jdbcTemplate
 					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
 							new Object[] { nom, prenom, login, mdp, role, null,
 									mail });
+			user3 = this.jdbcTemplate
+					.queryForObject(
+							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
+							new Object[] { login, mdp }, new UserMapper());
 			Long idUser = user3.getId();
 
 			for (int i = 0; i < user.getLesClasses().length; i++) {
@@ -251,6 +252,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 
 		if (role.startsWith("prof")) {
+			user3 = this.jdbcTemplate
+					.queryForObject(
+							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
+							new Object[] { login, mdp }, new UserMapper());
 			this.jdbcTemplate
 					.update("update user set idDiscipline = ? where id = ?",
 							new Object[] { user.getDiscipline().getId(),
@@ -324,6 +329,16 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 									pass, mail, dis, id });
 		}
 
+	}
+
+	public void updateProfil(User user) {
+		String login = user.getLogin();
+		String pass = user.getPass();
+		String mail = user.getMail();
+		Long id = user.getId();
+		this.jdbcTemplate.update(
+				"update user set login = ?, mdp = ?, mail = ? where id = ?",
+				new Object[] { login, pass, mail, id });
 	}
 
 	public void deleteUser(User user) {

@@ -78,8 +78,11 @@ public class LoginController {
 			UtilSession.setAnneeScolaireInSession("2011-2012");
 			model.addAttribute("userAuth", user);
 			User userIn = UtilSession.getUserInSession();
-			model.addAttribute("lesClasses",
-					manager.getAllClasseByProf(userIn.getId()));
+			if (userIn.getRole().equals("prof-principal")) {
+				model.addAttribute("lesClasses",
+						manager.getAllClasseByProf(userIn.getId()));
+				model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+			}
 			return "login/authenticate";
 		}
 	}

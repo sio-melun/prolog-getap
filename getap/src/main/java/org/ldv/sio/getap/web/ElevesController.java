@@ -220,12 +220,12 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() == 4) {
+				&& dctap.getEtat() > 40) {
 			dctap.setEtat(2);
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/eleve/mesdctap";
+		return "redirect:/app/eleve/index";
 	}
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
@@ -234,11 +234,11 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() == 4) {
+				&& dctap.getEtat() > 40) {
 			dctap.setEtat(1);
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/eleve/mesdctap";
+		return "redirect:/app/eleve/index";
 	}
 }

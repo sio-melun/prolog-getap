@@ -56,6 +56,8 @@ public interface IFManagerGeTAP {
 
 	public void updateUser(User user);
 
+	public void updateProfil(User user);
+
 	public void deleteUser(User user);
 
 	// CRUD de AP
