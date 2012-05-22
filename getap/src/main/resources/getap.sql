@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `ap` (
 
 INSERT INTO `ap` (`id`, `libelle`, `origineEtat`, `idUser`) VALUES
 (1, 'SOS Matiere', 0, NULL),
-(2, 'Sortie théatre', 0, NULL);
+(2, 'Sortie théatre', 0, NULL); 
 
 -- --------------------------------------------------------
 
