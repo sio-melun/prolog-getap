@@ -422,6 +422,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return count;
 	}
 
+	public List<Classe> getAllClasseByProf(Long id) {
+		return this.jdbcTemplate.query(
+				"select classe.* from user, classe, prof_principal p where user.id = "
+						+ id + " and p.idClasse = classe.id and p.idUser = "
+						+ id + " order by libelle", new ClasseMapper());
+	}
+
 	public void addClasse(Classe classe) {
 		int id = classe.getId();
 		String libelle = classe.getNom();

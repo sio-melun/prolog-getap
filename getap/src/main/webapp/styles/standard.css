@@ -174,3 +174,8 @@ td .bouton{
 	text-align: center;
 	display:none;
 }
+
+.isUpdate{
+	color:#E38304;
+	font-weight: bold;
+}

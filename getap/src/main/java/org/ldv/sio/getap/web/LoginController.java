@@ -2,7 +2,9 @@ package org.ldv.sio.getap.web;
 
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserLoginCriteria;
+import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFHauthLoginService;
+import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +24,10 @@ public class LoginController {
 	@Autowired
 	@Qualifier("serviceAuth")
 	private IFHauthLoginService hauthLoginService;
+
+	@Autowired
+	@Qualifier("DBServiceMangager")
+	private IFManagerGeTAP manager;
 
 	public void setHauthLoginService(IFHauthLoginService hauthLoginService) {
 		this.hauthLoginService = hauthLoginService;
@@ -51,7 +57,9 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
 	public String authenticate(UserLoginCriteria userLoginCriteria,
-			BindingResult bindResult, Model model) {
+			BindingResult bindResult, Model model,
+			UserSearchCriteria userSearchCriteria) {
+
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
 			bindResult.rejectValue("login", "required",
@@ -69,6 +77,9 @@ public class LoginController {
 			UtilSession.setUserInSession(user);
 			UtilSession.setAnneeScolaireInSession("2011-2012");
 			model.addAttribute("userAuth", user);
+			User userIn = UtilSession.getUserInSession();
+			model.addAttribute("lesClasses",
+					manager.getAllClasseByProf(userIn.getId()));
 			return "login/authenticate";
 		}
 	}

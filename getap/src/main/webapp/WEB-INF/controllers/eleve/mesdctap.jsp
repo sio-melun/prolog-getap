@@ -4,7 +4,7 @@
 <table class="legend">
 	<tr>
 		<td>
-			<img src="../../images/buttonValide.png"/> : Valider/Confirmer
+			<img src="../../images/buttonValide.png"/> : Confirmer
 		</td>
 		<td>
 			<img src="../../images/buttonModif.png"/> : Modifier
@@ -50,7 +50,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes modifiees par le professeur (${etat4})</a></h3>
+		<h3><a href="#">Demandes modifiees par le professeur (${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a></h3>
 		<div>
 			<table id="modif" class="tablesorter">
 				<thead>
@@ -63,13 +63,44 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 4}">
+						<c:if test="${dctap.etat > 40}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
-								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
-								<td>${dctap.accPers.nom}</td>
-							
+								<c:if test="${dctap.etat == 41}">
+									<td class="isUpdate">${dctap.dateAction}</td>
+									<td>${dctap.minutes}</td>
+									<td>${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 42}">
+									<td>${dctap.dateAction}</td>
+									<td class="isUpdate">${dctap.minutes}</td>
+									<td>${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 43}">
+									<td>${dctap.dateAction}</td>
+									<td>${dctap.minutes}</td>
+									<td class="isUpdate">${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 44}">
+									<td class="isUpdate">${dctap.dateAction}</td>
+									<td class="isUpdate">${dctap.minutes}</td>
+									<td>${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 45}">
+									<td>${dctap.dateAction}</td>
+									<td class="isUpdate">${dctap.minutes}</td>
+									<td class="isUpdate">${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 46}">
+									<td class="isUpdate">${dctap.dateAction}</td>
+									<td>${dctap.minutes}</td>
+									<td class="isUpdate">${dctap.accPers.nom}</td>
+								</c:if>
+								<c:if test="${dctap.etat == 47}">
+									<td class="isUpdate">${dctap.dateAction}</td>
+									<td class="isUpdate">${dctap.minutes}</td>
+									<td class="isUpdate">${dctap.accPers.nom}</td>
+								</c:if>
 								<td><a
 									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img src="../../images/buttonValideHover.png" onmouseover="this.src='../../images/buttonValide.png';" onmouseout="this.src='../../images/buttonValideHover.png';" /></a></td>
 								<td><a

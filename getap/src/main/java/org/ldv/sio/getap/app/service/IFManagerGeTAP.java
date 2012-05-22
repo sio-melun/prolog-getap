@@ -82,11 +82,15 @@ public interface IFManagerGeTAP {
 
 	public int countClasses();
 
+	public List<Classe> getAllClasseByProf(Long id);
+
 	// CRUD des roles
 	public List<Role> getAllRole();
 
 	// CRUD Disciplines
 	public List<Discipline> getAllDiscipline();
+
+	public Discipline getDisciplineById(int id);
 
 	// Opération sur annee scolaire (mise à jour lors d'une importation)
 	public String getCurrentAnneeScolaire();

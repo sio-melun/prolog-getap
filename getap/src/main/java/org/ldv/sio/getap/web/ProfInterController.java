@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.web;
 
+import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormListConsoForProfInter;
 import org.ldv.sio.getap.app.User;
@@ -39,7 +40,15 @@ public class ProfInterController {
 		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
 		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
-		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
+
+		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
+		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
+		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
+		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
+		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
+		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
+		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
+
 		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
 		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
 		return "prof-intervenant/listdctap";
@@ -56,7 +65,7 @@ public class ProfInterController {
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
 		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3
-				|| currentDctap.getEtat() == 4) {
+				|| currentDctap.getEtat() > 40) {
 			// valorise le bean de vue avec le dctap courant
 			dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
 			dctap.setDateAction(currentDctap.getDateAction());
@@ -91,12 +100,44 @@ public class ProfInterController {
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));
 
-			// valorise l'objet de la base à partir du bean de vue
+			// 41=date; 42=durée; 43=type; 44=date+durée; 45=durée+type;
+			// 46=date+type; 47=type+date+durée
+
+			AccPersonalise acc = manager.getAPById(formDctap.getAccPersId());
+			String accPersNom = acc.getNom();
+			if (!dctapForUpdate.getDateAction().equals(
+					formDctap.getDateAction())
+					&& !dctapForUpdate.getMinutes().equals(
+							formDctap.getMinutes())
+					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
+				dctapForUpdate.setEtat(47);
+			} else if (!dctapForUpdate.getDateAction().equals(
+					formDctap.getDateAction())
+					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
+				dctapForUpdate.setEtat(46);
+			} else if (!dctapForUpdate.getMinutes().equals(
+					formDctap.getMinutes())
+					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
+				dctapForUpdate.setEtat(45);
+			} else if (!dctapForUpdate.getDateAction().equals(
+					formDctap.getDateAction())
+					&& !dctapForUpdate.getMinutes().equals(
+							formDctap.getMinutes())) {
+				dctapForUpdate.setEtat(44);
+			} else if (!dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
+				dctapForUpdate.setEtat(43);
+			} else if (!dctapForUpdate.getMinutes().equals(
+					formDctap.getMinutes())) {
+				dctapForUpdate.setEtat(42);
+			} else if (!dctapForUpdate.getDateAction().equals(
+					formDctap.getDateAction())) {
+				dctapForUpdate.setEtat(41);
+			}
+
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
 			dctapForUpdate.setMinutes(formDctap.getMinutes());
 			dctapForUpdate.setAccPers(manager.getAPById(formDctap
 					.getAccPersId()));
-			dctapForUpdate.setEtat(4);
 
 			manager.updateDCTAP(dctapForUpdate);
 

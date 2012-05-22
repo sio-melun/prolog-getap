@@ -51,7 +51,15 @@ public class ElevesController {
 		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
 		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
-		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
+
+		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
+		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
+		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
+		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
+		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
+		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
+		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
+
 		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
 		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
 		return "eleve/mesdctap";
