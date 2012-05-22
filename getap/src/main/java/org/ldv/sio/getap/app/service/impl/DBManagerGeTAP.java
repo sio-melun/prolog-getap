@@ -16,6 +16,7 @@ import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -150,7 +151,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<User> getAllEleveByClasse() {
 		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) order by classe.libelle",
+				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) group by classe.libelle",
 						new UserMapper());
 	}
 
@@ -355,7 +356,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<AccPersonalise> getAllAP() {
-		return this.jdbcTemplate.query("select * from ap", new AccMapper());
+		User user = UtilSession.getUserInSession();
+		Long id = user.getId();
+		return this.jdbcTemplate.query(
+				"select * from ap where (origineEtat = 0 or (origineEtat = 1 and idUser = "
+						+ id + "))", new AccMapper());
 	}
 
 	public AccPersonalise getAPById(int id) {

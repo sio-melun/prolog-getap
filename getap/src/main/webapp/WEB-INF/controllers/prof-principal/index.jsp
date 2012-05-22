@@ -27,7 +27,7 @@
 							<tr>
 								<td>${eleve.nom} ${eleve.prenom}</td>
 								<td></td>
-								<td>${eleve.dureeTotal}</td>
+								<td>${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}h ${(eleve.dureeTotal%60)}min</td>
 							</tr>
 						</c:if>
 					</c:forEach>

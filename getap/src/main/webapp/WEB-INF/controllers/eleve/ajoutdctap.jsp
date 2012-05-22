@@ -49,7 +49,7 @@
 
 			<div class="from-row" id="inputAcc"
 				style="display: none; visibility: hidden;">
-				<label for="accPersNom">Aide personnalisée : </label><br>
+				<label for="accPersNom">Aide personnalisée : </label>
 				<form:input path="accPersNom" />
 			</div>
 		</fieldset>
