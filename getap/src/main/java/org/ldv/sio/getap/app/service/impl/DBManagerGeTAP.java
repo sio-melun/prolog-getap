@@ -279,35 +279,44 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String nom = user.getNom();
 		String prenom = user.getPrenom();
 		String role = user.getRole();
-		int idClasse = user.getClasse().getId();
+		int idClasse = 0;
+		if (role.equals("eleve")) {
+			idClasse = user.getClasse().getId();
+		}
 		String login = user.getLogin();
 		String pass = user.getPass();
 		String mail = user.getMail();
-
-		if (!role.equals("prof-principal")) {
-			this.jdbcTemplate
-					.update("delete from prof_principal where idUser = ? and idClasse = ?",
-							new Object[] { id, idClasse });
-		} else {
-			int result = this.jdbcTemplate
-					.queryForInt(
-							"select count(idUser) from prof_principal where idUser = ?",
-							new Object[] { id });
-			if (result == 0) {
-				this.jdbcTemplate
-						.update("insert into prof_principal(idUser, idClasse) values(?,?)",
-								new Object[] { id, idClasse });
-			} else {
-				this.jdbcTemplate
-						.update("update prof_principal set idClasse = ? where idUser = ?",
-								new Object[] { idClasse, id });
-			}
+		int dis = 0;
+		if (role.startsWith("prof")) {
+			dis = user.getDiscipline().getId();
 		}
 
-		this.jdbcTemplate
-				.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ? where id = ?",
-						new Object[] { nom, prenom, role, idClasse, login,
-								pass, mail, id });
+		this.jdbcTemplate.update("delete from prof_principal where idUser = ?",
+				new Object[] { id });
+
+		if (role.equals("prof-principal")) {
+			for (int i = 0; i < user.getLesClasses().length; i++) {
+				this.jdbcTemplate
+						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
+								new Object[] { id, user.getLesClasses()[i] });
+			}
+		}
+		if (role.equals("eleve")) {
+			this.jdbcTemplate
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+							new Object[] { nom, prenom, role, idClasse, login,
+									pass, mail, null, id });
+		} else if (role.equals("admin")) {
+			this.jdbcTemplate
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+							new Object[] { nom, prenom, role, null, login,
+									pass, mail, null, id });
+		} else {
+			this.jdbcTemplate
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+							new Object[] { nom, prenom, role, null, login,
+									pass, mail, dis, id });
+		}
 
 	}
 
@@ -480,6 +489,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 			DBManagerGeTAP manager = new DBManagerGeTAP();
 			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
+			Discipline dis = manager.getDisciplineById(rs
+					.getInt("idDiscipline"));
+			user.setDiscipline(dis);
 			user.setClasse(classe);
 			user.setLogin(rs.getString("login"));
 			user.setPass(rs.getString("mdp"));
@@ -613,6 +625,19 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user = null;
 		}
 		return user;
+	}
+
+	public Discipline getDisciplineById(int id) {
+		Discipline dis;
+		try {
+			dis = this.jdbcTemplate.queryForObject(
+					"select * from discipline where id = ?",
+					new Object[] { id }, new DisciplineMapper());
+
+		} catch (EmptyResultDataAccessException e) {
+			dis = null;
+		}
+		return dis;
 	}
 
 }

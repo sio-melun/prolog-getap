@@ -244,7 +244,9 @@ public class AdminController {
 		System.out.println("TEST prenom : " + currentUser.getPrenom());
 		System.out.println("TEST role : " + currentUser.getRole());
 		formUser.setRole(currentUser.getRole());
-
+		if (currentUser.getRole().startsWith("prof")) {
+			formUser.setDisciplineId(currentUser.getDiscipline().getId());
+		}
 		if (currentUser.getRole().equals("eleve")) {
 			formUser.setClasseId(currentUser.getClasse().getId());
 		}
@@ -269,15 +271,21 @@ public class AdminController {
 
 			User userForUpdate = manager.getUserById(Long.valueOf(formUser
 					.getId()));
-
+			Discipline dis = null;
+			if (formUser.getRoleNom().startsWith("prof")) {
+				dis = new Discipline(formUser.getDisciplineId(),
+						formUser.getDisciplineNom());
+			}
 			userForUpdate.setNom(formUser.getNom());
 			userForUpdate.setPrenom(formUser.getPrenom());
-			userForUpdate.setRole(formUser.getRole());
-
-			if (!formUser.getRole().equals("prof-intervenant")
-					|| !formUser.getRole().equals("admin")) {
+			userForUpdate.setRole(formUser.getRoleNom());
+			userForUpdate.setDiscipline(dis);
+			System.out.println("ROLE : " + formUser.getRoleNom());
+			if (formUser.getRoleNom().equals("eleve")) {
 				userForUpdate.setClasse(manager.getClasseById(formUser
 						.getClasseId()));
+			} else if (formUser.getRoleNom().equals("prof-principal")) {
+				userForUpdate.setLesClasses(formUser.getClasse());
 			}
 
 			manager.updateUser(userForUpdate);

@@ -14,6 +14,24 @@ public class FormEditUser {
 	private String[] classe;
 	private int disciplineId;
 	private String disciplineNom;
+	private int roleId;
+	private String roleNom;
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleNom() {
+		return roleNom;
+	}
+
+	public void setRoleNom(String roleNom) {
+		this.roleNom = roleNom;
+	}
 
 	public String[] getClasse() {
 		return classe;
