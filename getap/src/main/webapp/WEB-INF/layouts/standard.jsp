@@ -73,6 +73,31 @@
 		        $("#search").tablesorter({widgets: ['zebra']});
 	        });	
 	    </script>
+	     <script type="text/javascript">
+	        $(function() {		
+		        $("#1").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#2").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#3").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#4").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
+	    <script type="text/javascript">
+	        $(function() {		
+		        $("#5").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
 	</head>
 	
 	<body>

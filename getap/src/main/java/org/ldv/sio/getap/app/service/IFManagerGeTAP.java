@@ -48,6 +48,8 @@ public interface IFManagerGeTAP {
 
 	public List<User> getAllEleve();
 
+	public List<User> getAllEleveByClasse();
+
 	public User getUserById(Long id);
 
 	public void addUser(User user);

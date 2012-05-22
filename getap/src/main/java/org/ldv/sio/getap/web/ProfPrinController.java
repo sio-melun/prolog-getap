@@ -44,6 +44,8 @@ public class ProfPrinController {
 		User user = UtilSession.getUserInSession();
 		model.addAttribute("lesClasses",
 				manager.getAllClasseByProf(user.getId()));
+
+		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
 	}
 
 	@RequestMapping(value = "dosearchForClasse", method = RequestMethod.GET)
@@ -63,5 +65,4 @@ public class ProfPrinController {
 			return "prof-principal/index";
 		}
 	}
-
 }

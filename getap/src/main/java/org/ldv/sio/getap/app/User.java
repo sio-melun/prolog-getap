@@ -15,6 +15,7 @@ public class User {
 	private String mail;
 	private String[] lesClasses;
 	private Discipline discipline;
+	private int dureeTotal;
 
 	public User() {
 	}
@@ -74,6 +75,14 @@ public class User {
 	public String toString() {
 		return "User(" + prenom + ":" + nom + "," + role + "," + classe + ","
 				+ login + "," + mail + ")";
+	}
+
+	public int getDureeTotal() {
+		return dureeTotal;
+	}
+
+	public void setDureeTotal(int dureeTotal) {
+		this.dureeTotal = dureeTotal;
 	}
 
 	public Long getId() {

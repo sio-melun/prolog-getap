@@ -8,8 +8,12 @@
 	
 	<!-- Pages -->
 	<definition name="prof-principal/index" extends="standard-layout">
-		<put-attribute name="title" value="Professeur principal" />
+		<put-attribute name="title" value="index" />
 		<put-attribute name="body" value="/WEB-INF/controllers/prof-principal/index.jsp" />
+	</definition>
+	<definition name="prof-principal/listEleve" extends="standard-layout">
+		<put-attribute name="title" value="listEleve" />
+		<put-attribute name="body" value="/WEB-INF/controllers/prof-principal/listEleve.jsp" />
 	</definition>
 	
 </tiles-definitions>

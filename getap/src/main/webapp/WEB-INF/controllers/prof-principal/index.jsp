@@ -2,25 +2,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <br/>
-<br/>
+<br/><%int cpt=0;%> 
 
 
-<form:form modelAttribute="userSearchCriteria" action="dosearchForClasse"
-	method="get">
-	<form:errors path="*" cssClass="errors" />
-
-	<div class="form-row">
-		<label for="query">Les classes :</label>
+<div id="accordion">
+    <c:forEach items="${lesClasses}" var="classe">
+    <% cpt++; %>
+    	<h3><a href="#">${classe.nom}</a></h3>
 		<div>
-			<form:select path="query" items="${lesClasses}" itemValue="id" itemLabel="nom">
-			</form:select>
+			<table id="<%=cpt%>" class="tablesorter">
+				<thead>
+				<tr class="header">
+					<th>Eleves</th>
+					<th>Nombre d'actions par type</th>
+					<th>Temps Total</th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${lesEleves}" var="eleve">
+						<c:if test="${classe.nom == eleve.classe.nom}">
+							    <tr>
+									<td>${eleve.nom} ${eleve.prenom}</td>
+									<td>${eleve.dureeTotal}</td>
+								</tr>
+						</c:if>
+				    </c:forEach>
+				</tbody>
+			</table>
 		</div>
-	</div>
-
-	<br />
-
-	<div id="buttonGroup">
-		<a href="<c:url value="/app/admin/index" />"><input type="button"
-			value="Retour"> </a> <input type="submit" value="Rechercher" />
-	</div>
-</form:form>
+    </c:forEach>
+    </div>

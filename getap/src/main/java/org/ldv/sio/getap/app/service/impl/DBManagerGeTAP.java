@@ -148,6 +148,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 				"select * from user where role = 'eleve'", new UserMapper());
 	}
 
+	public List<User> getAllEleveByClasse() {
+		return this.jdbcTemplate
+				.query("select user.*, sum(dctap.duree) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id order by classe.libelle",
+						new UserMapper());
+	}
+
 	public User getUserById(Long id) {
 		User user;
 		try {
@@ -398,8 +404,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<Classe> getAllClasse() {
-		return this.jdbcTemplate.query("select * from classe order by libelle",
-				new ClasseMapper());
+		return this.jdbcTemplate
+				.query("select * from classe where libelle != 'null' order by libelle",
+						new ClasseMapper());
 	}
 
 	public Classe getClasseById(int id) {
@@ -493,6 +500,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user.setPrenom(rs.getString("prenom"));
 			user.setNom(rs.getString("nom"));
 			user.setRole(rs.getString("role"));
+			try {
+				user.setDureeTotal(rs.getInt("dureeTotal"));
+			} catch (SQLException ex) {
+
+			}
 
 			DBManagerGeTAP manager = new DBManagerGeTAP();
 			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
