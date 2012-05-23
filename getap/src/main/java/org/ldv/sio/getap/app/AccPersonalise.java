@@ -11,6 +11,8 @@ public class AccPersonalise {
 	private String nom;
 	private int origineEtat;
 	private Long idUser;
+	private int count;
+	private int idEleve;
 
 	public AccPersonalise() {
 	}
@@ -21,6 +23,22 @@ public class AccPersonalise {
 		this.nom = nom;
 		this.origineEtat = origineEtat;
 		this.idUser = idUser;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getIdEleve() {
+		return idEleve;
+	}
+
+	public void setIdEleve(int idEleve) {
+		this.idEleve = idEleve;
 	}
 
 	public Integer getId() {

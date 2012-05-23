@@ -82,6 +82,7 @@ public class LoginController {
 				model.addAttribute("lesClasses",
 						manager.getAllClasseByProf(userIn.getId()));
 				model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+				model.addAttribute("lesAP", manager.getApByType());
 			}
 			return "login/authenticate";
 		}

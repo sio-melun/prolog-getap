@@ -73,6 +73,8 @@ public interface IFManagerGeTAP {
 
 	public void deleteAP(AccPersonalise ap);
 
+	public List<AccPersonalise> getApByType();
+
 	// CRUD de classe
 	public List<Classe> getAllClasse();
 

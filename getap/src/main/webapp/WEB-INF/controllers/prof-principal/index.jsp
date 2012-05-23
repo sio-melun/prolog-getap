@@ -26,7 +26,13 @@
 						<c:if test="${classe.nom == eleve.classe.nom}">
 							<tr>
 								<td>${eleve.nom} ${eleve.prenom}</td>
-								<td></td>
+								<td>
+									<c:forEach items="${lesAP}" var="ap">
+										<c:if test="${eleve.id == ap.idEleve}">
+											${ap.count} - ${ap.nom}<br>
+										</c:if>
+									</c:forEach>
+								</td>
 								<td>${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}h ${(eleve.dureeTotal%60)}min</td>
 							</tr>
 						</c:if>

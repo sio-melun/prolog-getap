@@ -417,6 +417,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 				new Object[] { id });
 	}
 
+	public List<AccPersonalise> getApByType() {
+		return this.jdbcTemplate
+				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id group by dctap.idEleve, ap.libelle",
+						new AccMapper());
+	}
+
 	public List<Discipline> getAllDiscipline() {
 		return this.jdbcTemplate.query(
 				"select * from discipline order by libelle",
@@ -566,6 +572,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			acc.setNom(rs.getString("libelle"));
 			acc.setOrigineEtat(rs.getInt("origineEtat"));
 			acc.setIdUser(rs.getLong("idUser"));
+			try {
+				acc.setCount(rs.getInt("apByType"));
+				acc.setIdEleve(rs.getInt("idEleve"));
+			} catch (SQLException ex) {
+
+			}
 			return acc;
 		}
 	}
