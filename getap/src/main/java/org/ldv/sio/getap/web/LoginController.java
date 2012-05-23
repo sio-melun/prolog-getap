@@ -87,7 +87,7 @@ public class LoginController {
 			} else if (userIn.getRole().equals("admin")) {
 				model.addAttribute("lesAP", manager.getAllAP());
 			}
-			return "login/authenticate";
+			return "redirect:/app/" + userIn.getRole() + "/index";
 		}
 	}
 
