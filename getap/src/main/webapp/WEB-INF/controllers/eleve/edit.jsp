@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<c:if test="${etat < 2 }">
-	<h1>Modifier ma TAP</h1>
+<c:if test="${etat == 0 or etat == 3 }">
+	<h3>Modifier ma Demande</h3>
 	
 	<form:form modelAttribute="formDemandeConsoTempsAccPers" action="doedit"
 	  method="post">
@@ -17,29 +17,33 @@
 	        </div>
 	      </div>
 	      
-	     <br/>
-	      
 	      <div class="form-row">
 	        <label for="minutes">Temps d'aide personalisée :</label>
 	        <div class="input">
 	          <form:input path="minutes" />
 	        </div>
 	      </div>
-	      
-	      <br/>
-	      
+  
 	      <div class="form-row">
-	       <label for="profId">Les professeurs :</label><br>
+	       <label for="profId">Les professeurs :</label>
 	       <form:select path="profId" items="${lesProfs}" itemValue="id" itemLabel="nom"></form:select>
 	      </div>
 	      
-	      <br/>
-	      
-	      
 	      <div class="form-row">
-	       <label for="accPersId">Types d'aide personnalisée :</label><br>
-	       <form:select path="accPersId" items="${lesAP}" itemValue="id" itemLabel="nom"></form:select>
-	      </div>
+				<label for="accPersId">Type d'aide personnalisée : </label> <select
+					id="accPersId" name="accPersId" onchange="testAcc()">
+					<c:forEach items="${lesAP}" var="ap">
+						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>
+					</c:forEach>
+					<option value="0" label="Autre">Autre</option>
+				</select>
+			</div>
+
+			<div class="from-row" id="inputAcc"
+				style="display: none; visibility: hidden;">
+				<label for="accPersNom">Aide personnalisée : </label>
+				<form:input path="accPersNom" />
+			</div>
 
 	    </fieldset>
 	
@@ -56,7 +60,7 @@
 	  </div>
 	</form:form>
 </c:if>
-<c:if test="${etat > 1 }">
+<c:if test="${etat != 0 and etat != 3 }">
 	<script type="text/javascript">
 		window.location="mesdctap"
 	</script>

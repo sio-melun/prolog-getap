@@ -105,7 +105,6 @@ public class ElevesController {
 		model.addAttribute("etat", manager.getDCTAPById(formDctap.getId())
 				.getEtat());
 		model.addAttribute("lesAP", manager.getAllAP());
-
 		return "eleve/edit";
 	}
 
@@ -115,8 +114,12 @@ public class ElevesController {
 		System.out.println("TEST :" + formDctap.getId());
 		System.out.println("TEST id eleve :" + formDctap.getIdEleve());
 		System.out.println("TEST :" + model);
-		System.out.println("TEST AP :"
-				+ manager.getAPById(formDctap.getAccPersId()).getNom());
+		if (manager.getAPById(formDctap.getAccPersId()) != null) {
+			System.out.println("TEST AP :"
+					+ manager.getAPById(formDctap.getAccPersId()).getNom());
+		} else {
+			System.out.println("TEST AP : " + formDctap.getAccPersNom());
+		}
 		System.out.println("TEST minutes :" + formDctap.getMinutes());
 
 		// java.sql.Date.valueOf(formDctap.getDateAction());
@@ -129,18 +132,28 @@ public class ElevesController {
 			model.addAttribute("lesProfs", manager.getAllProf());
 			return "eleve/edit";
 		} else {
-
+			User user = UtilSession.getUserInSession();
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));
 			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 3) {
-				// valorise l'objet de la base à partir du bean de vue
+
+				AccPersonalise acc = new AccPersonalise(null,
+						formDctap.getAccPersNom(), 1, user.getId());
+				if (manager.getAPById(formDctap.getAccPersId()) != null) {
+					acc = manager.getAPById(formDctap.getAccPersId());
+					dctapForUpdate.setAccPers(manager.getAPById(formDctap
+							.getAccPersId()));
+				} else {
+					manager.addAP(acc);
+					dctapForUpdate.setAccPers(manager.getAPByNom(formDctap
+							.getAccPersNom()));
+				}
+
 				dctapForUpdate.setDateAction(formDctap.getDateAction());
 				dctapForUpdate.setMinutes(formDctap.getMinutes());
 
 				dctapForUpdate.setProf(manager.getUserById(formDctap
 						.getProfId()));
-				dctapForUpdate.setAccPers(manager.getAPById(formDctap
-						.getAccPersId()));
 				dctapForUpdate.setEtat(3);
 				manager.updateDCTAP(dctapForUpdate);
 			}

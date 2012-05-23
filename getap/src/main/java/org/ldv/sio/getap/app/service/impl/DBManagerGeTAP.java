@@ -100,7 +100,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		int etat = dctap.getEtat();
 		Long idProf = dctap.getProf().getId();
 		Long idEleve = dctap.getEleve().getId();
-		int idAP = dctap.getAccPers().getId();
+		int idAP;
+		if (dctap.getAccPers().getId() != null) {
+			idAP = dctap.getAccPers().getId();
+		} else {
+			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
+		}
 
 		this.jdbcTemplate
 				.update("update dctap set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
