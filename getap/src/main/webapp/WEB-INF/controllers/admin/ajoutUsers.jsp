@@ -22,7 +22,7 @@
 
 		<div class="section">
 			<fieldset>
-				<p>Ligne type : Nom  Prenom  INE  Division (séparateur ;)</p>
+				<p>Ligne type : Nom;Prénom;INE;Division</p>
 				<div class="form-row">
 					<label for="file">Fichier : </label>
 					<div class="input">
