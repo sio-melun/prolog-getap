@@ -405,9 +405,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String libelle = ap.getNom();
 		int origineEtat = ap.getOrigineEtat();
 
-		this.jdbcTemplate
-				.update("update ap set libelle = ?, origineEtat = ? where id = ? values(?,?,?)",
-						new Object[] { libelle, origineEtat, id });
+		this.jdbcTemplate.update(
+				"update ap set libelle = ?, origineEtat = ? where id = ?",
+				new Object[] { libelle, origineEtat, id });
 
 	}
 

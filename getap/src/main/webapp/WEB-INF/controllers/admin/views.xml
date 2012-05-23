@@ -101,5 +101,23 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/doajouts.jsp" />
 	</definition>
+	
+	<definition name="admin/ajoutAp" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : ajout AP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/ajoutAp.jsp" />
+	</definition>
+	
+	<definition name="admin/editAp" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : edition d'AP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/editAp.jsp" />
+	</definition>
+	
+	<definition name="admin/listAp" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : edition d'AP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/listAp.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -155,13 +155,6 @@ public class ElevesController {
 		model.addAttribute("lesProfs", manager.getAllProf());
 		model.addAttribute("lesAP", manager.getAllAP());
 
-		/*
-		 * Long nb = 0L; for (DemandeConsoTempsAccPers user : manager
-		 * .getAllDCTAPByEleve(UtilSession.getUserInSession())) { if (nb <
-		 * user.getId()) nb = user.getId(); } nb++;
-		 * 
-		 * formAjout.setId(nb);
-		 */
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);

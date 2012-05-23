@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.web;
 
+import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserLoginCriteria;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -56,9 +57,9 @@ public class LoginController {
 	 * @return Success or index view
 	 */
 	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
-	public String authenticate(UserLoginCriteria userLoginCriteria,
-			BindingResult bindResult, Model model,
-			UserSearchCriteria userSearchCriteria) {
+	public String authenticate(FormAjoutAp formAjout,
+			UserLoginCriteria userLoginCriteria, BindingResult bindResult,
+			Model model, UserSearchCriteria userSearchCriteria) {
 
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
@@ -83,6 +84,8 @@ public class LoginController {
 						manager.getAllClasseByProf(userIn.getId()));
 				model.addAttribute("lesEleves", manager.getAllEleveByClasse());
 				model.addAttribute("lesAP", manager.getApByType());
+			} else if (userIn.getRole().equals("admin")) {
+				model.addAttribute("lesAP", manager.getAllAP());
 			}
 			return "login/authenticate";
 		}

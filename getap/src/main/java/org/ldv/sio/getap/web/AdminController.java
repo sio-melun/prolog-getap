@@ -3,8 +3,10 @@ package org.ldv.sio.getap.web;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
@@ -51,8 +53,8 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index() {
-
+	public void index(FormAjoutAp formAjout, Model model) {
+		model.addAttribute("lesAP", manager.getAllAP());
 	}
 
 	@RequestMapping(value = "ajoutUser", method = RequestMethod.GET)
@@ -126,6 +128,71 @@ public class AdminController {
 	@RequestMapping(value = "searchClasse", method = RequestMethod.GET)
 	public void searchClasse(UserSearchCriteria userSearchCriteria, Model model) {
 		model.addAttribute("lesClasses", manager.getAllClasse());
+	}
+
+	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
+	public String ajoutAp(FormAjoutAp formAjout, Model model) {
+
+		return "admin/ajoutAp";
+	}
+
+	@RequestMapping(value = "doajoutAP", method = RequestMethod.POST)
+	public String doajout(FormAjoutAp formAjout, BindingResult bindResult,
+			Model model) {
+		AccPersonalise acc = new AccPersonalise();
+		acc.setNom(formAjout.getNom());
+		acc.setOrigineEtat(0);
+		acc.setIdUser(null);
+
+		manager.addAP(acc);
+
+		return "redirect:/app/admin/index";
+	}
+
+	@RequestMapping(value = "listAp", method = RequestMethod.GET)
+	public String mesdctap(Model model) {
+
+		model.addAttribute("lesAP", manager.getAllAP());
+		return "admin/listAp";
+	}
+
+	@RequestMapping(value = "editAp", method = RequestMethod.GET)
+	public String editAp(@RequestParam("id") String id, FormAjoutAp formAjout,
+			Model model) {
+		AccPersonalise acc = manager.getAPById(Integer.valueOf(id));
+		formAjout.setNom(acc.getNom());
+		return "admin/editAp";
+	}
+
+	@RequestMapping(value = "doEditAP", method = RequestMethod.POST)
+	public String doeditApById(FormAjoutAp formEdit, BindingResult bindResult,
+			Model model) {
+
+		if (bindResult.hasErrors()) {
+			System.out.println("ERROR");
+			return "admin/index";
+		} else {
+
+			AccPersonalise acc = manager.getAPById(Integer.valueOf(formEdit
+					.getId()));
+			acc.setNom(formEdit.getNom());
+			manager.upDateAP(acc);
+
+			return "redirect:/app/admin/index";
+		}
+	}
+
+	@RequestMapping(value = "deleteAP/{id}", method = RequestMethod.GET)
+	public String deleteAPById(@PathVariable String id, Model model) {
+		AccPersonalise acc = manager.getAPById(Integer.valueOf(id));
+
+		if (!acc.getId().equals(null)) {
+			manager.deleteAP(acc);
+			return "redirect:/app/admin/index";
+		} else {
+			return "redirect:/app/admin/index";
+		}
+
 	}
 
 	@RequestMapping(value = "searchDctapClasse", method = RequestMethod.GET)
