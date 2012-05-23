@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `dctap` (
   `anneeScolaire` varchar(9) NOT NULL,
   `dateAction` date NOT NULL,
   `dureeAP` int(11) NOT NULL,
-  `Etat` smallint(6) NOT NULL,
+  `Etat` int(11) NOT NULL,
   `idProf` int(11) NOT NULL,
   `idEleve` int(11) NOT NULL,
   `idAP` int(11) NOT NULL,
@@ -229,8 +229,8 @@ CREATE TABLE IF NOT EXISTS `prof_principal` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL auto_increment,
-  `nom` varchar(20) NOT NULL,
-  `prenom` varchar(20) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
   `ine` varchar(20) default NULL,
   `login` varchar(50) NOT NULL,
   `mdp` varchar(45) NOT NULL,
