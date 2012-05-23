@@ -151,7 +151,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<User> getAllEleveByClasse() {
 		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) group by classe.libelle",
+				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) group by user.id",
 						new UserMapper());
 	}
 
