@@ -53,8 +53,10 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index(FormAjoutAp formAjout, Model model) {
+	public void index(UserSearchCriteria userSearchCriteria,
+			FormAjoutAp formAjout, Model model) {
 		model.addAttribute("lesAP", manager.getAllAP());
+		model.addAttribute("lesClasses", manager.getAllClasse());
 	}
 
 	@RequestMapping(value = "ajoutUser", method = RequestMethod.GET)

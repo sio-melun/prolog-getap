@@ -11,12 +11,10 @@
 			<tr>
 				<td><a href="<c:url value="/app/admin/ajoutUser" />"><img
 						src="<c:url value="../../images/AjouterUser.png"/>" />
-						<div>Ajouter un Utilisateur</div> </a>
-				</td>
+						<div>Ajouter un Utilisateur</div> </a></td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/AjouterUser.png"/>" />
-						<div>Import Utilisateur via CSV</div> </a>
-				</td>
+						<div>Import Utilisateur via CSV</div> </a></td>
 			</tr>
 		</table>
 	</div>
@@ -26,45 +24,127 @@
 	<div>
 		<table>
 			<tr>
-				<td><a href="<c:url value="/app/admin/searchUser" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Rechercher un Utilisateur</div> </a>
-				</td>
-				<td><a href="<c:url value="/app/admin/searchProf" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Rechercher un Professeur</div> </a>
-				</td>
-				<td><a href="<c:url value="/app/admin/searchClasse" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Recherche par classe</div> </a>
-				</td>
+				<form:form modelAttribute="userSearchCriteria" action="dosearchUser"
+					method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche d'utilisateurs :</label>
+								<div class="input">
+									<form:input path="query" />
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
+			</tr>
+			<tr>
+				<form:form modelAttribute="userSearchCriteria" action="dosearchProf"
+					method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche de professeurs :</label>
+								<div class="input">
+									<form:input path="query" />
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
+			</tr>
+			<tr>
+				<form:form modelAttribute="userSearchCriteria"
+					action="dosearchForClasse" method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche par classe :</label>
+								<div>
+									<form:select path="query" items="${lesClasses}" itemValue="nom"
+										itemLabel="nom"></form:select>
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
 			</tr>
 		</table>
 	</div>
 	<h3>
-		<a href="#">Gestion des demandes faites par les eleves</a>
+		<a href="#">Gestion des demandes faites par les élèves</a>
 	</h3>
 	<div>
 		<table>
 			<tr>
-				<td><a href="<c:url value="/app/admin/searchDctapUser" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Rechercher un Utilisateur</div> </a>
-				</td>
-				<td><a href="<c:url value="/app/admin/searchDctapProf" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Rechercher un Professeur</div> </a>
-				</td>
-				<td><a href="<c:url value="/app/admin/searchDctapClasse" />"><img
-						class="searchUser"
-						src="<c:url value="../../images/RechercherUser.png"/>" />
-						<div>Recherche par classe</div> </a>
-				</td>
+				<form:form modelAttribute="userSearchCriteria"
+					action="doSearchDctap" method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche par élève :</label>
+								<div class="input">
+									<form:input path="query" />
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
+			</tr>
+			<tr>
+				<form:form modelAttribute="userSearchCriteria"
+					action="doSearchDctap" method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche par professeur :</label>
+								<div class="input">
+									<form:input path="query" />
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
+			</tr>
+			<tr>
+				<form:form modelAttribute="userSearchCriteria"
+					action="doSearchDctapClasse" method="get">
+					<form:errors path="*" cssClass="errors" />
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="query">Recherche par classe :</label>
+								<div>
+									<form:select path="query" items="${lesClasses}" itemValue="nom"
+										itemLabel="nom"></form:select>
+									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/buttonSearchHover.png';"
+										onmouseout="this.src='../../images/buttonSearch.png';" />
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
 			</tr>
 		</table>
 	</div>
@@ -75,63 +155,60 @@
 		<table>
 			<tr>
 				<form:form modelAttribute="formAjoutAp" action="doajoutAP"
-						method="post" id="formulaireAjoutAP">
-						<form:errors path="*" cssClass="errors" />
+					method="post" id="formulaireAjoutAP">
+					<form:errors path="*" cssClass="errors" />
 
-						<div class="section">
-							<fieldset>
-								<div class="form-row">
-									<label for="nom">Nouvelle aide personnalisée :</label>
-									<div class="input">
-										<form:input path="nom" />
-										<input type="submit" value="Ajouter" />
-									</div>
+					<div class="section">
+						<fieldset>
+							<div class="form-row">
+								<label for="nom">Nouvelle aide personnalisée :</label>
+								<div class="input">
+									<form:input path="nom" />
+									<input type="submit" value="Ajouter" />
 								</div>
-							</fieldset>
-						</div>
-					</form:form>
+							</div>
+						</fieldset>
+					</div>
+				</form:form>
 			</tr>
+			<table class="legend2">
+				<tr>
+					<td><img src="../../images/buttonModifHover.png" /> :
+						Modifier</td>
+					<td><img src="../../images/buttonSupprHover.png" /> :
+						Supprimer</td>
+				</tr>
+			</table>
 			<tr>
-				<table class="legend">
-					<tr>
-						<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
-						<td><img src="../../images/buttonSupprHover.png" /> : Supprimer</td>
-					</tr>
-				</table>
-			</tr>
-			<tr>
-				<td>
-					<table id="attente" class="tablesorter">
-						<thead>
-							<tr class="header">
-								<th>Nom</th>
+				<table id="attente" class="tablesorter">
+					<thead>
+						<tr class="header">
+							<th>Nom</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${lesAP}" var="ap">
+							<tr>
+								<td>${ap.nom}</td>
+								<c:if test="${ap.origineEtat == 1}">
+									<td>Elève</td>
+								</c:if>
+								<td><a
+									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
+										src="../../images/buttonModifHover.png"
+										onmouseover="this.src='../../images/buttonModif2.png';"
+										onmouseout="this.src='../../images/buttonModifHover.png';" />
+								</a></td>
+								<td><a href=""
+									onclick="if(confirm('Voulez-vous vraiment supprimer cette aide personnalisée ?')){window.location.href='deleteAP/${ap.id}';}"><img
+										src="../../images/buttonSupprHover.png"
+										onmouseover="this.src='../../images/buttonSupp.png';"
+										onmouseout="this.src='../../images/buttonSupprHover.png';" />
+								</a></td>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${lesAP}" var="ap">
-								<tr>
-									<td>${ap.nom}</td>
-									<c:if test="${ap.origineEtat == 1}">
-										<td>Elève</td>
-									</c:if>
-									<td><a
-										href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
-											src="../../images/buttonModifHover.png"
-											onmouseover="this.src='../../images/buttonModif2.png';"
-											onmouseout="this.src='../../images/buttonModifHover.png';" />
-									</a>
-									</td>
-									<td><a href=""
-										onclick="if(confirm('Voulez-vous vraiment supprimer cette aide personnalisée ?')){window.location.href='deleteAP/${ap.id}';}"><img
-											src="../../images/buttonSupprHover.png"
-											onmouseover="this.src='../../images/buttonSupp.png';"
-											onmouseout="this.src='../../images/buttonSupprHover.png';" />
-									</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table></td>
+						</c:forEach>
+					</tbody>
+				</table>
 			</tr>
 		</table>
 	</div>

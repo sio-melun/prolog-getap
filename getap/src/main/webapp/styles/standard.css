@@ -160,6 +160,12 @@ td .bouton{
 	margin-left:8px;
 }
 
+.legend2{
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 .section label{
 	width: 250px;
 	float: left;

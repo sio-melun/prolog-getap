@@ -2,41 +2,31 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Recherche d'un utilisateur</title>
-</head>
-<body>
-<table class="legend">
-	<tr>
-		<td>
-			<img src="../../images/buttonModif.png"/> : Modifier
-		</td>
-		<td>
-			<img src="../../images/buttonSuppr.png"/> : Supprimer
-		</td>
-	</tr>
-</table>
+
+<h3 class="titre3">Recherche d'utilisateur</h3>
+
 <c:if test="${empty users}">
 	Aucun utilisateur trouvé.
-	<br/>
-	<br/>
 </c:if>
 
-	<c:if test="${not empty users}">
-		<table id="search" class="tablesorter">
-			<thead>
-				<tr class="header">
-					<th>Nom/Prénom</th>
-					<th>Login</th>
-					<th>Mot de passe</th>
-					<th>Role</th>
-					<th>Classe</th>
-				</tr>
-			</thead>
-			<tbody>
+<c:if test="${not empty users}">
+	<table class="legend2">
+		<tr>
+			<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
+			<td><img src="../../images/buttonSupprHover.png" /> : Supprimer</td>
+		</tr>
+	</table>
+	<table id="search" class="tablesorter">
+		<thead>
+			<tr class="header">
+				<th>Nom/Prénom</th>
+				<th>Login</th>
+				<th>Mot de passe</th>
+				<th>Role</th>
+				<th>Classe</th>
+			</tr>
+		</thead>
+		<tbody>
 			<c:forEach items="${users}" var="user">
 				<tr>
 					<td>${user.nom} ${user.prenom}</td>
@@ -44,22 +34,24 @@
 					<td>${user.pass}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>
-					<td><a href="<c:url value="/app/admin/editUser?id=${user.id}" />" ><img src="../../images/buttonModifHover.png" onmouseover="this.src='../../images/buttonModif.png';" onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
+					<td><a
+						href="<c:url value="/app/admin/editUser?id=${user.id}" />"><img
+							src="../../images/buttonModifHover.png"
+							onmouseover="this.src='../../images/buttonModif2.png';"
+							onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+							src="../../images/buttonSupprHover.png"
+							onmouseover="this.src='../../images/buttonSupp.png';"
+							onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 				</tr>
 			</c:forEach>
-			</tbody>
-		</table>
-	</c:if>
+		</tbody>
+	</table>
+</c:if>
 
-	<div class="buttonGroup">
-		
-		
-		<a href="<c:url value="/app/admin/index" />">
-		 	<input type="button" value="Retour à l'index">
-		</a>		
-	</div>
-
-</body>
-</html>
+<div class="buttonGroup">
+	<a href="<c:url value="/app/admin/index" />"> <input type="button"
+		value="Retour à l'index">
+	</a>
+</div>
