@@ -5,9 +5,9 @@
 
 <table class="legend">
 	<tr>
-		<td><img src="../../images/buttonValide.png" /> : Valider</td>
-		<td><img src="../../images/buttonModif.png" /> : Modifier</td>
-		<td><img src="../../images/buttonSuppr.png" /> : Refuser</td>
+		<td><img src="../../images/buttonValideHover.png" /> : Valider</td>
+		<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
+		<td><img src="../../images/buttonSupprHover.png" /> : Refuser</td>
 	</tr>
 </table>
 
@@ -41,17 +41,17 @@
 								<td><a
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
 										src="../../images/buttonValideHover.png"
-										onmouseover="this.src='../../images/buttonValide.png';"
+										onmouseover="this.src='../../images/buttonValide2.png';"
 										onmouseout="this.src='../../images/buttonValideHover.png';" /></a></td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
 										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif.png';"
+										onmouseover="this.src='../../images/buttonModif2.png';"
 										onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSuppr.png';"
+										onmouseover="this.src='../../images/buttonSupp.png';"
 										onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 							</tr>
 						</c:if>
@@ -116,12 +116,12 @@
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
 										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif.png';"
+										onmouseover="this.src='../../images/buttonModif2.png';"
 										onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSuppr.png';"
+										onmouseover="this.src='../../images/buttonSupp.png';"
 										onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
 							</tr>
 						</c:if>

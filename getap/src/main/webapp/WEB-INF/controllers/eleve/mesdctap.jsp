@@ -5,15 +5,11 @@
 
 <table class="legend">
 	<tr>
-		<td>
-			<img src="../../images/buttonValide.png"/> : Confirmer
+		<td><img src="../../images/buttonValideHover.png" /> : Confirmer
 		</td>
-		<td>
-			<img src="../../images/buttonModif.png"/> : Modifier
-		</td>
-		<td>
-			<img src="../../images/buttonSuppr.png"/> : Supprimer/Refuser
-		</td>
+		<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
+		<td><img src="../../images/buttonSupprHover.png" /> :
+			Supprimer/Refuser</td>
 	</tr>
 </table>
 
@@ -23,7 +19,9 @@
 
 <c:if test="${not empty mesdctaps}">
 	<div id="accordion">
-		<h3><a href="#">Demandes non traitees (${etat0 + etat3})</a></h3>
+		<h3>
+			<a href="#">Demandes non traitees (${etat0 + etat3})</a>
+		</h3>
 		<div>
 			<table id="attente" class="tablesorter">
 				<thead>
@@ -36,23 +34,36 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-					<c:if test="${dctap.etat == 0 or dctap.etat == 3 }">
-						<tr>
-							<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
-							<td>${dctap.dateAction}</td>
-							<td>${dctap.minutes}</td>
-							<td>${dctap.accPers.nom}</td>
+						<c:if test="${dctap.etat == 0 or dctap.etat == 3 }">
+							<tr>
+								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
+								<td>${dctap.dateAction}</td>
+								<td>${dctap.minutes}</td>
+								<td>${dctap.accPers.nom}</td>
 								<td><a
-									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img src="../../images/buttonModifHover.png" onmouseover="this.src='../../images/buttonModif.png';" onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
+									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img
+										src="../../images/buttonModifHover.png"
+										onmouseover="this.src='../../images/buttonModif2.png';"
+										onmouseout="this.src='../../images/buttonModifHover.png';" />
+								</a>
+								</td>
 								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+									onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><img
+										src="../../images/buttonSupprHover.png"
+										onmouseover="this.src='../../images/buttonSupp.png';"
+										onmouseout="this.src='../../images/buttonSupprHover.png';" />
+								</a>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes modifiees par le professeur (${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a></h3>
+		<h3>
+			<a href="#">Demandes modifiees par le professeur
+				(${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a>
+		</h3>
 		<div>
 			<table id="modif" class="tablesorter">
 				<thead>
@@ -104,16 +115,28 @@
 									<td class="isUpdate">${dctap.accPers.nom}</td>
 								</c:if>
 								<td><a
-									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img src="../../images/buttonValideHover.png" onmouseover="this.src='../../images/buttonValide.png';" onmouseout="this.src='../../images/buttonValideHover.png';" /></a></td>
+									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img
+										src="../../images/buttonValideHover.png"
+										onmouseover="this.src='../../images/buttonValide2.png';"
+										onmouseout="this.src='../../images/buttonValideHover.png';" />
+								</a>
+								</td>
 								<td><a
-									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img src="../../images/buttonSupprHover.png" onmouseover="this.src='../../images/buttonSuppr.png';" onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
+										src="../../images/buttonSupprHover.png"
+										onmouseover="this.src='../../images/buttonSupp.png';"
+										onmouseout="this.src='../../images/buttonSupprHover.png';" />
+								</a>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes validees (${etat1 + etat5})</a></h3>
+		<h3>
+			<a href="#">Demandes validees (${etat1 + etat5})</a>
+		</h3>
 		<div>
 			<table id="valide" class="tablesorter">
 				<thead>
@@ -138,7 +161,9 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees par le professeur (${etat6})</a></h3>
+		<h3>
+			<a href="#">Demandes refusees par le professeur (${etat6})</a>
+		</h3>
 		<div>
 			<table id="refuse" class="tablesorter">
 				<thead>
@@ -163,7 +188,9 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees par vous-meme (${etat2})</a></h3>
+		<h3>
+			<a href="#">Demandes refusees par vous-meme (${etat2})</a>
+		</h3>
 		<div>
 			<table id="refuse2" class="tablesorter">
 				<thead>
@@ -191,6 +218,8 @@
 	</div>
 </c:if>
 
-<div class="buttonGroup" >
-	<a href="<c:url value="/app/eleve/index"/>"><input type="button" value="Retour"></a>
+<div class="buttonGroup">
+	<a href="<c:url value="/app/eleve/index"/>"><input type="button"
+		value="Retour">
+	</a>
 </div>

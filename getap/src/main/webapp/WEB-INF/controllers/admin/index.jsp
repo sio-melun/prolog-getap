@@ -94,8 +94,8 @@
 			<tr>
 				<table class="legend">
 					<tr>
-						<td><img src="../../images/buttonModif.png" /> : Modifier</td>
-						<td><img src="../../images/buttonSuppr.png" /> : Supprimer</td>
+						<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
+						<td><img src="../../images/buttonSupprHover.png" /> : Supprimer</td>
 					</tr>
 				</table>
 			</tr>
@@ -117,14 +117,14 @@
 									<td><a
 										href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
 											src="../../images/buttonModifHover.png"
-											onmouseover="this.src='../../images/buttonModif.png';"
+											onmouseover="this.src='../../images/buttonModif2.png';"
 											onmouseout="this.src='../../images/buttonModifHover.png';" />
 									</a>
 									</td>
 									<td><a href=""
 										onclick="if(confirm('Voulez-vous vraiment supprimer cette aide personnalisée ?')){window.location.href='deleteAP/${ap.id}';}"><img
 											src="../../images/buttonSupprHover.png"
-											onmouseover="this.src='../../images/buttonSuppr.png';"
+											onmouseover="this.src='../../images/buttonSupp.png';"
 											onmouseout="this.src='../../images/buttonSupprHover.png';" />
 									</a>
 									</td>

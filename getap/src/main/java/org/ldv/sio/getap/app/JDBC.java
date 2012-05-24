@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.app;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,9 +34,13 @@ public class JDBC {
 
 			// Insertion dans la base de donnees d'une liste
 			String lien = file;
-			if (lien.contains('\\' + "")) {
-				file = file.replace('\\', '/');
-			}
+
+			lien = File.pathSeparator + lien;
+
+			// if (lien.contains('\\' + "")) {
+			// file = file.replace('\\', );
+			// }
+			//
 			System.out.println(file);
 			LectureFichier lf = new LectureFichier(file);
 			ArrayList<Utilisateur> listUser = lf

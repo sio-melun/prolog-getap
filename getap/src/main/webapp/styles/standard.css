@@ -156,9 +156,8 @@ td .bouton{
 	padding-right:50px;
 }
 .legend{
-	margin-bottom:;
-	margin-right:auto;
-	margin-left:auto;
+	margin-bottom:-20px;
+	margin-left:8px;
 }
 
 .section label{
