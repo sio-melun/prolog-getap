@@ -1,4 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<h3 class="titre3">Mes demandes de validations</h3>
+
 <table class="legend">
 	<tr>
 		<td>
@@ -50,7 +53,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes modifiees (${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a></h3>
+		<h3><a href="#">Demandes en attentes de confirmations (${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a></h3>
 		<div>
 			<table id="modif" class="tablesorter">
 				<thead>
@@ -111,7 +114,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes validees (${etat1 + etat5})</a></h3>
+		<h3><a href="#">Demandes validées (${etat1 + etat5})</a></h3>
 		<div>
 			<table id="valide" class="tablesorter">
 				<thead>
@@ -136,7 +139,7 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees par l'élève (${etat2})</a></h3>
+		<h3><a href="#">Demandes refusées par l'élève (${etat2})</a></h3>
 		<div>
 			<table id="refuse" class="tablesorter">
 				<thead>
@@ -161,9 +164,9 @@
 				</tbody>
 			</table>
 		</div>
-		<h3><a href="#">Demandes refusees par Vous-même (${etat6})</a></h3>
+		<h3><a href="#">Vos demandes refusées (${etat6})</a></h3>
 		<div>
-			<table id="refuse" class="tablesorter">
+			<table id="refuse2" class="tablesorter">
 				<thead>
 				<tr class="header">
 					<th>Eleves</th>

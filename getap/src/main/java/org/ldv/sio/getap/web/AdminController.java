@@ -137,7 +137,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "doajoutAP", method = RequestMethod.POST)
-	public String doajout(FormAjoutAp formAjout, BindingResult bindResult,
+	public String doajoutAP(FormAjoutAp formAjout, BindingResult bindResult,
 			Model model) {
 		AccPersonalise acc = new AccPersonalise();
 		acc.setNom(formAjout.getNom());
@@ -375,7 +375,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
-	public String ajoutUsers(FormAjoutUsers file, Model model) {
+	public String ajoutUsers(FormAjoutAp formAjout, FormAjoutUsers file,
+			Model model) {
 		model.addAttribute(new FormAjoutUsers());
 		return "admin/ajoutUsers";
 	}
@@ -383,7 +384,7 @@ public class AdminController {
 	@RequestMapping(value = "doajouts", method = RequestMethod.POST)
 	public String doajouts(
 			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
-			BindingResult result, Model model) {
+			BindingResult result, FormAjoutAp formAjout, Model model) {
 		System.out.println("TEST :" + model);
 
 		if (result.hasErrors())

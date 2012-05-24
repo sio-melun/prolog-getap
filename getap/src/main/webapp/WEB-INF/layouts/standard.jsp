@@ -68,6 +68,11 @@
 		        $("#refuse").tablesorter({widgets: ['zebra']});
 	        });	
 	    </script>
+	     <script type="text/javascript">
+	        $(function() {		
+		        $("#refuse2").tablesorter({widgets: ['zebra']});
+	        });	
+	    </script>
 	    <script type="text/javascript">
 	        $(function() {		
 		        $("#search").tablesorter({widgets: ['zebra']});

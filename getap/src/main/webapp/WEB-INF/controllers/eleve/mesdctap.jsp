@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="org.ldv.sio.getap.app.service.impl.DBManagerGeTAP"%>
 
+<h3 class="titre3">Mes demandes de validations</h3>
+
 <table class="legend">
 	<tr>
 		<td>
@@ -163,7 +165,7 @@
 		</div>
 		<h3><a href="#">Demandes refusees par vous-meme (${etat2})</a></h3>
 		<div>
-			<table id="refuse" class="tablesorter">
+			<table id="refuse2" class="tablesorter">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>

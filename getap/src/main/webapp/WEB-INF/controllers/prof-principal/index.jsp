@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<br />
-<br />
+<h3 class="titre3">Mes classes</h3>
+
+
 <% int cpt = 0; %>
 
 

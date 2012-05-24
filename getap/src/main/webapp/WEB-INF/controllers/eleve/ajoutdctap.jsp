@@ -2,6 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<h3 class="titre3">Ajouter une demande de validation</h3>
 
 <form:form modelAttribute="formAjoutDctap" action="doajout"
 	method="post" id="formulaireAjoutDCTAP">
