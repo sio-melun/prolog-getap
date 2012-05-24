@@ -7,12 +7,6 @@
 <tiles-definitions>
 
 	<!-- Pages -->
-	<definition name="profil/index" extends="standard-layout">
-		<put-attribute name="title" value="Profil de l'utilisateur" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/profil/index.jsp" />
-	</definition>
-
 	<definition name="profil/edit" extends="standard-layout">
 		<put-attribute name="title" value="Modification du profil" />
 		<put-attribute name="body"

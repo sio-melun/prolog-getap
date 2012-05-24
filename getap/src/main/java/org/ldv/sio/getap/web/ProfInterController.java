@@ -31,29 +31,6 @@ public class ProfInterController {
 		this.manager = serviceManager;
 	}
 
-	@RequestMapping(value = "listdctap", method = RequestMethod.GET)
-	public String mesdctap(Model model) {
-		User me = UtilSession.getUserInSession();
-		model.addAttribute("listdctaps", manager.getAllDCTAPByProfInterv(me));
-		Long id = me.getId();
-		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
-		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
-		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
-		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
-
-		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
-		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
-		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
-		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
-		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
-		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
-		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
-
-		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
-		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
-		return "prof-intervenant/listdctap";
-	}
-
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String editDCTAPById(@RequestParam("id") String id,
 			FormListConsoForProfInter dctap, Model model) {
@@ -74,7 +51,7 @@ public class ProfInterController {
 
 			return "prof-intervenant/edit";
 		}
-		return "prof-intervenant/listdctap";
+		return "prof-intervenant/index";
 	}
 
 	/**
@@ -83,8 +60,25 @@ public class ProfInterController {
 	 * 
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index() {
+	public void index(Model model) {
+		User me = UtilSession.getUserInSession();
+		model.addAttribute("listdctaps", manager.getAllDCTAPByProfInterv(me));
+		Long id = me.getId();
+		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
+		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
+		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
+		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
 
+		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
+		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
+		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
+		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
+		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
+		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
+		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
+
+		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
+		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
@@ -141,7 +135,7 @@ public class ProfInterController {
 
 			manager.updateDCTAP(dctapForUpdate);
 
-			return "redirect:/app/prof-intervenant/listdctap";
+			return "redirect:/app/prof-intervenant/index";
 		}
 	}
 
@@ -152,12 +146,12 @@ public class ProfInterController {
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 3 || dctap
-						.getEtat() == 4)) {
+						.getEtat() > 40)) {
 			dctap.setEtat(6);
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/prof-intervenant/listdctap";
+		return "redirect:/app/prof-intervenant/index";
 	}
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
@@ -171,6 +165,6 @@ public class ProfInterController {
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/prof-intervenant/listdctap";
+		return "redirect:/app/prof-intervenant/index";
 	}
 }

@@ -28,17 +28,6 @@ public class Profil {
 		this.manager = serviceManager;
 	}
 
-	/**
-	 * Default action, displays the use case page.
-	 * 
-	 * 
-	 */
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index(Model model) {
-		User me = UtilSession.getUserInSession();
-		model.addAttribute("user", me);
-	}
-
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String editUserById(@RequestParam("id") String id,
 			FormEditProfil formUser, Model model) {
@@ -51,10 +40,8 @@ public class Profil {
 		if (currentUser.getId().equals(UtilSession.getUserInSession().getId())) {
 			formUser.setLogin(currentUser.getLogin());
 			formUser.setMail(currentUser.getMail());
-
-			return "profil/edit";
 		}
-		return "profil/index";
+		return "profil/edit";
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
@@ -84,7 +71,7 @@ public class Profil {
 			}
 			manager.updateProfil(user);
 
-			return "redirect:/app/profil/index";
+			return "redirect:/app/profil/edit?id=" + me.getId();
 		}
 	}
 

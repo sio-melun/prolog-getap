@@ -33,8 +33,7 @@
 		<form:hidden path="id" />
 
 		<div id="buttonGroup">
-			<a href="<c:url value="/app/prof-intervenant/listdctap" />"
-				style="text-decoration: none"> <input type="button"
+			<a href="<c:url value="/app/prof-intervenant/index" />"> <input type="button"
 				value="Retour">
 			</a> <input type="submit" value="Modifier" />
 		</div>

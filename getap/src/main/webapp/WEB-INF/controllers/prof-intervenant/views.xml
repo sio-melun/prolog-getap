@@ -11,11 +11,6 @@
 		<put-attribute name="title" value="Professeur intervenant" />
 		<put-attribute name="body" value="/WEB-INF/controllers/prof-intervenant/index.jsp" />
 	</definition>
-	
-	<definition name="prof-intervenant/listdctap" extends="standard-layout">
-    	<put-attribute name="title" value="Validation de consommation TAP" />
-    	<put-attribute name="body" value="/WEB-INF/controllers/prof-intervenant/listdctap.jsp" />
-  	</definition>
   	
   	<definition name="prof-intervenant/edit" extends="standard-layout">
     	<put-attribute name="title" value="Edition" />

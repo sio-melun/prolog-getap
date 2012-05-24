@@ -4,7 +4,7 @@
 
 		<c:if test="${user.role == 'eleve'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/eleve/index" />" target="_self"><b>Elèves</b>
+				<li><a href="<c:url value="/app/eleve/index" />" target="_self"><b>Mes demandes</b>
 				</a></li>
 			</ul>
 		</c:if>
@@ -12,30 +12,24 @@
 
 		<c:if test="${user.role == 'prof-principal'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/prof-principal/index" />" target="_self"><b>Prof
-						principal</b></a></li>
+				<li><a href="<c:url value="/app/prof-principal/index" />" target="_self"><b>Mes classes</b></a></li>
 			</ul>
 		</c:if>
 
 
 		<c:if test="${user.role == 'prof-intervenant' or user.role == 'prof-principal'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/prof-intervenant/index" />" target="_self"><b>Prof
-						intervenant</b></a></li>
+				<li><a href="<c:url value="/app/prof-intervenant/index" />" target="_self"><b>Mes demandes</b></a></li>
 			</ul>
 		</c:if>
 
 
 		<c:if test="${user.role == 'admin'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Administrateur</b>
+				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Administration</b>
 				</a>
 				</li>
 			</ul>
-			<%-- <ul class="select">
-				<li><a href="<c:url value="/app/hotels/index" />"
-					target="_self"><b>Hotels</b> </a></li>
-			</ul> --%>
 		</c:if>
 
 

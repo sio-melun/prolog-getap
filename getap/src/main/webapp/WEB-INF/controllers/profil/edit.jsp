@@ -46,8 +46,6 @@
     </fieldset>
 
     <div id="buttonGroup">
-    <a href="<c:url value="/app/profil/index" />"><input type="button" value="Retour">
-	</a>
       <input type="submit" value="Sauvegarder" />
     </div>
   </div>
