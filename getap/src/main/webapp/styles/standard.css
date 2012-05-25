@@ -21,6 +21,19 @@ div#page {
 	background: -moz-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);
 	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);	
 }
+div#footer {
+	width:750px;
+	height: 35px;
+    margin:  0 auto;
+    padding: 5px;
+	border-radius:15px;
+    box-shadow: 0px 0px 15px grey; 
+    box-sizing: border-box;
+	color: black;
+	z-index:1;
+	background: -moz-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);
+	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#D4D1CA 100%);	
+}
 
 div#header { 
 	margin: 0 0 1em 0;
@@ -63,10 +76,6 @@ div#content input[type="button"] {
 
 div#sub {
 	width: 215px;
-}
-
-div#footer {
-	margin-top: 1em;
 }
 
 div#footer img.spring {
