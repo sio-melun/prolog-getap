@@ -68,7 +68,8 @@
 								end="<%=end%>">
 
 								<td><form:checkbox path="classe" name="${classe.nom}"
-										value="${classe.id}" id="${classe.nom}" /></td>
+										value="${classe.id}" id="${classe.nom}" />
+								</td>
 								<td><label for="${classe.nom}" class="checkbox">${classe.nom}</label>
 								</td>
 
@@ -97,7 +98,13 @@
 	method="post" id="resetPass">
 	<form:errors path="*" cssClass="errors" />
 	<div class="form-row">
-		<input type="submit" value="Réinitialiser le Mot de Passe"/>
+		<input type="image" name="recycled" id="recycled"
+			onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?'))"
+			src="../../images/recycled.png"
+			onmouseover="this.src='../../images/recycledHover.png';"
+			onmouseout="this.src='../../images/recycled.png';" />
+			<br>
+			<label for="recycled">Réinitialiser le mot de passe</label>
 	</div>
 	<form:hidden path="id" />
 </form:form>

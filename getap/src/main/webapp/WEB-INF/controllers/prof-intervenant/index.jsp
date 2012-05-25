@@ -5,9 +5,9 @@
 
 <table class="legend">
 	<tr>
-		<td><img src="../../images/buttonValideHover.png" /> : Valider</td>
-		<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
-		<td><img src="../../images/buttonSupprHover.png" /> : Refuser</td>
+		<td><img src="../../images/valid.png" /> : Valider</td>
+		<td><img src="../../images/modif.png" /> : Modifier</td>
+		<td><img src="../../images/suppr.png" /> : Refuser</td>
 	</tr>
 </table>
 
@@ -40,19 +40,19 @@
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
-										src="../../images/buttonValideHover.png"
-										onmouseover="this.src='../../images/buttonValide2.png';"
-										onmouseout="this.src='../../images/buttonValideHover.png';" /></a></td>
+										src="../../images/valid.png"
+										onmouseover="this.src='../../images/validHover.png';"
+										onmouseout="this.src='../../images/valid.png';" /></a></td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
-										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif2.png';"
-										onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
+										src="../../images/modif.png"
+										onmouseover="this.src='../../images/modifHover.png';"
+										onmouseout="this.src='../../images/modif.png';" /></a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
-										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSupp.png';"
-										onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+										src="../../images/suppr.png"
+										onmouseover="this.src='../../images/supprHover.png';"
+										onmouseout="this.src='../../images/suppr.png';" /></a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -115,14 +115,14 @@
 								</c:if>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
-										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif2.png';"
-										onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
+										src="../../images/modif.png"
+										onmouseover="this.src='../../images/modifHover.png';"
+										onmouseout="this.src='../../images/modif.png';" /></a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
-										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSupp.png';"
-										onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+										src="../../images/suppr.png"
+										onmouseover="this.src='../../images/supprHover.png';"
+										onmouseout="this.src='../../images/suppr.png';" /></a></td>
 							</tr>
 						</c:if>
 					</c:forEach>

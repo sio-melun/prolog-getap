@@ -33,9 +33,9 @@
 								<label for="query">Recherche d'utilisateurs :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -52,9 +52,9 @@
 								<label for="query">Recherche de professeurs :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -72,9 +72,9 @@
 								<div>
 									<form:select path="query" items="${lesClasses}" itemValue="nom"
 										itemLabel="nom"></form:select>
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -98,9 +98,9 @@
 								<label for="query">Recherche par élève :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -117,9 +117,9 @@
 								<label for="query">Recherche par professeur :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -137,9 +137,9 @@
 								<div>
 									<form:select path="query" items="${lesClasses}" itemValue="nom"
 										itemLabel="nom"></form:select>
-									<input type="image" src="../../images/buttonSearch.png" alt="Rechercher" 
-										onmouseover="this.src='../../images/buttonSearchHover.png';"
-										onmouseout="this.src='../../images/buttonSearch.png';" />
+									<input type="image" src="../../images/search.png" alt="Rechercher" 
+										onmouseover="this.src='../../images/searchHover.png';"
+										onmouseout="this.src='../../images/search.png';" />
 								</div>
 							</div>
 						</fieldset>
@@ -173,9 +173,9 @@
 			</tr>
 			<table class="legend2">
 				<tr>
-					<td><img src="../../images/buttonModifHover.png" /> :
+					<td><img src="../../images/modif.png" /> :
 						Modifier</td>
-					<td><img src="../../images/buttonSupprHover.png" /> :
+					<td><img src="../../images/suppr.png" /> :
 						Supprimer</td>
 				</tr>
 			</table>
@@ -195,15 +195,15 @@
 								</c:if>
 								<td><a
 									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
-										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif2.png';"
-										onmouseout="this.src='../../images/buttonModifHover.png';" />
+										src="../../images/modif.png"
+										onmouseover="this.src='../../images/modifHover.png';"
+										onmouseout="this.src='../../images/modif.png';" />
 								</a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment supprimer cette aide personnalisée ?')){window.location.href='deleteAP/${ap.id}';}"><img
-										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSupp.png';"
-										onmouseout="this.src='../../images/buttonSupprHover.png';" />
+										src="../../images/suppr.png"
+										onmouseover="this.src='../../images/supprHover.png';"
+										onmouseout="this.src='../../images/suppr.png';" />
 								</a></td>
 							</tr>
 						</c:forEach>

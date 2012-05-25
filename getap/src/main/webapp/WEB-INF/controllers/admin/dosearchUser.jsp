@@ -12,8 +12,8 @@
 <c:if test="${not empty users}">
 	<table class="legend2">
 		<tr>
-			<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
-			<td><img src="../../images/buttonSupprHover.png" /> : Supprimer</td>
+			<td><img src="../../images/modif.png" /> : Modifier</td>
+			<td><img src="../../images/suppr.png" /> : Supprimer</td>
 		</tr>
 	</table>
 	<table id="search" class="tablesorter">
@@ -36,14 +36,14 @@
 					<td>${user.classe.nom}</td>
 					<td><a
 						href="<c:url value="/app/admin/editUser?id=${user.id}" />"><img
-							src="../../images/buttonModifHover.png"
-							onmouseover="this.src='../../images/buttonModif2.png';"
-							onmouseout="this.src='../../images/buttonModifHover.png';" /></a></td>
+							src="../../images/modif.png"
+							onmouseover="this.src='../../images/modifHover.png';"
+							onmouseout="this.src='../../images/modif.png';" /></a></td>
 					<td><a href=""
 						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
-							src="../../images/buttonSupprHover.png"
-							onmouseover="this.src='../../images/buttonSupp.png';"
-							onmouseout="this.src='../../images/buttonSupprHover.png';" /></a></td>
+							src="../../images/suppr.png"
+							onmouseover="this.src='../../images/supprHover.png';"
+							onmouseout="this.src='../../images/suppr.png';" /></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

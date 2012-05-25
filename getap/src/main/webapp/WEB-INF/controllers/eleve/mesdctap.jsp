@@ -10,15 +10,15 @@
 <c:if test="${not empty mesdctaps}">
 	<table class="legend">
 		<tr>
-			<td><img src="../../images/buttonValideHover.png" /> :
-				Confirmer</td>
-			<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
-			<td><img src="../../images/buttonSupprHover.png" /> :
-				Supprimer/Refuser</td>
+			<td><img src="../../images/valid.png" /> : Confirmer</td>
+			<td><img src="../../images/modif.png" /> : Modifier</td>
+			<td><img src="../../images/suppr.png" /> : Supprimer/Refuser</td>
 		</tr>
 	</table>
-	<br><br>
-	<h5 style="position: relative; top:35px;">Demandes de validation en cours</h5>
+	<br>
+	<br>
+	<h5 style="position: relative; top: 35px;">Demandes de validation
+		en cours</h5>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes non traitees (${etat0 + etat3})</a>
@@ -42,17 +42,18 @@
 								<td>${dctap.minutes}</td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
-									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img
-										src="../../images/buttonModifHover.png"
-										onmouseover="this.src='../../images/buttonModif2.png';"
-										onmouseout="this.src='../../images/buttonModifHover.png';" />
-								</a></td>
+									href="<c:url value="/app/admin/editUser?id=${user.id}" />"><img
+										src="../../images/modif.png"
+										onmouseover="this.src='../../images/modifHover.png';"
+										onmouseout="this.src='../../images/modif.png';" /> </a>
+								</td>
+								</a>
+								</td>
 								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><img
-										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSupp.png';"
-										onmouseout="this.src='../../images/buttonSupprHover.png';" />
-								</a></td>
+									onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+										src="../../images/suppr.png"
+										onmouseover="this.src='../../images/supprHover.png';"
+										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -115,16 +116,18 @@
 								</c:if>
 								<td><a
 									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img
-										src="../../images/buttonValideHover.png"
-										onmouseover="this.src='../../images/buttonValide2.png';"
-										onmouseout="this.src='../../images/buttonValideHover.png';" />
-								</a></td>
-								<td><a
-									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
-										src="../../images/buttonSupprHover.png"
-										onmouseover="this.src='../../images/buttonSupp.png';"
-										onmouseout="this.src='../../images/buttonSupprHover.png';" />
-								</a></td>
+										src="../../images/valid.png"
+										onmouseover="this.src='../../images/validHover.png';"
+										onmouseout="this.src='../../images/valid.png';" />
+								</a>
+								</td>
+								<td><a href=""
+									onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+										src="../../images/suppr.png"
+										onmouseover="this.src='../../images/supprHover.png';"
+										onmouseout="this.src='../../images/suppr.png';" />
+								</a>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
