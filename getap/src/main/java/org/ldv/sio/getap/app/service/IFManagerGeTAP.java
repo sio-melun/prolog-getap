@@ -77,6 +77,17 @@ public interface IFManagerGeTAP {
 
 	public List<AccPersonalise> getApByType();
 
+	// CRUD Disciplines
+	public List<Discipline> getAllDiscipline();
+
+	public Discipline getDisciplineById(int id);
+
+	public void addDiscipline(Discipline dis);
+
+	public void upDateDiscipline(Discipline dis);
+
+	public void deleteDiscipline(Discipline dis);
+
 	// CRUD de classe
 	public List<Classe> getAllClasse();
 
@@ -94,11 +105,6 @@ public interface IFManagerGeTAP {
 
 	// CRUD des roles
 	public List<Role> getAllRole();
-
-	// CRUD Disciplines
-	public List<Discipline> getAllDiscipline();
-
-	public Discipline getDisciplineById(int id);
 
 	// Opération sur annee scolaire (mise à jour lors d'une importation)
 	public String getCurrentAnneeScolaire();

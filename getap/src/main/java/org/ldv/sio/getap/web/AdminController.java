@@ -7,6 +7,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.FormAjoutAp;
+import org.ldv.sio.getap.app.FormAjoutDiscipline;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
@@ -54,9 +55,10 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(UserSearchCriteria userSearchCriteria,
-			FormAjoutAp formAjout, Model model) {
+			FormAjoutAp formAjout, FormAjoutDiscipline formAjoutDis, Model model) {
 		model.addAttribute("lesAP", manager.getAllAP());
 		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 	}
 
 	@RequestMapping(value = "ajoutUser", method = RequestMethod.GET)
@@ -190,6 +192,64 @@ public class AdminController {
 
 		if (!acc.getId().equals(null)) {
 			manager.deleteAP(acc);
+			return "redirect:/app/admin/index";
+		} else {
+			return "redirect:/app/admin/index";
+		}
+
+	}
+
+	@RequestMapping(value = "ajoutDiscipline", method = RequestMethod.GET)
+	public String ajoutAp(FormAjoutDiscipline formAjout, Model model) {
+
+		return "admin/ajoutDiscipline";
+	}
+
+	@RequestMapping(value = "doajoutDiscipline", method = RequestMethod.POST)
+	public String doajoutDiscipline(FormAjoutDiscipline formAjout,
+			BindingResult bindResult, Model model) {
+
+		Discipline dis = new Discipline();
+		dis.setNom(formAjout.getNom());
+
+		manager.addDiscipline(dis);
+
+		return "redirect:/app/admin/index";
+	}
+
+	@RequestMapping(value = "editDiscipline", method = RequestMethod.GET)
+	public String editDiscipline(@RequestParam("id") String id,
+			FormAjoutDiscipline formAjout, Model model) {
+		Discipline dis = manager.getDisciplineById(Integer.valueOf(id));
+		formAjout.setNom(dis.getNom());
+		return "admin/editDiscipline";
+	}
+
+	@RequestMapping(value = "doEditDiscipline", method = RequestMethod.POST)
+	public String doeditDisciplineById(FormAjoutDiscipline formEdit,
+			BindingResult bindResult, Model model) {
+
+		if (bindResult.hasErrors()) {
+			System.out.println("ERROR");
+			return "admin/index";
+		} else {
+
+			Discipline dis = manager.getDisciplineById(Integer.valueOf(formEdit
+					.getId()));
+			dis.setNom(formEdit.getNom());
+			manager.upDateDiscipline(dis);
+
+			return "redirect:/app/admin/index";
+		}
+	}
+
+	@RequestMapping(value = "deleteDiscipline/{id}", method = RequestMethod.GET)
+	public String deleteDisciplineById(@PathVariable String id, Model model) {
+
+		Discipline dis = manager.getDisciplineById(Integer.valueOf(id));
+
+		if (!dis.getNom().equals(null)) {
+			manager.deleteDiscipline(dis);
 			return "redirect:/app/admin/index";
 		} else {
 			return "redirect:/app/admin/index";

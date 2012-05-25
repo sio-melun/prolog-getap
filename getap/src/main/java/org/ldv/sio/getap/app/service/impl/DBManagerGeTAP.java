@@ -405,6 +405,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						+ id + "))))", new AccMapper());
 	}
 
+	/*
+	 * Ancienne requête, la nouvelle ne marche pas chez moi un modif de la base
+	 * de données ??
+	 * 
+	 * 
+	 * 
+	 * 
+	 * public List<AccPersonalise> getAllAP() { User user =
+	 * UtilSession.getUserInSession(); Long id = user.getId(); return
+	 * this.jdbcTemplate.query(
+	 * "select * from ap where (origineEtat = 0 or (origineEtat = 1 and idUser = "
+	 * + id + "))", new AccMapper()); }
+	 */
+
 	public AccPersonalise getAPById(int id) {
 		AccPersonalise acc;
 		try {
@@ -463,12 +477,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.jdbcTemplate
 				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id group by dctap.idEleve, ap.libelle",
 						new AccMapper());
-	}
-
-	public List<Discipline> getAllDiscipline() {
-		return this.jdbcTemplate.query(
-				"select * from discipline order by libelle",
-				new DisciplineMapper());
 	}
 
 	public List<Classe> getAllClasse() {
@@ -722,6 +730,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return user;
 	}
 
+	public List<Discipline> getAllDiscipline() {
+		return this.jdbcTemplate.query(
+				"select * from discipline order by libelle",
+				new DisciplineMapper());
+	}
+
 	public Discipline getDisciplineById(int id) {
 		Discipline dis;
 		try {
@@ -733,6 +747,30 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			dis = null;
 		}
 		return dis;
+	}
+
+	public void addDiscipline(Discipline dis) {
+		String libelle = dis.getNom();
+
+		this.jdbcTemplate.update("insert into discipline(libelle) values(?)",
+				new Object[] { libelle });
+
+	}
+
+	public void upDateDiscipline(Discipline dis) {
+		int id = dis.getId();
+		String libelle = dis.getNom();
+
+		this.jdbcTemplate.update(
+				"update discipline set libelle = ? where id = ?", new Object[] {
+						libelle, id });
+
+	}
+
+	public void deleteDiscipline(Discipline dis) {
+		int id = dis.getId();
+		this.jdbcTemplate.update("delete from discipline where id = ?",
+				new Object[] { id });
 	}
 
 }

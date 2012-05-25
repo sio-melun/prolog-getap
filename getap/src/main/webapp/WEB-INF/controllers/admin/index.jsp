@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <br />
 
-<h5 style="position: relative; top: 35px;">Administration logistique</h5>
+<h5 style="position: relative; top: 35px;">Administration
+	logistique</h5>
 <div id="accordion">
 	<h3>
 		<a href="#">Gestion d'utilisateur</a>
@@ -34,7 +35,8 @@
 								<label for="query">Recherche d'utilisateurs :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -53,7 +55,8 @@
 								<label for="query">Recherche de professeurs :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -73,7 +76,8 @@
 								<div>
 									<form:select path="query" items="${lesClasses}" itemValue="nom"
 										itemLabel="nom"></form:select>
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -99,7 +103,8 @@
 								<label for="query">Recherche par élève :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -118,7 +123,8 @@
 								<label for="query">Recherche par professeur :</label>
 								<div class="input">
 									<form:input path="query" />
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -138,7 +144,8 @@
 								<div>
 									<form:select path="query" items="${lesClasses}" itemValue="nom"
 										itemLabel="nom"></form:select>
-									<input type="image" src="../../images/search.png" alt="Rechercher" 
+									<input type="image" src="../../images/search.png"
+										alt="Rechercher"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -149,9 +156,9 @@
 			</tr>
 		</table>
 	</div>
-	</div>
-	<h5>Administration logiciel</h5>
-	<div id="accordion2">
+</div>
+<h5>Administration logiciel</h5>
+<div id="accordion2">
 	<h3>
 		<a href="#">Gestion des aides personnalisées</a>
 	</h3>
@@ -177,10 +184,8 @@
 			</tr>
 			<table class="legend2">
 				<tr>
-					<td><img src="../../images/modif.png" /> :
-						Modifier</td>
-					<td><img src="../../images/suppr.png" /> :
-						Supprimer</td>
+					<td><img src="../../images/modif.png" /> : Modifier</td>
+					<td><img src="../../images/suppr.png" /> : Supprimer</td>
 				</tr>
 			</table>
 			<tr>
@@ -201,19 +206,70 @@
 									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
 										src="../../images/modif.png"
 										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" />
-								</a></td>
-								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment supprimer cette aide personnalisée ?')){window.location.href='deleteAP/${ap.id}';}"><img
+										onmouseout="this.src='../../images/modif.png';" /> </a></td>
+								<td><a 
+									href="<c:url value="/app/admin/deleteAP/${ap.id}"/>"><img
 										src="../../images/suppr.png"
 										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" />
-								</a></td>
+										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</tr>
 		</table>
+	</div>
+	<h3>
+		<a href="#">Gestion des disciplines</a>
+	</h3>
+	<div>
+		<form:form modelAttribute="formAjoutDiscipline"
+			action="doajoutDiscipline" method="post">
+			<form:errors path="*" cssClass="errors" />
+
+			<div class="section">
+				<fieldset>
+					<div class="form-row">
+						<label for="nom">Nouvelle Discipline :</label>
+						<div class="input">
+							<form:input path="nom" /> 
+							<input type="submit" value="Ajouter" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</form:form>
+		<table class="legend2">
+			<tr>
+				<td><img src="../../images/modif.png" /> : Modifier</td>
+				<td><img src="../../images/suppr.png" /> : Supprimer</td>
+			</tr>
+		</table>
+		<tr>
+			<table id="2" class="tablesorter">
+				<thead>
+					<tr class="header">
+						<th>Nom</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${lesDisciplines}" var="dis">
+						<tr>
+							<td>${dis.nom}</td>
+							<td><a
+								href="<c:url value="/app/admin/editDiscipline?id=${dis.id}" />"><img
+									src="../../images/modif.png"
+									onmouseover="this.src='../../images/modifHover.png';"
+									onmouseout="this.src='../../images/modif.png';" /> </a></td>
+							<td><a
+								href="<c:url value="/app/admin/deleteDiscipline/${dis.id}"/>"><img
+									src="../../images/suppr.png"
+									onmouseover="this.src='../../images/supprHover.png';"
+									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</tr>
 	</div>
 </div>
