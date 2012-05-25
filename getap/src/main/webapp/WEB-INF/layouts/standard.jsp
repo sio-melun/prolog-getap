@@ -38,6 +38,9 @@
   			$(document).ready(function() {
    				$("#accordion").accordion();
   			});
+  			$(document).ready(function() {
+   				$("#accordion2").accordion();
+  			});
   		</script>
         <script>
 		  $(document).ready(function() {

@@ -17,6 +17,8 @@
 				Supprimer/Refuser</td>
 		</tr>
 	</table>
+	<br><br>
+	<h5 style="position: relative; top:35px;">Demandes de validation en cours</h5>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes non traitees (${etat0 + etat3})</a>
@@ -129,6 +131,9 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<h5>Demandes terminees</h5>
+	<div id="accordion2">
 		<h3>
 			<a href="#">Demandes validees (${etat1 + etat5})</a>
 		</h3>

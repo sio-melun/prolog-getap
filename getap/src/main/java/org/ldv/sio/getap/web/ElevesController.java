@@ -74,7 +74,7 @@ public class ElevesController {
 			if (manager.deleteDCTAPById(Long.valueOf(id))
 					&& (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3)) {
 				manager.deleteDCTAP(currentDctap);
-				return "redirect:/app/eleve/index";
+				return "redirect:/app/eleve/mesdctap";
 			}
 		}
 
@@ -231,7 +231,7 @@ public class ElevesController {
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/eleve/index";
+		return "redirect:/app/eleve/mesdctap";
 	}
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
@@ -245,6 +245,6 @@ public class ElevesController {
 			manager.updateDCTAP(dctap);
 		}
 
-		return "redirect:/app/eleve/index";
+		return "redirect:/app/eleve/mesdctap";
 	}
 }

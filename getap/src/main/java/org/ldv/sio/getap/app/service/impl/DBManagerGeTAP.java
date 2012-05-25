@@ -398,9 +398,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public List<AccPersonalise> getAllAP() {
 		User user = UtilSession.getUserInSession();
 		Long id = user.getId();
-		return this.jdbcTemplate.query(
-				"select * from ap where (origineEtat = 0 or (origineEtat = 1 and idUser = "
-						+ id + "))", new AccMapper());
+		return this.jdbcTemplate
+				.query("select distinct ap.* from ap, dctap, user where (origineEtat = 0 or (origineEtat = 1 and (idUser = "
+						+ id
+						+ " or (dctap.idAP = ap.id and user.id = dctap.idProf and user.id = "
+						+ id + "))))", new AccMapper());
 	}
 
 	public AccPersonalise getAPById(int id) {
