@@ -194,3 +194,9 @@ td .bouton{
 	padding-bottom:20px;
 	padding-top:20px;
 }
+
+#resetPass{
+	position:relative;
+	bottom:210px;
+	left:580px;
+}

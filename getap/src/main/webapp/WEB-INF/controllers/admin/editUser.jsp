@@ -68,8 +68,7 @@
 								end="<%=end%>">
 
 								<td><form:checkbox path="classe" name="${classe.nom}"
-										value="${classe.id}" id="${classe.nom}" />
-								</td>
+										value="${classe.id}" id="${classe.nom}" /></td>
 								<td><label for="${classe.nom}" class="checkbox">${classe.nom}</label>
 								</td>
 
@@ -93,4 +92,12 @@
 			<input type="submit" value="Editer" />
 		</div>
 	</div>
+</form:form>
+<form:form modelAttribute="formEditUser" action="doEditPass"
+	method="post" id="resetPass">
+	<form:errors path="*" cssClass="errors" />
+	<div class="form-row">
+		<input type="submit" value="Réinitialiser le Mot de Passe"/>
+	</div>
+	<form:hidden path="id" />
 </form:form>

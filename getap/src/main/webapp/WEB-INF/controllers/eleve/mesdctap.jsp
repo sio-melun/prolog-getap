@@ -3,21 +3,20 @@
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
-<table class="legend">
-	<tr>
-		<td><img src="../../images/buttonValideHover.png" /> : Confirmer
-		</td>
-		<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
-		<td><img src="../../images/buttonSupprHover.png" /> :
-			Supprimer/Refuser</td>
-	</tr>
-</table>
-
 <c:if test="${empty mesdctaps}">
 	Il n'y a encore aucune demande. 
 </c:if>
 
 <c:if test="${not empty mesdctaps}">
+	<table class="legend">
+		<tr>
+			<td><img src="../../images/buttonValideHover.png" /> :
+				Confirmer</td>
+			<td><img src="../../images/buttonModifHover.png" /> : Modifier</td>
+			<td><img src="../../images/buttonSupprHover.png" /> :
+				Supprimer/Refuser</td>
+		</tr>
+	</table>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes non traitees (${etat0 + etat3})</a>
@@ -45,15 +44,13 @@
 										src="../../images/buttonModifHover.png"
 										onmouseover="this.src='../../images/buttonModif2.png';"
 										onmouseout="this.src='../../images/buttonModifHover.png';" />
-								</a>
-								</td>
+								</a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment supprimer cette demande ?')){window.location.href='delete/${dctap.id}';}"><img
 										src="../../images/buttonSupprHover.png"
 										onmouseover="this.src='../../images/buttonSupp.png';"
 										onmouseout="this.src='../../images/buttonSupprHover.png';" />
-								</a>
-								</td>
+								</a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -119,15 +116,13 @@
 										src="../../images/buttonValideHover.png"
 										onmouseover="this.src='../../images/buttonValide2.png';"
 										onmouseout="this.src='../../images/buttonValideHover.png';" />
-								</a>
-								</td>
+								</a></td>
 								<td><a
 									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
 										src="../../images/buttonSupprHover.png"
 										onmouseover="this.src='../../images/buttonSupp.png';"
 										onmouseout="this.src='../../images/buttonSupprHover.png';" />
-								</a>
-								</td>
+								</a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -220,6 +215,5 @@
 
 <div class="buttonGroup">
 	<a href="<c:url value="/app/eleve/index"/>"><input type="button"
-		value="Retour">
-	</a>
+		value="Retour"> </a>
 </div>

@@ -1,5 +1,7 @@
 package org.ldv.sio.getap.app.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -229,6 +231,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		}
 		String mdp = generate(5);
+		String hash = getEncodedPassword(mdp);
 		String role = user.getRole();
 		int classe = user.getClasse().getId();
 
@@ -236,9 +239,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 		if (role.equals("prof-principal")) {
 			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, role, null,
-									mail });
+					.update("insert into user(nom,prenom,login,mdp,hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, hash, role,
+									null, mail });
 			user3 = this.jdbcTemplate
 					.queryForObject(
 							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
@@ -252,8 +255,8 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			}
 		} else {
 			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp,role,idClasse, mail) values(?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, role,
+					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, hash, role,
 									classe, mail });
 		}
 
@@ -291,6 +294,37 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return pass;
 	}
 
+	public static String getEncodedPassword(String key) {
+		byte[] uniqueKey = key.getBytes();
+		byte[] hash = null;
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		StringBuffer hashString = new StringBuffer();
+		for (int i = 0; i < hash.length; ++i) {
+			String hex = Integer.toHexString(hash[i]);
+			if (hex.length() == 1) {
+				hashString.append('0');
+				hashString.append(hex.charAt(hex.length() - 1));
+			} else {
+				hashString.append(hex.substring(hex.length() - 2));
+			}
+		}
+		return hashString.toString();
+	}
+
+	public void updatePass(User user) {
+		Long id = user.getId();
+		String pass = user.getPass();
+		String hash = getEncodedPassword(pass);
+
+		this.jdbcTemplate.update("update user set hash = ? where id = ?",
+				new Object[] { hash, id });
+
+	}
+
 	public void updateUser(User user) {
 		Long id = user.getId();
 		String nom = user.getNom();
@@ -302,6 +336,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 		String login = user.getLogin();
 		String pass = user.getPass();
+		String hash = getEncodedPassword(pass);
 		String mail = user.getMail();
 		int dis = 0;
 		if (role.startsWith("prof")) {
@@ -320,31 +355,31 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 		if (role.equals("eleve")) {
 			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?,hash = ?, mail = ?, idDiscipline= ? where id = ?",
 							new Object[] { nom, prenom, role, idClasse, login,
-									pass, mail, null, id });
+									hash, mail, null, id });
 		} else if (role.equals("admin")) {
 			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
 							new Object[] { nom, prenom, role, null, login,
-									pass, mail, null, id });
+									hash, mail, null, id });
 		} else {
 			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, mdp = ?, mail = ?, idDiscipline= ? where id = ?",
+					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
 							new Object[] { nom, prenom, role, null, login,
-									pass, mail, dis, id });
+									hash, mail, dis, id });
 		}
 
 	}
 
 	public void updateProfil(User user) {
 		String login = user.getLogin();
-		String pass = user.getPass();
+		String hash = user.getHash();
 		String mail = user.getMail();
 		Long id = user.getId();
 		this.jdbcTemplate.update(
-				"update user set login = ?, mdp = ?, mail = ? where id = ?",
-				new Object[] { login, pass, mail, id });
+				"update user set login = ?, hash = ?, mail = ? where id = ?",
+				new Object[] { login, hash, mail, id });
 	}
 
 	public void deleteUser(User user) {
@@ -513,9 +548,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public User getUserByLogin(String login, String pw) {
 		User user;
 		try {
+			String hash = getEncodedPassword(pw);
 			user = this.jdbcTemplate.queryForObject(
-					"select * from user where login = ? and mdp = ?",
-					new Object[] { login, pw }, new UserMapper());
+					"select * from user where login = ? and hash = ?",
+					new Object[] { login, hash }, new UserMapper());
 
 		} catch (EmptyResultDataAccessException e) {
 			user = null;
@@ -531,6 +567,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user.setPrenom(rs.getString("prenom"));
 			user.setNom(rs.getString("nom"));
 			user.setRole(rs.getString("role"));
+			user.setHash(rs.getString("hash"));
 			try {
 				user.setDureeTotal(rs.getInt("dureeTotal"));
 			} catch (SQLException ex) {

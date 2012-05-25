@@ -1,5 +1,8 @@
 package org.ldv.sio.getap.web;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.ldv.sio.getap.app.FormEditProfil;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -48,20 +51,19 @@ public class Profil {
 	public String doeditUserById(FormEditProfil formUser,
 			BindingResult bindResult, Model model) {
 
-		// java.sql.Date.valueOf(formDctap.getDateAction());
 		if (bindResult.hasErrors()) {
 			return "profil/edit";
 		} else {
 			User me = UtilSession.getUserInSession();
 			User user = manager.getUser(Long.valueOf(me.getId()));
 
-			// valorise l'objet de la base à partir du bean de vue
-			user.setLogin(formUser.getLogin());
-			if (formUser.getOldPass().equals(user.getPass())
+			String oldHash = getEncodedPassword(formUser.getOldPass());
+			if (oldHash.equals(user.getHash())
 					&& formUser.getFirstPass().equals(formUser.getSecondPass())) {
-				user.setPass(formUser.getFirstPass());
+				String hash = getEncodedPassword(formUser.getFirstPass());
+				user.setHash(hash);
 			} else {
-				user.setPass(user.getPass());
+				user.setHash(user.getHash());
 			}
 			if (formUser.getMail().equals(null)
 					|| formUser.getMail().equals("")) {
@@ -71,8 +73,29 @@ public class Profil {
 			}
 			manager.updateProfil(user);
 
-			return "redirect:/app/profil/edit?id=" + me.getId();
+			return "redirect:/app/" + user.getRole() + "/index";
 		}
+	}
+
+	public static String getEncodedPassword(String key) {
+		byte[] uniqueKey = key.getBytes();
+		byte[] hash = null;
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		StringBuffer hashString = new StringBuffer();
+		for (int i = 0; i < hash.length; ++i) {
+			String hex = Integer.toHexString(hash[i]);
+			if (hex.length() == 1) {
+				hashString.append('0');
+				hashString.append(hex.charAt(hex.length() - 1));
+			} else {
+				hashString.append(hex.substring(hex.length() - 2));
+			}
+		}
+		return hashString.toString();
 	}
 
 }

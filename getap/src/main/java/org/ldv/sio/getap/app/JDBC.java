@@ -71,7 +71,7 @@ public class JDBC {
 
 				// Requete d'insertion de l'utilisateur dans la base
 				PreparedStatement param = con
-						.prepareStatement("INSERT INTO user(nom, prenom, ine, login, mdp, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?);");
+						.prepareStatement("INSERT INTO user(nom, prenom, ine, login, mdp, hash, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
 				param.setNString(1, listUser.get(i).nom);
 				param.setNString(2, listUser.get(i).prenom);
@@ -132,8 +132,10 @@ public class JDBC {
 
 				param.setNString(5, listUser.get(i).pass);
 
+				param.setNString(6, listUser.get(i).hashPass);
+
 				// System.out.println("Fichier : " + fichier);
-				param.setNString(6, "eleve");
+				param.setNString(7, "eleve");
 
 				// Requete retournant l'id de la classe de l'utilisateur
 				Statement classe = con.createStatement();
@@ -142,7 +144,7 @@ public class JDBC {
 				ResultSet result = classe.executeQuery(sql);
 				if (result.next()) {
 					int clas = result.getInt("id");
-					param.setInt(7, clas);
+					param.setInt(8, clas);
 				}
 
 				// Execution de la requete !

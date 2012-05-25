@@ -12,6 +12,7 @@ public class User {
 	private String role;
 	private String login;
 	private String pass;
+	private String hash;
 	private String mail;
 	private String[] lesClasses;
 	private Discipline discipline;
@@ -139,6 +140,14 @@ public class User {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public String getMail() {

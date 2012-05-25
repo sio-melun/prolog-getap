@@ -359,7 +359,7 @@ public class AdminController {
 
 			manager.updateUser(userForUpdate);
 
-			return "redirect:/app/admin/searchUser";
+			return "redirect:/app/admin/index";
 		}
 	}
 
@@ -386,7 +386,8 @@ public class AdminController {
 	@RequestMapping(value = "doajouts", method = RequestMethod.POST)
 	public String doajouts(
 			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
-			BindingResult result, FormAjoutAp formAjout, Model model) {
+			BindingResult result, UserSearchCriteria userSearchCriteria,
+			FormAjoutAp formAjout, Model model) {
 		System.out.println("TEST :" + model);
 
 		if (result.hasErrors())
@@ -407,5 +408,19 @@ public class AdminController {
 			}
 		}
 		return "admin/index";
+	}
+
+	@RequestMapping(value = "doEditPass", method = RequestMethod.POST)
+	public String doEditPass(FormEditUser formUser, BindingResult bindResult,
+			Model model) {
+		System.out.println("TEST :" + model);
+
+		if (bindResult.hasErrors())
+			return "admin/ajoutUsers";
+		else {
+			User user = manager.getUserById(Long.valueOf(formUser.getId()));
+			manager.updatePass(user);
+		}
+		return "redirect:/app/admin/index";
 	}
 }

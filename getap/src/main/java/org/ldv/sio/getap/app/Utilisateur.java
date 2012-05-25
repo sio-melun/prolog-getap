@@ -1,5 +1,8 @@
 package org.ldv.sio.getap.app;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Utilisateur {
 
 	protected String nom;
@@ -7,6 +10,7 @@ public class Utilisateur {
 	protected String ine;
 	protected String login;
 	protected String pass;
+	protected String hashPass;
 	protected String classe;
 
 	public Utilisateur(String nom, String prenom, String ine, String classe) {
@@ -24,6 +28,7 @@ public class Utilisateur {
 		this.ine = ine;
 		this.login = login();
 		this.pass = generate(5);
+		this.hashPass = getEncodedPassword(pass);
 		this.classe = classe;
 	}
 
@@ -37,6 +42,27 @@ public class Utilisateur {
 			pass += chars.charAt(i);
 		}
 		return pass;
+	}
+
+	public static String getEncodedPassword(String key) {
+		byte[] uniqueKey = key.getBytes();
+		byte[] hash = null;
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		StringBuffer hashString = new StringBuffer();
+		for (int i = 0; i < hash.length; ++i) {
+			String hex = Integer.toHexString(hash[i]);
+			if (hex.length() == 1) {
+				hashString.append('0');
+				hashString.append(hex.charAt(hex.length() - 1));
+			} else {
+				hashString.append(hex.substring(hex.length() - 2));
+			}
+		}
+		return hashString.toString();
 	}
 
 	public String login() {

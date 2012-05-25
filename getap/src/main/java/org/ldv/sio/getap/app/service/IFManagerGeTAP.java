@@ -54,6 +54,8 @@ public interface IFManagerGeTAP {
 
 	public void addUser(User user);
 
+	public void updatePass(User user);
+
 	public void updateUser(User user);
 
 	public void updateProfil(User user);

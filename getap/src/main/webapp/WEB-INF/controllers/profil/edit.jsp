@@ -12,7 +12,7 @@
       <div class="form-row">
         <label for="login">Login :</label>
         <div class="input">
-          <form:input path="login" size="50px"/>
+          <form:input path="login" size="50px" disabled="true"/>
         </div>
       </div>
 
