@@ -3,19 +3,21 @@
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
-<table class="legend">
-	<tr>
-		<td><img src="../../images/valid.png" /> : Valider</td>
-		<td><img src="../../images/modif.png" /> : Modifier</td>
-		<td><img src="../../images/suppr.png" /> : Refuser</td>
-	</tr>
-</table>
-
 <c:if test="${empty listdctaps}">
 	Il n'y a encore aucune demande. 
 </c:if>
 
 <c:if test="${not empty listdctaps}">
+	<table class="legend">
+		<tr>
+			<td><img src="../../images/valid.png" /> : Valider</td>
+			<td><img src="../../images/modif.png" /> : Modifier</td>
+			<td><img src="../../images/suppr.png" /> : Refuser</td>
+		</tr>
+	</table>
+	<br><br>
+	<h5 style="position: relative; top: 35px;">Demandes de validation
+		en cours</h5>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes reçues (${etat0 + etat3})</a>
@@ -42,17 +44,17 @@
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
 										src="../../images/valid.png"
 										onmouseover="this.src='../../images/validHover.png';"
-										onmouseout="this.src='../../images/valid.png';" /></a></td>
+										onmouseout="this.src='../../images/valid.png';" /> </a></td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
 										src="../../images/modif.png"
 										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /></a></td>
+										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/suppr.png"
 										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" /></a></td>
+										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -117,18 +119,21 @@
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
 										src="../../images/modif.png"
 										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /></a></td>
+										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/suppr.png"
 										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" /></a></td>
+										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<h5>Demandes terminees</h5>
+	<div id="accordion2">
 		<h3>
 			<a href="#">Demandes validées (${etat1 + etat5})</a>
 		</h3>
@@ -172,6 +177,33 @@
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
 						<c:if test="${dctap.etat == 2}">
+							<tr>
+								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+								<td>${dctap.dateAction}</td>
+								<td>${dctap.minutes}</td>
+								<td>${dctap.accPers.nom}</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<h3>
+			<a href="#">Demandes annulées par l'élève (${etat7})</a>
+		</h3>
+		<div>
+			<table id="refuse" class="tablesorter">
+				<thead>
+					<tr class="header">
+						<th>Eleves</th>
+						<th>Date</th>
+						<th>Temps (min)</th>
+						<th>Type d'aide</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${listdctaps}" var="dctap">
+						<c:if test="${dctap.etat == 7}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>

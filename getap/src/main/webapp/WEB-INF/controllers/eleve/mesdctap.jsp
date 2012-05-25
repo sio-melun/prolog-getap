@@ -42,15 +42,12 @@
 								<td>${dctap.minutes}</td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
-									href="<c:url value="/app/admin/editUser?id=${user.id}" />"><img
+									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img
 										src="../../images/modif.png"
 										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /> </a>
-								</td>
-								</a>
-								</td>
-								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+										onmouseout="this.src='../../images/modif.png';" /> </a></td>
+								<td><a
+									href="<c:url value="/app/eleve/delete/${dctap.id}" />"><img
 										src="../../images/suppr.png"
 										onmouseover="this.src='../../images/supprHover.png';"
 										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
@@ -118,15 +115,13 @@
 									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img
 										src="../../images/valid.png"
 										onmouseover="this.src='../../images/validHover.png';"
-										onmouseout="this.src='../../images/valid.png';" />
-								</a>
+										onmouseout="this.src='../../images/valid.png';" /> </a>
 								</td>
-								<td><a href=""
-									onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+								<td><a
+									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
 										src="../../images/suppr.png"
 										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" />
-								</a>
+										onmouseout="this.src='../../images/suppr.png';" /> </a>
 								</td>
 							</tr>
 						</c:if>

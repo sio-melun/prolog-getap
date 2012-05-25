@@ -62,6 +62,7 @@ public class ElevesController {
 
 		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
 		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
+
 		return "eleve/mesdctap";
 	}
 
@@ -71,11 +72,8 @@ public class ElevesController {
 				.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			if (manager.deleteDCTAPById(Long.valueOf(id))
-					&& (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3)) {
-				manager.deleteDCTAP(currentDctap);
-				return "redirect:/app/eleve/mesdctap";
-			}
+			currentDctap.setEtat(7);
+			manager.updateDCTAP(currentDctap);
 		}
 
 		return "redirect:/app/eleve/mesdctap";
@@ -111,18 +109,6 @@ public class ElevesController {
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
 	public String doeditDCTAPById(FormDemandeConsoTempsAccPers formDctap,
 			BindingResult bindResult, Model model) {
-		System.out.println("TEST :" + formDctap.getId());
-		System.out.println("TEST id eleve :" + formDctap.getIdEleve());
-		System.out.println("TEST :" + model);
-		if (manager.getAPById(formDctap.getAccPersId()) != null) {
-			System.out.println("TEST AP :"
-					+ manager.getAPById(formDctap.getAccPersId()).getNom());
-		} else {
-			System.out.println("TEST AP : " + formDctap.getAccPersNom());
-		}
-		System.out.println("TEST minutes :" + formDctap.getMinutes());
-
-		// java.sql.Date.valueOf(formDctap.getDateAction());
 		User prof = manager.getUserById(formDctap.getProfId());
 		if (prof == null)
 			bindResult.rejectValue("profId", "required",

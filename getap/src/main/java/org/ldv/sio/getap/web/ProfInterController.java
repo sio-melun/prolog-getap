@@ -79,6 +79,7 @@ public class ProfInterController {
 
 		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
 		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
+		model.addAttribute("etat7", manager.getAllDCTAPByEtat(7, id));
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)

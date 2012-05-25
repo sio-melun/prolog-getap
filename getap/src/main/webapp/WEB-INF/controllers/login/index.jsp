@@ -26,3 +26,7 @@
 		</div>
 	</div>
 </form:form>
+<div id="logolycee">
+	<img src="<c:url value="/images/logolycee.jpg"/>" width="80px"
+		height="84px" />
+</div>

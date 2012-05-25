@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <br />
-<br />
+
+<h5 style="position: relative; top: 35px;">Administration logistique</h5>
 <div id="accordion">
 	<h3>
 		<a href="#">Gestion d'utilisateur</a>
@@ -19,7 +20,7 @@
 		</table>
 	</div>
 	<h3>
-		<a href="#">Gestion de recherche</a>
+		<a href="#">Gestion de recherche d'utilisateurs</a>
 	</h3>
 	<div>
 		<table>
@@ -84,7 +85,7 @@
 		</table>
 	</div>
 	<h3>
-		<a href="#">Gestion des demandes faites par les élèves</a>
+		<a href="#">Recherche des demandes</a>
 	</h3>
 	<div>
 		<table>
@@ -148,6 +149,9 @@
 			</tr>
 		</table>
 	</div>
+	</div>
+	<h5>Administration logiciel</h5>
+	<div id="accordion2">
 	<h3>
 		<a href="#">Gestion des aides personnalisées</a>
 	</h3>

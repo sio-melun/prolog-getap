@@ -127,10 +127,6 @@
 			<tiles:insertAttribute name="body" />
 		</div>
 		<!-- end content -->
-		<div id="logolycee">
-			<img src="<c:url value="/images/logolycee.jpg"/>" width="80px"
-				height="84px" />
-		</div>
 	</div>
 	<div id="footer">
 		<tiles:insertAttribute name="footer" />
