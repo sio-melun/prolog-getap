@@ -220,6 +220,59 @@
 		</table>
 	</div>
 	<h3>
+		<a href="#">Gestion des classes</a>
+	</h3>
+	<div>
+		<form:form modelAttribute="formAjoutClasse"
+			action="doajoutClasse" method="post">
+			<form:errors path="*" cssClass="errors" />
+
+			<div class="section">
+				<fieldset>
+					<div class="form-row">
+						<label for="nom">Nouvelle Classe :</label>
+						<div class="input">
+							<form:input path="nom" />  
+							<input type="submit" value="Ajouter" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</form:form>
+		<table class="legend2">
+			<tr>
+				<td><img src="../../images/modif.png" /> : Modifier</td>
+				<td><img src="../../images/suppr.png" /> : Supprimer</td>
+			</tr>
+		</table>
+		<tr>
+			<table id="2" class="tablesorter">
+				<thead>
+					<tr class="header">
+						<th>Nom</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${lesClasses}" var="classe">
+						<tr>
+							<td>${classe.nom}</td>
+							<td><a
+								href="<c:url value="/app/admin/editClasse?id=${classe.id}" />"><img
+									src="../../images/modif.png"
+									onmouseover="this.src='../../images/modifHover.png';"
+									onmouseout="this.src='../../images/modif.png';" /> </a></td>
+							<td><a
+								href="<c:url value="/app/admin/deleteClasse/${classe.id}"/>"><img
+									src="../../images/suppr.png"
+									onmouseover="this.src='../../images/supprHover.png';"
+									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</tr>
+	</div>
+	<h3>
 		<a href="#">Gestion des disciplines</a>
 	</h3>
 	<div>

@@ -125,5 +125,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/editDiscipline.jsp" />
 	</definition>
+	
+	<definition name="admin/editClasse" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : edition de Classe" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/editClasse.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
