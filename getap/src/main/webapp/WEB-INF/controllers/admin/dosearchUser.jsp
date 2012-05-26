@@ -29,7 +29,7 @@
 		<tbody>
 			<c:forEach items="${users}" var="user">
 				<tr>
-					<td>${user.nom} ${user.prenom}</td>
+					<td style="text-align:left;">${user.nom} ${user.prenom}</td>
 					<td>${user.login}</td>
 					<td>${user.pass}</td>
 					<td>${user.role}</td>

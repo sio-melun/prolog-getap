@@ -38,10 +38,10 @@
 		
      	<script>
   			$(document).ready(function() {
-   				$("#accordion").accordion();
+   				$("#accordion").accordion({autoHeight:false});
   			});
   			$(document).ready(function() {
-   				$("#accordion2").accordion();
+   				$("#accordion2").accordion({autoHeight:false});
   			});
   		</script>
         <script>
