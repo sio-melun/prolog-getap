@@ -19,9 +19,29 @@
 	      
 	      <div class="form-row">
 	        <label for="minutes">Temps d'aide personalisée :</label>
-	        <div class="input">
+	        <%-- <div class="input">
 	          <form:input path="minutes" />
-	        </div>
+	        </div> --%>
+	        <select name="minutes" id="minutes">
+				<% for(int i=5; i<=300; i+=5) {%>
+					<c:set var="valueI" value="<%=i%>"/>
+					<% if( (int) i/60 != 0 ){%>
+						<c:if test="${valueI == minute }">
+							<option selected="selected" value="<%=i%>"><%=(int)i/60 %>h <%=(int)i%60 %>min</option>
+						</c:if>
+						<c:if test="${valueI != minute }">
+							<option value="<%=i%>"><%=(int)i/60 %>h <%=(int)i%60 %>min</option>
+						</c:if>
+					<% } else { %>
+						<c:if test="${valueI == minute }">
+							<option selected="selected" value="<%=i%>"><%=(int)i%60 %>min</option>
+						</c:if>
+						<c:if test="${valueI != minute }">
+							<option value="<%=i%>"><%=(int)i%60 %>min</option>
+						</c:if>
+					<% } 
+				}%>
+			</select>
 	      </div>
   
 	      <div class="form-row">

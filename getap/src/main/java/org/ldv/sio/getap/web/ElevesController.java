@@ -98,11 +98,12 @@ public class ElevesController {
 		formDctap.setIdEleve(currentDctap.getEleve().getId());
 		formDctap.setAccPersId(currentDctap.getAccPers().getId());
 		formDctap.setMinutes(currentDctap.getMinutes());
+		model.addAttribute("minute", currentDctap.getMinutes());
 
 		model.addAttribute("lesProfs", manager.getAllProf());
 		model.addAttribute("etat", manager.getDCTAPById(formDctap.getId())
 				.getEtat());
-		model.addAttribute("lesAP", manager.getAllAP());
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
 		return "eleve/edit";
 	}
 
@@ -152,8 +153,8 @@ public class ElevesController {
 	public String ajoutUser(FormAjoutDctap formAjout, Model model) {
 
 		model.addAttribute("lesProfs", manager.getAllProf());
-		model.addAttribute("lesAP", manager.getAllAP());
-		System.out.println(manager.getAllAP());
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
+		System.out.println(manager.getAllAPForEleve());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
@@ -166,7 +167,7 @@ public class ElevesController {
 	public String doajoutUser(FormAjoutDctap formAjout,
 			BindingResult bindResult, Model model) {
 		model.addAttribute("lesProfs", manager.getAllProf());
-		model.addAttribute("lesAP", manager.getAllAP());
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());

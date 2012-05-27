@@ -37,7 +37,7 @@ public class ProfInterController {
 
 		System.out.println("TEST id recu :" + dctap.getId());
 
-		model.addAttribute("lesAP", manager.getAllAP());
+		model.addAttribute("lesAP", manager.getAllAPForProf());
 
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
@@ -47,6 +47,7 @@ public class ProfInterController {
 			dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
 			dctap.setDateAction(currentDctap.getDateAction());
 			dctap.setMinutes(currentDctap.getMinutes());
+			model.addAttribute("minute", currentDctap.getMinutes());
 			dctap.setAccPersId(currentDctap.getAccPers().getId());
 
 			return "prof-intervenant/edit";

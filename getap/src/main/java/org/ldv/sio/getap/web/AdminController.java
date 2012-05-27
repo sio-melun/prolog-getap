@@ -58,7 +58,7 @@ public class AdminController {
 	public void index(UserSearchCriteria userSearchCriteria,
 			FormAjoutAp formAjout, FormAjoutDiscipline formAjoutDis,
 			FormAjoutClasse formAjoutClasse, Model model) {
-		model.addAttribute("lesAP", manager.getAllAP());
+		model.addAttribute("lesAP", manager.getAllAPForAdmin());
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 	}
@@ -111,31 +111,6 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "searchUser", method = RequestMethod.GET)
-	public void searchUser(UserSearchCriteria userSearchCriteria) {
-
-	}
-
-	@RequestMapping(value = "searchDctapUser", method = RequestMethod.GET)
-	public void searchDctapUser(UserSearchCriteria userSearchCriteria) {
-
-	}
-
-	@RequestMapping(value = "searchProf", method = RequestMethod.GET)
-	public void searchProf(UserSearchCriteria userSearchCriteria) {
-
-	}
-
-	@RequestMapping(value = "searchDctapProf", method = RequestMethod.GET)
-	public void searchDctapProf(UserSearchCriteria userSearchCriteria) {
-
-	}
-
-	@RequestMapping(value = "searchClasse", method = RequestMethod.GET)
-	public void searchClasse(UserSearchCriteria userSearchCriteria, Model model) {
-		model.addAttribute("lesClasses", manager.getAllClasse());
-	}
-
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
 	public String ajoutAp(FormAjoutAp formAjout, Model model) {
 
@@ -153,13 +128,6 @@ public class AdminController {
 		manager.addAP(acc);
 
 		return "redirect:/app/admin/index";
-	}
-
-	@RequestMapping(value = "listAp", method = RequestMethod.GET)
-	public String mesdctap(Model model) {
-
-		model.addAttribute("lesAP", manager.getAllAP());
-		return "admin/listAp";
 	}
 
 	@RequestMapping(value = "editAp", method = RequestMethod.GET)
@@ -194,10 +162,8 @@ public class AdminController {
 
 		if (!acc.getId().equals(null)) {
 			manager.deleteAP(acc);
-			return "redirect:/app/admin/index";
-		} else {
-			return "redirect:/app/admin/index";
 		}
+		return "redirect:/app/admin/index";
 
 	}
 
@@ -233,7 +199,7 @@ public class AdminController {
 
 		if (bindResult.hasErrors()) {
 			System.out.println("ERROR");
-			return "admin/index";
+			return "redirect:/app/admin/index";
 		} else {
 
 			Discipline dis = manager.getDisciplineById(Integer.valueOf(formEdit
@@ -252,10 +218,8 @@ public class AdminController {
 
 		if (!dis.getNom().equals(null)) {
 			manager.deleteDiscipline(dis);
-			return "redirect:/app/admin/index";
-		} else {
-			return "redirect:/app/admin/index";
 		}
+		return "redirect:/app/admin/index";
 
 	}
 
@@ -309,10 +273,8 @@ public class AdminController {
 
 		if (!classe.getNom().equals(null)) {
 			manager.deleteClasse(classe);
-			return "redirect:/app/admin/index";
-		} else {
-			return "redirect:/app/admin/index";
 		}
+		return "redirect:/app/admin/index";
 
 	}
 
@@ -488,11 +450,8 @@ public class AdminController {
 
 		if (!user.getId().equals(null)) {
 			manager.deleteUser(user);
-			return "redirect:/app/admin/searchUser";
-		} else {
-			return "redirect:/app/admin/index";
 		}
-
+		return "redirect:/app/admin/index";
 	}
 
 	@RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
@@ -506,7 +465,8 @@ public class AdminController {
 	public String doajouts(
 			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
 			BindingResult result, UserSearchCriteria userSearchCriteria,
-			FormAjoutAp formAjout, Model model) {
+			FormAjoutAp formAjout, FormAjoutClasse formAjoutClasse,
+			FormAjoutDiscipline formAjoutDiscipline, Model model) {
 		System.out.println("TEST :" + model);
 
 		if (result.hasErrors())
@@ -526,7 +486,7 @@ public class AdminController {
 				return "admin/index";
 			}
 		}
-		return "admin/index";
+		return "redirect:/app/admin/index";
 	}
 
 	@RequestMapping(value = "doEditPass", method = RequestMethod.POST)

@@ -193,12 +193,16 @@
 					<thead>
 						<tr class="header">
 							<th>Nom</th>
+							<th>Auteur</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${lesAP}" var="ap">
 							<tr>
 								<td>${ap.nom}</td>
+								<c:if test="${ap.origineEtat == 0}">
+									<td>Admin</td>
+								</c:if>
 								<c:if test="${ap.origineEtat == 1}">
 									<td>Elève</td>
 								</c:if>
@@ -299,7 +303,7 @@
 			</tr>
 		</table>
 		<tr>
-			<table id="2" class="tablesorter">
+			<table id="3" class="tablesorter">
 				<thead>
 					<tr class="header">
 						<th>Nom</th>

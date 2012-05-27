@@ -63,7 +63,11 @@ public interface IFManagerGeTAP {
 	public void deleteUser(User user);
 
 	// CRUD de AP
-	public List<AccPersonalise> getAllAP();
+	public List<AccPersonalise> getAllAPForEleve();
+
+	public List<AccPersonalise> getAllAPForProf();
+
+	public List<AccPersonalise> getAllAPForAdmin();
 
 	public AccPersonalise getAPById(int id);
 

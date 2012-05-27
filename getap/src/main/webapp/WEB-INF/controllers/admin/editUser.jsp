@@ -104,7 +104,7 @@
 			onmouseover="this.src='../../images/recycledHover.png';"
 			onmouseout="this.src='../../images/recycled.png';" />
 			<br>
-			<label for="recycled">Réinitialiser le mot de passe</label>
+			<label for="recycled" id="lRecycled">Réinitialiser le mot de passe</label>
 	</div>
 	<form:hidden path="id" />
 </form:form>

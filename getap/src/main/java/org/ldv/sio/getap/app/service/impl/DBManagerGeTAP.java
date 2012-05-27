@@ -158,7 +158,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<User> getAllEleveByClasse() {
 		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.dureeAP) as dureeTotal from user, classe, dctap where role = 'eleve' and dctap.idEleve = user.id and user.idClasse = classe.id and (dctap.Etat = 1 or dctap.Etat = 5) group by user.id",
+				.query("select user.*, sum(dctap.dureeAP) as dureeTotal "
+						+ "from user "
+						+ "left join dctap on dctap.idEleve = user.id and (dctap.Etat = 1 or dctap.Etat = 5) "
+						+ "left join classe on classe.id = user.idClasse where user.role = 'eleve'"
+						+ "group by user.id order by dureeTotal DESC, user.nom",
 						new UserMapper());
 	}
 
@@ -395,14 +399,24 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	}
 
-	public List<AccPersonalise> getAllAP() {
+	public List<AccPersonalise> getAllAPForAdmin() {
+		return this.jdbcTemplate.query("select * from ap", new AccMapper());
+	}
+
+	public List<AccPersonalise> getAllAPForProf() {
 		User user = UtilSession.getUserInSession();
 		Long id = user.getId();
 		return this.jdbcTemplate
-				.query("select distinct ap.* from ap, dctap, user where (origineEtat = 0 or (origineEtat = 1 and (idUser = "
-						+ id
-						+ " or (dctap.idAP = ap.id and user.id = dctap.idProf and user.id = "
-						+ id + "))))", new AccMapper());
+				.query("select distinct ap.id, ap.libelle, ap.origineEtat, ap.idUser from ap, dctap where origineEtat = 0 or (origineEtat = 1 and dctap.idAP = ap.id and dctap.idEleve = ap.idUser and dctap.idProf = "
+						+ id + ")", new AccMapper());
+	}
+
+	public List<AccPersonalise> getAllAPForEleve() {
+		User user = UtilSession.getUserInSession();
+		Long id = user.getId();
+		return this.jdbcTemplate.query(
+				"select * from ap where origineEtat = 0 or (origineEtat = 1 and idUser = "
+						+ id + ")", new AccMapper());
 	}
 
 	/*
@@ -475,7 +489,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<AccPersonalise> getApByType() {
 		return this.jdbcTemplate
-				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id group by dctap.idEleve, ap.libelle",
+				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id and (dctap.Etat = 1 or dctap.Etat = 5) group by dctap.idEleve, ap.libelle",
 						new AccMapper());
 	}
 

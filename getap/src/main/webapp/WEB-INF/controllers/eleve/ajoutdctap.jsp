@@ -28,9 +28,18 @@
 			<div class="form-row">
 				<label for="minutes">Temps d'aide personnalisée (minutes) :
 				</label>
-				<div class="input">
+				<%-- <div class="input">
 					<form:input path="minutes" />
-				</div>
+				</div> --%>
+				<select name="minutes" id="minutes">
+				<% for(int i=5; i<=300; i+=5) {
+					if( (int) i/60 != 0 ){%>
+						<option value="<%=i%>"><%=(int)i/60 %>h <%=(int)i%60 %>min</option>
+					<% } else { %>
+						<option value="<%=i%>"><%=(int)i%60 %>min</option>
+					<% } 
+				}%>
+				</select>
 			</div>
 
 			<div class="form-row">
