@@ -394,6 +394,7 @@ public class AdminController {
 		System.out.println("TEST prenom : " + currentUser.getPrenom());
 		System.out.println("TEST role : " + currentUser.getRole());
 		formUser.setRole(currentUser.getRole());
+		model.addAttribute("fonction", currentUser.getRole());
 		if (currentUser.getRole().startsWith("prof")) {
 			formUser.setDisciplineId(currentUser.getDiscipline().getId());
 		}
@@ -404,6 +405,8 @@ public class AdminController {
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesRoles", manager.getAllRole());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
+		model.addAttribute("mesClasses",
+				manager.getAllClasseByProf(currentUser.getId()));
 
 		return "admin/editUser";
 	}

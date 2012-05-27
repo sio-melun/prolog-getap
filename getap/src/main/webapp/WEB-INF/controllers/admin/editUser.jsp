@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <form:form modelAttribute="formEditUser" action="doEditUser"
 	method="post">
 	<form:errors path="*" cssClass="errors" />
@@ -30,7 +31,12 @@
 				<label for="role">Role :</label> <select id="roleNom" name="roleNom"
 					onchange="testRole()">
 					<c:forEach items="${lesRoles}" var="role">
-						<option value="${role.nom}" label="${role.nom}">${role.nom}</option>
+						<c:if test="${role.nom != fonction}">
+							<option value="${role.nom}" label="${role.nom}">${role.nom}</option>
+						</c:if>
+						<c:if test="${role.nom == fonction}">
+							<option selected="selected" value="${role.nom}" label="${role.nom}">${role.nom}</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</div>
@@ -66,10 +72,24 @@
 
 							<c:forEach items="${lesClasses}" var="classe" begin="<%=begin%>"
 								end="<%=end%>">
-
-								<td><form:checkbox path="classe" name="${classe.nom}"
-										value="${classe.id}" id="${classe.nom}" />
-								</td>
+								<c:forEach items="${mesClasses}" var="maClasse">
+									<c:if test="${maClasse.nom == classe.nom}">
+										<td><form:checkbox path="classe" name="${classe.nom}"
+										value="${classe.id}" id="${classe.nom}" checked="checked"/></td>
+									</c:if>
+								</c:forEach>
+								<% int cpt = 0; %>
+								<c:forEach items="${mesClasses}" var="maClasse">
+									<c:if test="${maClasse.nom == classe.nom}">
+											<% cpt++; %>
+									</c:if>
+								</c:forEach>
+								<c:set var="compteur" value="<%=cpt%>"/>
+								<c:if test="${compteur == 0}">
+									<td><form:checkbox path="classe" name="${classe.nom}"
+											value="${classe.id}" id="${classe.nom}" />
+									</td>
+								</c:if>
 								<td><label for="${classe.nom}" class="checkbox">${classe.nom}</label>
 								</td>
 
