@@ -527,10 +527,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public void addClasse(Classe classe) {
-		int id = classe.getId();
 		String libelle = classe.getNom();
-		this.jdbcTemplate.update("insert into classe(id, libelle) values(?,?)",
-				new Object[] { id, libelle });
+		this.jdbcTemplate.update("insert into classe(libelle) values(?)",
+				new Object[] { libelle });
 
 	}
 

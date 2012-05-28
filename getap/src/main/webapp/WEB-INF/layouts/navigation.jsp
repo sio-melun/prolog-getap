@@ -30,7 +30,9 @@
 
 		<c:if test="${user.role == 'admin'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Administration</b>
+				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Service logistique</b>
+				</a></li>
+				<li><a href="<c:url value="/app/admin/logiciel" />" target="_self"><b>Service logiciel</b>
 				</a></li>
 			</ul>
 		</c:if>

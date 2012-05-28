@@ -63,6 +63,15 @@ public class AdminController {
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 	}
 
+	@RequestMapping(value = "logiciel", method = RequestMethod.GET)
+	public void logiciel(UserSearchCriteria userSearchCriteria,
+			FormAjoutAp formAjout, FormAjoutDiscipline formAjoutDis,
+			FormAjoutClasse formAjoutClasse, Model model) {
+		model.addAttribute("lesAP", manager.getAllAPForAdmin());
+		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
+	}
+
 	@RequestMapping(value = "ajoutUser", method = RequestMethod.GET)
 	public String ajoutUser(FormAjoutUser formAjout, Model model) {
 
@@ -127,7 +136,7 @@ public class AdminController {
 
 		manager.addAP(acc);
 
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 	}
 
 	@RequestMapping(value = "editAp", method = RequestMethod.GET)
@@ -143,8 +152,7 @@ public class AdminController {
 			Model model) {
 
 		if (bindResult.hasErrors()) {
-			System.out.println("ERROR");
-			return "admin/index";
+			return "redirect:/app/admin/logiciel";
 		} else {
 
 			AccPersonalise acc = manager.getAPById(Integer.valueOf(formEdit
@@ -152,7 +160,7 @@ public class AdminController {
 			acc.setNom(formEdit.getNom());
 			manager.upDateAP(acc);
 
-			return "redirect:/app/admin/index";
+			return "redirect:/app/admin/logiciel";
 		}
 	}
 
@@ -163,7 +171,7 @@ public class AdminController {
 		if (!acc.getId().equals(null)) {
 			manager.deleteAP(acc);
 		}
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 
 	}
 
@@ -182,7 +190,7 @@ public class AdminController {
 
 		manager.addDiscipline(dis);
 
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 	}
 
 	@RequestMapping(value = "editDiscipline", method = RequestMethod.GET)
@@ -199,7 +207,7 @@ public class AdminController {
 
 		if (bindResult.hasErrors()) {
 			System.out.println("ERROR");
-			return "redirect:/app/admin/index";
+			return "redirect:/app/admin/logiciel";
 		} else {
 
 			Discipline dis = manager.getDisciplineById(Integer.valueOf(formEdit
@@ -207,7 +215,7 @@ public class AdminController {
 			dis.setNom(formEdit.getNom());
 			manager.upDateDiscipline(dis);
 
-			return "redirect:/app/admin/index";
+			return "redirect:/app/admin/logiciel";
 		}
 	}
 
@@ -219,7 +227,7 @@ public class AdminController {
 		if (!dis.getNom().equals(null)) {
 			manager.deleteDiscipline(dis);
 		}
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 
 	}
 
@@ -237,7 +245,7 @@ public class AdminController {
 		classe.setNom(formAjout.getNom());
 		manager.addClasse(classe);
 
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 	}
 
 	@RequestMapping(value = "editClasse", method = RequestMethod.GET)
@@ -254,7 +262,7 @@ public class AdminController {
 
 		if (bindResult.hasErrors()) {
 			System.out.println("ERROR");
-			return "admin/index";
+			return "redirect:/app/admin/logiciel";
 		} else {
 
 			Classe classe = manager.getClasseById(Integer.valueOf(formEdit
@@ -262,7 +270,7 @@ public class AdminController {
 			classe.setNom(formEdit.getNom());
 			manager.upDateClasse(classe);
 
-			return "redirect:/app/admin/index";
+			return "redirect:/app/admin/logiciel";
 		}
 	}
 
@@ -274,7 +282,7 @@ public class AdminController {
 		if (!classe.getNom().equals(null)) {
 			manager.deleteClasse(classe);
 		}
-		return "redirect:/app/admin/index";
+		return "redirect:/app/admin/logiciel";
 
 	}
 

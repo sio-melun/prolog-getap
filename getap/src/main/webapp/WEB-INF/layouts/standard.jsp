@@ -22,7 +22,7 @@
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
-		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<link href="../../styles/css-framework/jquery-ui.css" rel="stylesheet" type="text/css"/>
 		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 		
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>

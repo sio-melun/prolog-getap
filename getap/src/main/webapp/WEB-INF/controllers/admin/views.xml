@@ -12,6 +12,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/index.jsp" />
 	</definition>
+	
+	<definition name="admin/logiciel" extends="standard-layout">
+		<put-attribute name="title" value="Administration" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/logiciel.jsp" />
+	</definition>
 
 	<definition name="admin/ajoutUser" extends="standard-layout">
 		<put-attribute name="title" value="Ajout d'un utilisateur" />
