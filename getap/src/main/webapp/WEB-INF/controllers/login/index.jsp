@@ -26,6 +26,17 @@
 		</div>
 	</div>
 </form:form>
+<!-- Welcome on Getap<br>
+<br>
+Mesdames et Messieurs,<br>
+ceci<br>
+est<br>
+une<br>
+page<br>
+d'accueil<br>
+qui<br>
+déchire<br> 
+tout<br>-->
 <div id="logolycee">
 	<img src="<c:url value="/images/logolycee.jpg"/>" width="80px"
 		height="84px" />

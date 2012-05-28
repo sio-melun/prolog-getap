@@ -65,6 +65,7 @@ public class LoginController {
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
 			bindResult.rejectValue("login", "required",
 					"SVP un identifiant est attendu !");
+			return "redirect:/app/login/index";
 		}
 		if (bindResult.hasErrors()) {
 			return "login/index";
@@ -73,7 +74,7 @@ public class LoginController {
 			if (user == null) {
 				bindResult.rejectValue("login", "required",
 						"SVP entrez un identifiant valide");
-				return "login/index";
+				return "redirect:/app/login/index";
 			}
 			UtilSession.setUserInSession(user);
 			UtilSession.setAnneeScolaireInSession("2011-2012");

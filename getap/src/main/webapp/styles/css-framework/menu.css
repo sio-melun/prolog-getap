@@ -57,10 +57,16 @@
 	background: url(../../images/DecoRouge.png) no-repeat;
 }
 
+#connexion{
+	position:absolute;
+	left:265px;
+}
 .co {
 	background: url(../../images/CoNoir.png) no-repeat;
-	position: relative;
-	left: 400px;
+/* 	position:relative;
+	top:5px */
+	position: absolute;
+	left: 760px;
 	top: 5px;
 }
 
