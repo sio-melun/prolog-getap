@@ -4,23 +4,18 @@
 
 <h3 class="titre3">Mes classes</h3>
 
-
-<% int cpt = 0; %>
-
-
 <div id="accordion">
 	<c:forEach items="${lesClasses}" var="classe">
-		<% cpt++; %>
 		<h3>
 			<a href="#">${classe.nom}</a>
 		</h3>
-		<div>
-			<table id="<%=cpt%>" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
-						<th>Nombre d'actions par type</th>
-						<th>Temps Total</th>
+						<th class="sorting">Eleves</th>
+						<th class="sorting">Nombre d'actions par type</th>
+						<th class="sorting">Temps Total</th>
 					</tr>
 				</thead>
 				<tbody>

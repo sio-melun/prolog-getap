@@ -16,6 +16,7 @@
 			@import url("<c:url value="/styles/css-framework/typo.css" />");
 			@import url("<c:url value="/styles/css-framework/layout.css" />");
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
+			@import url("<c:url value="/styles/css-framework/demos.css" />");
 			<% if(userAgent.indexOf("Firefox") != -1) { %>
 				@import url("<c:url value="/styles/standard.css" />");
 			<% } else if(userAgent.indexOf("Safari") != -1) { %>
@@ -33,9 +34,37 @@
 		<script  src="http://dev.jquery.com/view/trunk/plugins/tablesorter/2.0/jquery.tablesorter.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.pager.js"></script>
-
+		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.js"></script>
 		
-		
+		<script>
+		$(document).ready(function() {
+			$('.dataTable').dataTable( {
+				"oLanguage": {
+					"sZeroRecords": "Rien trouvé - désolé",
+					"sInfo": "Affiche de _START_ à _END_ sur _TOTAL_ éléments",
+					"sInfoEmtpy": "Affiche de 0 à 0 sur 0 élément",
+					"sInfoFiltered": "(filtered from _MAX_ total records)",
+					"sSearch": "Recherche :",
+					"sLengthMenu": 'Affiche <select>'+
+					 	'<option value="5">5</option>'+
+					 	'<option value="10">10</option>'+
+					 	'<option value="15">15</option>'+
+					 	'<option value="20">20</option>'+
+					 	'<option value="25">25</option>'+
+					 	'<option value="-1">All</option>'+
+					 	'</select> éléments par page',
+					"oPaginate": {
+						"sFirst": "<<",
+						"sLast": ">>",
+						"sNext": ">",
+						"sPrevious": "<"
+					}
+				},
+				"aaSorting": [ [2,'desc'], [0,'asc'] ],
+				"sPaginationType": "full_numbers"
+			} );
+		} );
+		</script>
      	<script>
   			$(document).ready(function() {
    				$("#accordion").accordion({autoHeight:false});

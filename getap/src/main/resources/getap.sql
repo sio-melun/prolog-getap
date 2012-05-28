@@ -234,6 +234,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ine` varchar(20) default NULL,
   `login` varchar(50) NOT NULL,
   `mdp` varchar(45) NOT NULL,
+  `hash` varchar(50) NOT NULL,
   `role` varchar(20) NOT NULL COMMENT 'Admin \n\nProfPrin\n\nProfInter\n\nEleve',
   `idClasse` int(11) default NULL,
   `mail` varchar(50) default NULL,
