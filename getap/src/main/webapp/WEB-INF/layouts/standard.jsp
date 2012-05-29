@@ -24,27 +24,26 @@
 			<% } %>
 		</style>
 		<link href="../../styles/css-framework/jquery-ui.css" rel="stylesheet" type="text/css"/>
-		<link rel="stylesheet" href="../../styles/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 		
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>	
 		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-		<script  src="http://dev.jquery.com/view/trunk/plugins/tablesorter/2.0/jquery.tablesorter.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.min.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/jquery.tablesorter.pager.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.js"></script>
 		
 		<script>
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
 				"oLanguage": {
-					"sZeroRecords": "Rien trouvé - désolé",
+					"sEmptyTable": "Aucune donnée correspondante",
+					"sLoadingRecords": "Traitement en cour...",
+					"sProcessing": "Traitement en cour...",
+					"sZeroRecords": "Aucune donnée correspondante",
 					"sInfo": "Affiche de _START_ à _END_ sur _TOTAL_ éléments",
-					"sInfoEmtpy": "Affiche de 0 à 0 sur 0 élément",
-					"sInfoFiltered": "(filtered from _MAX_ total records)",
-					"sSearch": "Recherche :",
+					"sInfoEmpty": "Aucun élément",
+					"sInfoFiltered": "",
+					"sSearch": "<img src='../../images/search.png'>",
 					"sLengthMenu": 'Affiche <select>'+
 					 	'<option value="5">5</option>'+
 					 	'<option value="10">10</option>'+
@@ -60,7 +59,7 @@
 						"sPrevious": "<"
 					}
 				},
-				"aaSorting": [ [2,'desc'], [0,'asc'] ],
+				"aaSorting": [  ],
 				"sPaginationType": "full_numbers"
 			} );
 		} );
@@ -82,61 +81,6 @@
 		    });
 		  }); 
 		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {		
-		        $("#attente").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#valide").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#modif").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#refuse").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	     <script type="text/javascript">
-	        $(function() {		
-		        $("#refuse2").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#search").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	     <script type="text/javascript">
-	        $(function() {		
-		        $("#1").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#2").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#3").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#4").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
-	    <script type="text/javascript">
-	        $(function() {		
-		        $("#5").tablesorter({widgets: ['zebra']});
-	        });	
-	    </script>
 	</head>
 	
 	<body onload="testRole()">

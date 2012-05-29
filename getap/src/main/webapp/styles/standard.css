@@ -209,18 +209,11 @@ td .bouton{
 }
 
 #recycled{
-	margin-left:50px;
+	
 }
-/*#lRecycled{
-	position:fixed;
-	top:310px;
-	right:295px;
-} */
 
 #resetPass{
-	position:absolute;
-	top:225px;
-	right:280px;
+	text-align:center;
 }
 
 #acceuil_text{

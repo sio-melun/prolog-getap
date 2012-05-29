@@ -23,7 +23,7 @@
 	padding: 0;
 }
 
-#dt_example #demo {
+#dt_example #demo{
 	margin: 30px auto 0 auto;
 }
 
@@ -157,19 +157,26 @@ table.display {
 	margin: 0 auto;
 	width: 100%;
 	clear: both;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border-radius: 10px;
 }
 
 table.display thead th {
-	padding: 3px 10px;
-	border-bottom: 1px solid black;
+	background-color: rgb(205,205,205);
 	font-weight: bold;
 	cursor: pointer;
 	* cursor: hand;
+<<<<<<< HEAD
+	border-radius: 2px;
+	padding: 3px;
+=======
 	background-color: rgb(205,205,205);
+>>>>>>> branch 'master' of https://flaforest77@github.com:443/sio-melun/prolog-getap.git
 }
 
 table.display tfoot th {
-	padding: 3px 10px;
+	
 	border-top: 1px solid black;
 	font-weight: bold;
 }
@@ -179,7 +186,7 @@ table.display tr.heading2 td {
 }
 
 table.display td {
-	padding: 3px 10px;
+	padding: 3px;
 }
 
 table.display td.center {
@@ -193,15 +200,15 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: url('../../images/sort_asc.jpg') no-repeat center right;
+	background: url('../../images/desc.gif') no-repeat center right;
 }
 
 .sorting_desc {
-	background: url('../../images/sort_desc.jpg') no-repeat center right;
+	background: url('../../images/asc.gif') no-repeat center right;
 }
 
 .sorting {
-	background: url('../../images/sort_both.jpg') no-repeat center right;
+	background: url('../../images/bg.gif') no-repeat center right;
 }
 
 
@@ -255,11 +262,15 @@ table.display tr.even.gradeU {
 
 
 tr.odd {
-	background-color: #E2E4FF;
+	background-color: #F1F1F1;
+	border-bottom: 2px solid #DCDCDC;
+	border-top: 2px solid #DCDCDC;
 }
 
 tr.even {
-	background-color: white;
+	background-color: #FFF;
+	border-bottom: 2px solid #DCDCDC;
+	border-top: 2px solid #DCDCDC;
 }
 
 
@@ -322,7 +333,9 @@ div.dataTables_paginate .paginate_button:hover {
 }
 
 div.dataTables_paginate .paginate_active {
-	background-color: #99B3FF;
+	border: 1px solid black;
+	background-color: grey;
+	color:white;
 }
 
 
@@ -340,27 +353,27 @@ table.display tr.row_selected.even td {
  */
 /* For the standard odd/even */
 tr.odd td.sorting_1 {
-	background-color: #D3D6FF;
+	background-color: #F1F1F1;
 }
 
 tr.odd td.sorting_2 {
-	background-color: #DADCFF;
+	background-color: #F1F1F1;
 }
 
 tr.odd td.sorting_3 {
-	background-color: #E0E2FF;
+	background-color: #F1F1F1;
 }
 
 tr.even td.sorting_1 {
-	background-color: #EAEBFF;
+	background-color: white;
 }
 
 tr.even td.sorting_2 {
-	background-color: #F2F3FF;
+	background-color: white;
 }
 
 tr.even td.sorting_3 {
-	background-color: #F9F9FF;
+	background-color: white;
 }
 
 

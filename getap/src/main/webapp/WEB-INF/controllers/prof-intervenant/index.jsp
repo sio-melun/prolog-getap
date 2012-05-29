@@ -8,28 +8,30 @@
 </c:if>
 
 <c:if test="${not empty listdctaps}">
-	<table class="legend">
+	<table class="legend2">
 		<tr>
 			<td><img src="../../images/valid.png" /> : Valider</td>
 			<td><img src="../../images/modif.png" /> : Modifier</td>
 			<td><img src="../../images/suppr.png" /> : Refuser</td>
 		</tr>
 	</table>
-	<br><br>
 	<h5 style="position: relative; top: 35px;">Demandes de validation
 		en cours</h5>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes reçues (${etat0 + etat3})</a>
 		</h3>
-		<div>
-			<table id="attente" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
 						<th>Temps (min)</th>
 						<th>Type d'aide</th>
+						<th></th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,14 +67,16 @@
 			<a href="#">Demandes en attentes de confirmations
 				(${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a>
 		</h3>
-		<div>
-			<table id="modif" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
 						<th>Temps (min)</th>
 						<th>Type d'aide</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -137,8 +141,8 @@
 		<h3>
 			<a href="#">Demandes validées (${etat1 + etat5})</a>
 		</h3>
-		<div>
-			<table id="valide" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>
@@ -164,8 +168,8 @@
 		<h3>
 			<a href="#">Demandes refusées par l'élève (${etat2})</a>
 		</h3>
-		<div>
-			<table id="refuse" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>
@@ -191,8 +195,8 @@
 		<h3>
 			<a href="#">Demandes annulées par l'élève (${etat7})</a>
 		</h3>
-		<div>
-			<table id="refuse" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>
@@ -218,8 +222,8 @@
 		<h3>
 			<a href="#">Vos demandes refusées (${etat6})</a>
 		</h3>
-		<div>
-			<table id="refuse2" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Eleves</th>

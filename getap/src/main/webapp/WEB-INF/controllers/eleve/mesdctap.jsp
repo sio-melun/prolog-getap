@@ -8,29 +8,29 @@
 </c:if>
 
 <c:if test="${not empty mesdctaps}">
-	<table class="legend">
+	<table class="legend2">
 		<tr>
-			<td><img src="../../images/valid.png" /> : Confirmer</td>
+			<td><img src="../../images/valid.png" /> : Valider/Confirmer</td>
 			<td><img src="../../images/modif.png" /> : Modifier</td>
-			<td><img src="../../images/suppr.png" /> : Supprimer/Refuser</td>
+			<td><img src="../../images/suppr.png" /> : Supprimer</td>
 		</tr>
 	</table>
-	<br>
-	<br>
 	<h5 style="position: relative; top: 35px;">Demandes de validation
 		en cours</h5>
 	<div id="accordion">
 		<h3>
 			<a href="#">Demandes non traitees (${etat0 + etat3})</a>
 		</h3>
-		<div>
-			<table id="attente" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>
 						<th>Date</th>
 						<th>Temps (min)</th>
 						<th>Type d'aide</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,14 +61,16 @@
 			<a href="#">Demandes modifiees par le professeur
 				(${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a>
 		</h3>
-		<div>
-			<table id="modif" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>
 						<th>Date</th>
 						<th>Temps (min)</th>
 						<th>Type d'aide</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -135,8 +137,8 @@
 		<h3>
 			<a href="#">Demandes validees (${etat1 + etat5})</a>
 		</h3>
-		<div>
-			<table id="valide" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>
@@ -162,8 +164,8 @@
 		<h3>
 			<a href="#">Demandes refusees par le professeur (${etat6})</a>
 		</h3>
-		<div>
-			<table id="refuse" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>
@@ -189,8 +191,8 @@
 		<h3>
 			<a href="#">Demandes refusees par vous-meme (${etat2})</a>
 		</h3>
-		<div>
-			<table id="refuse2" class="tablesorter">
+		<div id="demo">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Professeurs</th>

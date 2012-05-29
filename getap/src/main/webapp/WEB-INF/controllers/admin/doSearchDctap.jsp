@@ -10,7 +10,8 @@
 </c:if>
 
 <c:if test="${not empty dctap}">
-	<table id="search" class="tablesorter">
+	<div id="demo">
+	<table class="display dataTable">
 		<thead>
 			<tr class="header">
 				<th>Elève</th>
@@ -34,6 +35,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </c:if>
 
 <div class="buttonGroup">

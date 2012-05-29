@@ -34,11 +34,13 @@
 				</tr>
 			</table>
 			<tr>
-				<table id="attente" class="tablesorter">
+				<table class="display dataTable">
 					<thead>
 						<tr class="header">
 							<th>Nom</th>
 							<th>Auteur</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -94,10 +96,12 @@
 			</tr>
 		</table>
 		<tr>
-			<table id="2" class="tablesorter">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Nom</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -147,10 +151,12 @@
 			</tr>
 		</table>
 		<tr>
-			<table id="3" class="tablesorter">
+			<table class="display dataTable">
 				<thead>
 					<tr class="header">
 						<th>Nom</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>

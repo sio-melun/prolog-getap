@@ -10,13 +10,8 @@
 </c:if>
 
 <c:if test="${not empty users}">
-	<table class="legend2">
-		<tr>
-			<td><img src="../../images/modif.png" /> : Modifier</td>
-			<td><img src="../../images/suppr.png" /> : Supprimer</td>
-		</tr>
-	</table>
-	<table id="search" class="tablesorter">
+	<div id="demo">
+	<table class="display dataTable">
 		<thead>
 			<tr class="header">
 				<th>Nom/Prénom</th>
@@ -24,6 +19,8 @@
 				<th>Mot de passe</th>
 				<th>Role</th>
 				<th>Classe</th>
+				<th>Modifier</th>
+				<th>Supprimer</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,6 +45,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </c:if>
 
 <div class="buttonGroup">
