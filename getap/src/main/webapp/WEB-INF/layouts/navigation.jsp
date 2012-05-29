@@ -39,25 +39,27 @@
 
 
 		<c:if test="${user.role == null}">
-			<ul class="select">
+<%-- 			<ul class="select">
 				<li><a class="co"  href="<c:url value="/app/login/index" />" target="_self">
 						<img src="<c:url value="../../images/CoTransparent.png"/>" /> </a>
 				</li>
-			</ul>
+			</ul> --%>
 
 
-<%-- 			<form:form modelAttribute="userLoginCriteria" action="authenticate" id="connexion"
+			<form:form modelAttribute="userLoginCriteria" action="authenticate" id="connexion"
 				method="post">
-				<form:errors path="*" cssClass="errors" />
-				<label for="login">Identifiant:</label>
+						
+				<label for="login">Identifiant :</label>
 				<form:input path="login" />
 
-				<label for="password">Mot de passe :</label>
+				<label for="password">&nbsp Mot de passe :</label>
 				<form:password path="password" />
 				
-				<input  class="co" src="<c:url value="../../images/CoTransparent.png"/>" type=image Value=submit> 
+				
+				<input  class="co" src="<c:url value="../../images/CoTransparent.png"/>" type=image Value=submit>
+				<div id="erreur"><form:errors path="*" cssClass="errors" /></div>
 					
-			</form:form> --%>
+			</form:form>
 		</c:if>
 
 		<c:if test="${user.role != null}">

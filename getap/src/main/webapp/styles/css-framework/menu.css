@@ -1,7 +1,7 @@
 .nav {
 	height: 35px;
 	width: 910px;
-    margin:  0 auto;
+	margin:  0 auto; 
     padding: 0;
 	background:-moz-linear-gradient(top, #FFF, #BBB);
 	background:-webkit-linear-gradient(top, #FFF, #BBB);
@@ -58,16 +58,13 @@
 }
 
 #connexion{
-	position:absolute;
-	left:265px;
+	position:relative;
+	left:130px;
 }
 .co {
 	background: url(../../images/CoNoir.png) no-repeat;
-/* 	position:relative;
-	top:5px */
-	position: absolute;
-	left: 760px;
-	top: 5px;
+	position:relative;
+	top:5px;
 }
 
 .co:hover{

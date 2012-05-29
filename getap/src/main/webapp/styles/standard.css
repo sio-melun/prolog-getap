@@ -64,9 +64,13 @@ div#content input[type="button"] {
 	border-style: none;
 	vertical-align: middle;
 }
+#erreur{
+	position:relative;
+	bottom: 27px;
+	right: 250px;
+}
 .errors {
 	font-weight: bold;
-	text-align: center;
 	color: #600;
 }
 

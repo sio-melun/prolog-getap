@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form:form modelAttribute="userLoginCriteria" action="authenticate"
+<%-- <form:form modelAttribute="userLoginCriteria" action="authenticate"
 	method="post">
 	<form:errors path="*" cssClass="errors" />
 
@@ -25,8 +25,8 @@
 			<input type="submit" value="Se connecter" />
 		</div>
 	</div>
-</form:form>
-<!-- Welcome on Getap<br>
+</form:form> --%>
+Welcome on Getap<br>
 <br>
 Mesdames et Messieurs,<br>
 ceci<br>
@@ -36,7 +36,7 @@ page<br>
 d'accueil<br>
 qui<br>
 déchire<br> 
-tout<br>-->
+tout<br>
 <div id="logolycee">
 	<img src="<c:url value="/images/logolycee.jpg"/>" width="80px"
 		height="84px" />
