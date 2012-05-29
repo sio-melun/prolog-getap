@@ -45,13 +45,13 @@ div#banniere {
 	text-align: center;
 	position:relative;
 	right: 380px;
-	margin-top: 60px;
+	margin-top: 30px;
 	margin-bottom: -33px;
 }
 div#logolycee {
 	text-align: right;
 	position:relative;
-	bottom:20px;
+	top:10px;
 	left:8px;
 }
 
@@ -221,4 +221,16 @@ td .bouton{
 	position:absolute;
 	top:225px;
 	right:280px;
+}
+
+#acceuil_text{
+	min-height: 320px;
+	text-indent:50px;
+	text-align: justify;
+}
+#photo_accueil{
+	float:left;
+	border:2px solid rgb(102,0,50);
+	border-radius:20px;
+	margin-right:45px;
 }

@@ -2,7 +2,6 @@
 
 <div>
 	<br/>
-	Bienvenue sur GeTAP
 	<% Object user = session.getAttribute("user");  %>
    <span style="position:relative; left:550px;">	
 	 <c:if test="${not empty user}">
