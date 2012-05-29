@@ -23,14 +23,15 @@
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
-		<link href="../../styles/css-framework/jquery-ui.css" rel="stylesheet" type="text/css"/>
-		
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
+			
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>	
 		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.js"></script>
+		<script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>
 		
 		<script>
 		$(document).ready(function() {
