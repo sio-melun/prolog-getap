@@ -21,4 +21,11 @@
 		<put-attribute name="title" value="GETAP : deconnexion" />
 		<put-attribute name="body" value="/WEB-INF/controllers/login/out.jsp" />
 	</definition>
+	
+	<definition name="profil/apropos" extends="standard-layout">
+		<put-attribute name="title" value="A Propos" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/profil/apropos.jsp" />
+	</definition>
+	
 </tiles-definitions>
