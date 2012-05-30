@@ -31,6 +31,12 @@ public class Profil {
 		this.manager = serviceManager;
 	}
 
+	@RequestMapping(value = "apropos", method = RequestMethod.GET)
+	public String apropos() {
+
+		return "profil/apropos";
+	}
+
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String editUserById(@RequestParam("id") String id,
 			FormEditProfil formUser, Model model) {
