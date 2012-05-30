@@ -415,6 +415,7 @@ public class AdminController {
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("mesClasses",
 				manager.getAllClasseByProf(currentUser.getId()));
+		model.addAttribute("mdp", currentUser.getPass());
 
 		return "admin/editUser";
 	}

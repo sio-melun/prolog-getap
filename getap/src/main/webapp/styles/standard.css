@@ -68,6 +68,7 @@ div#content input[type="button"] {
 	position:relative;
 	bottom: 27px;
 	right: 250px;
+	z-index:-1;
 }
 .errors {
 	font-weight: bold;
@@ -194,7 +195,7 @@ td .bouton{
 }
 
 .isUpdate{
-	color:#E38304;
+	background : -moz-radial-gradient(center,rgb(255,215,70) 50% ,rgb(241,241,241) 20%);
 	font-weight: bold;
 }
 
@@ -226,4 +227,11 @@ td .bouton{
 	border:2px solid rgb(102,0,50);
 	border-radius:20px;
 	margin-right:45px;
+}
+
+.inputPerso{
+	background-color: rgb(180,200,221);
+	font-size:15px;
+	font-weight: bolder;
+	
 }

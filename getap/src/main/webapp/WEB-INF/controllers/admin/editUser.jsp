@@ -110,7 +110,7 @@
 		<form:hidden path="id" />
 
 		<div id="buttonGroup">
-			<input type="submit" value="Editer" />
+			<input type="submit" value="Sauvegarder" />
 		</div>
 	</div>
 </form:form>
@@ -119,7 +119,7 @@
 	<form:errors path="*" cssClass="errors" />
 	<div class="form-row">
 		<input type="image" name="recycled" id="recycled"
-			onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?'))"
+			onclick="alert('Nouveau mot de passe : ${mdp}')"
 			src="../../images/recycled.png"
 			onmouseover="this.src='../../images/recycledHover.png';"
 			onmouseout="this.src='../../images/recycled.png';" />

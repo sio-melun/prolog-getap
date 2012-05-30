@@ -16,7 +16,7 @@
 						<div>Ajouter un Utilisateur</div> </a></td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/AjouterUser.png"/>" />
-						<div>Import Utilisateur via CSV</div> </a></td>
+						<div>Import d'élèves via CSV</div> </a></td>
 			</tr>
 		</table>
 	</div>
@@ -29,7 +29,7 @@
 				<form:form modelAttribute="userSearchCriteria" action="dosearchUser"
 					method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche d'utilisateurs :</label>
@@ -49,7 +49,7 @@
 				<form:form modelAttribute="userSearchCriteria" action="dosearchProf"
 					method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche de professeurs :</label>
@@ -69,7 +69,7 @@
 				<form:form modelAttribute="userSearchCriteria"
 					action="dosearchForClasse" method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche par classe :</label>
@@ -97,7 +97,7 @@
 				<form:form modelAttribute="userSearchCriteria"
 					action="doSearchDctap" method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche par élève :</label>
@@ -117,7 +117,7 @@
 				<form:form modelAttribute="userSearchCriteria"
 					action="doSearchDctap" method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche par professeur :</label>
@@ -137,7 +137,7 @@
 				<form:form modelAttribute="userSearchCriteria"
 					action="doSearchDctapClasse" method="get">
 					<form:errors path="*" cssClass="errors" />
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="query">Recherche par classe :</label>

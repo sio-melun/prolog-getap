@@ -14,7 +14,7 @@
 					method="post" id="formulaireAjoutAP">
 					<form:errors path="*" cssClass="errors" />
 
-					<div class="section">
+					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
 								<label for="nom">Nouvelle aide personnalisée :</label>
@@ -38,7 +38,6 @@
 					<thead>
 						<tr class="header">
 							<th>Nom</th>
-							<th>Auteur</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -47,12 +46,6 @@
 						<c:forEach items="${lesAP}" var="ap">
 							<tr>
 								<td>${ap.nom}</td>
-								<c:if test="${ap.origineEtat == 0}">
-									<td>Admin</td>
-								</c:if>
-								<c:if test="${ap.origineEtat == 1}">
-									<td>Elève</td>
-								</c:if>
 								<td><a
 									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
 										src="../../images/modif.png"
@@ -77,7 +70,7 @@
 			method="post">
 			<form:errors path="*" cssClass="errors" />
 
-			<div class="section">
+			<div class="section inputPerso">
 				<fieldset>
 					<div class="form-row">
 						<label for="nom">Nouvelle Classe :</label>
@@ -132,7 +125,7 @@
 			action="doajoutDiscipline" method="post">
 			<form:errors path="*" cssClass="errors" />
 
-			<div class="section">
+			<div class="section inputPerso">
 				<fieldset>
 					<div class="form-row">
 						<label for="nom">Nouvelle Discipline :</label>

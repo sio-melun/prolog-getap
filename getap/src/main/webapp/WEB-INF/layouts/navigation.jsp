@@ -5,8 +5,7 @@
 
 		<c:if test="${user.role == 'eleve'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/eleve/index" />" target="_self"><b>Mes
-							demandes</b> </a></li>
+				<li><a href="<c:url value="/app/eleve/index" />" target="_self"><b>Menu</b> </a></li>
 			</ul>
 		</c:if>
 
@@ -30,9 +29,9 @@
 
 		<c:if test="${user.role == 'admin'}">
 			<ul class="select">
-				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Service logistique</b>
+				<li><a href="<c:url value="/app/admin/index" />" target="_self"><b>Gestion d'utilisateur</b>
 				</a></li>
-				<li><a href="<c:url value="/app/admin/logiciel" />" target="_self"><b>Service logiciel</b>
+				<li><a href="<c:url value="/app/admin/logiciel" />" target="_self"><b>Administration</b>
 				</a></li>
 			</ul>
 		</c:if>

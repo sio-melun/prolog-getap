@@ -16,7 +16,6 @@
 			<tr class="header">
 				<th>Nom/Prénom</th>
 				<th>Login</th>
-				<th>Mot de passe</th>
 				<th>Role</th>
 				<th>Classe</th>
 				<th>Modifier</th>
@@ -28,7 +27,6 @@
 				<tr>
 					<td style="text-align:left;">${user.nom} ${user.prenom}</td>
 					<td>${user.login}</td>
-					<td>${user.pass}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>
 					<td><a

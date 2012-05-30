@@ -60,7 +60,7 @@
 
 			<div class="from-row" id="inputAcc"
 				style="display: none; visibility: hidden;">
-				<label for="accPersNom">Aide personnalisée : </label>
+				<label for="accPersNom">Préciser : </label>
 				<form:input path="accPersNom" />
 			</div>
 		</fieldset>

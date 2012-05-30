@@ -408,7 +408,8 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<AccPersonalise> getAllAPForAdmin() {
-		return this.jdbcTemplate.query("select * from ap", new AccMapper());
+		return this.jdbcTemplate.query(
+				"select * from ap where origineEtat = 0", new AccMapper());
 	}
 
 	public List<AccPersonalise> getAllAPForProf() {

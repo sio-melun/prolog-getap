@@ -12,7 +12,7 @@
 	<form:form modelAttribute="formAjoutUser" action="doajout"
 		method="post">
 		<form:errors path="*" cssClass="errors" />
-		<h3>Ajout d'un Utilisateur</h3>
+		<h3>Ajout d'élève</h3>
 		<div class="section">
 			<fieldset>
 				<div class="form-row">

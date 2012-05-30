@@ -25,7 +25,8 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>Eleve</th>
+						<th>Classe</th>
 						<th>Date</th>
 						<th>Temps (min)</th>
 						<th>Type d'aide</th>
@@ -39,6 +40,7 @@
 						<c:if test="${dctap.etat == 0 or dctap.etat == 4}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+								<td>${dctap.eleve.classe.nom}</td>
 								<td>${dctap.dateAction}</td>
 								<td>${dctap.minutes}</td>
 								<td>${dctap.accPers.nom}</td>
@@ -64,7 +66,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes en attentes de confirmations (${etatsup1000})</a>
+			<a href="#">Demandes en attentes de confirmations par l'élève (${etatsup1000})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -148,7 +150,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refusées par l'élève (${etat2})</a>
+			<a href="#">Demandes refusées par l'élève après modification de votre par (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
