@@ -10,9 +10,10 @@
 <c:if test="${not empty mesdctaps}">
 	<table class="legend2">
 		<tr>
-			<td><img src="../../images/valid.png" /> : Valider/Confirmer</td>
+			<td><img src="../../images/valid.png" /> : Confirmer</td>
 			<td><img src="../../images/modif.png" /> : Modifier</td>
 			<td><img src="../../images/suppr.png" /> : Supprimer</td>
+			<td><img src="../../images/refuseModif.png" /> : Refuser</td>
 		</tr>
 	</table>
 	<h5 style="position: relative; top: 35px;">Demandes de validation
@@ -103,9 +104,9 @@
 								</td>
 								<td><a
 									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
-										src="../../images/suppr.png"
-										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" /> </a>
+										src="../../images/refuseModif.png"
+										onmouseover="this.src='../../images/refuseModifHover.png';"
+										onmouseout="this.src='../../images/refuseModif.png';" /> </a>
 								</td>
 							</tr>
 						</c:if>

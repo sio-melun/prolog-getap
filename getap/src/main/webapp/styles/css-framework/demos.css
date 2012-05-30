@@ -352,7 +352,7 @@ table.display tr.row_selected.even td {
  * Sorting classes for columns
  */
 /* For the standard odd/even */
-tr.odd td.sorting_1 {
+/* tr.odd td.sorting_1 {
 	background-color: #F1F1F1;
 }
 
@@ -375,7 +375,7 @@ tr.even td.sorting_2 {
 tr.even td.sorting_3 {
 	background-color: white;
 }
-
+ */
 
 /* For the Conditional-CSS grading rows */
 /*

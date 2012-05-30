@@ -195,7 +195,8 @@ td .bouton{
 }
 
 .isUpdate{
-	background : -moz-radial-gradient(center,rgb(255,215,70) 50% ,rgb(241,241,241) 20%);
+	background-color: rgb(180,200,221);
+	border: 1px solid white;
 	font-weight: bold;
 }
 

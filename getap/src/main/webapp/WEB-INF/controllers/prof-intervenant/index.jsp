@@ -11,7 +11,7 @@
 	<table class="legend2">
 		<tr>
 			<td><img src="../../images/valid.png" /> : Valider</td>
-			<td><img src="../../images/modif.png" /> : Modifier</td>
+			<td><img src="../../images/modifValid.png" /> : Modifier</td>
 			<td><img src="../../images/suppr.png" /> : Refuser</td>
 		</tr>
 	</table>
@@ -51,9 +51,9 @@
 										onmouseout="this.src='../../images/valid.png';" /> </a></td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
-										src="../../images/modif.png"
-										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /> </a></td>
+										src="../../images/modifValid.png"
+										onmouseover="this.src='../../images/modifValidHover.png';"
+										onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/suppr.png"
@@ -105,9 +105,9 @@
 								</c:if>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
-										src="../../images/modif.png"
-										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /> </a></td>
+										src="../../images/modifValid.png"
+										onmouseover="this.src='../../images/modifValidHover.png';"
+										onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
 								<td><a href=""
 									onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
 										src="../../images/suppr.png"

@@ -7,7 +7,7 @@
 <div id="accordion">
 	<c:forEach items="${lesClasses}" var="classe">
 		<h3>
-			<a href="#">${classe.nom}</a>
+			<a href="#"> <b>${classe.nom}</b></a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
