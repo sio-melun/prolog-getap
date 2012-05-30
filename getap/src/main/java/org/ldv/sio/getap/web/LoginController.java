@@ -34,6 +34,12 @@ public class LoginController {
 		this.hauthLoginService = hauthLoginService;
 	}
 
+	@RequestMapping(value = "apropos", method = RequestMethod.GET)
+	public String apropos() {
+
+		return "profil/apropos";
+	}
+
 	/**
 	 * Default action, displays the login page.
 	 * 
