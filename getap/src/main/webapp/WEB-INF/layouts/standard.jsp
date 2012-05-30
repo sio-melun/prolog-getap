@@ -66,12 +66,18 @@
 		} );
 		</script>
      	<script>
-  			$(document).ready(function() {
-   				$("#accordion").accordion({autoHeight:false});
+  			/* $(document).ready(function() {
+   				$("#accordion").accordion({ collapsible: true, activate: false, autoHeight:false});
+  			}); */
+  			
+  			$(function(){
+  			// Accordion
+  			$("#accordion").accordion({ header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});
+  			$("#accordion2").accordion({ header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});		
   			});
-  			$(document).ready(function() {
-   				$("#accordion2").accordion({autoHeight:false});
-  			});
+
+
+
   		</script>
         <script>
 		  $(document).ready(function() {
