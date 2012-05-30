@@ -67,6 +67,14 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return count;
 	}
 
+	public int getAllDCTAPModifByEtat(Long id) {
+		int count = this.jdbcTemplate
+				.queryForInt(
+						"select count(id) from dctap where Etat >=1024 and (idProf = ? or idEleve = ?)",
+						new Object[] { id, id });
+		return count;
+	}
+
 	public DemandeConsoTempsAccPers getDCTAPById(Long id) {
 		return this.jdbcTemplate.queryForObject(
 				"select * from dctap where id = ?", new Object[] { id },

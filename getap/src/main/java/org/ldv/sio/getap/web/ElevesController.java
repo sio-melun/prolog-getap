@@ -50,18 +50,12 @@ public class ElevesController {
 		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
 		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
-		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
 
-		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
-		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
-		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
-		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
-		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
-		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
-		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
-
-		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
-		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
+		model.addAttribute("etat16", manager.getAllDCTAPByEtat(16, id));
+		model.addAttribute("etat32", manager.getAllDCTAPByEtat(32, id));
+		model.addAttribute("etat64", manager.getAllDCTAPByEtat(64, id));
+		model.addAttribute("etatsup1000", manager.getAllDCTAPModifByEtat(id));
 
 		return "eleve/mesdctap";
 	}
@@ -72,7 +66,7 @@ public class ElevesController {
 				.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			currentDctap.setEtat(7);
+			currentDctap.setEtat(8);
 			manager.updateDCTAP(currentDctap);
 		}
 
@@ -122,7 +116,7 @@ public class ElevesController {
 			User user = UtilSession.getUserInSession();
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));
-			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 3) {
+			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 4) {
 
 				AccPersonalise acc = new AccPersonalise(null,
 						formDctap.getAccPersNom(), 1, user.getId());
@@ -141,7 +135,7 @@ public class ElevesController {
 
 				dctapForUpdate.setProf(manager.getUserById(formDctap
 						.getProfId()));
-				dctapForUpdate.setEtat(3);
+				dctapForUpdate.setEtat(4);
 				manager.updateDCTAP(dctapForUpdate);
 			}
 
@@ -214,7 +208,7 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() > 40) {
+				&& dctap.getEtat() > 1023) {
 			dctap.setEtat(2);
 			manager.updateDCTAP(dctap);
 		}
@@ -228,7 +222,7 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() > 40) {
+				&& dctap.getEtat() > 1023) {
 			dctap.setEtat(1);
 			manager.updateDCTAP(dctap);
 		}

@@ -12,6 +12,10 @@ import java.sql.Date;
  */
 
 public class DemandeConsoTempsAccPers {
+	private static final int DATE_MODIFIEE = 1024;
+	private static final int DUREE_MODIFIEE = 2048;
+	private static final int AP_MODIFIEE = 4096;
+
 	/**
 	 * Identifiant de la DCTAP
 	 */
@@ -165,6 +169,20 @@ public class DemandeConsoTempsAccPers {
 		// TODO vérifier que la transition vers le nouvel état est bien
 		// autorisée
 		this.etat = etat;
+	}
+
+	public boolean isDateModifiee() {
+		// return this.etat == 41;
+		return (this.etat & DATE_MODIFIEE) != 0;
+		// setEtat(getEtat() | DATE_MODIFIEE) /// (64 & 1)
+	}
+
+	public boolean isDureeModifiee() {
+		return (this.etat & DUREE_MODIFIEE) != 0;
+	}
+
+	public boolean isApModifiee() {
+		return (this.etat & AP_MODIFIEE) != 0;
 	}
 
 	@Override

@@ -19,7 +19,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes reçues (${etat0 + etat3})</a>
+			<a href="#">Demandes reçues (${etat0 + etat4})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -36,7 +36,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 0 or dctap.etat == 3}">
+						<c:if test="${dctap.etat == 0 or dctap.etat == 4}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -64,8 +64,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes en attentes de confirmations
-				(${etat41+etat42+etat43+etat44+etat45+etat46+etat47})</a>
+			<a href="#">Demandes en attentes de confirmations (${etatsup1000})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -81,43 +80,26 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat>40}">
+						<c:if test="${dctap.etat>1023}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
-								<c:if test="${dctap.etat == 41}">
+								<c:if test="${dctap.dateModifiee}">
 									<td class="isUpdate">${dctap.dateAction}</td>
-									<td>${dctap.minutes}</td>
-									<td>${dctap.accPers.nom}</td>
 								</c:if>
-								<c:if test="${dctap.etat == 42}">
+								<c:if test="${!dctap.dateModifiee}">
 									<td>${dctap.dateAction}</td>
-									<td class="isUpdate">${dctap.minutes}</td>
-									<td>${dctap.accPers.nom}</td>
 								</c:if>
-								<c:if test="${dctap.etat == 43}">
-									<td>${dctap.dateAction}</td>
+								<c:if test="${dctap.dureeModifiee}">
+									<td class="isUpdate">${dctap.minutes}</td>
+								</c:if>
+								<c:if test="${!dctap.dureeModifiee}">
 									<td>${dctap.minutes}</td>
+								</c:if>
+								<c:if test="${dctap.apModifiee}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
 								</c:if>
-								<c:if test="${dctap.etat == 44}">
-									<td class="isUpdate">${dctap.dateAction}</td>
-									<td class="isUpdate">${dctap.minutes}</td>
+								<c:if test="${!dctap.apModifiee}">
 									<td>${dctap.accPers.nom}</td>
-								</c:if>
-								<c:if test="${dctap.etat == 45}">
-									<td>${dctap.dateAction}</td>
-									<td class="isUpdate">${dctap.minutes}</td>
-									<td class="isUpdate">${dctap.accPers.nom}</td>
-								</c:if>
-								<c:if test="${dctap.etat == 46}">
-									<td class="isUpdate">${dctap.dateAction}</td>
-									<td>${dctap.minutes}</td>
-									<td class="isUpdate">${dctap.accPers.nom}</td>
-								</c:if>
-								<c:if test="${dctap.etat == 47}">
-									<td class="isUpdate">${dctap.dateAction}</td>
-									<td class="isUpdate">${dctap.minutes}</td>
-									<td class="isUpdate">${dctap.accPers.nom}</td>
 								</c:if>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
@@ -139,7 +121,7 @@
 	<h5>Demandes terminees</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes validées (${etat1 + etat5})</a>
+			<a href="#">Demandes validées (${etat1 + etat32})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -153,7 +135,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 1 or dctap.etat == 5}">
+						<c:if test="${dctap.etat == 1 or dctap.etat == 32}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -193,7 +175,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes annulées par l'élève (${etat7})</a>
+			<a href="#">Vos demandes refusées (${etat64})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -207,34 +189,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 7}">
-							<tr>
-								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
-								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
-								<td>${dctap.accPers.nom}</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<h3>
-			<a href="#">Vos demandes refusées (${etat6})</a>
-		</h3>
-		<div id="demo">
-			<table class="display dataTable">
-				<thead>
-					<tr class="header">
-						<th>Eleves</th>
-						<th>Date</th>
-						<th>Temps (min)</th>
-						<th>Type d'aide</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${dctap.etat == 6}">
+						<c:if test="${dctap.etat == 64}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>

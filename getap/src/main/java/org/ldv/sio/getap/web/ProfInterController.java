@@ -41,8 +41,8 @@ public class ProfInterController {
 
 		DemandeConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
 				.valueOf(id));
-		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 3
-				|| currentDctap.getEtat() > 40) {
+		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 4
+				|| currentDctap.getEtat() > 1023) {
 			// valorise le bean de vue avec le dctap courant
 			dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
 			dctap.setDateAction(currentDctap.getDateAction());
@@ -68,19 +68,12 @@ public class ProfInterController {
 		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
 		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
-		model.addAttribute("etat3", manager.getAllDCTAPByEtat(3, id));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
 
-		model.addAttribute("etat41", manager.getAllDCTAPByEtat(41, id));
-		model.addAttribute("etat42", manager.getAllDCTAPByEtat(42, id));
-		model.addAttribute("etat43", manager.getAllDCTAPByEtat(43, id));
-		model.addAttribute("etat44", manager.getAllDCTAPByEtat(44, id));
-		model.addAttribute("etat45", manager.getAllDCTAPByEtat(45, id));
-		model.addAttribute("etat46", manager.getAllDCTAPByEtat(46, id));
-		model.addAttribute("etat47", manager.getAllDCTAPByEtat(47, id));
-
-		model.addAttribute("etat5", manager.getAllDCTAPByEtat(5, id));
-		model.addAttribute("etat6", manager.getAllDCTAPByEtat(6, id));
-		model.addAttribute("etat7", manager.getAllDCTAPByEtat(7, id));
+		model.addAttribute("etat16", manager.getAllDCTAPByEtat(16, id));
+		model.addAttribute("etat32", manager.getAllDCTAPByEtat(32, id));
+		model.addAttribute("etat64", manager.getAllDCTAPByEtat(64, id));
+		model.addAttribute("etatsup1000", manager.getAllDCTAPModifByEtat(id));
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
@@ -96,9 +89,6 @@ public class ProfInterController {
 			DemandeConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
 					.valueOf(formDctap.getId()));
 
-			// 41=date; 42=durée; 43=type; 44=date+durée; 45=durée+type;
-			// 46=date+type; 47=type+date+durée
-
 			AccPersonalise acc = manager.getAPById(formDctap.getAccPersId());
 			String accPersNom = acc.getNom();
 			if (!dctapForUpdate.getDateAction().equals(
@@ -106,28 +96,28 @@ public class ProfInterController {
 					&& !dctapForUpdate.getMinutes().equals(
 							formDctap.getMinutes())
 					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(47);
+				dctapForUpdate.setEtat(7168);
 			} else if (!dctapForUpdate.getDateAction().equals(
 					formDctap.getDateAction())
 					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(46);
+				dctapForUpdate.setEtat(5120);
 			} else if (!dctapForUpdate.getMinutes().equals(
 					formDctap.getMinutes())
 					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(45);
+				dctapForUpdate.setEtat(6144);
 			} else if (!dctapForUpdate.getDateAction().equals(
 					formDctap.getDateAction())
 					&& !dctapForUpdate.getMinutes().equals(
 							formDctap.getMinutes())) {
-				dctapForUpdate.setEtat(44);
+				dctapForUpdate.setEtat(3072);
 			} else if (!dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(43);
+				dctapForUpdate.setEtat(4096);
 			} else if (!dctapForUpdate.getMinutes().equals(
 					formDctap.getMinutes())) {
-				dctapForUpdate.setEtat(42);
+				dctapForUpdate.setEtat(2048);
 			} else if (!dctapForUpdate.getDateAction().equals(
 					formDctap.getDateAction())) {
-				dctapForUpdate.setEtat(41);
+				dctapForUpdate.setEtat(1024);
 			}
 
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
@@ -147,9 +137,9 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.getEtat() == 0 || dctap.getEtat() == 3 || dctap
-						.getEtat() > 40)) {
-			dctap.setEtat(6);
+				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
+						.getEtat() > 1023)) {
+			dctap.setEtat(64);
 			manager.updateDCTAP(dctap);
 		}
 
@@ -162,8 +152,8 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.getEtat() == 0 || dctap.getEtat() == 3)) {
-			dctap.setEtat(5);
+				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
+			dctap.setEtat(32);
 			manager.updateDCTAP(dctap);
 		}
 

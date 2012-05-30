@@ -29,6 +29,8 @@ public interface IFManagerGeTAP {
 
 	public int getAllDCTAPByEtat(int etat, Long id);
 
+	public int getAllDCTAPModifByEtat(Long id);
+
 	public DemandeConsoTempsAccPers getDCTAPById(Long id);
 
 	public void addDCTAP(DemandeConsoTempsAccPers dctap);
