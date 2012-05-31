@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.ldv.sio.getap.app.AccPersonalise;
+import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.FormAjoutAp;
@@ -43,6 +44,12 @@ public class AdminController {
 	private JDBC jdbc;
 	@Autowired
 	private PDF pdf;
+	@Autowired
+	private CSV csv;
+
+	public void setCsv(CSV csv) {
+		this.csv = csv;
+	}
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
@@ -487,6 +494,12 @@ public class AdminController {
 	@RequestMapping(value = "exportUserPdf")
 	public String exportUserPdf() {
 		pdf.export();
+		return "redirect:/app/admin/index";
+	}
+
+	@RequestMapping(value = "exportUserCsv")
+	public String exportUserCsv() {
+		csv.export();
 		return "redirect:/app/admin/index";
 	}
 
