@@ -14,7 +14,6 @@
 		</title>
 		<style type="text/css" media="screen">
 			@import url("<c:url value="/styles/css-framework/typo.css" />");
-			@import url("<c:url value="/styles/css-framework/layout.css" />");
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
 			@import url("<c:url value="/styles/css-framework/demos.css" />");
 			<% if(userAgent.indexOf("Firefox") != -1) { %>
@@ -23,16 +22,15 @@
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="../../styles/css-framework/jquery-ui.min.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="../../styles/css-framework/ui.theme.min.css" type="text/css" media="all" />
 			
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/sorttable.js"></script>	
-		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
+		<script type="text/javascript" src="../../styles/javascript/fonctions.js" defer="defer"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.js"></script>
-		<script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>
-		
+		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/jquery-ui.verymin.js"></script>
+		<!-- <script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>-->		
 		<script>
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
@@ -93,7 +91,8 @@
 	<body onload="testRole()">
 	
 	<div id="banniere">
-		<img src="<c:url value="/images/LogoGetap.png"/>" width="155px" height="66px"/>
+		<img src="<c:url value="/images/LogoGetap.png"/>" width="155px"
+		height="66px"/>
 	</div>
 	
 	<tiles:insertAttribute name="navigation" />

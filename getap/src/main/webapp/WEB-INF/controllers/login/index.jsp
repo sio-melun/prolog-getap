@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<img id="photo_accueil" src="<c:url value="/images/lycee2.jpg"/>" />
+<img id="photo_accueil" src="<c:url value="/images/lycee2.jpg"/>" width="307px" height="469px"/>
 <h1 style="text-align:center;">Bienvenue sur ProLog-Getap</h1>
 <p id="acceuil_text">l'application qui va changer votre quotidien !
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sodales
@@ -18,5 +18,5 @@
 	quam gravida.</p>
 <div id="logolycee">
 	<img src="<c:url value="/images/logolycee.jpg"/>" width="80px"
-		height="84px" />
+		height="83px" />
 </div>
