@@ -14,8 +14,8 @@
 	<table class="display dataTable">
 		<thead>
 			<tr class="header">
+				<th>Detail</th>
 				<th>Nom/Prénom</th>
-				<th>Login</th>
 				<th>Role</th>
 				<th>Classe</th>
 				<th>Modifier</th>
@@ -25,8 +25,12 @@
 		<tbody>
 			<c:forEach items="${users}" var="user">
 				<tr>
+					<td><a
+						href="<c:url value="/app/admin/detailUser?id=${user.id}" />"><img
+							src="../../images/detail.png"
+							onmouseover="this.src='../../images/detailHover.png';"
+							onmouseout="this.src='../../images/detail.png';" /></a></td>
 					<td style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${user.id}" />">${user.nom} ${user.prenom}</a></td>
-					<td>${user.login}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>
 					<td><a

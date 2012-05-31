@@ -13,6 +13,7 @@ import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.JDBC;
+import org.ldv.sio.getap.app.PDF;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -40,6 +41,8 @@ public class AdminController {
 
 	@Autowired
 	private JDBC jdbc;
+	@Autowired
+	private PDF pdf;
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
@@ -47,6 +50,10 @@ public class AdminController {
 
 	public void setJdbc(JDBC jdbc) {
 		this.jdbc = jdbc;
+	}
+
+	public void setPdf(PDF pdf) {
+		this.pdf = pdf;
 	}
 
 	/**
@@ -474,6 +481,12 @@ public class AdminController {
 				return "admin/index";
 			}
 		}
+		return "redirect:/app/admin/index";
+	}
+
+	@RequestMapping(value = "exportUserPdf")
+	public String exportUserPdf() {
+		pdf.export();
 		return "redirect:/app/admin/index";
 	}
 
