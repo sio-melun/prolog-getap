@@ -15,16 +15,16 @@
 						<div>Ajouter un Utilisateur</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
-						src="<c:url value="../../images/AjouterUser.png"/>" />
+						src="<c:url value="../../images/importcsv.png"/>" />
 						<div>Import d'élèves via CSV</div> </a>
 				</td>
-				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
-						src="<c:url value="../../images/AjouterUser.png"/>" />
-						<div>Export PDF d'utilisateurs</div> </a>
-				</td>
-					<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
-						src="<c:url value="../../images/AjouterUser.png"/>" />
+				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
+						src="<c:url value="../../images/exportcsv.png"/>" />
 						<div>Export CSV d'élèves</div> </a>
+				</td>
+					<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
+						src="<c:url value="../../images/pdfdl.png"/>" />
+						<div>Export PDF d'utilisateurs</div> </a>
 				</td>
 			</tr>
 		</table>
