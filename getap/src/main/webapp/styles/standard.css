@@ -226,9 +226,16 @@ td .bouton{
 #photo_accueil{
 	float:left;
 	/* border:2px solid rgb(102,0,50); */
-	box-shadow: 0 0 2px 1px rgb(102,0,50);
-	border-radius:20px;
-	margin-right:45px;
+	/* box-shadow: 0 0 2px 1px rgb(102,0,50); */
+	/* border-top-right-radius: 20px; */
+	box-shadow:1px -1px 3px 1px grey;
+	border-bottom-left-radius: 20px;
+	margin-left:-40px;
+	margin-top:-27px;
+	margin-right:30px;
+	width:340px;
+	height:540px
+	
 }
 
 .inputPerso{
