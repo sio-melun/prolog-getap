@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <img id="photo_accueil" src="<c:url value="/images/lycee2.jpg"/>" />
-<h1>Bienvenue sur ProLog-Getap</h1>
+<h1 style="text-align:center;">Bienvenue sur ProLog-Getap</h1>
 <p id="acceuil_text">l'application qui va changer votre quotidien !
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sodales
 	pretium nisl, in laoreet lectus lacinia at. Cras eget lectus nec nunc

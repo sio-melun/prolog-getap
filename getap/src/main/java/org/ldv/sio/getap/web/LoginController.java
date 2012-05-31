@@ -70,7 +70,7 @@ public class LoginController {
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
 			bindResult.rejectValue("login", "required",
-					"SVP un identifiant est attendu !");
+					"Un identifiant est attendu !");
 			return "login/authenticate";
 		}
 		if (bindResult.hasErrors()) {
@@ -79,7 +79,7 @@ public class LoginController {
 			User user = hauthLoginService.getAuthUser(userLoginCriteria);
 			if (user == null) {
 				bindResult.rejectValue("login", "required",
-						"SVP entrez un identifiant valide");
+						"Entrez un identifiant valide");
 				return "login/authenticate";
 			}
 			UtilSession.setUserInSession(user);

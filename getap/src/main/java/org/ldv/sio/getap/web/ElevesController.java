@@ -167,21 +167,21 @@ public class ElevesController {
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);
 
-		System.out.println("TEST :" + formAjout.getId());
-		System.out.println("TEST id eleve :" + formAjout.getEleveId());
-		if (manager.getAPById(formAjout.getAccPersId()) != null) {
-			System.out.println("TEST AP :"
-					+ manager.getAPById(formAjout.getAccPersId()).getNom());
-		} else {
-			System.out.println("TEST AP : " + formAjout.getAccPersNom());
-		}
-		System.out.println("TEST :" + model);
-		System.out.println("TEST annee scolaire : "
-				+ manager.getCurrentAnneeScolaire());
+		// System.out.println("TEST :" + formAjout.getId());
+		// System.out.println("TEST id eleve :" + formAjout.getEleveId());
+		// if (manager.getAPById(formAjout.getAccPersId()) != null) {
+		// System.out.println("TEST AP :"
+		// + manager.getAPById(formAjout.getAccPersId()).getNom());
+		// } else {
+		// System.out.println("TEST AP : " + formAjout.getAccPersNom());
+		// }
+		// System.out.println("TEST :" + model);
+		// System.out.println("TEST annee scolaire : "
+		// + manager.getCurrentAnneeScolaire());
 
-		if (bindResult.hasErrors())
+		if (bindResult.hasErrors()) {
 			return "eleve/ajoutdctap";
-		else {
+		} else {
 			AccPersonalise acc = new AccPersonalise(null,
 					formAjout.getAccPersNom(), 1, formAjout.getEleveId());
 			if (manager.getAPById(formAjout.getAccPersId()) != null) {
