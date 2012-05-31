@@ -703,10 +703,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return listeRoles;
 	}
 
-	public List<User> search(UserSearchCriteria userSearchCriteria) {
+	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query("select * from user where nom like "
-				+ "'" + query + "%'", new UserMapper());
+		return this.jdbcTemplate.query(
+				"select * from user where role = 'eleve' and nom like " + "'"
+						+ query + "%'", new UserMapper());
 	}
 
 	public List<User> searchProf(UserSearchCriteria userSearchCriteria) {

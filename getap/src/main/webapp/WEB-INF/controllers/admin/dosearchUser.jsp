@@ -25,7 +25,7 @@
 		<tbody>
 			<c:forEach items="${users}" var="user">
 				<tr>
-					<td style="text-align:left;">${user.nom} ${user.prenom}</td>
+					<td style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${user.id}" />">${user.nom} ${user.prenom}</a></td>
 					<td>${user.login}</td>
 					<td>${user.role}</td>
 					<td>${user.classe.nom}</td>

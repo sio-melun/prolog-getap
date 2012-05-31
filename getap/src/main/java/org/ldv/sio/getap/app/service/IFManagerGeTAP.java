@@ -118,7 +118,7 @@ public interface IFManagerGeTAP {
 	public List<String> getAllAnneeScolaire();
 
 	// Opération Search User
-	public List<User> search(UserSearchCriteria userSearchCriteria);
+	public List<User> searchEleve(UserSearchCriteria userSearchCriteria);
 
 	public List<User> searchProf(UserSearchCriteria userSearchCriteria);
 

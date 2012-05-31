@@ -2,11 +2,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <br />
 
-<h5 style="position: relative; top: 35px;">Administration
-	logistique</h5>
+<h5 style="position: relative; top: 35px;">Gestion utilisateur</h5>
 <div id="accordion">
 	<h3>
-		<a href="#">Gestion d'utilisateur</a>
+		<a href="#">Import/Export d'utilisateurs</a>
 	</h3>
 	<div>
 		<table>
@@ -32,7 +31,7 @@
 					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
-								<label for="query">Recherche d'utilisateurs :</label>
+								<label for="query">Recherche d'élèves :</label>
 								<div class="input">
 									<form:input path="query" />
 									<input type="image" src="../../images/search.png"
@@ -68,74 +67,6 @@
 			<tr>
 				<form:form modelAttribute="userSearchCriteria"
 					action="dosearchForClasse" method="get">
-					<form:errors path="*" cssClass="errors" />
-					<div class="section inputPerso">
-						<fieldset>
-							<div class="form-row">
-								<label for="query">Recherche par classe :</label>
-								<div>
-									<form:select path="query" items="${lesClasses}" itemValue="nom"
-										itemLabel="nom"></form:select>
-									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
-										onmouseover="this.src='../../images/searchHover.png';"
-										onmouseout="this.src='../../images/search.png';" />
-								</div>
-							</div>
-						</fieldset>
-					</div>
-				</form:form>
-			</tr>
-		</table>
-	</div>
-	<h3>
-		<a href="#">Recherche des demandes</a>
-	</h3>
-	<div>
-		<table>
-			<tr>
-				<form:form modelAttribute="userSearchCriteria"
-					action="doSearchDctap" method="get">
-					<form:errors path="*" cssClass="errors" />
-					<div class="section inputPerso">
-						<fieldset>
-							<div class="form-row">
-								<label for="query">Recherche par élève :</label>
-								<div class="input">
-									<form:input path="query" />
-									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
-										onmouseover="this.src='../../images/searchHover.png';"
-										onmouseout="this.src='../../images/search.png';" />
-								</div>
-							</div>
-						</fieldset>
-					</div>
-				</form:form>
-			</tr>
-			<tr>
-				<form:form modelAttribute="userSearchCriteria"
-					action="doSearchDctap" method="get">
-					<form:errors path="*" cssClass="errors" />
-					<div class="section inputPerso">
-						<fieldset>
-							<div class="form-row">
-								<label for="query">Recherche par professeur :</label>
-								<div class="input">
-									<form:input path="query" />
-									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
-										onmouseover="this.src='../../images/searchHover.png';"
-										onmouseout="this.src='../../images/search.png';" />
-								</div>
-							</div>
-						</fieldset>
-					</div>
-				</form:form>
-			</tr>
-			<tr>
-				<form:form modelAttribute="userSearchCriteria"
-					action="doSearchDctapClasse" method="get">
 					<form:errors path="*" cssClass="errors" />
 					<div class="section inputPerso">
 						<fieldset>

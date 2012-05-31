@@ -225,7 +225,8 @@ td .bouton{
 }
 #photo_accueil{
 	float:left;
-	border:2px solid rgb(102,0,50);
+	/* border:2px solid rgb(102,0,50); */
+	box-shadow: 0 0 2px 1px rgb(102,0,50);
 	border-radius:20px;
 	margin-right:45px;
 }
@@ -235,4 +236,31 @@ td .bouton{
 	font-size:15px;
 	font-weight: bolder;
 	
+}
+
+#stats tbody td{
+	border: 1px dotted grey;
+}
+
+#stats thead th{
+	border-right: 2px outset white;
+}
+
+#statsTotal{
+	font-weight: bolder;
+}
+
+#statsValide{
+	color: green;
+	font-weight: bold;
+}
+
+#statsAttente{
+	color: rgb(230,110,0);
+	font-weight: bold;
+}
+
+#statsRefuse{
+	color: red;
+	font-weight: bold;
 }

@@ -120,6 +120,17 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value = "detailUser", method = RequestMethod.GET)
+	public String detailUser(@RequestParam("id") String id, Model model) {
+		User user = manager.getUserById(Long.valueOf(id));
+		model.addAttribute("utilisateur", user);
+		model.addAttribute("sesDCTAPeleve", manager.getAllDCTAPByEleve(user));
+		model.addAttribute("sesDCTAPprof",
+				manager.getAllDCTAPByProfInterv(user));
+
+		return "admin/detailUser";
+	}
+
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
 	public String ajoutAp(FormAjoutAp formAjout, Model model) {
 
@@ -305,30 +316,13 @@ public class AdminController {
 		if (userSearchCriteria.getQuery() == null
 				|| "".equals(userSearchCriteria.getQuery())) {
 			bindResult.rejectValue("query", "required",
-					"Please enter valid search criteria");
+					"Entrez un critère de recherche valide");
 		}
 		if (bindResult.hasErrors()) {
 			return "admin/searchUser";
 		} else {
-			model.addAttribute("users", manager.search(userSearchCriteria));
+			model.addAttribute("users", manager.searchEleve(userSearchCriteria));
 			return "admin/dosearchUser";
-		}
-	}
-
-	@RequestMapping(value = "doSearchDctap", method = RequestMethod.GET)
-	public String searchDctap(UserSearchCriteria userSearchCriteria,
-			BindingResult bindResult, Model model) {
-
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
-			bindResult.rejectValue("query", "required",
-					"Please enter valid search criteria");
-		}
-		if (bindResult.hasErrors()) {
-			return "admin/searchDctapUser";
-		} else {
-			model.addAttribute("dctap", manager.searchDctap(userSearchCriteria));
-			return "admin/doSearchDctap";
 		}
 	}
 
@@ -346,24 +340,6 @@ public class AdminController {
 		} else {
 			model.addAttribute("users", manager.searchProf(userSearchCriteria));
 			return "admin/dosearchUser";
-		}
-	}
-
-	@RequestMapping(value = "doSearchDctapClasse", method = RequestMethod.GET)
-	public String searchDctapClasse(UserSearchCriteria userSearchCriteria,
-			BindingResult bindResult, Model model) {
-
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
-			bindResult.rejectValue("query", "required",
-					"Entrez un critère de recherche valide");
-		}
-		if (bindResult.hasErrors()) {
-			return "admin/searchDctapClasse";
-		} else {
-			model.addAttribute("dctap",
-					manager.searchDctapClasse(userSearchCriteria));
-			return "admin/doSearchDctap";
 		}
 	}
 

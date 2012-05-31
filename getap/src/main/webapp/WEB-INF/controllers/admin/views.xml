@@ -50,34 +50,6 @@
 			value="/WEB-INF/controllers/admin/searchClasse.jsp" />
 	</definition>
 
-	<definition name="admin/searchDctapUser" extends="standard-layout">
-		<put-attribute name="title"
-			value="Recherche des demandes d'un utilisateur" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/admin/searchDctapUser.jsp" />
-	</definition>
-	
-	<definition name="admin/searchDctapProf" extends="standard-layout">
-		<put-attribute name="title"
-			value="Recherche des demandes par professeur" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/admin/searchDctapProf.jsp" />
-	</definition>
-	
-	<definition name="admin/searchDctapClasse" extends="standard-layout">
-		<put-attribute name="title"
-			value="Recherche des demandes par classe" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/admin/searchDctapClasse.jsp" />
-	</definition>
-
-	<definition name="admin/doSearchDctap" extends="standard-layout">
-		<put-attribute name="title"
-			value="Resultat recherche des demandes d'utilisateur" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/admin/doSearchDctap.jsp" />
-	</definition>
-
 	<definition name="admin/doajout" extends="standard-layout">
 		<put-attribute name="title" value="Ajout d'un utilisateur" />
 		<put-attribute name="body"
@@ -120,12 +92,6 @@
 			value="/WEB-INF/controllers/admin/editAp.jsp" />
 	</definition>
 	
-	<definition name="admin/listAp" extends="standard-layout">
-		<put-attribute name="title" value="GETAP : edition d'AP" />
-		<put-attribute name="body"
-			value="/WEB-INF/controllers/admin/listAp.jsp" />
-	</definition>
-	
 	<definition name="admin/editDiscipline" extends="standard-layout">
 		<put-attribute name="title" value="GETAP : edition de Discipline" />
 		<put-attribute name="body"
@@ -136,6 +102,12 @@
 		<put-attribute name="title" value="GETAP : edition de Classe" />
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/editClasse.jsp" />
+	</definition>
+	
+	<definition name="admin/detailUser" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : detail de l'utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/detailUser.jsp" />
 	</definition>
 	
 

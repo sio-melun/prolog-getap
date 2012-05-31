@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <br />
 
-<h5 style="position: relative; top: 35px;">Administration logiciel</h5>
+<h5 style="position: relative; top: 35px;">Administration</h5>
 <div id="accordion">
 	<h3>
 		<a href="#">Gestion des aides personnalisées</a>
