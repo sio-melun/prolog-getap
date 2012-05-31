@@ -22,11 +22,11 @@
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
-		<link rel="stylesheet" href="../../styles/css-framework/jquery-ui.min.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="../../styles/css-framework/ui.theme.min.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
 			
 		<script type="text/javascript" src="../../styles/javascript/prefix.js"></script>
-		<script type="text/javascript" src="../../styles/javascript/fonctions.js" defer="defer"></script>	
+		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery-ui.verymin.js"></script>
