@@ -54,7 +54,7 @@ public interface IFManagerGeTAP {
 
 	public User getUserById(Long id);
 
-	public void addUser(User user);
+	public User addUser(User user);
 
 	public void updatePass(User user);
 
