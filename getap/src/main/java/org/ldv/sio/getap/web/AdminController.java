@@ -7,6 +7,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.FormAccueilPerso;
 import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.FormAjoutClasse;
 import org.ldv.sio.getap.app.FormAjoutDiscipline;
@@ -69,9 +70,11 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index(UserSearchCriteria userSearchCriteria,
-			FormAjoutAp formAjout, FormAjoutDiscipline formAjoutDis,
-			FormAjoutClasse formAjoutClasse, Model model) {
+	public void index(
+			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
+			UserSearchCriteria userSearchCriteria, FormAjoutAp formAjout,
+			FormAjoutDiscipline formAjoutDis, FormAjoutClasse formAjoutClasse,
+			Model model) {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
@@ -79,8 +82,9 @@ public class AdminController {
 
 	@RequestMapping(value = "logiciel", method = RequestMethod.GET)
 	public void logiciel(UserSearchCriteria userSearchCriteria,
-			FormAjoutAp formAjout, FormAjoutDiscipline formAjoutDis,
-			FormAjoutClasse formAjoutClasse, Model model) {
+			FormAccueilPerso formAccueilPerso, FormAjoutAp formAjout,
+			FormAjoutDiscipline formAjoutDis, FormAjoutClasse formAjoutClasse,
+			Model model) {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
@@ -515,5 +519,30 @@ public class AdminController {
 			manager.updatePass(user);
 		}
 		return "redirect:/app/admin/index";
+	}
+
+	@RequestMapping(value = "doPerso", method = RequestMethod.POST)
+	public String doPerso(FormAccueilPerso form, Model model) {
+		FileOutputStream img, logo = null;
+		String imgPath = System.getProperty("java.io.tmpdir")
+				+ form.getImg().getOriginalFilename();
+		String logoPath = System.getProperty("java.io.tmpdir")
+				+ form.getLogo().getOriginalFilename();
+
+		try {
+			img = new FileOutputStream(new File(imgPath));
+			logo = new FileOutputStream(new File(logoPath));
+
+			img.write(form.getImg().getFileItem().get());
+			logo.write(form.getLogo().getFileItem().get());
+
+			img.close();
+			logo.close();
+
+		} catch (Exception e) {
+			System.out.println("Error while saving file : ");
+			e.printStackTrace();
+		}
+		return "admin/logiciel";
 	}
 }

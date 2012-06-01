@@ -29,8 +29,10 @@
 			</tr>
 			<table class="legend2">
 				<tr>
-					<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
-					<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
+					<td><img src="../../images/modif.png" width="24" height="24" />
+						: Modifier</td>
+					<td><img src="../../images/suppr.png" width="24" height="24" />
+						: Supprimer</td>
 				</tr>
 			</table>
 			<tr>
@@ -84,8 +86,10 @@
 		</form:form>
 		<table class="legend2">
 			<tr>
-				<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
-				<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
+				<td><img src="../../images/modif.png" width="24" height="24" />
+					: Modifier</td>
+				<td><img src="../../images/suppr.png" width="24" height="24" />
+					: Supprimer</td>
 			</tr>
 		</table>
 		<tr>
@@ -139,8 +143,10 @@
 		</form:form>
 		<table class="legend2">
 			<tr>
-				<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
-				<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
+				<td><img src="../../images/modif.png" width="24" height="24" />
+					: Modifier</td>
+				<td><img src="../../images/suppr.png" width="24" height="24" />
+					: Supprimer</td>
 			</tr>
 		</table>
 		<tr>
@@ -171,5 +177,44 @@
 				</tbody>
 			</table>
 		</tr>
+	</div>
+	<h3>
+		<a href="#">Personnaliser la page d'accueil</a>
+	</h3>
+	<div>
+		<form:form modelAttribute="formAccueilPerso" action="doPerso"
+			method="post">
+			<form:errors path="*" cssClass="errors" />
+
+			<div class="section inputPerso">
+				<fieldset>
+					<div class="form-row">
+						<label for="img">images principale :</label>
+						<div class="input">
+							<form:input type="file" path="img" size="40" />
+						</div>
+					</div>
+					<div class="form-row">
+						<label for="logo">logo :</label>
+						<div class="input">
+							<form:input type="file" path="logo" size="40" />
+						</div>
+					</div>
+					<div class="form-row">
+						<label for="titre">Titre :</label>
+						<div class="input">
+							<form:input type="titre" path="titre" size="40" />
+						</div>
+					</div>
+					<div class="form-row">
+						<label for="texte">Texte d'accueil :</label>
+						<div class="input">
+							<form:textarea type="text" path="texte" rows="3" cols="38" />
+							<input type="submit" value="Enregistrer" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</form:form>
 	</div>
 </div>
