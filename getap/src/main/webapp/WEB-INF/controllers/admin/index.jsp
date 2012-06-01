@@ -11,19 +11,19 @@
 		<table>
 			<tr>
 				<td><a href="<c:url value="/app/admin/ajoutUser" />"><img
-						src="<c:url value="../../images/AjouterUser.png"/>" />
+						src="<c:url value="../../images/AjouterUser.png"/>" width="64" height="68"/>
 						<div>Ajouter un Utilisateur</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
-						src="<c:url value="../../images/importcsv.png"/>" />
+						src="<c:url value="../../images/importcsv.png"/>" width="64" height="64"/>
 						<div>Import d'élèves via CSV</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
-						src="<c:url value="../../images/exportcsv.png"/>" />
+						src="<c:url value="../../images/exportcsv.png"/>"  width="64" height="64"/>
 						<div>Export CSV d'élèves</div> </a>
 				</td>
 					<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
-						src="<c:url value="../../images/pdfdl.png"/>" />
+						src="<c:url value="../../images/pdfdl.png"/>"  width="64" height="64"/>
 						<div>Export PDF d'utilisateurs</div> </a>
 				</td>
 			</tr>
@@ -45,7 +45,7 @@
 								<div class="input">
 									<form:input path="query" />
 									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
+										alt="Rechercher" width="24" height="24"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -65,7 +65,7 @@
 								<div class="input">
 									<form:input path="query" />
 									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
+										alt="Rechercher" width="24" height="24"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>
@@ -86,7 +86,7 @@
 									<form:select path="query" items="${lesClasses}" itemValue="nom"
 										itemLabel="nom"></form:select>
 									<input type="image" src="../../images/search.png"
-										alt="Rechercher"
+										alt="Rechercher" width="24" height="24"
 										onmouseover="this.src='../../images/searchHover.png';"
 										onmouseout="this.src='../../images/search.png';" />
 								</div>

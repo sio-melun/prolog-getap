@@ -10,10 +10,10 @@
 <c:if test="${not empty mesdctaps}">
 	<table class="legend2">
 		<tr>
-			<td><img src="../../images/valid.png" /> : Confirmer</td>
-			<td><img src="../../images/modif.png" /> : Modifier</td>
-			<td><img src="../../images/suppr.png" /> : Supprimer</td>
-			<td><img src="../../images/refuseModif.png" /> : Refuser</td>
+			<td><img src="../../images/valid.png" width="24" height="24"/> : Confirmer</td>
+			<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
+			<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
+			<td><img src="../../images/refuseModif.png" width="24" height="24"/> : Refuser</td>
 		</tr>
 	</table>
 	<h5 style="position: relative; top: 35px;">Demandes de validation
@@ -44,12 +44,12 @@
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img
-										src="../../images/modif.png"
+										src="../../images/modif.png" width="24" height="24"
 										onmouseover="this.src='../../images/modifHover.png';"
 										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 								<td><a
 									href="<c:url value="/app/eleve/delete/${dctap.id}" />"><img
-										src="../../images/suppr.png"
+										src="../../images/suppr.png" width="24" height="24"
 										onmouseover="this.src='../../images/supprHover.png';"
 										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
@@ -98,13 +98,13 @@
 								</c:if>
 								<td><a
 									href="<c:url value="/app/eleve/valid/${dctap.id}" />"><img
-										src="../../images/valid.png"
+										src="../../images/valid.png" width="24" height="24"
 										onmouseover="this.src='../../images/validHover.png';"
 										onmouseout="this.src='../../images/valid.png';" /> </a>
 								</td>
 								<td><a
 									href="<c:url value="/app/eleve/refuse/${dctap.id}" />"><img
-										src="../../images/refuseModif.png"
+										src="../../images/refuseModif.png" width="24" height="24"
 										onmouseover="this.src='../../images/refuseModifHover.png';"
 										onmouseout="this.src='../../images/refuseModif.png';" /> </a>
 								</td>

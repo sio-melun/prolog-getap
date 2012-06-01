@@ -67,7 +67,7 @@
 					taget="_self"><b>Mon compte</b></a></li>
 				<li><a class="deco" href="<c:url value="/app/login/logout" />"
 					target="_self"><img
-						src="<c:url value="../../images/CoTransparent.png"/>" /> </a></li>
+						src="<c:url value="../../images/CoTransparent.png"/>"  width="131" height="23"/> </a></li>
 
 				<%-- <li><img class="deco" src="<c:url value="../../images/BoutonTransparent.png"/>" /></li> --%>
 			</ul>

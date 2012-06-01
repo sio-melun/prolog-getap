@@ -42,7 +42,7 @@
 					"sInfo": "Affiche de _START_ à _END_ sur _TOTAL_ éléments",
 					"sInfoEmpty": "Aucun élément",
 					"sInfoFiltered": "",
-					"sSearch": "<img src='../../images/search.png'>",
+					"sSearch": "<img src='../../images/search.png' width='24' height='24'>",
 					"sLengthMenu": 'Affiche <select>'+
 					 	'<option value="5">5</option>'+
 					 	'<option value="10">10</option>'+

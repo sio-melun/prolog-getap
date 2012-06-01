@@ -26,7 +26,7 @@
 							<tr>
 								<td>
 									<a href="<c:url value="/app/prof-principal/detailUser?id=${eleve.id}" />">
-										<img src="../../images/detail.png"
+										<img src="../../images/detail.png" width="24" height="24"
 											onmouseover="this.src='../../images/detailHover.png';"
 											onmouseout="this.src='../../images/detail.png';" />
 									</a>

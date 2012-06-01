@@ -29,8 +29,8 @@
 			</tr>
 			<table class="legend2">
 				<tr>
-					<td><img src="../../images/modif.png" /> : Modifier</td>
-					<td><img src="../../images/suppr.png" /> : Supprimer</td>
+					<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
+					<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
 				</tr>
 			</table>
 			<tr>
@@ -48,11 +48,11 @@
 								<td>${ap.nom}</td>
 								<td><a
 									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
-										src="../../images/modif.png"
+										src="../../images/modif.png" width="24" height="24"
 										onmouseover="this.src='../../images/modifHover.png';"
 										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 								<td><a href="<c:url value="/app/admin/deleteAP/${ap.id}"/>"><img
-										src="../../images/suppr.png"
+										src="../../images/suppr.png" width="24" height="24"
 										onmouseover="this.src='../../images/supprHover.png';"
 										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 							</tr>
@@ -84,8 +84,8 @@
 		</form:form>
 		<table class="legend2">
 			<tr>
-				<td><img src="../../images/modif.png" /> : Modifier</td>
-				<td><img src="../../images/suppr.png" /> : Supprimer</td>
+				<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
+				<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
 			</tr>
 		</table>
 		<tr>
@@ -103,12 +103,12 @@
 							<td>${classe.nom}</td>
 							<td><a
 								href="<c:url value="/app/admin/editClasse?id=${classe.id}" />"><img
-									src="../../images/modif.png"
+									src="../../images/modif.png" width="24" height="24"
 									onmouseover="this.src='../../images/modifHover.png';"
 									onmouseout="this.src='../../images/modif.png';" /> </a></td>
 							<td><a
 								href="<c:url value="/app/admin/deleteClasse/${classe.id}"/>"><img
-									src="../../images/suppr.png"
+									src="../../images/suppr.png" width="24" height="24"
 									onmouseover="this.src='../../images/supprHover.png';"
 									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 						</tr>
@@ -139,8 +139,8 @@
 		</form:form>
 		<table class="legend2">
 			<tr>
-				<td><img src="../../images/modif.png" /> : Modifier</td>
-				<td><img src="../../images/suppr.png" /> : Supprimer</td>
+				<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
+				<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
 			</tr>
 		</table>
 		<tr>
@@ -158,12 +158,12 @@
 							<td>${dis.nom}</td>
 							<td><a
 								href="<c:url value="/app/admin/editDiscipline?id=${dis.id}" />"><img
-									src="../../images/modif.png"
+									src="../../images/modif.png" width="24" height="24"
 									onmouseover="this.src='../../images/modifHover.png';"
 									onmouseout="this.src='../../images/modif.png';" /> </a></td>
 							<td><a
 								href="<c:url value="/app/admin/deleteDiscipline/${dis.id}"/>"><img
-									src="../../images/suppr.png"
+									src="../../images/suppr.png" width="24" height="24"
 									onmouseover="this.src='../../images/supprHover.png';"
 									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
 						</tr>
