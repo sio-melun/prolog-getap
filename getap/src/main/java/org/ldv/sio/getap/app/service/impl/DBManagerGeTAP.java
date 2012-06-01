@@ -168,7 +168,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.jdbcTemplate
 				.query("select user.*, sum(dctap.dureeAP) as dureeTotal "
 						+ "from user "
-						+ "left join dctap on dctap.idEleve = user.id and (dctap.Etat = 1 or dctap.Etat = 5) "
+						+ "left join dctap on dctap.idEleve = user.id and (dctap.Etat = 1 or dctap.Etat = 32) "
 						+ "left join classe on classe.id = user.idClasse where user.role = 'eleve'"
 						+ "group by user.id order by dureeTotal DESC, user.nom",
 						new UserMapper());

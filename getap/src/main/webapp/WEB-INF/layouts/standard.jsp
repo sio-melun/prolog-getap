@@ -71,8 +71,8 @@
   			
   			$(function(){
   			// Accordion
-  			$("#accordion").accordion({ header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});
-  			$("#accordion2").accordion({ header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});		
+  			$("#accordion").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
+  			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});		
   			});
   		</script>
   		

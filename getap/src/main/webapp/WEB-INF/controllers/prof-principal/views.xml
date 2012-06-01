@@ -16,4 +16,10 @@
 		<put-attribute name="body" value="/WEB-INF/controllers/prof-principal/listEleve.jsp" />
 	</definition>
 	
+	<definition name="prof-principal/detailUser" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : detail de l'utilisateur" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-principal/detailUser.jsp" />
+	</definition>
+	
 </tiles-definitions>

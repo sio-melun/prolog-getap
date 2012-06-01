@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Web controller for hotel related actions.
@@ -66,4 +67,16 @@ public class ProfPrinController {
 			return "prof-principal/index";
 		}
 	}
+
+	@RequestMapping(value = "detailUser", method = RequestMethod.GET)
+	public String detailUser(@RequestParam("id") String id, Model model) {
+		User user = manager.getUserById(Long.valueOf(id));
+		model.addAttribute("utilisateur", user);
+		model.addAttribute("sesDCTAPeleve", manager.getAllDCTAPByEleve(user));
+		model.addAttribute("sesDCTAPprof",
+				manager.getAllDCTAPByProfInterv(user));
+
+		return "admin/detailUser";
+	}
+
 }
