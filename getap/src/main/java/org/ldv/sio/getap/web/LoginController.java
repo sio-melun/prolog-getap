@@ -1,5 +1,7 @@
 package org.ldv.sio.getap.web;
 
+import java.util.List;
+
 import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserLoginCriteria;
@@ -47,7 +49,13 @@ public class LoginController {
 	 *            The criteria to authenticate
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index(UserLoginCriteria userSearchCriteria) {
+	public void index(UserLoginCriteria userSearchCriteria, Model model) {
+		List<String> infos = manager.getInfoAccueil();
+
+		model.addAttribute("img", infos.get(0));
+		model.addAttribute("logo", infos.get(1));
+		model.addAttribute("titre", infos.get(2));
+		model.addAttribute("texte", infos.get(3));
 
 	}
 

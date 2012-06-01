@@ -52,11 +52,13 @@
 									href="<c:url value="/app/admin/editAp?id=${ap.id}" />"><img
 										src="../../images/modif.png" width="24" height="24"
 										onmouseover="this.src='../../images/modifHover.png';"
-										onmouseout="this.src='../../images/modif.png';" /> </a></td>
+										onmouseout="this.src='../../images/modif.png';" /> </a>
+								</td>
 								<td><a href="<c:url value="/app/admin/deleteAP/${ap.id}"/>"><img
 										src="../../images/suppr.png" width="24" height="24"
 										onmouseover="this.src='../../images/supprHover.png';"
-										onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+										onmouseout="this.src='../../images/suppr.png';" /> </a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -109,12 +111,14 @@
 								href="<c:url value="/app/admin/editClasse?id=${classe.id}" />"><img
 									src="../../images/modif.png" width="24" height="24"
 									onmouseover="this.src='../../images/modifHover.png';"
-									onmouseout="this.src='../../images/modif.png';" /> </a></td>
+									onmouseout="this.src='../../images/modif.png';" /> </a>
+							</td>
 							<td><a
 								href="<c:url value="/app/admin/deleteClasse/${classe.id}"/>"><img
 									src="../../images/suppr.png" width="24" height="24"
 									onmouseover="this.src='../../images/supprHover.png';"
-									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+									onmouseout="this.src='../../images/suppr.png';" /> </a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -166,12 +170,14 @@
 								href="<c:url value="/app/admin/editDiscipline?id=${dis.id}" />"><img
 									src="../../images/modif.png" width="24" height="24"
 									onmouseover="this.src='../../images/modifHover.png';"
-									onmouseout="this.src='../../images/modif.png';" /> </a></td>
+									onmouseout="this.src='../../images/modif.png';" /> </a>
+							</td>
 							<td><a
 								href="<c:url value="/app/admin/deleteDiscipline/${dis.id}"/>"><img
 									src="../../images/suppr.png" width="24" height="24"
 									onmouseover="this.src='../../images/supprHover.png';"
-									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+									onmouseout="this.src='../../images/suppr.png';" /> </a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -183,19 +189,19 @@
 	</h3>
 	<div>
 		<form:form modelAttribute="formAccueilPerso" action="doPerso"
-			method="post">
+			enctype="multipart/form-data" method="post">
 			<form:errors path="*" cssClass="errors" />
 
 			<div class="section inputPerso">
 				<fieldset>
 					<div class="form-row">
-						<label for="img">images principale :</label>
+						<label for="img">Lien de l'image principale :</label>
 						<div class="input">
 							<form:input type="file" path="img" size="40" />
 						</div>
 					</div>
 					<div class="form-row">
-						<label for="logo">logo :</label>
+						<label for="logo">Lien du logo :</label>
 						<div class="input">
 							<form:input type="file" path="logo" size="40" />
 						</div>

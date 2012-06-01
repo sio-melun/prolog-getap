@@ -117,6 +117,11 @@ public interface IFManagerGeTAP {
 
 	public List<String> getAllAnneeScolaire();
 
+	// Opération sur la personnalisation de l'accueil
+	public void addAccueil(String img, String logo, String titre, String texte);
+
+	public List<String> getInfoAccueil();
+
 	// Opération Search User
 	public List<User> searchEleve(UserSearchCriteria userSearchCriteria);
 

@@ -541,10 +541,19 @@ public class AdminController {
 			img.close();
 			logo.close();
 
+			String titre = form.getTitre();
+			String texte = form.getTexte();
+
+			String[] urlimg = imgPath.split("\\");
+			System.out.println(urlimg);
+			String split = urlimg[-1];
+			System.out.println(split);
+
+			manager.addAccueil(imgPath, logoPath, titre, texte);
 		} catch (Exception e) {
 			System.out.println("Error while saving file : ");
 			e.printStackTrace();
 		}
-		return "admin/logiciel";
+		return "redirect:/app/admin/logiciel";
 	}
 }
