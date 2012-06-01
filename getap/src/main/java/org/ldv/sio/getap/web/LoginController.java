@@ -37,9 +37,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "apropos", method = RequestMethod.GET)
-	public String apropos() {
+	public String apropos(UserLoginCriteria userLoginCriteria) {
 
-		return "profil/apropos";
+		return "login/apropos";
 	}
 
 	/**
@@ -75,6 +75,13 @@ public class LoginController {
 			UserLoginCriteria userLoginCriteria, BindingResult bindResult,
 			Model model, UserSearchCriteria userSearchCriteria) {
 
+		List<String> infos = manager.getInfoAccueil();
+
+		model.addAttribute("img", infos.get(0));
+		model.addAttribute("logo", infos.get(1));
+		model.addAttribute("titre", infos.get(2));
+		model.addAttribute("texte", infos.get(3));
+
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
 			bindResult.rejectValue("login", "required",
@@ -107,8 +114,14 @@ public class LoginController {
 	 * @return Success view
 	 */
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(UserLoginCriteria userLoginCriteria) {
+	public String logout(UserLoginCriteria userLoginCriteria, Model model) {
 		UtilSession.setUserInSession(null);
+		List<String> infos = manager.getInfoAccueil();
+
+		model.addAttribute("img", infos.get(0));
+		model.addAttribute("logo", infos.get(1));
+		model.addAttribute("titre", infos.get(2));
+		model.addAttribute("texte", infos.get(3));
 		return "login/index";
 	}
 

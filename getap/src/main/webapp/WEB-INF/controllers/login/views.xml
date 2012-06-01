@@ -22,10 +22,10 @@
 		<put-attribute name="body" value="/WEB-INF/controllers/login/out.jsp" />
 	</definition>
 	
-	<definition name="profil/apropos" extends="standard-layout">
+	<definition name="login/apropos" extends="standard-layout">
 		<put-attribute name="title" value="A Propos" />
 		<put-attribute name="body"
-			value="/WEB-INF/controllers/profil/apropos.jsp" />
+			value="/WEB-INF/controllers/login/apropos.jsp" />
 	</definition>
 	
 </tiles-definitions>
