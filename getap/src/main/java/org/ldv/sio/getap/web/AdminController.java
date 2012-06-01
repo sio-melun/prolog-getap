@@ -132,9 +132,11 @@ public class AdminController {
 						formAjout.getNom(), classe, formAjout.getRoleNom(), dis);
 			}
 
-			manager.addUser(user);
+			User userAjoute = manager.addUser(user);
 
-			return "redirect:/app/admin/index";
+			model.addAttribute("userAjoute", userAjoute);
+
+			return "admin/doajout";
 		}
 	}
 
@@ -205,7 +207,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "ajoutDiscipline", method = RequestMethod.GET)
-	public String ajoutAp(FormAjoutDiscipline formAjout, Model model) {
+	public String ajoutDiscipline(FormAjoutDiscipline formAjout, Model model) {
 
 		return "admin/ajoutDiscipline";
 	}
@@ -446,7 +448,7 @@ public class AdminController {
 
 			manager.updateUser(userForUpdate);
 
-			return "redirect:/app/admin/index";
+			return "admin/doEditUser";
 		}
 	}
 

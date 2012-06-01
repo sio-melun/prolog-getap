@@ -187,7 +187,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return user;
 	}
 
-	public void addUser(User user) {
+	public User addUser(User user) {
 		String nom = user.getNom();
 		String prenom = user.getPrenom();
 		String login;
@@ -282,6 +282,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 							new Object[] { user.getDiscipline().getId(),
 									user3.getId() });
 		}
+
+		User userInfo = new User();
+		userInfo.setLogin(login);
+		userInfo.setPass(mdp);
+		return userInfo;
 
 	}
 
