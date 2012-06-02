@@ -76,7 +76,7 @@ public class ProfPrinController {
 		model.addAttribute("sesDCTAPprof",
 				manager.getAllDCTAPByProfInterv(user));
 
-		return "admin/detailUser";
+		return "prof-principal/detailUser";
 	}
 
 }

@@ -91,33 +91,19 @@ public class ProfInterController {
 
 			AccPersonalise acc = manager.getAPById(formDctap.getAccPersId());
 			String accPersNom = acc.getNom();
+
 			if (!dctapForUpdate.getDateAction().equals(
 					formDctap.getDateAction())
-					&& !dctapForUpdate.getMinutes().equals(
-							formDctap.getMinutes())
-					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(7168);
-			} else if (!dctapForUpdate.getDateAction().equals(
-					formDctap.getDateAction())
-					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(5120);
-			} else if (!dctapForUpdate.getMinutes().equals(
-					formDctap.getMinutes())
-					&& !dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(6144);
-			} else if (!dctapForUpdate.getDateAction().equals(
-					formDctap.getDateAction())
-					&& !dctapForUpdate.getMinutes().equals(
-							formDctap.getMinutes())) {
-				dctapForUpdate.setEtat(3072);
-			} else if (!dctapForUpdate.getAccPers().getNom().equals(accPersNom)) {
-				dctapForUpdate.setEtat(4096);
-			} else if (!dctapForUpdate.getMinutes().equals(
-					formDctap.getMinutes())) {
-				dctapForUpdate.setEtat(2048);
-			} else if (!dctapForUpdate.getDateAction().equals(
-					formDctap.getDateAction())) {
-				dctapForUpdate.setEtat(1024);
+					&& !dctapForUpdate.isDateModifiee()) {
+				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 1024);
+			}
+			if (!dctapForUpdate.getMinutes().equals(formDctap.getMinutes())
+					&& !dctapForUpdate.isDureeModifiee()) {
+				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 2048);
+			}
+			if (!dctapForUpdate.getAccPers().getNom().equals(accPersNom)
+					&& !dctapForUpdate.isApModifiee()) {
+				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 4096);
 			}
 
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
