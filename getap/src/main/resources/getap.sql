@@ -243,3 +243,22 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `param_accueil`
+--
+
+CREATE TABLE IF NOT EXISTS `param_accueil` (
+  `img` varchar(200) NULL,
+  `logo` varchar(200) NULL,
+  `titre` varchar(200) NULL,
+  `texte` longtext NULL,
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `param_annee`
+--
+
+INSERT INTO `param_accueil` (`img`, `logo`, `titre`, `texte`) VALUES
+('/images/lycee2.jpg', '/images/logolycee.jpg', 'Bienvenue sur ProLog-GeTAP', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lorem nulla, sagittis sit amet ullamcorper laoreet, dapibus a elit. Nulla a tellus leo. Vestibulum at dolor sed purus tincidunt bibendum. Integer lorem sem, aliquam id accumsan at, vulputate ac nibh. Morbi eget lacinia metus. Suspendisse imperdiet tincidunt urna in interdum. Donec dignissim fringilla diam, id hendrerit mi tempor id. Aenean non purus ut nulla congue condimentum quis vitae arcu. Nam mattis elit ut velit porttitor rutrum. Integer pretium egestas quam, vitae mattis elit aliquet in. Duis vel euismod nulla. Pellentesque vitae leo velit, nec bibendum risus. Sed non ligula orci. Mauris bibendum congue massa ut feugiat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed enim felis, tempor nec molestie nec, vehicula sed diam. ');

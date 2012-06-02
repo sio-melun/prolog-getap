@@ -195,13 +195,13 @@
 			<div class="section inputPerso">
 				<fieldset>
 					<div class="form-row">
-						<label for="img">Lien de l'image principale :</label>
+						<label for="img">Image principale (300x460):</label>
 						<div class="input">
 							<form:input type="file" path="img" size="40" />
 						</div>
 					</div>
 					<div class="form-row">
-						<label for="logo">Lien du logo :</label>
+						<label for="logo">Logo (80x80):</label>
 						<div class="input">
 							<form:input type="file" path="logo" size="40" />
 						</div>
