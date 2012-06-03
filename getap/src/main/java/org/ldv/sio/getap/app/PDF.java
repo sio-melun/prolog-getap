@@ -54,7 +54,6 @@ public class PDF {
 
 					String string = new String();
 					cpt += 3;
-					System.out.println(cpt);
 					if (cpt >= 39) {
 						string = "Nom : "
 								+ rs.getString("nom")

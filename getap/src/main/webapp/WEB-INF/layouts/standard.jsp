@@ -91,8 +91,8 @@
 	<body onload="testRole()">
 	
 	<div id="banniere">
-		<img src="<c:url value="/images/LogoGetap.png"/>" width="155px"
-		height="66px"/>
+		<a href="index"><img src="<c:url value="/images/LogoGetap.png"/>" width="155px"
+		height="66px"/></a>
 	</div>
 	
 	<tiles:insertAttribute name="navigation" />

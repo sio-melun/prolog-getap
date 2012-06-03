@@ -12,7 +12,7 @@
 <h3>${utilisateur.nom} ${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
-		<a href="#">Demandes Validées</a>
+		<a href="#">Demandes Validées (${etat1 + etat32})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -24,29 +24,31 @@
 			</tr>
 		</thead>
 		<tbody>
-				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
-						<tr>
-							<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
-							<td>${dctap.accPers.nom}</td>
-							<td><fmt:formatNumber value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h ${dctap.minutes%60}min</td>
-							<td>${dctap.dateAction}</td>
-						</tr>
-						<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
-					</c:if>
-				</c:forEach>
+			<c:forEach items="${sesDCTAPeleve}" var="dctap">
+				<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+				<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
+					<tr>
+						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
+						<td>${dctap.accPers.nom}</td>
+						<td><fmt:formatNumber
+								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
+							${dctap.minutes%60}min</td>
+						<td>${dctap.dateAction}</td>
+					</tr>
+					<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
+				</c:if>
+			</c:forEach>
 		</tbody>
 	</table>
-	
-		<script>
+
+	<script>
 			$(document).ready(function() {
 				 $("#progressbar").progressbar({ value: ${timeVal/(72*60)*100} });
 			});
 		</script>
 
 	<h3>
-		<a href="#">Demandes Refusées</a>
+		<a href="#">Demandes Refusées (${etat2 + etat8 + etat64})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -55,24 +57,37 @@
 				<th>Type d'accompagnement</th>
 				<th>Temps</th>
 				<th>Date</th>
+				<th>Cause</th>
 			</tr>
 		</thead>
 		<tbody>
-				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:if test="${dctap.etat == 2 || dctap.etat == 64 }">
-						<tr>
-							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
-							<td>${dctap.accPers.nom}</td>
-							<td><fmt:formatNumber value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h ${dctap.minutes%60}min</td>
-							<td>${dctap.dateAction}</td>
-						</tr>
-						<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
-					</c:if>
-				</c:forEach>
+			<c:forEach items="${sesDCTAPeleve}" var="dctap">
+				<c:if
+					test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+					<tr>
+						<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
+						<td>${dctap.accPers.nom}</td>
+						<td><fmt:formatNumber
+								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
+							${dctap.minutes%60}min</td>
+						<td>${dctap.dateAction}</td>
+						<c:if test="${dctap.etat == 2}">
+							<td>Refus élève</td>
+						</c:if>
+						<c:if test="${dctap.etat == 8}">
+							<td>Annulé</td>
+						</c:if>
+						<c:if test="${dctap.etat == 64}">
+							<td>Refus prof</td>
+						</c:if>
+					</tr>
+					<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+				</c:if>
+			</c:forEach>
 		</tbody>
 	</table>
 	<h3>
-		<a href="#">Demandes en Cours</a>
+		<a href="#">Demandes en Cours (${etat0 + etat4 + etatsup1000})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -81,21 +96,62 @@
 				<th>Type d'accompagnement</th>
 				<th>Temps</th>
 				<th>Date</th>
+				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:if
-						test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
-						<tr>
-							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
-							<td>${dctap.accPers.nom}</td>
-							<td><fmt:formatNumber value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h ${dctap.minutes%60}min</td>
-							<td>${dctap.dateAction}</td>
-						</tr>
-						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
-					</c:if>
-				</c:forEach>
+			<c:forEach items="${sesDCTAPeleve}" var="dctap">
+				<c:if
+					test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
+					<tr>
+						<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
+						<td>${dctap.accPers.nom}</td>
+						<td><fmt:formatNumber
+								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
+							${dctap.minutes%60}min</td>
+						<td>${dctap.dateAction}</td>
+						<c:if
+							test="${(dctap.etat == 0 || dctap.etat == 4) && dctap.prof.id == user.id}">
+							<td><a
+								href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
+									src="../../images/valid.png" width="24" height="24"
+									onmouseover="this.src='../../images/validHover.png';"
+									onmouseout="this.src='../../images/valid.png';" /> </a></td>
+							<td><a
+								href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
+									src="../../images/modifValid.png" width="22" height="22"
+									onmouseover="this.src='../../images/modifValidHover.png';"
+									onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
+							<td><a href=""
+								onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
+									src="../../images/suppr.png" width="24" height="24"
+									onmouseover="this.src='../../images/supprHover.png';"
+									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+						</c:if>
+						<c:if test="${dctap.etat > 1023 && dctap.prof.id == user.id}">
+							<td></td>
+							<td><a
+								href="<c:url value="/app/prof-intervenant/edit?id=${dctap.id}" />"><img
+									src="../../images/modifValid.png" width="22" height="22"
+									onmouseover="this.src='../../images/modifValidHover.png';"
+									onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
+							<td><a href=""
+								onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
+									src="../../images/suppr.png" width="24" height="24"
+									onmouseover="this.src='../../images/supprHover.png';"
+									onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+						</c:if>
+						<c:if test="${dctap.prof.id != user.id}">
+							<td></td>
+							<td></td>
+							<td></td>
+						</c:if>
+					</tr>
+					<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
+				</c:if>
+			</c:forEach>
 		</tbody>
 	</table>
 	<h3>
@@ -122,7 +178,7 @@
 						pattern="#0" />h ${timeRef%60}min</td>
 			</tr>
 			<tr>
-				
+
 				<td><div id="progressbar"></div> <fmt:formatNumber
 						value="${timeVal/(72*60)*100}" pattern="#0.00" />% - 72h requises</td>
 				<td id="statsValide"><fmt:formatNumber
