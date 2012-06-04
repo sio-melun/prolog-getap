@@ -49,7 +49,6 @@ public class ProfPrinController {
 				manager.getAllClasseByProf(user.getId()));
 
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
-		model.addAttribute("lesAP", manager.getApByType());
 	}
 
 	@RequestMapping(value = "dosearchForClasse", method = RequestMethod.GET)
