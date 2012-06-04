@@ -36,7 +36,8 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 		String role = (userInSession != null) ? userInSession.getRole() : "";
 
 		boolean ok = true;
-
+		if (controllerName.equals("ws"))
+			return true;
 		if (!controllerName.equals("login") && null == userInSession) {
 			response.sendRedirect(request.getContextPath() + "/app/login/index");
 			ok = false;

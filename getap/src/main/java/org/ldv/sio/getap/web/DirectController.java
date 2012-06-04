@@ -1,5 +1,10 @@
 package org.ldv.sio.getap.web;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +20,17 @@ public class DirectController {
 
 	@RequestMapping(value = "/ws/test", method = RequestMethod.GET)
 	public @ResponseBody
-	String testAjax() {
-		return "Bingo Ajax !";
+	void testAjax(HttpServletResponse response) {
+		response.setContentType("application/pdf");
+		try {
+			OutputStream out = response.getOutputStream();
+			out.write("<BingoAjax />".getBytes());
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return "<BingoAjax />";
 	}
 }

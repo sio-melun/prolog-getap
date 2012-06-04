@@ -1,12 +1,13 @@
 package org.ldv.sio.getap.app;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class PDF {
 		this.ds = ds;
 	}
 
-	public void export() {
+	public void export(HttpServletResponse response) {
 
 		try {
 			Connection con = ds.getConnection();
@@ -43,8 +44,8 @@ public class PDF {
 			Document document = new Document(PageSize.A4);
 
 			try {
-				PdfWriter writer = PdfWriter.getInstance(document,
-						new FileOutputStream("F:/test.pdf"));
+				OutputStream out = response.getOutputStream();
+				PdfWriter writer = PdfWriter.getInstance(document, out);
 				writer.setViewerPreferences(PdfWriter.PageLayoutSinglePage
 						| PdfWriter.PageModeUseThumbs);
 

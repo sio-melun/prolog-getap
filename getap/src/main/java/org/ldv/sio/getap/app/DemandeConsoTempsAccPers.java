@@ -166,15 +166,11 @@ public class DemandeConsoTempsAccPers {
 	 *            </ul>
 	 */
 	public void setEtat(int etat) {
-		// TODO vérifier que la transition vers le nouvel état est bien
-		// autorisée
 		this.etat = etat;
 	}
 
 	public boolean isDateModifiee() {
-		// return this.etat == 41;
 		return (this.etat & DATE_MODIFIEE) != 0;
-		// setEtat(getEtat() | DATE_MODIFIEE) /// (64 & 1)
 	}
 
 	public boolean isDureeModifiee() {

@@ -1,19 +1,17 @@
 package org.ldv.sio.getap.app;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.PageSize;
 
 @Service("ServiceCSV")
 public class CSV {
@@ -29,7 +27,7 @@ public class CSV {
 		this.ds = ds;
 	}
 
-	public void export() {
+	public void export(HttpServletResponse response) {
 
 		try {
 			Connection con = ds.getConnection();
@@ -37,12 +35,11 @@ public class CSV {
 			ResultSet rs = select
 					.executeQuery("SELECT * FROM user, classe where user.idClasse = classe.id and role = 'eleve' order by classe.libelle, user.nom");
 
-			Document document = new Document(PageSize.A4);
-
 			try {
-				FileWriter writer = new FileWriter("F:/test2.csv");
+				PrintWriter writer = response.getWriter();
+				// FileWriter writer = new FileWriter("F:/test2.csv");
 
-				writer.append("nom;prenom;INE;Division\n");
+				writer.println("nom;prenom;INE;Division");
 				while (rs.next()) {
 					writer.append(rs.getString("nom"));
 					writer.append(";");
@@ -51,7 +48,7 @@ public class CSV {
 					writer.append(rs.getString("INE"));
 					writer.append(";");
 					writer.append(rs.getString("libelle"));
-					writer.append("\n");
+					writer.println("");
 				}
 				writer.flush();
 				writer.close();

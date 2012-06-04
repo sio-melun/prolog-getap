@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
@@ -510,15 +512,19 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "exportUserPdf")
-	public String exportUserPdf() {
-		pdf.export();
-		return "redirect:/app/admin/index";
+	public void exportUserPdf(HttpServletResponse response) {
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=utilisateurs.pdf");
+		pdf.export(response);
 	}
 
 	@RequestMapping(value = "exportUserCsv")
-	public String exportUserCsv() {
-		csv.export();
-		return "redirect:/app/admin/index";
+	public void exportUserCsv(HttpServletResponse response) {
+		response.setContentType("text/x-csv; charset=UTF-8");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=eleves.csv");
+		csv.export(response);
 	}
 
 	@RequestMapping(value = "doEditPass", method = RequestMethod.POST)

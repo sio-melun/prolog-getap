@@ -9,7 +9,7 @@
 <c:set var="timeRef" value="0" />
 <c:set var="timeAtt" value="0" />
 
-<h3>${utilisateur.nom} ${utilisateur.prenom}</h3>
+<h3 class="titre3">Demande de validation de ${utilisateur.nom} ${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
 		<a href="#">Demandes Validées (${etat1 + etat32})</a>
@@ -65,7 +65,7 @@
 				<c:if
 					test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
 					<tr>
-						<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
+						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
 						<td><fmt:formatNumber
 								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
@@ -106,7 +106,7 @@
 				<c:if
 					test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
 					<tr>
-						<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
+						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
 						<td><fmt:formatNumber
 								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
