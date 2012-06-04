@@ -1,7 +1,9 @@
 package org.ldv.sio.getap.web;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
@@ -542,22 +544,41 @@ public class AdminController {
 				+ form.getLogo().getOriginalFilename();
 
 		try {
-			img = new FileOutputStream(new File(imgPath));
-			logo = new FileOutputStream(new File(logoPath));
+			List<String> tab = manager.getInfoAccueil();
+			try {
+				img = new FileOutputStream(new File(imgPath));
+				img.write(form.getImg().getFileItem().get());
+				img.close();
+			} catch (FileNotFoundException p) {
+				imgPath = tab.get(0);
+			}
+			try {
+				logo = new FileOutputStream(new File(logoPath));
+				logo.write(form.getLogo().getFileItem().get());
+				logo.close();
+			} catch (FileNotFoundException p) {
+				logoPath = tab.get(1);
 
-			img.write(form.getImg().getFileItem().get());
-			logo.write(form.getLogo().getFileItem().get());
+			}
+			String titre;
+			String texte;
+			if (!form.getTitre().equals(null) && !form.getTitre().equals("")) {
+				System.out.println(form.getTitre());
+				titre = form.getTitre();
+			} else {
+				titre = tab.get(2);
+			}
+			if (!form.getTexte().equals(null) && !form.getTexte().equals("")) {
+				System.out.println(form.getTexte());
+				texte = form.getTexte();
+			} else {
+				texte = tab.get(3);
+			}
 
-			img.close();
-			logo.close();
-
-			String titre = form.getTitre();
-			String texte = form.getTexte();
-
-			String[] urlimg = imgPath.split("\\");
-			System.out.println(urlimg);
-			String split = urlimg[-1];
-			System.out.println(split);
+			// String[] urlimg = imgPath.split("\\");
+			// System.out.println(urlimg);
+			// String split = urlimg[-1];
+			// System.out.println(split);
 
 			manager.addAccueil(imgPath, logoPath, titre, texte);
 		} catch (Exception e) {
