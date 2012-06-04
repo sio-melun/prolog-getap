@@ -30,18 +30,6 @@ public class ProfPrinController {
 		this.manager = serviceManager;
 	}
 
-	@RequestMapping(value = "mesdctap", method = RequestMethod.GET)
-	public String mesdctap(Model model) {
-		User me = UtilSession.getUserInSession();
-		model.addAttribute("mesdctaps", manager.getAllDCTAPByProfPrinc(me));
-		return "prof-principal/mesdctap";
-	}
-
-	/**
-	 * Default action, displays the use case page.
-	 * 
-	 * 
-	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(UserSearchCriteria userSearchCriteria, Model model) {
 		User user = UtilSession.getUserInSession();

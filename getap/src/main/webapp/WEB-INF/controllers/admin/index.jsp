@@ -16,7 +16,7 @@
 				</td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/importcsv.png"/>" width="64" height="64"/>
-						<div>Import d'élèves via CSV</div> </a>
+						<div>Import CSV d'élèves</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>"  width="64" height="64"/>

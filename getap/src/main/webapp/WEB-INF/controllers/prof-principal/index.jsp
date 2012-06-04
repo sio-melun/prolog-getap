@@ -31,7 +31,7 @@
 											onmouseout="this.src='../../images/detail.png';" />
 									</a>
 								</td>
-								<td>${eleve.nom} ${eleve.prenom}</td>
+								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
 								<td><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
 										pattern="#0" />h ${(eleve.dureeTotal%60)}min</td>

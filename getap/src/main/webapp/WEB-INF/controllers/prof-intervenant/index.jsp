@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
@@ -28,7 +29,7 @@
 						<th>Eleve</th>
 						<th>Classe</th>
 						<th>Date</th>
-						<th>Temps (min)</th>
+						<th>Temps</th>
 						<th>Type d'aide</th>
 						<th></th>
 						<th></th>
@@ -42,7 +43,9 @@
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.eleve.classe.nom}</td>
 								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
@@ -74,7 +77,7 @@
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
-						<th>Temps (min)</th>
+						<th>Temps</th>
 						<th>Type d'aide</th>
 						<th></th>
 						<th></th>
@@ -92,10 +95,14 @@
 									<td>${dctap.dateAction}</td>
 								</c:if>
 								<c:if test="${dctap.dureeModifiee}">
-									<td class="isUpdate">${dctap.minutes}</td>
+									<td class="isUpdate"><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								</c:if>
 								<c:if test="${!dctap.dureeModifiee}">
-									<td>${dctap.minutes}</td>
+									<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								</c:if>
 								<c:if test="${dctap.apModifiee}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
@@ -120,7 +127,7 @@
 			</table>
 		</div>
 	</div>
-	<h5>Demandes terminees</h5>
+	<h5>Demandes de validation terminées</h5>
 	<div id="accordion2">
 		<h3>
 			<a href="#">Demandes validées (${etat1 + etat32})</a>
@@ -131,7 +138,7 @@
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
-						<th>Temps (min)</th>
+						<th>Temps</th>
 						<th>Type d'aide</th>
 					</tr>
 				</thead>
@@ -141,7 +148,9 @@
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -158,7 +167,7 @@
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
-						<th>Temps (min)</th>
+						<th>Temps</th>
 						<th>Type d'aide</th>
 					</tr>
 				</thead>
@@ -168,7 +177,9 @@
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -185,7 +196,7 @@
 					<tr class="header">
 						<th>Eleves</th>
 						<th>Date</th>
-						<th>Temps (min)</th>
+						<th>Temps</th>
 						<th>Type d'aide</th>
 					</tr>
 				</thead>
@@ -195,7 +206,9 @@
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
-								<td>${dctap.minutes}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#0" />h ${(dctap.minutes%60)}min</td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>

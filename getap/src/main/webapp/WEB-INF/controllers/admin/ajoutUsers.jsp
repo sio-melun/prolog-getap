@@ -9,7 +9,7 @@
 			document.getElementById("loader").style.visibility = "visible";
 		}
 	</script>
-	<h3>Importation d'une liste d'utilisateur</h3>
+	<h3 class="titre3">Importation d'une liste d'utilisateurs</h3>
 	<form:form commandName="formAjoutUsers" enctype="multipart/form-data"
 		action="doajouts" method="post">
 		<form:errors path="*" cssClass="errors" />

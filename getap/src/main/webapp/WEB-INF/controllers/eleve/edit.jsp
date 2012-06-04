@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:if test="${etat == 0 or etat == 3 }">
-	<h3>Modifier ma Demande</h3>
+	<h3 class="titre3">Modifier ma Demande</h3>
 	
 	<form:form modelAttribute="formDemandeConsoTempsAccPers" action="doedit"
 	  method="post">

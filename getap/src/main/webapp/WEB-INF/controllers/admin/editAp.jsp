@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
+<h3 class="titre3">Edition d'un accompagnement personnalisé</h3>
 <form:form modelAttribute="formAjoutAp" action="doEditAP" method="post"
 	id="formulaireEditAP">
 	<form:errors path="*" cssClass="errors" />
@@ -18,7 +19,7 @@
 		</fieldset>
 		<form:hidden path="id" />
 		<div id="buttonGroup">
-			<a href="index"><input
+			<a href="logiciel"><input
 				type="button" value="Retour">
 			</a> <input type="submit" value="Modifier" />
 
