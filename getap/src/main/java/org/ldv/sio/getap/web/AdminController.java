@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
+import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.FormAccueilPerso;
 import org.ldv.sio.getap.app.FormAjoutAp;
@@ -20,6 +21,7 @@ import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.JDBC;
 import org.ldv.sio.getap.app.PDF;
+import org.ldv.sio.getap.app.StatsPDF;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -51,6 +53,8 @@ public class AdminController {
 	private PDF pdf;
 	@Autowired
 	private CSV csv;
+	@Autowired
+	private StatsPDF statsPdf;
 
 	public void setCsv(CSV csv) {
 		this.csv = csv;
@@ -517,6 +521,17 @@ public class AdminController {
 		response.setHeader("Content-Disposition",
 				"attachment;filename=utilisateurs.pdf");
 		pdf.export(response);
+	}
+
+	@RequestMapping(value = "exportStats/{id}", method = RequestMethod.GET)
+	public void exportStats(@PathVariable String id,
+			HttpServletResponse response) {
+		User user = manager.getUserById(Long.valueOf(id));
+		List<DemandeConsoTempsAccPers> dctap = manager.getAllDCTAPByEleve(user);
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment;filename=stats"
+				+ user.getNom() + ".pdf");
+		statsPdf.export(response, user.getId(), dctap);
 	}
 
 	@RequestMapping(value = "exportUserCsv")

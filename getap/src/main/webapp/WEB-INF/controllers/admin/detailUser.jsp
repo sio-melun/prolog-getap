@@ -9,7 +9,8 @@
 <c:set var="timeRef" value="0" />
 <c:set var="timeAtt" value="0" />
 
-<h3 class="titre3">Détail des demandes de ${utilisateur.nom} ${utilisateur.prenom}</h3>
+<h3 class="titre3">Détail des demandes de ${utilisateur.nom}
+	${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
 		<a href="#">Demandes Validées (${etat1 + etat32})</a>
@@ -249,4 +250,9 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+<div style="text-align: center;">
+<a href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
+	src="<c:url value="../../images/pdfdl.png"/>" width="64" height="64"/>
+	<div>Export PDF statistiques</div> </a>
 </div>
