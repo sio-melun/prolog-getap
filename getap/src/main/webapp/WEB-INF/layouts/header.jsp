@@ -3,10 +3,10 @@
 <div>
 	<br/>
 	<% Object user = session.getAttribute("user");  %>
-   <span style="position:relative; left:700px;">	
+   <div style="text-align: right;">	
 	 <c:if test="${not empty user}">
 	   ${user.prenom} ${user.nom} (${user.role})
 	 </c:if> 	
-	</span>
+	</div>
 </div>
 
