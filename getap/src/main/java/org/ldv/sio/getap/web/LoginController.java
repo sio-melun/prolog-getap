@@ -122,6 +122,7 @@ public class LoginController {
 		UtilSession.setUserInSession(null);
 		List<String> infos = manager.getInfoAccueil();
 
+		// TODO code redondant
 		if (infos != null) {
 			model.addAttribute("img", infos.get(0));
 			model.addAttribute("logo", infos.get(1));
