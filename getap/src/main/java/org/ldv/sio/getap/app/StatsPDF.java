@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -42,7 +43,6 @@ public class StatsPDF {
 			Statement select = con.createStatement();
 			ResultSet rs = select
 					.executeQuery("SELECT user.* FROM user where id = " + id);
-
 			Document document = new Document(PageSize.A4);
 
 			try {
@@ -52,10 +52,24 @@ public class StatsPDF {
 						| PdfWriter.PageModeUseThumbs);
 
 				document.open();
+
 				String string = new String();
 				rs.last();
-				string = rs.getString("nom") + " " + rs.getString("prenom");
+				String eleve = "Nom : " + rs.getString("nom");
+				eleve += "\nPrénom : " + rs.getString("prenom");
+				int idClasse = rs.getInt("idClasse");
 				rs.beforeFirst();
+				ResultSet rs2 = select
+						.executeQuery("SELECT classe.* from classe where id = "
+								+ idClasse);
+				rs2.last();
+				eleve += "\nClasse : " + rs2.getString("libelle");
+				rs2.beforeFirst();
+
+				Paragraph paragraph = new Paragraph(eleve);
+				paragraph.setAlignment(Element.ALIGN_RIGHT);
+				document.add(paragraph);
+
 				int timeTT = 0, timeVal = 0, timeAtt = 0, timeRef = 0;
 				for (int i = 0; i < dctap.size(); i++) {
 					timeTT += dctap.get(i).getMinutes();
@@ -74,23 +88,34 @@ public class StatsPDF {
 
 				}
 				double timeTTpercent = timeVal, timeValPercent = timeVal, timeAttPercent = timeAtt, timeRefPercent = timeRef;
-				timeTTpercent = Math.round(timeTTpercent / (72 * 60) * 100);
-				timeValPercent = Math.round((timeValPercent / timeTT) * 100);
-				timeAttPercent = Math.round((timeAttPercent / timeTT) * 100);
-				timeRefPercent = Math.round((timeRefPercent / timeTT) * 100);
-				string += "\n\nTemps total effectué : "
+				timeTTpercent = Math.round((timeTTpercent / (72 * 60) * 100)
+						* Math.pow(10.0, 2))
+						/ Math.pow(10.0, 2);
+				timeValPercent = Math.round(((timeValPercent / timeTT) * 100)
+						* Math.pow(10.0, 2))
+						/ Math.pow(10.0, 2);
+				timeAttPercent = Math.round(((timeAttPercent / timeTT) * 100)
+						* Math.pow(10.0, 2))
+						/ Math.pow(10.0, 2);
+				timeRefPercent = Math.round(((timeRefPercent / timeTT) * 100)
+						* Math.pow(10.0, 2))
+						/ Math.pow(10.0, 2);
+				string += "\n\n\n\n\nTemps total effectué sur 72h : "
 						+ (timeTT / 60 - (timeTT % 60 / 60)) + "h "
 						+ (timeTT % 60) + "min soit " + timeTTpercent + "%";
-				string += "\nTemps total validé : "
+				string += "\n\nTemps total validé : "
 						+ (timeVal / 60 - (timeVal % 60 / 60)) + "h "
 						+ (timeVal % 60) + "min soit " + timeValPercent + "%";
-				string += "\nTemps total en attente : "
+				string += "\n\nTemps total en attente : "
 						+ (timeAtt / 60 - (timeAtt % 60 / 60)) + "h "
 						+ (timeAtt % 60) + "min soit " + timeAttPercent + "%";
-				string += "\nTemps total Refusé : "
+				string += "\n\nTemps total Refusé : "
 						+ (timeRef / 60 - (timeRef % 60 / 60)) + "h "
 						+ (timeRef % 60) + "min soit " + timeRefPercent + "%";
-				document.add(new Paragraph(string));
+
+				paragraph = new Paragraph(string);
+				paragraph.setAlignment(Element.ALIGN_CENTER);
+				document.add(paragraph);
 
 			} catch (DocumentException de) {
 				de.printStackTrace();
