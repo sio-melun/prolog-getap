@@ -18,7 +18,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Structure de la table `ap`
 --
-
+DROP TABLE IF EXISTS ap;
 CREATE TABLE IF NOT EXISTS `ap` (
   `id` int(11) NOT NULL auto_increment,
   `libelle` varchar(45) default NULL,
@@ -41,13 +41,13 @@ INSERT INTO `ap` (`id`, `libelle`, `origineEtat`, `idUser`) VALUES
 --
 -- Structure de la table `classe`
 --
-
+DROP TABLE IF EXISTS classe;
 CREATE TABLE IF NOT EXISTS `classe` (
   `id` int(11) NOT NULL auto_increment,
   `libelle` varchar(45) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `libelle` (`libelle`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `classe`
@@ -122,7 +122,7 @@ INSERT INTO `classe` (`id`, `libelle`) VALUES
 --
 -- Structure de la table `dctap`
 --
-
+DROP TABLE IF EXISTS dctap;
 CREATE TABLE IF NOT EXISTS `dctap` (
   `id` int(11) NOT NULL auto_increment,
   `anneeScolaire` varchar(9) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `dctap` (
 --
 -- Structure de la table `discipline`
 --
-
+DROP TABLE IF EXISTS discipline;
 CREATE TABLE IF NOT EXISTS `discipline` (
   `id` int(11) NOT NULL auto_increment,
   `libelle` varchar(30) NOT NULL,
@@ -191,7 +191,7 @@ INSERT INTO `discipline` (`id`, `libelle`) VALUES
 --
 -- Structure de la table `param_annee`
 --
-
+DROP TABLE IF EXISTS param_annee;
 CREATE TABLE IF NOT EXISTS `param_annee` (
   `id` int(11) NOT NULL auto_increment,
   `anneeScolaire` varchar(9) NOT NULL,
@@ -210,7 +210,7 @@ INSERT INTO `param_annee` (`id`, `anneeScolaire`) VALUES
 --
 -- Structure de la table `prof_principal`
 --
-
+DROP TABLE IF EXISTS prof_principal;
 CREATE TABLE IF NOT EXISTS `prof_principal` (
   `idUser` int(11) NOT NULL,
   `idClasse` int(11) NOT NULL,
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `prof_principal` (
 --
 -- Structure de la table `user`
 --
-
+DROP TABLE IF EXISTS user;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL auto_increment,
   `nom` varchar(50) NOT NULL,
@@ -248,12 +248,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 -- Structure de la table `param_accueil`
 --
-
+DROP TABLE IF EXISTS param_accueil;
 CREATE TABLE IF NOT EXISTS `param_accueil` (
   `img` varchar(200) NULL,
   `logo` varchar(200) NULL,
   `titre` varchar(200) NULL,
-  `texte` longtext NULL,
+  `texte` longtext NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
