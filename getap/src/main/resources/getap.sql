@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `param_accueil` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `param_annee`
+-- Contenu de la table `param_accueil`
 --
 
 INSERT INTO `param_accueil` (`img`, `logo`, `titre`, `texte`) VALUES

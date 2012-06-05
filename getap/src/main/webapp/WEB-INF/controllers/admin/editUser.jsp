@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
+<h3 class="titre3">Edition d'un utilisateur</h3>
 <form:form modelAttribute="formEditUser" action="doEditUser"
 	method="post">
 	<form:errors path="*" cssClass="errors" />

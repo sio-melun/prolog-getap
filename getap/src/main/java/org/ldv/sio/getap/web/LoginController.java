@@ -52,10 +52,12 @@ public class LoginController {
 	public void index(UserLoginCriteria userSearchCriteria, Model model) {
 		List<String> infos = manager.getInfoAccueil();
 
-		model.addAttribute("img", infos.get(0));
-		model.addAttribute("logo", infos.get(1));
-		model.addAttribute("titre", infos.get(2));
-		model.addAttribute("texte", infos.get(3));
+		if (infos != null) {
+			model.addAttribute("img", infos.get(0));
+			model.addAttribute("logo", infos.get(1));
+			model.addAttribute("titre", infos.get(2));
+			model.addAttribute("texte", infos.get(3));
+		}
 
 	}
 
@@ -77,10 +79,12 @@ public class LoginController {
 
 		List<String> infos = manager.getInfoAccueil();
 
-		model.addAttribute("img", infos.get(0));
-		model.addAttribute("logo", infos.get(1));
-		model.addAttribute("titre", infos.get(2));
-		model.addAttribute("texte", infos.get(3));
+		if (infos != null) {
+			model.addAttribute("img", infos.get(0));
+			model.addAttribute("logo", infos.get(1));
+			model.addAttribute("titre", infos.get(2));
+			model.addAttribute("texte", infos.get(3));
+		}
 
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
@@ -118,10 +122,13 @@ public class LoginController {
 		UtilSession.setUserInSession(null);
 		List<String> infos = manager.getInfoAccueil();
 
-		model.addAttribute("img", infos.get(0));
-		model.addAttribute("logo", infos.get(1));
-		model.addAttribute("titre", infos.get(2));
-		model.addAttribute("texte", infos.get(3));
+		if (infos != null) {
+			model.addAttribute("img", infos.get(0));
+			model.addAttribute("logo", infos.get(1));
+			model.addAttribute("titre", infos.get(2));
+			model.addAttribute("texte", infos.get(3));
+		}
+
 		return "login/index";
 	}
 

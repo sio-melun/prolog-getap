@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="form-row">
-				<label for="minutes">Temps d'aide personnalisée (minutes) :
+				<label for="minutes">Temps d'accompagnement personnalisé :
 				</label>
 				<%-- <div class="input">
 					<form:input path="minutes" />
@@ -43,13 +43,13 @@
 			</div>
 
 			<div class="form-row">
-				<label for="profs">Les professeurs :</label>
+				<label for="profId">Les professeurs :</label>
 				<form:select path="profId" items="${lesProfs}" itemValue="id"
 					itemLabel="nom"></form:select>
 			</div>
 
 			<div class="form-row">
-				<label for="accPers">Type d'aide personnalisée : </label> <select
+				<label for="accPersId">Type d'aide personnalisée : </label> <select
 					id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>

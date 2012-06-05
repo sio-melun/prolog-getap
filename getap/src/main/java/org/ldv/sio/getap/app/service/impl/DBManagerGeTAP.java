@@ -174,6 +174,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						new UserMapper());
 	}
 
+	public List<User> getAllEleveByPP(User user) {
+		Long id = user.getId();
+		return this.jdbcTemplate
+				.query("select * from user where idClasse in (select idClasse from prof_principal where idUser ="
+						+ id + ")", new UserMapper());
+	}
+
 	public User getUserById(Long id) {
 		User user;
 		try {

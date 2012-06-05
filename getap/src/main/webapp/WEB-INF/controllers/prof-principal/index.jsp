@@ -15,9 +15,9 @@
 				<thead>
 					<tr class="header">
 						<th>Detail</th>
-						<th class="sorting">Eleves</th>
-						<th class="sorting">Nombre d'actions par type</th>
-						<th class="sorting">Temps Total</th>
+						<th>Eleves</th>
+						<th>Temps Total</th>
+						<th>%</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,16 +31,13 @@
 											onmouseout="this.src='../../images/detail.png';" />
 									</a>
 								</td>
-								<td>${eleve.nom} ${eleve.prenom}</td>
-								<td style="text-align: left;"><c:forEach items="${lesAP}"
-										var="ap">
-										<c:if test="${eleve.id == ap.idEleve}">
-											${ap.count} - ${ap.nom}<br>
-										</c:if>
-									</c:forEach></td>
+								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
 								<td><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
 										pattern="#0" />h ${(eleve.dureeTotal%60)}min</td>
+								<td><fmt:formatNumber
+										value="${(eleve.dureeTotal/(72*60)*100)}"
+										pattern="#0.00" />%</td>
 							</tr>
 						</c:if>
 					</c:forEach>

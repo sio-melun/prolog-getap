@@ -52,6 +52,8 @@ public interface IFManagerGeTAP {
 
 	public List<User> getAllEleveByClasse();
 
+	public List<User> getAllEleveByPP(User user);
+
 	public User getUserById(Long id);
 
 	public User addUser(User user);

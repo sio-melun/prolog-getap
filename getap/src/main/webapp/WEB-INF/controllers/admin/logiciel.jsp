@@ -5,7 +5,7 @@
 <h5 style="position: relative; top: 35px;">Administration</h5>
 <div id="accordion">
 	<h3>
-		<a href="#">Gestion des aides personnalisées</a>
+		<a href="#">Gestion des accompagnements personnalisés</a>
 	</h3>
 	<div>
 		<table>

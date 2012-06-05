@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <br/>
-	<h3 style="text-align:center;">MENU</h3>
+	<h3 class="titre3">MENU</h3>
 <br/>
 
 <div class="centerButton" >

@@ -1,7 +1,11 @@
 package org.ldv.sio.getap.web;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
@@ -147,6 +151,16 @@ public class AdminController {
 		model.addAttribute("sesDCTAPeleve", manager.getAllDCTAPByEleve(user));
 		model.addAttribute("sesDCTAPprof",
 				manager.getAllDCTAPByProfInterv(user));
+		Long idUser = user.getId();
+		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, idUser));
+		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, idUser));
+		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, idUser));
+		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, idUser));
+		model.addAttribute("etat8", manager.getAllDCTAPByEtat(8, idUser));
+		model.addAttribute("etat32", manager.getAllDCTAPByEtat(32, idUser));
+		model.addAttribute("etat64", manager.getAllDCTAPByEtat(64, idUser));
+		model.addAttribute("etatsup1000",
+				manager.getAllDCTAPModifByEtat(idUser));
 
 		return "admin/detailUser";
 	}
@@ -498,15 +512,19 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "exportUserPdf")
-	public String exportUserPdf() {
-		pdf.export();
-		return "redirect:/app/admin/index";
+	public void exportUserPdf(HttpServletResponse response) {
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=utilisateurs.pdf");
+		pdf.export(response);
 	}
 
 	@RequestMapping(value = "exportUserCsv")
-	public String exportUserCsv() {
-		csv.export();
-		return "redirect:/app/admin/index";
+	public void exportUserCsv(HttpServletResponse response) {
+		response.setContentType("text/x-csv; charset=UTF-8");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=eleves.csv");
+		csv.export(response);
 	}
 
 	@RequestMapping(value = "doEditPass", method = RequestMethod.POST)
@@ -532,22 +550,41 @@ public class AdminController {
 				+ form.getLogo().getOriginalFilename();
 
 		try {
-			img = new FileOutputStream(new File(imgPath));
-			logo = new FileOutputStream(new File(logoPath));
+			List<String> tab = manager.getInfoAccueil();
+			try {
+				img = new FileOutputStream(new File(imgPath));
+				img.write(form.getImg().getFileItem().get());
+				img.close();
+			} catch (FileNotFoundException p) {
+				imgPath = tab.get(0);
+			}
+			try {
+				logo = new FileOutputStream(new File(logoPath));
+				logo.write(form.getLogo().getFileItem().get());
+				logo.close();
+			} catch (FileNotFoundException p) {
+				logoPath = tab.get(1);
 
-			img.write(form.getImg().getFileItem().get());
-			logo.write(form.getLogo().getFileItem().get());
+			}
+			String titre;
+			String texte;
+			if (!form.getTitre().equals(null) && !form.getTitre().equals("")) {
+				System.out.println(form.getTitre());
+				titre = form.getTitre();
+			} else {
+				titre = tab.get(2);
+			}
+			if (!form.getTexte().equals(null) && !form.getTexte().equals("")) {
+				System.out.println(form.getTexte());
+				texte = form.getTexte();
+			} else {
+				texte = tab.get(3);
+			}
 
-			img.close();
-			logo.close();
-
-			String titre = form.getTitre();
-			String texte = form.getTexte();
-
-			String[] urlimg = imgPath.split("\\");
-			System.out.println(urlimg);
-			String split = urlimg[-1];
-			System.out.println(split);
+			// String[] urlimg = imgPath.split("\\");
+			// System.out.println(urlimg);
+			// String split = urlimg[-1];
+			// System.out.println(split);
 
 			manager.addAccueil(imgPath, logoPath, titre, texte);
 		} catch (Exception e) {
