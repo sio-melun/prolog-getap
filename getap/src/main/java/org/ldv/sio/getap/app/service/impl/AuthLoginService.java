@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * Stub implementation of a AuthLoginService using a predefined set of Users
  */
 @Service("serviceAuth")
-public class StubAuthLoginService implements IFHauthLoginService {
+public class AuthLoginService implements IFHauthLoginService {
 
 	@Autowired
 	@Qualifier("DBServiceMangager")
@@ -29,7 +29,7 @@ public class StubAuthLoginService implements IFHauthLoginService {
 		this.managerGeTAP = serviceManager;
 	}
 
-	public StubAuthLoginService() {
+	public AuthLoginService() {
 
 	}
 
