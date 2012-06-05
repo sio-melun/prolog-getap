@@ -585,7 +585,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<String> getAllAnneeScolaire() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

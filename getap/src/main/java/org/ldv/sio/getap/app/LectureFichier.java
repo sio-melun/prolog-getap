@@ -51,7 +51,7 @@ public class LectureFichier {
 			// parcour toutes les lignes du .csv et cr�� les utilisateurs
 			// correspondants
 			while (ligne != null) {
-				String[] params = ligne.split(";"); // TODO
+				String[] params = ligne.split(";");
 				if (params.length >= 2) {
 					Utilisateur user = new Utilisateur(params[0], params[1],
 							params[2], params[3]);
