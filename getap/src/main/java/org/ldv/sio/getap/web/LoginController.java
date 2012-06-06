@@ -50,15 +50,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(UserLoginCriteria userSearchCriteria, Model model) {
-		List<String> infos = manager.getInfoAccueil();
-
-		if (infos != null) {
-			model.addAttribute("img", infos.get(0));
-			model.addAttribute("logo", infos.get(1));
-			model.addAttribute("titre", infos.get(2));
-			model.addAttribute("texte", infos.get(3));
-		}
-
+		addParamAcc(model);
 	}
 
 	/**
@@ -77,14 +69,7 @@ public class LoginController {
 			UserLoginCriteria userLoginCriteria, BindingResult bindResult,
 			Model model, UserSearchCriteria userSearchCriteria) {
 
-		List<String> infos = manager.getInfoAccueil();
-
-		if (infos != null) {
-			model.addAttribute("img", infos.get(0));
-			model.addAttribute("logo", infos.get(1));
-			model.addAttribute("titre", infos.get(2));
-			model.addAttribute("texte", infos.get(3));
-		}
+		addParamAcc(model);
 
 		if (userLoginCriteria.getLogin() == null
 				|| "".equals(userLoginCriteria.getLogin().trim())) {
@@ -120,17 +105,21 @@ public class LoginController {
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(UserLoginCriteria userLoginCriteria, Model model) {
 		UtilSession.setUserInSession(null);
-		List<String> infos = manager.getInfoAccueil();
 
-		// TODO code redondant
-		if (infos != null) {
-			model.addAttribute("img", infos.get(0));
-			model.addAttribute("logo", infos.get(1));
-			model.addAttribute("titre", infos.get(2));
-			model.addAttribute("texte", infos.get(3));
-		}
+		addParamAcc(model);
 
 		return "login/index";
+	}
+
+	// methodes
+
+	public void addParamAcc(Model model) {
+		List<String> infos = manager.getInfoAccueil();
+		model.addAttribute("img", infos.get(0));
+		model.addAttribute("logo", infos.get(1));
+		model.addAttribute("titre", infos.get(2));
+		model.addAttribute("texte", infos.get(3));
+
 	}
 
 }

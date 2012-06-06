@@ -12,12 +12,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
- * TODO change name of this class, it's not a Stub now !
- * 
  * Stub implementation of a AuthLoginService using a predefined set of Users
  */
 @Service("serviceAuth")
-public class StubAuthLoginService implements IFHauthLoginService {
+public class AuthLoginService implements IFHauthLoginService {
 
 	@Autowired
 	@Qualifier("DBServiceMangager")
@@ -29,7 +27,7 @@ public class StubAuthLoginService implements IFHauthLoginService {
 		this.managerGeTAP = serviceManager;
 	}
 
-	public StubAuthLoginService() {
+	public AuthLoginService() {
 
 	}
 

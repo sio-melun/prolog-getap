@@ -18,5 +18,5 @@ En Particulier :
 <ul>
 	<li>ROBERT Grégoire, étudiant en SIO-SLAM, pour son investissement dans le projet</li>
 	<li>MEUNIER Christopher, SIAD Hassen, ROBERT Vincent, équipe de réseau, pour leur aide précieuse dans la mise en place du serveur TOMCAT </li>
+</ul>
 
-</ul> 
