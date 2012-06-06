@@ -496,7 +496,7 @@ public class AdminController {
 		else {
 			FileOutputStream outputStream = null;
 			String filePath = System.getProperty("java.io.tmpdir")
-					+ form.getFile().getOriginalFilename();
+					+ File.separatorChar + form.getFile().getOriginalFilename();
 			try {
 				outputStream = new FileOutputStream(new File(filePath));
 				outputStream.write(form.getFile().getFileItem().get());
