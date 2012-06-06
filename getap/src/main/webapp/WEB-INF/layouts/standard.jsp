@@ -49,7 +49,7 @@
 					 	'<option value="15">15</option>'+
 					 	'<option value="20">20</option>'+
 					 	'<option value="25">25</option>'+
-					 	'<option value="-1">All</option>'+
+					 	'<option value="-1">Tous</option>'+
 					 	'</select> éléments par page',
 					"oPaginate": {
 						"sFirst": "<<",

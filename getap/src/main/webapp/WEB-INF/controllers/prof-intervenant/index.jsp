@@ -159,7 +159,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refusées par l'élève après modification de votre par (${etat2})</a>
+			<a href="#">Demandes refusées par l'élève après modification de votre part (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">

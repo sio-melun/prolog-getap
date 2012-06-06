@@ -149,60 +149,6 @@
 		</tbody>
 	</table>
 	<h3>
-		<a href="#">Demandes en Cours (${etat0 + etat4 + etatsup1000})</a>
-	</h3>
-	<table class="display dataTable">
-		<thead>
-			<tr class="header">
-				<c:if test="${utilisateur.role == 'eleve'}">
-					<th>Nom du Professeur</th>
-				</c:if>
-				<c:if
-					test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
-					<th>Nom de l'élève</th>
-				</c:if>
-				<th>Type d'accompagnement</th>
-				<th>Temps</th>
-				<th>Date</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${utilisateur.role == 'eleve'}">
-				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:if
-						test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
-						<tr>
-							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
-							<td>${dctap.accPers.nom}</td>
-							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
-							<td>${dctap.dateAction}</td>
-						</tr>
-						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
-					</c:if>
-				</c:forEach>
-			</c:if>
-			<c:if
-				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
-				<c:forEach items="${sesDCTAPprof}" var="dctap">
-					<c:if
-						test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
-						<tr>
-							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
-							<td>${dctap.accPers.nom}</td>
-							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
-							<td>${dctap.dateAction}</td>
-						</tr>
-						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
-					</c:if>
-				</c:forEach>
-			</c:if>
-		</tbody>
-	</table>
-	<h3>
 		<c:if test="${utilisateur.role == 'eleve'}">
 			<a href="#">Statistiques de l'élève</a>
 		</c:if>
