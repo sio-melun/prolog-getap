@@ -251,8 +251,16 @@
 		</tbody>
 	</table>
 </div>
-<div style="text-align: center;">
-<a href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
-	src="<c:url value="../../images/pdfdl.png"/>" width="64" height="64"/>
-	<div>Export PDF statistiques</div> </a>
-</div>
+<table class="legend2">
+	<tr>
+		<td><a
+			href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
+				src="<c:url value="../../images/pdfdl.png"/>" width="64"
+				height="64" />
+				<div>Export PDF statistiques</div> </a></td>
+		<td><a href="<c:url value="/app/admin/exportDemandeCsv/${utilisateur.id}" />"><img
+				src="<c:url value="../../images/exportcsv.png"/>" width="64"
+				height="64" />
+				<div>Export CSV des demandes</div> </a></td>
+	</tr>
+</table>
