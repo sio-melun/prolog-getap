@@ -120,7 +120,7 @@
 	<form:errors path="*" cssClass="errors" />
 	<div class="form-row">
 		<input type="image" name="recycled" id="recycled"
-			onclick="alert('Nouveau mot de passe : ${mdp}')"
+			onclick="alert('mot de passe initial : ${mdp}')"
 			src="../../images/recycled.png"
 			onmouseover="this.src='../../images/recycledHover.png';"
 			onmouseout="this.src='../../images/recycled.png';" />
