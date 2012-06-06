@@ -112,8 +112,8 @@
 						<tr class="header">
 							<th>Detail</th>
 							<th>Nom</th>
-							<th>prenom</th>
-							<th>classe</th>
+							<th>Prenom</th>
+							<th>Classe</th>
 						</tr>
 					</thead>
 					<tbody>
