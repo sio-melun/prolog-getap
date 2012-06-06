@@ -87,6 +87,7 @@ public class AdminController {
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesEleves", manager.getAllEleve());
+		model.addAttribute("lesProfs", manager.getAllProf());
 	}
 
 	@RequestMapping(value = "logiciel", method = RequestMethod.GET)

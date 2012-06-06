@@ -102,7 +102,7 @@
 		</table>
 	</div>
 	<h3>
-		<a href="#">Liste de tous les utilisateurs</a>
+		<a href="#">Liste de tous les élèves</a>
 	</h3>
 	<div>
 		<table>
@@ -125,9 +125,46 @@
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td>${eleve.nom}</td>
-								<td>${eleve.prenom}</td>
+								<td style="text-align:left;">${eleve.nom}</td>
+								<td style="text-align:left;">${eleve.prenom}</td>
 								<td>${eleve.classe.nom}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</tr>
+		</table>
+	</div>
+	<h3>
+		<a href="#">Liste de tous les professeurs</a>
+	</h3>
+	<div>
+		<table>
+			<tr>
+				<table class="display dataTable">
+					<thead>
+						<tr class="header">
+							<th>Detail</th>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Professeur</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${lesProfs}" var="prof">
+							<tr>
+								<td><a
+									href="<c:url value="/app/admin/detailUser?id=${prof.id}" />"><img
+										src="../../images/detail.png"
+										onmouseover="this.src='../../images/detailHover.png';"
+										onmouseout="this.src='../../images/detail.png';" /> </a>
+								</td>
+								<td text-align="center">${prof.nom}</td>
+								<td>${prof.prenom}</td>
+								<td>
+									<c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
+									<c:if test="${prof.role == 'prof-intervenant'}">Intervenant</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
