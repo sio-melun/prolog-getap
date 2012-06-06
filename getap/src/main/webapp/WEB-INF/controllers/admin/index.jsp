@@ -11,19 +11,23 @@
 		<table>
 			<tr>
 				<td><a href="<c:url value="/app/admin/ajoutUser" />"><img
-						src="<c:url value="../../images/AjouterUser.png"/>" width="64" height="68"/>
+						src="<c:url value="../../images/AjouterUser.png"/>" width="64"
+						height="68" />
 						<div>Ajouter un Utilisateur</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
-						src="<c:url value="../../images/importcsv.png"/>" width="64" height="64"/>
+						src="<c:url value="../../images/importcsv.png"/>" width="64"
+						height="64" />
 						<div>Import CSV d'élèves</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
-						src="<c:url value="../../images/exportcsv.png"/>"  width="64" height="64"/>
+						src="<c:url value="../../images/exportcsv.png"/>" width="64"
+						height="64" />
 						<div>Export CSV d'élèves</div> </a>
 				</td>
-					<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
-						src="<c:url value="../../images/pdfdl.png"/>"  width="64" height="64"/>
+				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
+						src="<c:url value="../../images/pdfdl.png"/>" width="64"
+						height="64" />
 						<div>Export PDF d'utilisateurs</div> </a>
 				</td>
 			</tr>
@@ -94,6 +98,40 @@
 						</fieldset>
 					</div>
 				</form:form>
+			</tr>
+		</table>
+	</div>
+	<h3>
+		<a href="#">Liste de tous les utilisateurs</a>
+	</h3>
+	<div>
+		<table>
+			<tr>
+				<table class="display dataTable">
+					<thead>
+						<tr class="header">
+							<th>Detail</th>
+							<th>Nom</th>
+							<th>prenom</th>
+							<th>classe</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${lesEleves}" var="eleve">
+							<tr>
+								<td><a
+									href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />"><img
+										src="../../images/detail.png"
+										onmouseover="this.src='../../images/detailHover.png';"
+										onmouseout="this.src='../../images/detail.png';" /> </a>
+								</td>
+								<td>${eleve.nom}</td>
+								<td>${eleve.prenom}</td>
+								<td>${eleve.classe.nom}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</tr>
 		</table>
 	</div>
