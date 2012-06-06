@@ -111,9 +111,9 @@
 					<thead>
 						<tr class="header">
 							<th>Detail</th>
-							<th>Nom</th>
-							<th>Prenom</th>
+							<th>Nom/Prenom</th>
 							<th>Classe</th>
+							<th>Temps consommé</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -125,9 +125,9 @@
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td style="text-align:left;">${eleve.nom}</td>
-								<td style="text-align:left;">${eleve.prenom}</td>
+								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
 								<td>${eleve.classe.nom}</td>
+								<td style="text-align:left;"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -145,8 +145,7 @@
 					<thead>
 						<tr class="header">
 							<th>Detail</th>
-							<th>Nom</th>
-							<th>Prenom</th>
+							<th>Nom/Prenom</th>
 							<th>Professeur</th>
 						</tr>
 					</thead>
@@ -159,8 +158,7 @@
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td text-align="center">${prof.nom}</td>
-								<td>${prof.prenom}</td>
+								<td style="text-align:left;">${prof.nom} ${prof.prenom}</td>
 								<td>
 									<c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
 									<c:if test="${prof.role == 'prof-intervenant'}">Intervenant</c:if>
