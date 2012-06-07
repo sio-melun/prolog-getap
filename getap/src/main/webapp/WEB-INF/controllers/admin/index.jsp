@@ -126,7 +126,7 @@
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
+								<td style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />">${eleve.nom} ${eleve.prenom}</a></td>
 								<td>${eleve.classe.nom}</td>
 								<td style="text-align:left;"></td>
 							</tr>
@@ -159,7 +159,7 @@
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td style="text-align:left;">${prof.nom} ${prof.prenom}</td>
+								<td style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${prof.id}" />">${prof.nom} ${prof.prenom}</a></td>
 								<td>
 									<c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
 									<c:if test="${prof.role == 'prof-intervenant'}">Intervenant</c:if>

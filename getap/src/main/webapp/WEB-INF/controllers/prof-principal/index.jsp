@@ -32,7 +32,7 @@
 											onmouseout="this.src='../../images/detail.png';" />
 									</a>
 								</td>
-								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
+								<td style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />">${eleve.nom} ${eleve.prenom}</a></td>
 								<td><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
 										pattern="#0" />h ${(eleve.dureeTotal%60)}min</td>
