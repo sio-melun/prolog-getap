@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <br />
@@ -18,12 +19,12 @@
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/importcsv.png"/>" width="64"
 						height="64" />
-						<div>Import CSV d'élèves</div> </a>
+						<div>Import CSV d'Ã©lÃ¨ves</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
 						height="64" />
-						<div>Export CSV d'élèves</div> </a>
+						<div>Export CSV d'Ã©lÃ¨ves</div> </a>
 				</td>
 				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
@@ -45,7 +46,7 @@
 					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
-								<label for="query">Recherche d'élèves :</label>
+								<label for="query">Recherche d'Ã©lÃ¨ves :</label>
 								<div class="input">
 									<form:input path="query" />
 									<input type="image" src="../../images/search.png"
@@ -102,7 +103,7 @@
 		</table>
 	</div>
 	<h3>
-		<a href="#">Liste de tous les élèves</a>
+		<a href="#">Liste de tous les Ã©lÃ¨ves</a>
 	</h3>
 	<div>
 		<table>
@@ -113,7 +114,7 @@
 							<th>Detail</th>
 							<th>Nom/Prenom</th>
 							<th>Classe</th>
-							<th>Temps consommé</th>
+							<th>Temps consommÃ©</th>
 						</tr>
 					</thead>
 					<tbody>

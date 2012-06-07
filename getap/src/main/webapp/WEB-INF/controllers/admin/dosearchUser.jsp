@@ -1,12 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 
 <h3 class="titre3">Recherche d'utilisateur</h3>
 
 <c:if test="${empty users}">
-	Aucun utilisateur trouvé.
+	Aucun utilisateur trouvÃ©.
 </c:if>
 
 <c:if test="${not empty users}">
@@ -15,7 +15,7 @@
 		<thead>
 			<tr class="header">
 				<th>Detail</th>
-				<th>Nom/Prénom</th>
+				<th>Nom/PrÃ©nom</th>
 				<th>Role</th>
 				<th>Classe</th>
 				<th>Modifier</th>
@@ -52,6 +52,6 @@
 
 <div class="buttonGroup">
 	<a href="<c:url value="/app/admin/index" />"> <input type="button"
-		value="Retour à l'index">
+		value="Retour ï¿½ l'index">
 	</a>
 </div>
