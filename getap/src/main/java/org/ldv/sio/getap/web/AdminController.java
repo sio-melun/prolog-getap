@@ -89,7 +89,7 @@ public class AdminController {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
-		model.addAttribute("lesEleves", manager.getAllEleve());
+		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
 		model.addAttribute("lesProfs", manager.getAllProf());
 	}
 

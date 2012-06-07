@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <br />
 
 <h5 style="position: relative; top: 35px;">Gestion utilisateur</h5>
@@ -119,16 +120,27 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${lesEleves}" var="eleve">
-							<tr>
-								<td><a
+							<c:set value="" var="classPercentZero" />
+							<c:if test="${eleve.dureeTotal == 0 }">
+								<c:set value="percentZero" var="classPercentZero" />
+							</c:if>
+							<tr >
+								<td class="${classPercentZero}"><a
 									href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />"><img
 										src="../../images/detail.png"
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a>
 								</td>
-								<td style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
-								<td>${eleve.classe.nom}</td>
-								<td style="text-align:left;"></td>
+								<td class="${classPercentZero}" style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
+								<td class="${classPercentZero}">${eleve.classe.nom}</td>
+								<td class="${classPercentZero}"><fmt:formatNumber
+										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${eleve.dureeTotal%60}"
+										pattern="#00" />  (<fmt:formatNumber
+										value="${(eleve.dureeTotal/(72*60)*100)}"
+										pattern="#00.00" />%)
+										</td>
 							</tr>
 						</c:forEach>
 					</tbody>
