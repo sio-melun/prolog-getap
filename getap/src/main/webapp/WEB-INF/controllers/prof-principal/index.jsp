@@ -32,8 +32,7 @@
 									href="<c:url value="/app/prof-principal/detailUser?id=${eleve.id}" />">
 										<img src="../../images/detail.png" width="24" height="24"
 										onmouseover="this.src='../../images/detailHover.png';"
-										onmouseout="this.src='../../images/detail.png';" /> </a>
-								</td>
+										onmouseout="this.src='../../images/detail.png';" /> </a></td>
 								<td class="${classPercentZero}" style="text-align: left;">${eleve.nom}
 									${eleve.prenom}</td>
 								<td class="${classPercentZero}"><fmt:formatNumber

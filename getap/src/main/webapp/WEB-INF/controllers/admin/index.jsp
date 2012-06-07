@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -15,23 +16,19 @@
 				<td><a href="<c:url value="/app/admin/ajoutUser" />"><img
 						src="<c:url value="../../images/AjouterUser.png"/>" width="64"
 						height="68" />
-						<div>Ajouter un Utilisateur</div> </a>
-				</td>
+						<div>Ajouter un Utilisateur</div> </a></td>
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/importcsv.png"/>" width="64"
 						height="64" />
-						<div>Import CSV d'élèves</div> </a>
-				</td>
+						<div>Import CSV d'élèves</div> </a></td>
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
 						height="64" />
-						<div>Export CSV d'élèves</div> </a>
-				</td>
+						<div>Export CSV d'élèves</div> </a></td>
 				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
 						height="64" />
-						<div>Export PDF d'utilisateurs</div> </a>
-				</td>
+						<div>Export PDF d'utilisateurs</div> </a></td>
 			</tr>
 		</table>
 	</div>
@@ -124,23 +121,21 @@
 							<c:if test="${eleve.dureeTotal == 0 }">
 								<c:set value="percentZero" var="classPercentZero" />
 							</c:if>
-							<tr >
+							<tr>
 								<td class="${classPercentZero}"><a
 									href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />"><img
 										src="../../images/detail.png"
 										onmouseover="this.src='../../images/detailHover.png';"
-										onmouseout="this.src='../../images/detail.png';" /> </a>
-								</td>
-								<td class="${classPercentZero}" style="text-align:left;">${eleve.nom} ${eleve.prenom}</td>
+										onmouseout="this.src='../../images/detail.png';" /> </a></td>
+								<td class="${classPercentZero}" style="text-align: left;">${eleve.nom}
+									${eleve.prenom}</td>
 								<td class="${classPercentZero}">${eleve.classe.nom}</td>
 								<td class="${classPercentZero}"><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
 										pattern="#00" />h<fmt:formatNumber
-										value="${eleve.dureeTotal%60}"
-										pattern="#00" />  (<fmt:formatNumber
-										value="${(eleve.dureeTotal/(72*60)*100)}"
-										pattern="#00.00" />%)
-										</td>
+										value="${eleve.dureeTotal%60}" pattern="#00" /> (<fmt:formatNumber
+										value="${(eleve.dureeTotal/(72*60)*100)}" pattern="#00.00" />%)
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -169,11 +164,12 @@
 									href="<c:url value="/app/admin/detailUser?id=${prof.id}" />"><img
 										src="../../images/detail.png"
 										onmouseover="this.src='../../images/detailHover.png';"
-										onmouseout="this.src='../../images/detail.png';" /> </a>
+										onmouseout="this.src='../../images/detail.png';" /> </a></td>
+								<td style="text-align: left;"><a
+									href="<c:url value="/app/admin/detailUser?id=${prof.id}" />">${prof.nom}
+										${prof.prenom}</a>
 								</td>
-								<td style="text-align:left;">${prof.nom} ${prof.prenom}</td>
-								<td>
-									<c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
+								<td><c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
 									<c:if test="${prof.role == 'prof-intervenant'}">Intervenant</c:if>
 								</td>
 							</tr>
