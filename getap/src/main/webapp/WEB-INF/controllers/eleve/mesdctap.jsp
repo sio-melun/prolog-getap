@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page import="org.ldv.sio.getap.app.service.impl.DBManagerGeTAP"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
@@ -21,7 +22,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes non traitees (${etat0 + etat4})</a>
+			<a href="#">Demandes non traitées (${etat0 + etat4})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -62,7 +63,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes modifiees par le professeur (${etatsup1000})</a>
+			<a href="#">Demandes modifiées par le professeur (${etatsup1000})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -122,10 +123,10 @@
 			</table>
 		</div>
 	</div>
-	<h5>Demandes terminees</h5>
+	<h5>Demandes terminées</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes validees (${etat1 + etat32})</a>
+			<a href="#">Demandes validées (${etat1 + etat32})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -154,7 +155,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refusees par le professeur (${etat64})</a>
+			<a href="#">Demandes refusées par le professeur (${etat64})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -183,7 +184,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refusees (${etat2})</a>
+			<a href="#">Vos demandes refusées (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">

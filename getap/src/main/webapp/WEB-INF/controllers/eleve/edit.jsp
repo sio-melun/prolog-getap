@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <c:if test="${etat == 0 or etat == 3 }">
 	<h3 class="titre3">Modifier ma Demande</h3>
@@ -18,7 +19,7 @@
 	      </div>
 	      
 	      <div class="form-row">
-	        <label for="minutes">Temps d'aide personalisée :</label>
+	        <label for="minutes">Temps d'aide personalisÃ©e :</label>
 	        <%-- <div class="input">
 	          <form:input path="minutes" />
 	        </div> --%>
@@ -50,7 +51,7 @@
 	      </div>
 	      
 	      <div class="form-row">
-				<label for="accPersId">Type d'aide personnalisée : </label> <select
+				<label for="accPersId">Type d'aide personnalisÃ©e : </label> <select
 					id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>
@@ -61,7 +62,7 @@
 
 			<div class="from-row" id="inputAcc"
 				style="display: none; visibility: hidden;">
-				<label for="accPersNom">Aide personnalisée : </label>
+				<label for="accPersNom">Aide personnalisÃ©e : </label>
 				<form:input path="accPersNom" />
 			</div>
 

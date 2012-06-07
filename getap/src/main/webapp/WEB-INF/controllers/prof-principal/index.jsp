@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <h3 class="titre3">Mes classes</h3>
 
@@ -15,7 +16,7 @@
 				<thead>
 					<tr class="header">
 						<th>Detail</th>
-						<th>Eleves</th>
+						<th>Elèves</th>
 						<th>Temps Total</th>
 						<th>%</th>
 					</tr>

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
@@ -20,13 +21,13 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes reçues (${etat0 + etat4})</a>
+			<a href="#">Demandes reÃ§ues (${etat0 + etat4})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleve</th>
+						<th>ElÃ¨ve</th>
 						<th>Classe</th>
 						<th>Date</th>
 						<th>Temps</th>
@@ -69,13 +70,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes en attentes de confirmations par l'élève (${etatsup1000})</a>
+			<a href="#">Demandes en attentes de confirmations par l'Ã©lÃ¨ve (${etatsup1000})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>ElÃ¨ves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -127,16 +128,16 @@
 			</table>
 		</div>
 	</div>
-	<h5>Demandes de validation terminées</h5>
+	<h5>Demandes de validation terminÃ©es</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes validées (${etat1 + etat32})</a>
+			<a href="#">Demandes validÃ©es (${etat1 + etat32})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>ElÃ¨ves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -159,13 +160,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refusées par l'élève après modification de votre part (${etat2})</a>
+			<a href="#">Demandes refusÃ©es par l'Ã©lÃ¨ve aprÃ¨s modification de votre part (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>ElÃ¨ves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -188,13 +189,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refusées (${etat64})</a>
+			<a href="#">Vos demandes refusÃ©es (${etat64})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>ElÃ¨ves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>

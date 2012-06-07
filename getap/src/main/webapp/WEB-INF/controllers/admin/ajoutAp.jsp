@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 
 <form:form modelAttribute="formAjoutAp" action="doajoutAP" method="post"
 	id="formulaireAjoutAP">
@@ -10,7 +10,7 @@
 	<div class="section">
 		<fieldset>
 			<div class="form-row">
-				<label for="nom">Nom de la nouvelle aide personnalisée :</label>
+				<label for="nom">Nom de la nouvelle aide personnalisÃ©e :</label>
 				<div class="input">
 					<form:input path="nom" />
 				</div>
