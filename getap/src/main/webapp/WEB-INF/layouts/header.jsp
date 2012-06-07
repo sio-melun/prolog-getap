@@ -8,7 +8,7 @@
 	 <c:if test="${not empty user}">
 	 	<c:choose>
 	 		<c:when test="${user.role == 'eleve' }">
-	 			${user.prenom} ${user.nom} (Elève)
+	 			${user.prenom} ${user.nom} (Élève)
 	 		</c:when>
 	 		<c:when test="${user.role == 'admin' }">
 	 			${user.prenom} ${user.nom} (Admin)

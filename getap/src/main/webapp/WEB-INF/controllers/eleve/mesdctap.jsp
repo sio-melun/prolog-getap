@@ -15,7 +15,7 @@
 			<td><img src="../../images/valid.png" width="24" height="24"/> : Confirmer</td>
 			<td><img src="../../images/modif.png" width="24" height="24"/> : Modifier</td>
 			<td><img src="../../images/suppr.png" width="24" height="24"/> : Supprimer</td>
-			<td><img src="../../images/refuseModif.png" width="24" height="24"/> : Refuser</td>
+			<td><img src="../../images/refuseModif.png" width="24" height="24"/> : Rejeter</td>
 		</tr>
 	</table>
 	<h5 style="position: relative; top: 35px;">Demandes de validation
@@ -44,7 +44,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/eleve/edit?id=${dctap.id}" />"><img
@@ -91,12 +93,16 @@
 								<c:if test="${dctap.dureeModifiee}">
 									<td class="isUpdate"><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${!dctap.dureeModifiee}">
 									<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${dctap.apModifiee}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
@@ -146,7 +152,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -175,7 +183,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -204,7 +214,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>

@@ -27,7 +27,7 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Elève</th>
+						<th>Élève</th>
 						<th>Classe</th>
 						<th>Date</th>
 						<th>Temps</th>
@@ -46,7 +46,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
@@ -76,7 +78,7 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Elèves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -98,12 +100,16 @@
 								<c:if test="${dctap.dureeModifiee}">
 									<td class="isUpdate"><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${!dctap.dureeModifiee}">
 									<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${dctap.apModifiee}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
@@ -137,7 +143,7 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Elèves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -151,7 +157,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -166,7 +174,7 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Elèves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -180,7 +188,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -195,7 +205,7 @@
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Elèves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -209,7 +219,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>

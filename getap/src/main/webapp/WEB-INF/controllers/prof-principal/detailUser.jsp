@@ -30,8 +30,10 @@
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
 						<td><fmt:formatNumber
-								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-							${dctap.minutes%60}min</td>
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 						<td>${dctap.dateAction}</td>
 					</tr>
 					<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
@@ -67,8 +69,10 @@
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
 						<td><fmt:formatNumber
-								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-							${dctap.minutes%60}min</td>
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 						<td>${dctap.dateAction}</td>
 						<c:if test="${dctap.etat == 2}">
 							<td>Refus élève</td>
@@ -105,8 +109,10 @@
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
 						<td><fmt:formatNumber
-								value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-							${dctap.minutes%60}min</td>
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 						<td>${dctap.dateAction}</td>
 					</tr>
 					<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
@@ -129,13 +135,21 @@
 		<tbody>
 			<tr>
 				<td><fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
-						pattern="#0" />h ${timeTT%60}min</td>
+						pattern="#00" />h<fmt:formatNumber
+										value="${timeTT%60}"
+										pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
-						pattern="#0" />h ${timeVal%60}min</td>
+						pattern="#00" />h<fmt:formatNumber
+										value="${timeVal%60}"
+										pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeAtt/60-(timeAtt%60/60)}"
-						pattern="#0" />h ${timeAtt%60}min</td>
+						pattern="#00" />h<fmt:formatNumber
+										value="${timeAtt%60}"
+										pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeRef/60-(timeRef%60/60)}"
-						pattern="#0" />h ${timeRef%60}min</td>
+						pattern="#00" />h<fmt:formatNumber
+										value="${timeRef%60}"
+										pattern="#00" /></td>
 			</tr>
 			<tr>
 
