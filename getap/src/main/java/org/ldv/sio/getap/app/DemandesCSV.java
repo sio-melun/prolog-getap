@@ -2,10 +2,6 @@ package org.ldv.sio.getap.app;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,93 +24,61 @@ public class DemandesCSV {
 		this.ds = ds;
 	}
 
-	public void export(HttpServletResponse response, Long id,
+	public void export(HttpServletResponse response,
 			List<DemandeConsoTempsAccPers> dctap) {
 
 		try {
-			Connection con = ds.getConnection();
-			Statement select = con.createStatement();
-			ResultSet rs = select
-					.executeQuery("SELECT user.* FROM user where id = " + id);
-
-			try {
-				PrintWriter writer = response.getWriter();
-
-				rs.last();
-				String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				int idClasse = rs.getInt("idClasse");
-				rs.beforeFirst();
-				ResultSet rs2 = select
-						.executeQuery("SELECT classe.* from classe where id = "
-								+ idClasse);
-				rs2.last();
-				String classe = rs2.getString("libelle");
-				rs2.beforeFirst();
-				writer.println(nom + ";" + prenom + ";" + classe + "\n");
-				writer.println("Professeur;Type d'accompagnement;Temps;Date\n");
-				writer.println("Demandes validées");
-				for (int i = 0; i < dctap.size(); i++) {
-					if (dctap.get(i).getEtat() == 1
-							|| dctap.get(i).getEtat() == 32) {
-						writer.append(dctap.get(i).getProf().getNom() + " "
-								+ dctap.get(i).getProf().getPrenom());
-						writer.append(";");
-						writer.append(dctap.get(i).getAccPers().getNom());
-						writer.append(";");
-						writer.append(dctap.get(i).getMinutes() / 60
-								- (dctap.get(i).getMinutes() % 60 / 60) + "h "
-								+ dctap.get(i).getMinutes() % 60 + "min");
-						writer.append(";");
-						writer.append(dctap.get(i).getDateAction() + "");
-						writer.println("");
-					}
+			PrintWriter writer = response.getWriter();
+			writer.println("Année scolaire;Date;Temps;Etat;Professeur;Eleve;Type d'accompagnement");
+			for (int i = 0; i < dctap.size(); i++) {
+				if (dctap.get(i).getEtat() == 1 || dctap.get(i).getEtat() == 32) {
+					writer.append(dctap.get(i).getAnneeScolaire() + ";");
+					writer.append(dctap.get(i).getDateAction() + ";");
+					writer.append(dctap.get(i).getMinutes() + ";");
+					writer.append("Validée;");
+					writer.append(dctap.get(i).getProf().getNom() + " "
+							+ dctap.get(i).getProf().getPrenom() + ";");
+					writer.append(dctap.get(i).getEleve().getNom() + " "
+							+ dctap.get(i).getEleve().getPrenom() + ";");
+					writer.append(dctap.get(i).getAccPers().getNom());
+					writer.println("");
 				}
-				writer.println("\nDemandes refusées");
-				for (int i = 0; i < dctap.size(); i++) {
-					if (dctap.get(i).getEtat() == 2
-							|| dctap.get(i).getEtat() == 8
-							|| dctap.get(i).getEtat() == 64) {
-						writer.append(dctap.get(i).getProf().getNom() + " "
-								+ dctap.get(i).getProf().getPrenom());
-						writer.append(";");
-						writer.append(dctap.get(i).getAccPers().getNom());
-						writer.append(";");
-						writer.append(dctap.get(i).getMinutes() / 60
-								- (dctap.get(i).getMinutes() % 60 / 60) + "h "
-								+ dctap.get(i).getMinutes() % 60 + "min");
-						writer.append(";");
-						writer.append(dctap.get(i).getDateAction() + "");
-						writer.println("");
-					}
-				}
-				writer.println("\nDemandes en cours");
-				for (int i = 0; i < dctap.size(); i++) {
-					if (dctap.get(i).getEtat() == 0
-							|| dctap.get(i).getEtat() == 4
-							|| dctap.get(i).getEtat() > 1023) {
-						writer.append(dctap.get(i).getProf().getNom() + " "
-								+ dctap.get(i).getProf().getPrenom());
-						writer.append(";");
-						writer.append(dctap.get(i).getAccPers().getNom());
-						writer.append(";");
-						writer.append(dctap.get(i).getMinutes() / 60
-								- (dctap.get(i).getMinutes() % 60 / 60) + "h "
-								+ dctap.get(i).getMinutes() % 60 + "min");
-						writer.append(";");
-						writer.append(dctap.get(i).getDateAction() + "");
-						writer.println("");
-					}
-				}
-				writer.flush();
-				writer.close();
-
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
 			}
+			for (int i = 0; i < dctap.size(); i++) {
+				if (dctap.get(i).getEtat() == 2 || dctap.get(i).getEtat() == 8
+						|| dctap.get(i).getEtat() == 64) {
+					writer.append(dctap.get(i).getAnneeScolaire() + ";");
+					writer.append(dctap.get(i).getDateAction() + ";");
+					writer.append(dctap.get(i).getMinutes() + ";");
+					writer.append("Refusée;");
+					writer.append(dctap.get(i).getProf().getNom() + " "
+							+ dctap.get(i).getProf().getPrenom() + ";");
+					writer.append(dctap.get(i).getEleve().getNom() + " "
+							+ dctap.get(i).getEleve().getPrenom() + ";");
+					writer.append(dctap.get(i).getAccPers().getNom());
+					writer.println("");
+				}
+			}
+			for (int i = 0; i < dctap.size(); i++) {
+				if (dctap.get(i).getEtat() == 0 || dctap.get(i).getEtat() == 4
+						|| dctap.get(i).getEtat() > 1023) {
+					writer.append(dctap.get(i).getAnneeScolaire() + ";");
+					writer.append(dctap.get(i).getDateAction() + ";");
+					writer.append(dctap.get(i).getMinutes() + ";");
+					writer.append("En cour;");
+					writer.append(dctap.get(i).getProf().getNom() + " "
+							+ dctap.get(i).getProf().getPrenom() + ";");
+					writer.append(dctap.get(i).getEleve().getNom() + " "
+							+ dctap.get(i).getEleve().getPrenom() + ";");
+					writer.append(dctap.get(i).getAccPers().getNom());
+					writer.println("");
+				}
+			}
+			writer.flush();
+			writer.close();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
 		}
 
 	}

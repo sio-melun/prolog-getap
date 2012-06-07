@@ -547,7 +547,7 @@ public class AdminController {
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom() + ".csv");
-		demandes.export(response, user.getId(), dctap);
+		demandes.export(response, dctap);
 	}
 
 	@RequestMapping(value = "exportUserCsv")
