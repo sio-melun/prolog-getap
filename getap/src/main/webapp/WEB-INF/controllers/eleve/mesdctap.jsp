@@ -10,6 +10,10 @@
 </c:if>
 
 <c:if test="${not empty mesdctaps}">
+	<c:set var="timeTT" value="0" />
+	<c:set var="timeVal" value="0" />
+	<c:set var="timeRef" value="0" />
+	<c:set var="timeAtt" value="0" />
 	<table class="legend2">
 		<tr>
 			<td><img src="../../images/valid.png" width="24" height="24"/> : Confirmer</td>
@@ -224,6 +228,60 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+		<c:forEach items="${mesdctaps}" var="dctap">
+		<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+		<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
+			<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
+		</c:if>
+	</c:forEach>
+	<c:forEach items="${mesdctaps}" var="dctap">
+		<c:if test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+			<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+		</c:if>
+	</c:forEach>
+	<c:forEach items="${mesdctaps}" var="dctap">
+		<c:if
+			test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
+			<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
+		</c:if>
+	</c:forEach>
+	<br><br>
+	<h5>Statistiques</h5>
+	<div id="accordion3">
+		<h3>
+			<a href="#">Mes statistiques</a>
+		</h3>
+		<table class="display" id="stats">
+			<thead>
+				<tr>
+					<th>Temps total validé</th>
+					<th>Temps total en attente</th>
+					<th>Temps total refusé</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeVal%60}"
+							pattern="#00" /></td>
+					<td><fmt:formatNumber value="${timeAtt/60-(timeAtt%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeAtt%60}"
+							pattern="#00" /></td>
+					<td><fmt:formatNumber value="${timeRef/60-(timeRef%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeRef%60}"
+							pattern="#00" /></td>
+				</tr>
+				<tr>
+					<td id="statsValide"><fmt:formatNumber
+							value="${timeVal/timeTT*100}" pattern="#0.00" />%</td>
+					<td id="statsAttente"><fmt:formatNumber
+							value="${timeAtt/timeTT*100}" pattern="#0.00" />%</td>
+					<td id="statsRefuse"><fmt:formatNumber
+							value="${timeRef/timeTT*100}" pattern="#0.00" />%</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </c:if>
 

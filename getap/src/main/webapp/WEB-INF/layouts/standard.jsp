@@ -73,14 +73,15 @@
   			$(function(){
   			// Accordion
   			$("#accordion").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
-  			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false", autoHeight:"false"});		
+  			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
+  			$("#accordion3").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			});
   		</script>
   		
         <script>
 		  $(document).ready(function() {
 		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd", 
-		    	                          monthNames: ["Janvier","F�vrier","Mars","Avril","Mai","Juin","Juillet","Ao�t","Septembre","Octobre","Novembre","D�cembre"],
+		    	                          monthNames: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
 		    	                          dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
 		    	                          dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"] 
 		    });
