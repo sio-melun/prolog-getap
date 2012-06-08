@@ -127,8 +127,8 @@
 										src="../../images/detail.png"
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a></td>
-								<td class="${classPercentZero}" style="text-align: left;">${eleve.nom}
-									${eleve.prenom}</td>
+								<td class="${classPercentZero}" style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />">${eleve.nom}
+									${eleve.prenom}</a></td>
 								<td class="${classPercentZero}">${eleve.classe.nom}</td>
 								<td class="${classPercentZero}"><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"
