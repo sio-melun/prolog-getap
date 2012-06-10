@@ -187,9 +187,9 @@ INSERT INTO `dctap` (`id`, `anneeScolaire`, `dateAction`, `dureeAP`, `Etat`, `id
 
 INSERT INTO `ap` (`id`, `libelle`, `origineEtat`, `idUser`) VALUES
 (1, 'SOS Matiere', 0, NULL),
-(2, 'Sortie théatre', 0, NULL),
+(2, 'Sortie théâtre', 0, NULL),
 (3, 'Tutorat', 0, NULL),
-(4, 'Entretien Conseilère d''Orientation', 0, NULL);
+(4, 'Entretien Conseillère d''Orientation', 0, NULL);
 
 INSERT INTO `classe` (`id`, `libelle`) VALUES
 (1, 'SIO11'),
@@ -205,7 +205,7 @@ INSERT INTO `discipline` (`id`, `libelle`) VALUES
 (5, 'Espagnol');
 
 INSERT INTO `param_accueil` (`img`, `logo`, `titre`, `texte`) VALUES
-('/images/lycee2.jpg', '/images/logolycee.jpg', 'Bienvenu sur GeTAP.', 'En informatique, une application Web (aussi appelée WebApp) est un logiciel applicatif manipulable grâce à un navigateur Web. De la même manière que les sites Web, une application Web est généralement placée sur un serveur et se manipule en actionnant des widgets à l aide d un navigateur Web, via un réseau informatique (Internet, intranet, réseau local, etc.).');
+('/images/lycee2.jpg', '/images/logolycee.jpg', 'Bienvenu sur GeTAP.', '[...]');
 
 INSERT INTO `param_annee` (`id`, `anneeScolaire`) VALUES
 (1, '2011-2012');
