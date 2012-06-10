@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
@@ -7,8 +8,9 @@
 
 <% String userAgent = request.getHeader("user-agent"); %>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
+	
 		<title>
 			<tiles:getAsString name="title" />
 		</title>
@@ -35,12 +37,12 @@
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
 				"oLanguage": {
-					"sEmptyTable": "Aucune donnée correspondante",
+					"sEmptyTable": "Aucune donnÃ©e correspondante",
 					"sLoadingRecords": "Traitement en cour...",
 					"sProcessing": "Traitement en cour...",
-					"sZeroRecords": "Aucune donnée correspondante",
-					"sInfo": "Affiche de _START_ à _END_ sur _TOTAL_ éléments",
-					"sInfoEmpty": "Aucun élément",
+					"sZeroRecords": "Aucune donnÃ©e correspondante",
+					"sInfo": "Affiche de _START_ Ã  _END_ sur _TOTAL_ Ã©lÃ©ments",
+					"sInfoEmpty": "Aucun Ã©lÃ©ment",
 					"sInfoFiltered": "",
 					"sSearch": "<img src='../../images/search.png' width='24' height='24'>",
 					"sLengthMenu": 'Affiche <select>'+
@@ -50,7 +52,7 @@
 					 	'<option value="20">20</option>'+
 					 	'<option value="25">25</option>'+
 					 	'<option value="-1">Tous</option>'+
-					 	'</select> éléments par page',
+					 	'</select> Ã©lÃ©ments par page',
 					"oPaginate": {
 						"sFirst": "<<",
 						"sLast": ">>",
@@ -79,7 +81,7 @@
         <script>
 		  $(document).ready(function() {
 		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd", 
-		    	                          monthNames: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+		    	                          monthNames: ["Janvier","FÃ©vrier","Mars","Avril","Mai","Juin","Juillet","AoÃ»t","Septembre","Octobre","Novembre","DÃ©cembre"],
 		    	                          dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
 		    	                          dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"] 
 		    });
