@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 	
 <h3 class="titre3">Ajouter une demande de validation</h3>
 
@@ -12,7 +12,7 @@
 	<div class="section">
 		<fieldset>
 			<div class="form-row">
-				<label for="anneeScolaire">Année scolaire courante :</label>
+				<label for="anneeScolaire">AnnÃ©e scolaire courante :</label>
 				<div class="input">
 					<form:input path="anneeScolaire" disabled="true" />
 				</div>
@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="form-row">
-				<label for="minutes">Temps d'accompagnement personnalisé :
+				<label for="minutes">Temps d'accompagnement personnalisÃ© :
 				</label>
 				<%-- <div class="input">
 					<form:input path="minutes" />
@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="form-row">
-				<label for="accPersId">Type d'aide personnalisée : </label> <select
+				<label for="accPersId">Type d'aide personnalisÃ©e : </label> <select
 					id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>
@@ -60,7 +60,7 @@
 
 			<div class="from-row" id="inputAcc"
 				style="display: none; visibility: hidden;">
-				<label for="accPersNom">Préciser : </label>
+				<label for="accPersNom">PrÃ©ciser : </label>
 				<form:input path="accPersNom" />
 			</div>
 		</fieldset>

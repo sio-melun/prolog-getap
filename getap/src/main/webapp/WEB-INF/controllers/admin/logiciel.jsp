@@ -1,11 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <br />
 
 <h5 style="position: relative; top: 35px;">Administration</h5>
 <div id="accordion">
 	<h3>
-		<a href="#">Gestion des accompagnements personnalisés</a>
+		<a href="#">Gestion des accompagnements personnalisÃ©s</a>
 	</h3>
 	<div>
 		<table>
@@ -17,7 +19,7 @@
 					<div class="section inputPerso">
 						<fieldset>
 							<div class="form-row">
-								<label for="nom">Nouvelle aide personnalisée :</label>
+								<label for="nom">Nouvelle aide personnalisÃ©e :</label>
 								<div class="input">
 									<form:input path="nom" />
 									<input type="submit" value="Ajouter" />

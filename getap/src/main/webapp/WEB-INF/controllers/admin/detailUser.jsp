@@ -1,19 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 
 <c:set var="timeTT" value="0" />
 <c:set var="timeVal" value="0" />
 <c:set var="timeRef" value="0" />
 <c:set var="timeAtt" value="0" />
 
-<h3 class="titre3">Détail des demandes de ${utilisateur.nom}
+<h3 class="titre3">DÃ©tail des demandes de ${utilisateur.nom}
 	${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
-		<a href="#">Demandes Validées (${etat1 + etat32})</a>
+		<a href="#">Demandes ValidÃ©es (${etat1 + etat32})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -23,7 +23,7 @@
 				</c:if>
 				<c:if
 					test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
-					<th>Nom de l'élève</th>
+					<th>Nom de l'Ã©lÃ¨ve</th>
 				</c:if>
 				<th>Type d'accompagnement</th>
 				<th>Temps</th>
@@ -76,7 +76,7 @@
 	</c:if>
 
 	<h3>
-		<a href="#">Demandes Refusées (${etat2 + etat8 + etat64})</a>
+		<a href="#">Demandes RefusÃ©es (${etat2 + etat8 + etat64})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -86,7 +86,7 @@
 				</c:if>
 				<c:if
 					test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
-					<th>Nom de l'élève</th>
+					<th>Nom de l'Ã©lÃ¨ve</th>
 				</c:if>
 				<th>Type d'accompagnement</th>
 				<th>Temps</th>
@@ -107,10 +107,10 @@
 								${dctap.minutes%60}min</td>
 							<td>${dctap.dateAction}</td>
 							<c:if test="${dctap.etat == 2}">
-								<td>Refus élève</td>
+								<td>Refus Ã©lÃ¨ve</td>
 							</c:if>
 							<c:if test="${dctap.etat == 8}">
-								<td>Annulé</td>
+								<td>AnnulÃ©</td>
 							</c:if>
 							<c:if test="${dctap.etat == 64}">
 								<td>Refus prof</td>
@@ -133,10 +133,10 @@
 								${dctap.minutes%60}min</td>
 							<td>${dctap.dateAction}</td>
 							<c:if test="${dctap.etat == 2}">
-								<td>Refus élève</td>
+								<td>Refus Ã©lÃ¨ve</td>
 							</c:if>
 							<c:if test="${dctap.etat == 8}">
-								<td>Annulé</td>
+								<td>AnnulÃ©</td>
 							</c:if>
 							<c:if test="${dctap.etat == 64}">
 								<td>Refus prof</td>
@@ -150,7 +150,7 @@
 	</table>
 	<h3>
 		<c:if test="${utilisateur.role == 'eleve'}">
-			<a href="#">Statistiques de l'élève</a>
+			<a href="#">Statistiques de l'Ã©lÃ¨ve</a>
 		</c:if>
 		<c:if
 			test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
@@ -161,11 +161,11 @@
 		<thead>
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
-					<th>Temps total effectué</th>
+					<th>Temps total effectuï¿½</th>
 				</c:if>
-				<th>Temps total validé</th>
+				<th>Temps total validÃ©</th>
 				<th>Temps total en attente</th>
-				<th>Temps total refusé</th>
+				<th>Temps total refusÃ©</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -197,8 +197,16 @@
 		</tbody>
 	</table>
 </div>
-<div style="text-align: center;">
-<a href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
-	src="<c:url value="../../images/pdfdl.png"/>" width="64" height="64"/>
-	<div>Export PDF statistiques</div> </a>
-</div>
+<table class="legend2">
+	<tr>
+		<td><a
+			href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
+				src="<c:url value="../../images/pdfdl.png"/>" width="64"
+				height="64" />
+				<div>Export PDF statistiques</div> </a></td>
+		<td><a href="<c:url value="/app/admin/exportDemandeCsv/${utilisateur.id}" />"><img
+				src="<c:url value="../../images/exportcsv.png"/>" width="64"
+				height="64" />
+				<div>Export CSV des demandes</div> </a></td>
+	</tr>
+</table>

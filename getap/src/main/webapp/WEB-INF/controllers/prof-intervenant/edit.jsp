@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <h3 class="titre3">Modification d'une demande de validation</h3>
 <form:form modelAttribute="formListConsoForProfInter" action="doedit"
 	method="post">
@@ -16,7 +17,7 @@
 			</div>
 
 			<div class="form-row">
-				<label for="minutes">Temps d'aide personnalisée :</label>
+				<label for="minutes">Temps d'aide personnalisÃ©e :</label>
 				<%-- <div class="input">
 					<form:input path="minutes" />
 				</div> --%>
@@ -43,7 +44,7 @@
 			</div>
 
 			<div>
-				<label for="accPersId">Type d'aide personnalisée :</label>
+				<label for="accPersId">Type d'aide personnalisÃ©e :</label>
 				<form:select path="accPersId" items="${lesAP}" itemValue="id"
 					itemLabel="nom"></form:select>
 			</div>

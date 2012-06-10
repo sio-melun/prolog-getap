@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <h3 class="titre3">Mes demandes de validations</h3>
 
@@ -20,13 +21,13 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes re�ues (${etat0 + etat4})</a>
+			<a href="#">Demandes reçues (${etat0 + etat4})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleve</th>
+						<th>Élève</th>
 						<th>Classe</th>
 						<th>Date</th>
 						<th>Temps</th>
@@ -45,7 +46,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 								<td><a
 									href="<c:url value="/app/prof-intervenant/valid/${dctap.id}" />"><img
@@ -69,13 +72,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes en attentes de confirmations par l'�l�ve (${etatsup1000})</a>
+			<a href="#">Demandes en attentes de confirmations par l'élève (${etatsup1000})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -97,12 +100,16 @@
 								<c:if test="${dctap.dureeModifiee}">
 									<td class="isUpdate"><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${!dctap.dureeModifiee}">
 									<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								</c:if>
 								<c:if test="${dctap.apModifiee}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
@@ -127,16 +134,16 @@
 			</table>
 		</div>
 	</div>
-	<h5>Demandes de validation termin�es</h5>
+	<h5>Demandes de validation terminées</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes valid�es (${etat1 + etat32})</a>
+			<a href="#">Demandes validées (${etat1 + etat32})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -150,7 +157,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -159,13 +168,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refus�es par l'�l�ve apr�s modification de votre part (${etat2})</a>
+			<a href="#">Demandes refusées par l'élève après modification de votre part (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -179,7 +188,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
@@ -188,13 +199,13 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refus�es (${etat64})</a>
+			<a href="#">Vos demandes refusées (${etat64})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
-						<th>Eleves</th>
+						<th>Élèves</th>
 						<th>Date</th>
 						<th>Temps</th>
 						<th>Type d'aide</th>
@@ -208,7 +219,9 @@
 								<td>${dctap.dateAction}</td>
 								<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
-										pattern="#0" />h ${(dctap.minutes%60)}min</td>
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
 								<td>${dctap.accPers.nom}</td>
 							</tr>
 						</c:if>
