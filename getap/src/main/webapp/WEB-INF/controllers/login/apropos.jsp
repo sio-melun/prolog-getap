@@ -15,8 +15,9 @@
 	<li>Olivier Capuozzo</li> 
 	<li>(Classe SIO SLAM du Lycée Léonard de Vinci – Melun 2011-2012)</li>
 	<li>Antoine Fidalgo</li>
-	<li>Quentin Geffart</li>
+	<li>Quentin Geffard</li>
 	<li>Florian Laforest</li>
+	<li>Nicolas Barroso</li>
 	<li>Grégoire Robert</li>
 </ul>
 
