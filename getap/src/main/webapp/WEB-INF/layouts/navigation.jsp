@@ -45,21 +45,22 @@
 				</li>
 			</ul> --%>
 
-
+			<div class="menuLogin">
 			<form:form modelAttribute="userLoginCriteria" action="authenticate" id="connexion"
 				method="post">
 						
-				<label for="login">Identifiant :</label>
-				<form:input path="login" />
+				<!-- <label for="login">Identifiant :</label> -->
+				<form:input path="login" value="Identifiant" onFocus="javascript:this.value=''" onBlur="javascript:if(this.value==''){this.value='Identifiant'}"/>
 
-				<label for="password">&nbsp Mot de passe :</label>
-				<form:password path="password" />
+				<!-- <label for="password">&nbsp Mot de passe :</label> -->
+				<form:password path="password" value="Mot de passe" onFocus="javascript:this.value=''" onBlur="javascript:if(this.value==''){this.value='Mot de passe'}"/>
 				
 				
 				<input  class="co" src="<c:url value="../../images/CoTransparent.png"/>" type=image Value=submit>
 				<div id="erreur"><form:errors path="*" cssClass="errors" /></div>
 					
 			</form:form>
+			</div>
 		</c:if>
 
 		<c:if test="${user.role != null}">

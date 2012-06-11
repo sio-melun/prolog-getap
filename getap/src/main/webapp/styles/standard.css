@@ -68,7 +68,7 @@ div#content input[type="button"] {
 #erreur{
 	position:relative;
 	bottom: 27px;
-	right: 250px;
+	right: 350px;
 	z-index:-1;
 }
 .errors {
@@ -275,4 +275,10 @@ td .bouton{
 
 .percentZero{
 	background-color:#E0F0FE;
+}
+.menuLogin{
+	text-align: left;
+	position:relative;
+	left:90px;
+	bottom:10px;
 }
