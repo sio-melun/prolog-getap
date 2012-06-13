@@ -19,6 +19,9 @@
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
 			@import url("<c:url value="/styles/css-framework/demos.css" />");
 			@import url("<c:url value="/styles/odt.css" />");
+			
+			/* TODO : voir le resultat avec Chrome sous ubuntu...  */
+			
 			<% if(userAgent.indexOf("Firefox") != -1) { %>
 				@import url("<c:url value="/styles/standard.css" />");
 			<% } else if(userAgent.indexOf("Chrome") != -1) { %>
