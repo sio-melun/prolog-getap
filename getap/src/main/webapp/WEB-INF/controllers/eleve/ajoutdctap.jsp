@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 	
-<h3 class="titre3">Ajouter une demande de validation</h3>
+<h3 class="titre3">Création d'une demande de validation<br/>de participation à une activité</h3>
 
 <form:form modelAttribute="formAjoutDctap" action="doajout"
 	method="post" id="formulaireAjoutDCTAP">
@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="form-row">
-				<label for="minutes">Temps d'accompagnement personnalisé :
+				<label for="minutes">Durée de l'activité :
 				</label>
 				<%-- <div class="input">
 					<form:input path="minutes" />
@@ -43,13 +43,13 @@
 			</div>
 
 			<div class="form-row">
-				<label for="profId">Les professeurs :</label>
+				<label for="profId">Professeur intervenant :</label>
 				<form:select path="profId" items="${lesProfs}" itemValue="id"
 					itemLabel="nom"></form:select>
 			</div>
 
 			<div class="form-row">
-				<label for="accPersId">Type d'aide personnalisée : </label> <select
+				<label for="accPersId">Type d'accompagnement personnalisé : </label> <select
 					id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>

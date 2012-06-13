@@ -18,9 +18,10 @@
 			@import url("<c:url value="/styles/css-framework/typo.css" />");
 			@import url("<c:url value="/styles/css-framework/menu.css" />");
 			@import url("<c:url value="/styles/css-framework/demos.css" />");
+			@import url("<c:url value="/styles/odt.css" />");
 			<% if(userAgent.indexOf("Firefox") != -1) { %>
 				@import url("<c:url value="/styles/standard.css" />");
-			<% } else if(userAgent.indexOf("Safari") != -1) { %>
+			<% } else if(userAgent.indexOf("Chrome") != -1) { %>
 				@import url("<c:url value="/styles/standardChrome.css" />");
 			<% } %>
 		</style>
@@ -94,15 +95,14 @@
 	<body onload="testRole()">
 	
 	<div id="banniere">
-		<a href="index"><img src="<c:url value="/images/LogoGetap.png"/>" width="155px"
+		<a href="index"><img src="<c:url value="/images/LogoGetap3.png"/>" width="155px"
 		height="66px"/></a>
 	</div>
 	
 	<tiles:insertAttribute name="navigation" />
 
-
 	<div id="page">
-
+        
 		<div id="header">
 			<tiles:insertAttribute name="header" />
 		</div>

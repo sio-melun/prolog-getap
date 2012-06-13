@@ -25,7 +25,7 @@
 <ul>
 	<li>Edith Vigna, Dominique Fiard</li>
 	<li>(Classe SIO SISR du Lycée Léonard de Vinci – Melun 2011-2012)</li>
-	<li>Christopher Meunier, Hassen Siad, Vincent ROBERT</li>
+	<li>Christopher Meunier, Hassen Siad, Vincent Robert</li>
 </ul>
 
 <h4>GeTAP : version 0.5  -   Copyright © 2011-2012 SIO LDV-Melun  - Licence GPL</h4>
