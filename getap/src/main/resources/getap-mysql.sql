@@ -25,13 +25,13 @@ DROP TABLE IF EXISTS `getap`.`ap`;
 CREATE TABLE  `getap`.`ap` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(45) DEFAULT NULL,
-  `origineEtat` smallint(6) DEFAULT NULL COMMENT 'False par default (non validÃ©e)',
-  `idUser` int(11) DEFAULT NULL COMMENT 'NULL pour AP gÃ©nÃ©rique',
+  `origineEtat` smallint(6) DEFAULT NULL COMMENT 'False par default (non validée)',
+  `idUser` int(11) DEFAULT NULL COMMENT 'NULL pour AP générique',
   PRIMARY KEY (`id`),
   KEY `fk_AP_User1` (`idUser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 INSERT INTO `getap`.`ap` VALUES  (1,'SOS Matiere',0,NULL),
- (2,'Sortie théatre',0,NULL),
+ (2,'Sortie théâtre',0,NULL),
  (3,'Tutorat',0,NULL),
  (4,'Entretien Conseillère d\'Orientation',0,NULL);
 
