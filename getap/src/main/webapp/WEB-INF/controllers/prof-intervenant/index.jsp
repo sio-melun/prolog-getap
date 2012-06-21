@@ -4,6 +4,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<SCRIPT type="text/javascript">
+	var checkflag = "false";
+	function check(field) {
+		if (checkflag == "false") {
+			for (i = 0; i < field.length; i++) {
+				field[i].checked = true;
+			}
+			checkflag = "true";
+			return "Tout décocher";
+		} else {
+			for (i = 0; i < field.length; i++) {
+				field[i].checked = false;
+			}
+			checkflag = "false";
+			return "Tout cocher";
+		}
+	}
+</script>
+
 <h3 class="titre3">Mes demandes de validations</h3>
 
 <c:if test="${empty listdctaps}">
@@ -42,7 +61,7 @@
 							<th></th>
 							<th></th>
 							<th></th>
-							<th></th>
+							<th><input name="tout" type="checkbox" onClick="this.value=check(this.form);"/></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -101,7 +120,7 @@
 							<th>Type d'aide</th>
 							<th></th>
 							<th></th>
-							<th></th>
+							<th><input name="tout" type="checkbox" onClick="this.value=check(this.form);"/></th>
 						</tr>
 					</thead>
 					<tbody>
