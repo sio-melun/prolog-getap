@@ -1,5 +1,7 @@
 package org.ldv.sio.getap.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormListConsoForProfInter;
@@ -141,6 +143,50 @@ public class ProfInterController {
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
 			dctap.setEtat(32);
 			manager.updateDCTAP(dctap);
+		}
+
+		return "redirect:/app/prof-intervenant/index";
+	}
+
+	@RequestMapping(value = "sendId", method = RequestMethod.POST)
+	public String listIdDctap(Model model, HttpServletRequest request) {
+
+		// TODO recupérer le tableau d'id dans la classe FormListIdDctap au lieu
+		// du request
+		String[] listId = request.getParameterValues("ids");
+		if (request.getParameter("send").equals("Valider")) {
+			try {
+				for (int i = 0; i < listId.length; i++) {
+					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
+							.valueOf(listId[i]));
+
+					// Test que la DCTAP appartient à la bonne personne
+					if (dctap.getProf().equals(UtilSession.getUserInSession())
+							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
+						dctap.setEtat(32);
+						manager.updateDCTAP(dctap);
+					}
+				}
+			} catch (NullPointerException e) {
+
+			}
+		} else {
+			try {
+				for (int i = 0; i < listId.length; i++) {
+					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
+							.valueOf(listId[i]));
+
+					// Test que la DCTAP appartient à la bonne personne
+					if (dctap.getProf().equals(UtilSession.getUserInSession())
+							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
+									.getEtat() > 1023)) {
+						dctap.setEtat(64);
+						manager.updateDCTAP(dctap);
+					}
+				}
+			} catch (NullPointerException e) {
+
+			}
 		}
 
 		return "redirect:/app/prof-intervenant/index";
