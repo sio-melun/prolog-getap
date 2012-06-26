@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Web controller for hotel related actions.
+ * Web controller for prof-intervenant related actions. TODO remplacer les
+ * références à des valeurs numériques soit par des constantes bien nommées,
+ * soit par des méthodes is/set de la classe DCTAP (préférable)
  */
 @Controller
 @RequestMapping("/prof-intervenant/*")
@@ -155,6 +157,7 @@ public class ProfInterController {
 		// du request
 		String[] listId = request.getParameterValues("ids");
 		if (request.getParameter("send").equals("Valider")) {
+			// TODO revoir la gestion de ce try
 			try {
 				for (int i = 0; i < listId.length; i++) {
 					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
