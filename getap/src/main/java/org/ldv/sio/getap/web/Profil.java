@@ -43,7 +43,7 @@ public class Profil {
 		if (currentUser.getId().equals(UtilSession.getUserInSession().getId())) {
 			formUser.setLogin(currentUser.getLogin());
 			formUser.setMail(currentUser.getMail());
-
+			// TODO as-t-on besoin de passer tout cela à la vue ?
 			Long idUser = currentUser.getId();
 			model.addAttribute("utilisateur", currentUser);
 			model.addAttribute("sesDCTAPeleve",
