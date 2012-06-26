@@ -43,20 +43,6 @@ public class Profil {
 		if (currentUser.getId().equals(UtilSession.getUserInSession().getId())) {
 			formUser.setLogin(currentUser.getLogin());
 			formUser.setMail(currentUser.getMail());
-			// TODO as-t-on besoin de passer tout cela à la vue ?
-			Long idUser = currentUser.getId();
-			model.addAttribute("utilisateur", currentUser);
-			model.addAttribute("sesDCTAPeleve",
-					manager.getAllDCTAPByEleve(currentUser));
-			model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, idUser));
-			model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, idUser));
-			model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, idUser));
-			model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, idUser));
-			model.addAttribute("etat8", manager.getAllDCTAPByEtat(8, idUser));
-			model.addAttribute("etat32", manager.getAllDCTAPByEtat(32, idUser));
-			model.addAttribute("etat64", manager.getAllDCTAPByEtat(64, idUser));
-			model.addAttribute("etatsup1000",
-					manager.getAllDCTAPModifByEtat(idUser));
 		}
 		return "profil/edit";
 	}

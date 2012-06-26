@@ -66,7 +66,7 @@ public class ElevesController {
 				.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			currentDctap.setEtat(8);
+			currentDctap.setDctapAnnule();
 			manager.updateDCTAP(currentDctap);
 		}
 
@@ -135,7 +135,7 @@ public class ElevesController {
 
 				dctapForUpdate.setProf(manager.getUserById(formDctap
 						.getProfId()));
-				dctapForUpdate.setEtat(4);
+				dctapForUpdate.setDctapModifEleve();
 				manager.updateDCTAP(dctapForUpdate);
 			}
 
@@ -167,18 +167,6 @@ public class ElevesController {
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);
 
-		// System.out.println("TEST :" + formAjout.getId());
-		// System.out.println("TEST id eleve :" + formAjout.getEleveId());
-		// if (manager.getAPById(formAjout.getAccPersId()) != null) {
-		// System.out.println("TEST AP :"
-		// + manager.getAPById(formAjout.getAccPersId()).getNom());
-		// } else {
-		// System.out.println("TEST AP : " + formAjout.getAccPersNom());
-		// }
-		// System.out.println("TEST :" + model);
-		// System.out.println("TEST annee scolaire : "
-		// + manager.getCurrentAnneeScolaire());
-
 		if (bindResult.hasErrors()) {
 			return "eleve/ajoutdctap";
 		} else {
@@ -209,7 +197,7 @@ public class ElevesController {
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
 				&& dctap.getEtat() > 1023) {
-			dctap.setEtat(2);
+			dctap.setDctapRejete();
 			manager.updateDCTAP(dctap);
 		}
 
@@ -223,7 +211,7 @@ public class ElevesController {
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
 				&& dctap.getEtat() > 1023) {
-			dctap.setEtat(1);
+			dctap.setDctapConfirme();
 			manager.updateDCTAP(dctap);
 		}
 

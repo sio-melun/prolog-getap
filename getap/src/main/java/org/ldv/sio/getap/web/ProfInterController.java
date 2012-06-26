@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Web controller for prof-intervenant related actions. TODO remplacer les
- * références à des valeurs numériques soit par des constantes bien nommées,
- * soit par des méthodes is/set de la classe DCTAP (préférable)
+ * Web controller for prof-intervenant related actions.
  */
 @Controller
 @RequestMapping("/prof-intervenant/*")
@@ -99,15 +97,15 @@ public class ProfInterController {
 			if (!dctapForUpdate.getDateAction().equals(
 					formDctap.getDateAction())
 					&& !dctapForUpdate.isDateModifiee()) {
-				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 1024);
+				dctapForUpdate.setDctapDateModif();
 			}
 			if (!dctapForUpdate.getMinutes().equals(formDctap.getMinutes())
 					&& !dctapForUpdate.isDureeModifiee()) {
-				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 2048);
+				dctapForUpdate.setDctapDureeModif();
 			}
 			if (!dctapForUpdate.getAccPers().getNom().equals(accPersNom)
 					&& !dctapForUpdate.isApModifiee()) {
-				dctapForUpdate.setEtat(dctapForUpdate.getEtat() + 4096);
+				dctapForUpdate.setDctapAccModif();
 			}
 
 			dctapForUpdate.setDateAction(formDctap.getDateAction());
@@ -129,7 +127,7 @@ public class ProfInterController {
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
 						.getEtat() > 1023)) {
-			dctap.setEtat(64);
+			dctap.setDctapRefuse();
 			manager.updateDCTAP(dctap);
 		}
 
@@ -143,7 +141,7 @@ public class ProfInterController {
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
-			dctap.setEtat(32);
+			dctap.setDctapValide();
 			manager.updateDCTAP(dctap);
 		}
 
@@ -157,8 +155,9 @@ public class ProfInterController {
 		// du request
 		String[] listId = request.getParameterValues("ids");
 		if (request.getParameter("send").equals("Valider")) {
-			// TODO revoir la gestion de ce try
-			try {
+			if (listId == null) {
+				return "redirect:/app/prof-intervenant/index";
+			} else {
 				for (int i = 0; i < listId.length; i++) {
 					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
 							.valueOf(listId[i]));
@@ -166,15 +165,15 @@ public class ProfInterController {
 					// Test que la DCTAP appartient à la bonne personne
 					if (dctap.getProf().equals(UtilSession.getUserInSession())
 							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
-						dctap.setEtat(32);
+						dctap.setDctapValide();
 						manager.updateDCTAP(dctap);
 					}
 				}
-			} catch (NullPointerException e) {
-
 			}
 		} else {
-			try {
+			if (listId == null) {
+				return "redirect:/app/prof-intervenant/index";
+			} else {
 				for (int i = 0; i < listId.length; i++) {
 					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
 							.valueOf(listId[i]));
@@ -183,12 +182,10 @@ public class ProfInterController {
 					if (dctap.getProf().equals(UtilSession.getUserInSession())
 							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
 									.getEtat() > 1023)) {
-						dctap.setEtat(64);
+						dctap.setDctapRefuse();
 						manager.updateDCTAP(dctap);
 					}
 				}
-			} catch (NullPointerException e) {
-
 			}
 		}
 

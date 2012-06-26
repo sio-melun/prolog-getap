@@ -159,10 +159,20 @@ public class DemandeConsoTempsAccPers {
 	 *            prend ses valeur dans :
 	 *            <ul>
 	 *            <li>0 - demande créée par l'élève</li>
-	 *            <li>1 - demande modifiée par le professeur</li>
-	 *            <li>2 - demande validée par le professeur</li>
-	 *            <li>3 - demande refusée par le professeur</li>
-	 *            <li>4 - demande détruite par l'élève</li>
+	 *            <li>1 - demande confimée par l'élève aprés modification du
+	 *            professeur</li>
+	 *            <li>2 - demande rejetée par l'élève aprés modification du
+	 *            professeur</li>
+	 *            <li>4 - demande modifiée par l'élève</li>
+	 *            <li>8 - demande annulée par l'élève</li>
+	 *            <li>32 - demande validée par le professeur</li>
+	 *            <li>64 - demande refusée par le professeur</li>
+	 *            <li>1024 - demande où la date a été modifiée par le professeur
+	 *            </li>
+	 *            <li>2048 - demande où la durée a été modifiée par le
+	 *            professeur</li>
+	 *            <li>4096 - demande où l'accompagnement personnalisé a été
+	 *            modifiée par le professeur</li>
 	 *            </ul>
 	 */
 	public void setEtat(int etat) {
@@ -179,6 +189,46 @@ public class DemandeConsoTempsAccPers {
 
 	public boolean isApModifiee() {
 		return (this.etat & AP_MODIFIEE) != 0;
+	}
+
+	public void setDtapInitial() {
+		this.etat = 0;
+	}
+
+	public void setDctapConfirme() {
+		this.etat = 1;
+	}
+
+	public void setDctapRejete() {
+		this.etat = 2;
+	}
+
+	public void setDctapModifEleve() {
+		this.etat = 4;
+	}
+
+	public void setDctapAnnule() {
+		this.etat = 8;
+	}
+
+	public void setDctapValide() {
+		this.etat = 32;
+	}
+
+	public void setDctapRefuse() {
+		this.etat = 64;
+	}
+
+	public void setDctapDateModif() {
+		this.etat = this.getEtat() + 1024;
+	}
+
+	public void setDctapDureeModif() {
+		this.etat = this.getEtat() + 2048;
+	}
+
+	public void setDctapAccModif() {
+		this.etat = this.getEtat() + 4096;
 	}
 
 	@Override
