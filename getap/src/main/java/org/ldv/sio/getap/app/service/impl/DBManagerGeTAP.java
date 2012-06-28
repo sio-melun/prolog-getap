@@ -252,7 +252,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		String mdp = generate(5);
 		String hash = getEncodedPassword(mdp);
 		String role = user.getRole();
-		int classe = user.getClasse().getId();
+		int classe = 0;
+		if (role.equals("eleve"))
+			classe = user.getClasse().getId();
 
 		User user3;
 
@@ -272,6 +274,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
 								new Object[] { idUser, user.getLesClasses()[i] });
 			}
+		} else if (!role.equals("eleve")) {
+			this.jdbcTemplate
+					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
+							new Object[] { nom, prenom, login, mdp, hash, role,
+									null, mail });
 		} else {
 			this.jdbcTemplate
 					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
