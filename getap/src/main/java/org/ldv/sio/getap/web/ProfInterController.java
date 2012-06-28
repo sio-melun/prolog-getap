@@ -156,30 +156,11 @@ public class ProfInterController {
 			return "redirect:/app/prof-intervenant/index";
 		}
 
-		if (request.getParameter("send").equals("Valider")) {
-			for (int i = 0; i < listId.getIds().length; i++) {
-				DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
-						.valueOf(listId.getIds()[i]));
-
-				// Test que la DCTAP appartient à la bonne personne
-				if (dctap.getProf().equals(UtilSession.getUserInSession())
-						&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
-					dctap.setDctapValide();
-					manager.updateDCTAP(dctap);
-				}
-			}
-		} else {
-			for (int i = 0; i < listId.getIds().length; i++) {
-				DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
-						.valueOf(listId.getIds()[i]));
-
-				// Test que la DCTAP appartient à la bonne personne
-				if (dctap.getProf().equals(UtilSession.getUserInSession())
-						&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
-								.getEtat() > 1023)) {
-					dctap.setDctapRefuse();
-					manager.updateDCTAP(dctap);
-				}
+		for (int i = 0; i < listId.getIds().length; i++) {
+			if (request.getParameter("send").equals("Valider")) {
+				this.validDCTAPById(listId.getIds()[i], model);
+			} else {
+				this.refuseDCTAPById(listId.getIds()[i], model);
 			}
 		}
 
