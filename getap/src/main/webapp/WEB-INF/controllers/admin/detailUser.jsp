@@ -34,13 +34,16 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
+					</c:if>
 					<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
 							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
 						</tr>
 						<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
@@ -51,13 +54,16 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
+					</c:if>
 					<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
 							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
 						</tr>
 						<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
@@ -103,8 +109,8 @@
 							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
 							<td>${dctap.accPers.nom}</td>
 							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
 							<c:if test="${dctap.etat == 2}">
 								<td>Refus élève</td>
@@ -129,8 +135,8 @@
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
 							<td><fmt:formatNumber
-									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#0" />h
-								${dctap.minutes%60}min</td>
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
 							<c:if test="${dctap.etat == 2}">
 								<td>Refus élève</td>
@@ -161,7 +167,7 @@
 		<thead>
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
-					<th>Temps total effectu�</th>
+					<th>Temps total effectué</th>
 				</c:if>
 				<th>Temps total validé</th>
 				<th>Temps total en attente</th>
@@ -172,14 +178,18 @@
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
 					<td><fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
-							pattern="#0" />h ${timeTT%60}min</td>
+							pattern="#00" />h<fmt:formatNumber value="${timeTT%60}"
+							pattern="#00" /></td>
 				</c:if>
 				<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
-						pattern="#0" />h ${timeVal%60}min</td>
+						pattern="#00" />h<fmt:formatNumber value="${timeVal%60}"
+						pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeAtt/60-(timeAtt%60/60)}"
-						pattern="#0" />h ${timeAtt%60}min</td>
+						pattern="#00" />h<fmt:formatNumber value="${timeAtt%60}"
+						pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeRef/60-(timeRef%60/60)}"
-						pattern="#0" />h ${timeRef%60}min</td>
+						pattern="#00" />h<fmt:formatNumber value="${timeRef%60}"
+						pattern="#00" /></td>
 			</tr>
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">

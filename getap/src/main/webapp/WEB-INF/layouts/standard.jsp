@@ -98,8 +98,14 @@
 	<body onload="testRole()">
 	
 	<div id="banniere">
-		<a href="index"><img src="<c:url value="/images/logos/logoGetapV5.png"/>" width="102px"
+		<c:if test="${empty user.role}">
+			<a href="/getap/app/login/index"><img src="<c:url value="/images/logos/logoGetapV5.png"/>" width="102px"
 		height="34px"/></a>
+		</c:if>
+		<c:if test="${not empty user.role}">
+			<a href="/getap/app/${user.role}/index"><img src="<c:url value="/images/logos/logoGetapV5.png"/>" width="102px"
+		height="34px"/></a>
+		</c:if>
 	</div>
 	
 	<tiles:insertAttribute name="navigation" />

@@ -31,5 +31,10 @@
     <put-attribute name="title" value="Ajout d'une DCTAP" />
     <put-attribute name="body" value="/WEB-INF/controllers/eleve/ajoutdctap.jsp" />
   </definition>
+  
+  <definition name="eleve/doajout" extends="standard-layout">
+    <put-attribute name="title" value="Ajout d'une DCTAP" />
+    <put-attribute name="body" value="/WEB-INF/controllers/eleve/ajoutdctap.jsp" />
+  </definition>
 
 </tiles-definitions>

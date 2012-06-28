@@ -49,7 +49,7 @@
 			<div class="form-row">
 				<label for="oldPass">Ancien mot de passe :</label>
 				<div class="password">
-					<form:password path="oldPass" size="50px" onclick="test()" />
+					<form:password path="oldPass" size="50px" />
 				</div>
 			</div>
 

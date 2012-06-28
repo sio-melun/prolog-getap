@@ -5,22 +5,31 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-	
+
 	<!-- Pages -->
 	<definition name="prof-intervenant/index" extends="standard-layout">
 		<put-attribute name="title" value="Professeur intervenant" />
-		<put-attribute name="body" value="/WEB-INF/controllers/prof-intervenant/index.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-intervenant/index.jsp" />
 	</definition>
-  	
-  	<definition name="prof-intervenant/edit" extends="standard-layout">
-    	<put-attribute name="title" value="Edition" />
-    	<put-attribute name="body" value="/WEB-INF/controllers/prof-intervenant/edit.jsp" />
-  	</definition>
-  	
-  	<definition name="prof-intervenant/doedit" extends="standard-layout">
-    <put-attribute name="title" value="Modification d'une DCTAP" />
-    <put-attribute name="body" value="/WEB-INF/controllers/prof-intervenant/doedit.jsp" />
-  </definition>
-	
-	
+
+	<definition name="prof-intervenant/edit" extends="standard-layout">
+		<put-attribute name="title" value="Edition" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-intervenant/edit.jsp" />
+	</definition>
+
+	<definition name="prof-intervenant/doedit" extends="standard-layout">
+		<put-attribute name="title" value="Modification d'une DCTAP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-intervenant/doedit.jsp" />
+	</definition>
+
+	<definition name="prof-intervenant/sendId" extends="standard-layout">
+		<put-attribute name="title" value="Validation/Refus de DCTAP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-intervenant/sendId.jsp" />
+	</definition>
+
+
 </tiles-definitions>

@@ -2,14 +2,14 @@ package org.ldv.sio.getap.app;
 
 public class FormListIdDctap {
 
-	private String[] id;
+	private String[] ids;
 
-	public String[] getId() {
-		return id;
+	public String[] getIds() {
+		return ids;
 	}
 
-	public void setId(String[] id) {
-		this.id = id;
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
 
 }

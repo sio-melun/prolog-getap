@@ -33,7 +33,7 @@
 										<img src="../../images/detail.png" width="24" height="24"
 										onmouseover="this.src='../../images/detailHover.png';"
 										onmouseout="this.src='../../images/detail.png';" /> </a></td>
-								<td class="${classPercentZero}" style="text-align:left;"><a href="<c:url value="/app/admin/detailUser?id=${eleve.id}" />">${eleve.nom}
+								<td class="${classPercentZero}" style="text-align:left;"><a href="<c:url value="/app/prof-principal/detailUser?id=${eleve.id}" />">${eleve.nom}
 									${eleve.prenom}</a></td>
 								<td class="${classPercentZero}"><fmt:formatNumber
 										value="${(eleve.dureeTotal/60)-((eleve.dureeTotal%60)/60)}"

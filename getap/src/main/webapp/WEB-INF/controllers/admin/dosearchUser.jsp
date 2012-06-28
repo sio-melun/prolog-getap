@@ -14,7 +14,7 @@
 	<table class="display dataTable">
 		<thead>
 			<tr class="header">
-				<th>Detail</th>
+				<th>Détail</th>
 				<th>Nom/Prénom</th>
 				<th>Role</th>
 				<th>Classe</th>
@@ -52,6 +52,6 @@
 
 <div class="buttonGroup">
 	<a href="<c:url value="/app/admin/index" />"> <input type="button"
-		value="Retour � l'index">
+		value="Retour à l'index">
 	</a>
 </div>

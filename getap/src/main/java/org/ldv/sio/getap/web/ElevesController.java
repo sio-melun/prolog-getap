@@ -167,6 +167,12 @@ public class ElevesController {
 		formAjout.setEleveId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);
 
+		if (formAjout.getDate() == null) {
+			bindResult.rejectValue("date", "required",
+					"Une date valide est attendue !");
+			return "eleve/doajout";
+		}
+
 		if (bindResult.hasErrors()) {
 			return "eleve/ajoutdctap";
 		} else {

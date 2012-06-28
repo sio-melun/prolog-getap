@@ -87,7 +87,8 @@ public class LoginController {
 				return "login/authenticate";
 			}
 			UtilSession.setUserInSession(user);
-			UtilSession.setAnneeScolaireInSession("2011-2012");
+			String anneeScolaire = manager.getCurrentAnneeScolaire();
+			UtilSession.setAnneeScolaireInSession(anneeScolaire);
 			model.addAttribute("userAuth", user);
 			User userIn = UtilSession.getUserInSession();
 

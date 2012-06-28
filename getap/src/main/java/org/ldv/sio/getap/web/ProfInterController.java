@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.FormListConsoForProfInter;
+import org.ldv.sio.getap.app.FormListIdDctap;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.utils.UtilSession;
@@ -149,42 +150,35 @@ public class ProfInterController {
 	}
 
 	@RequestMapping(value = "sendId", method = RequestMethod.POST)
-	public String listIdDctap(Model model, HttpServletRequest request) {
+	public String listIdDctap(Model model, HttpServletRequest request,
+			FormListIdDctap listId) {
+		if (listId.getIds() == null) {
+			return "redirect:/app/prof-intervenant/index";
+		}
 
-		// TODO recupérer le tableau d'id dans la classe FormListIdDctap au lieu
-		// du request
-		String[] listId = request.getParameterValues("ids");
 		if (request.getParameter("send").equals("Valider")) {
-			if (listId == null) {
-				return "redirect:/app/prof-intervenant/index";
-			} else {
-				for (int i = 0; i < listId.length; i++) {
-					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
-							.valueOf(listId[i]));
+			for (int i = 0; i < listId.getIds().length; i++) {
+				DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
+						.valueOf(listId.getIds()[i]));
 
-					// Test que la DCTAP appartient à la bonne personne
-					if (dctap.getProf().equals(UtilSession.getUserInSession())
-							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
-						dctap.setDctapValide();
-						manager.updateDCTAP(dctap);
-					}
+				// Test que la DCTAP appartient à la bonne personne
+				if (dctap.getProf().equals(UtilSession.getUserInSession())
+						&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
+					dctap.setDctapValide();
+					manager.updateDCTAP(dctap);
 				}
 			}
 		} else {
-			if (listId == null) {
-				return "redirect:/app/prof-intervenant/index";
-			} else {
-				for (int i = 0; i < listId.length; i++) {
-					DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
-							.valueOf(listId[i]));
+			for (int i = 0; i < listId.getIds().length; i++) {
+				DemandeConsoTempsAccPers dctap = manager.getDCTAPById(Long
+						.valueOf(listId.getIds()[i]));
 
-					// Test que la DCTAP appartient à la bonne personne
-					if (dctap.getProf().equals(UtilSession.getUserInSession())
-							&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
-									.getEtat() > 1023)) {
-						dctap.setDctapRefuse();
-						manager.updateDCTAP(dctap);
-					}
+				// Test que la DCTAP appartient à la bonne personne
+				if (dctap.getProf().equals(UtilSession.getUserInSession())
+						&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
+								.getEtat() > 1023)) {
+					dctap.setDctapRefuse();
+					manager.updateDCTAP(dctap);
 				}
 			}
 		}
