@@ -41,7 +41,7 @@ public class StatsPDF {
 	}
 
 	public void export(HttpServletResponse response, Long id,
-			List<DemandeConsoTempsAccPers> dctap) {
+			List<DemandeValidationConsoTempsAccPers> dctap) {
 
 		try {
 			Connection con = ds.getConnection();

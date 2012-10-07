@@ -41,7 +41,16 @@ div#header {
 	padding: 0px 0px;
 	
 }
-
+/*
+div#banniere {
+    text-align: left;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: -33px;
+    width: 100px;
+    left: 220px;
+}
+*/
 div#banniere {
 	text-align: center;
 	position:relative;
@@ -49,6 +58,7 @@ div#banniere {
 	margin-top: 30px;
 	margin-bottom: -33px;
 }
+
 div#logolycee {
 	text-align: right;
 	position:relative;

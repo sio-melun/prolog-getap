@@ -5,13 +5,10 @@ import java.sql.Date;
 /**
  * Demande de validation d'un temps d'accompagnement personnalisé
  * 
- * La classe ne devrait-elle pas s'appeler DdeValidTempsAccPers ou quelque chose
- * comme ça ? L'élève demande à faire valider un temps d'accompagnement passé,
- * pas à consommer un temps futur.
  * 
  */
 
-public class DemandeConsoTempsAccPers {
+public class DemandeValidationConsoTempsAccPers {
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
@@ -45,22 +42,16 @@ public class DemandeConsoTempsAccPers {
 	 * Identifiant de l'élève ayant réalisé l'accompagnement personnalisé
 	 */
 	private User eleve;
+
 	/**
-	 * Etat actuel de la demande de validation. Valeurs admissibles :
-	 * <ul>
-	 * <li>0 - demande créée par l'élève</li>
-	 * <li>1 - demande modifiée par le professeur</li>
-	 * <li>2 - demande validée par le professeur</li>
-	 * <li>3 - demande refusée par le professeur</li>
-	 * <li>4 - demande détruite par l'élève</li>
-	 * </ul>
+	 * 
 	 */
 	private int etat;
 
 	/**
 	 * constructeur par défaut
 	 */
-	public DemandeConsoTempsAccPers() {
+	public DemandeValidationConsoTempsAccPers() {
 
 	}
 
@@ -78,7 +69,7 @@ public class DemandeConsoTempsAccPers {
 	 * @param idEleve
 	 * @param etat
 	 */
-	public DemandeConsoTempsAccPers(Long id, String anneeScolaire, Date date,
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
 			Integer minutes, User prof, AccPersonalise accPers, User eleve,
 			int etat) {
 		super();
@@ -251,7 +242,7 @@ public class DemandeConsoTempsAccPers {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DemandeConsoTempsAccPers other = (DemandeConsoTempsAccPers) obj;
+		DemandeValidationConsoTempsAccPers other = (DemandeValidationConsoTempsAccPers) obj;
 		if (anneeScolaire == null) {
 			if (other.anneeScolaire != null)
 				return false;

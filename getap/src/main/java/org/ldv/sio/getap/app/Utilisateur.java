@@ -7,13 +7,13 @@ public class Utilisateur {
 
 	protected String nom;
 	protected String prenom;
-	protected String ine;
+	protected String idEtab;
 	protected String login;
 	protected String pass;
 	protected String hashPass;
 	protected String classe;
 
-	public Utilisateur(String nom, String prenom, String ine, String classe) {
+	public Utilisateur(String nom, String prenom, String idEtab, String classe) {
 
 		if (nom.contains("'")) {
 			nom = nom.replace("'", "");
@@ -25,7 +25,7 @@ public class Utilisateur {
 
 		this.nom = nom;
 		this.prenom = prenom;
-		this.ine = ine;
+		this.idEtab = idEtab;
 		this.login = login();
 		this.pass = generate(5);
 		this.hashPass = getEncodedPassword(pass);

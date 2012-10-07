@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
-import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.DemandesCSV;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.FormAccueilPerso;
@@ -532,7 +532,7 @@ public class AdminController {
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeConsoTempsAccPers> dctap = manager.getAllDCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDCTAPByEleve(user);
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
@@ -543,7 +543,7 @@ public class AdminController {
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeConsoTempsAccPers> dctap = manager.getAllDCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDCTAPByEleve(user);
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom() + ".csv");

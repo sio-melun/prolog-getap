@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
-import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
@@ -19,25 +19,25 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
 public interface IFManagerGeTAP {
 
 	// CRUD DCTAP
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByEleve(User eleve);
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByEleve(User eleve);
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfInterv(User profi);
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfInterv(User profi);
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp);
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp);
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByClasse(String classe);
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByClasse(String classe);
 
 	public int getAllDCTAPByEtat(int etat, Long id);
 
 	public int getAllDCTAPModifByEtat(Long id);
 
-	public DemandeConsoTempsAccPers getDCTAPById(Long id);
+	public DemandeValidationConsoTempsAccPers getDCTAPById(Long id);
 
-	public void addDCTAP(DemandeConsoTempsAccPers dctap);
+	public void addDCTAP(DemandeValidationConsoTempsAccPers dctap);
 
-	public void updateDCTAP(DemandeConsoTempsAccPers dctap);
+	public void updateDCTAP(DemandeValidationConsoTempsAccPers dctap);
 
-	public void deleteDCTAP(DemandeConsoTempsAccPers dctap);
+	public void deleteDCTAP(DemandeValidationConsoTempsAccPers dctap);
 
 	public boolean deleteDCTAPById(Long id);
 
@@ -131,10 +131,10 @@ public interface IFManagerGeTAP {
 
 	public List<User> searchClasse(UserSearchCriteria userSearchCriteria);
 
-	public List<DemandeConsoTempsAccPers> searchDctap(
+	public List<DemandeValidationConsoTempsAccPers> searchDctap(
 			UserSearchCriteria userSearchCriteria);
 
-	public List<DemandeConsoTempsAccPers> searchDctapClasse(
+	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
 			UserSearchCriteria userSearchCriteria);
 
 	public User getUser(Long id);

@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
-import org.ldv.sio.getap.app.DemandeConsoTempsAccPers;
+import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
@@ -35,25 +35,25 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByEleve(User eleve) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByEleve(User eleve) {
 		Long id = eleve.getId();
 		return this.jdbcTemplate.query("select * from dctap where idEleve = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfInterv(User profi) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfInterv(User profi) {
 		Long id = profi.getId();
 		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp) {
 		Long id = profp.getId();
 		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeConsoTempsAccPers> getAllDCTAPByClasse(String nomClasse) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByClasse(String nomClasse) {
 		return this.jdbcTemplate
 				.query("select * from dctap d, user u, classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
 						new DemandeMapper());
@@ -75,13 +75,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return count;
 	}
 
-	public DemandeConsoTempsAccPers getDCTAPById(Long id) {
+	public DemandeValidationConsoTempsAccPers getDCTAPById(Long id) {
 		return this.jdbcTemplate.queryForObject(
 				"select * from dctap where id = ?", new Object[] { id },
 				new DemandeMapper());
 	}
 
-	public void addDCTAP(DemandeConsoTempsAccPers dctap) {
+	public void addDCTAP(DemandeValidationConsoTempsAccPers dctap) {
 		String anneeScolaire = dctap.getAnneeScolaire();
 		Date dateAction = dctap.getDateAction();
 		int dureeAP = dctap.getMinutes();
@@ -102,7 +102,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	}
 
-	public void updateDCTAP(DemandeConsoTempsAccPers dctap) {
+	public void updateDCTAP(DemandeValidationConsoTempsAccPers dctap) {
 		Long id = dctap.getId();
 		String anneeScolaire = dctap.getAnneeScolaire();
 		Date dateAction = dctap.getDateAction();
@@ -124,7 +124,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	}
 
-	public void deleteDCTAP(DemandeConsoTempsAccPers dctap) {
+	public void deleteDCTAP(DemandeValidationConsoTempsAccPers dctap) {
 		Long id = dctap.getId();
 		this.jdbcTemplate.update("delete from dctap where id = ?",
 				new Object[] { id });
@@ -688,10 +688,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	private static final class DemandeMapper implements
-			RowMapper<DemandeConsoTempsAccPers> {
-		public DemandeConsoTempsAccPers mapRow(ResultSet rs, int rowNum)
+			RowMapper<DemandeValidationConsoTempsAccPers> {
+		public DemandeValidationConsoTempsAccPers mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			DemandeConsoTempsAccPers dctap = new DemandeConsoTempsAccPers();
+			DemandeValidationConsoTempsAccPers dctap = new DemandeValidationConsoTempsAccPers();
 			dctap.setId(rs.getLong("id"));
 			dctap.setAnneeScolaire(rs.getString("anneeScolaire"));
 			dctap.setDateAction(rs.getDate("dateAction"));
@@ -755,7 +755,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						+ "'" + query + "'", new UserMapper());
 	}
 
-	public List<DemandeConsoTempsAccPers> searchDctap(
+	public List<DemandeValidationConsoTempsAccPers> searchDctap(
 			UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate
@@ -763,7 +763,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 						+ "'" + query + "%'", new DemandeMapper());
 	}
 
-	public List<DemandeConsoTempsAccPers> searchDctapClasse(
+	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
 			UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate

@@ -25,7 +25,7 @@ public class DemandesCSV {
 	}
 
 	public void export(HttpServletResponse response,
-			List<DemandeConsoTempsAccPers> dctap) {
+			List<DemandeValidationConsoTempsAccPers> dctap) {
 
 		try {
 			PrintWriter writer = response.getWriter();

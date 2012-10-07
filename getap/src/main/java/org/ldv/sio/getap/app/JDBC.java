@@ -71,11 +71,11 @@ public class JDBC {
 
 				// Requete d'insertion de l'utilisateur dans la base
 				PreparedStatement param = con
-						.prepareStatement("INSERT INTO user(nom, prenom, ine, login, mdp, hash, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+						.prepareStatement("INSERT INTO user(nom, prenom, idEtab, login, mdp, hash, role, idClasse ) VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
 				param.setNString(1, listUser.get(i).nom);
 				param.setNString(2, listUser.get(i).prenom);
-				param.setNString(3, listUser.get(i).ine);
+				param.setNString(3, listUser.get(i).idEtab);
 
 				// d�finition de la base d'un login : 1ere lettre prenom + nom
 				String baseLogin = listUser.get(i).prenom.charAt(0)

@@ -17,9 +17,9 @@
 		<div class="section">
 			<fieldset>
 				<p>
-					Ligne type : Nom;Prénom;INE;Division<br>
-					<br> ABADE;Mathilde;2404005482M;1CTA1<br>
-					ABDALLAH;Florence;2406025996Y;1SCT<br>
+					Ligne type : Nom;Prénom;idEtab;Division<br>
+					<br> ABADE;Mathilde;AZ04005182M;1CTA1<br>
+					ABDALLAH;Florence;BR06022996Y;1SCT<br>
 				</p>
 				<div class="form-row">
 					<label for="file">Fichier : </label>

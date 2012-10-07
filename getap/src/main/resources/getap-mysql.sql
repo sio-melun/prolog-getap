@@ -231,7 +231,7 @@ CREATE TABLE  `getap`.`user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
-  `ine` varchar(20) DEFAULT NULL,
+  `idetab` varchar(20) DEFAULT NULL,
   `login` varchar(50) NOT NULL,
   `mdp` varchar(45) NOT NULL,
   `hash` varchar(50) NOT NULL,
