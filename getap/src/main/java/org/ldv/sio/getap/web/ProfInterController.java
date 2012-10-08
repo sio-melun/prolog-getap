@@ -42,7 +42,7 @@ public class ProfInterController {
 
 		model.addAttribute("lesAP", manager.getAllAPForProf());
 
-		DemandeValidationConsoTempsAccPers currentDctap = manager.getDCTAPById(Long
+		DemandeValidationConsoTempsAccPers currentDctap = manager.getDVCTAPById(Long
 				.valueOf(id));
 		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 4
 				|| currentDctap.getEtat() > 1023) {
@@ -66,17 +66,17 @@ public class ProfInterController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(Model model) {
 		User me = UtilSession.getUserInSession();
-		model.addAttribute("listdctaps", manager.getAllDCTAPByProfInterv(me));
+		model.addAttribute("listdctaps", manager.getAllDVCTAPByProfInterv(me));
 		Long id = me.getId();
-		model.addAttribute("etat0", manager.getAllDCTAPByEtat(0, id));
-		model.addAttribute("etat1", manager.getAllDCTAPByEtat(1, id));
-		model.addAttribute("etat2", manager.getAllDCTAPByEtat(2, id));
-		model.addAttribute("etat4", manager.getAllDCTAPByEtat(4, id));
+		model.addAttribute("etat0", manager.getAllDVCTAPByEtat(0, id));
+		model.addAttribute("etat1", manager.getAllDVCTAPByEtat(1, id));
+		model.addAttribute("etat2", manager.getAllDVCTAPByEtat(2, id));
+		model.addAttribute("etat4", manager.getAllDVCTAPByEtat(4, id));
 
-		model.addAttribute("etat16", manager.getAllDCTAPByEtat(16, id));
-		model.addAttribute("etat32", manager.getAllDCTAPByEtat(32, id));
-		model.addAttribute("etat64", manager.getAllDCTAPByEtat(64, id));
-		model.addAttribute("etatsup1000", manager.getAllDCTAPModifByEtat(id));
+		model.addAttribute("etat16", manager.getAllDVCTAPByEtat(16, id));
+		model.addAttribute("etat32", manager.getAllDVCTAPByEtat(32, id));
+		model.addAttribute("etat64", manager.getAllDVCTAPByEtat(64, id));
+		model.addAttribute("etatsup1000", manager.getAllDVCTAPModifByEtat(id));
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
@@ -89,7 +89,7 @@ public class ProfInterController {
 			return "prof-intervenant/edit";
 		else {
 
-			DemandeValidationConsoTempsAccPers dctapForUpdate = manager.getDCTAPById(Long
+			DemandeValidationConsoTempsAccPers dctapForUpdate = manager.getDVCTAPById(Long
 					.valueOf(formDctap.getId()));
 
 			AccPersonalise acc = manager.getAPById(formDctap.getAccPersId());
@@ -114,7 +114,7 @@ public class ProfInterController {
 			dctapForUpdate.setAccPers(manager.getAPById(formDctap
 					.getAccPersId()));
 
-			manager.updateDCTAP(dctapForUpdate);
+			manager.updateDVCTAP(dctapForUpdate);
 
 			return "redirect:/app/prof-intervenant/index";
 		}
@@ -122,14 +122,14 @@ public class ProfInterController {
 
 	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
 	public String refuseDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
 						.getEtat() > 1023)) {
 			dctap.setDctapRefuse();
-			manager.updateDCTAP(dctap);
+			manager.updateDVCTAP(dctap);
 		}
 
 		return "redirect:/app/prof-intervenant/index";
@@ -137,13 +137,13 @@ public class ProfInterController {
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
 	public String validDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
 				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
 			dctap.setDctapValide();
-			manager.updateDCTAP(dctap);
+			manager.updateDVCTAP(dctap);
 		}
 
 		return "redirect:/app/prof-intervenant/index";

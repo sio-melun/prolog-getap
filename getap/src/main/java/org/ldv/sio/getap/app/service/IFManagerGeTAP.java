@@ -19,27 +19,27 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
 public interface IFManagerGeTAP {
 
 	// CRUD DCTAP
-	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByEleve(User eleve);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(User eleve);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfInterv(User profi);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(User profi);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByProfPrinc(User profp);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(User profp);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDCTAPByClasse(String classe);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(String classe);
 
-	public int getAllDCTAPByEtat(int etat, Long id);
+	public int getAllDVCTAPByEtat(int etat, Long id);
 
-	public int getAllDCTAPModifByEtat(Long id);
+	public int getAllDVCTAPModifByEtat(Long id);
 
-	public DemandeValidationConsoTempsAccPers getDCTAPById(Long id);
+	public DemandeValidationConsoTempsAccPers getDVCTAPById(Long id);
 
-	public void addDCTAP(DemandeValidationConsoTempsAccPers dctap);
+	public void addDVCTAP(DemandeValidationConsoTempsAccPers dctap);
 
-	public void updateDCTAP(DemandeValidationConsoTempsAccPers dctap);
+	public void updateDVCTAP(DemandeValidationConsoTempsAccPers dctap);
 
-	public void deleteDCTAP(DemandeValidationConsoTempsAccPers dctap);
+	public void deleteDVCTAP(DemandeValidationConsoTempsAccPers dctap);
 
-	public boolean deleteDCTAPById(Long id);
+	public boolean deleteDVCTAPById(Long id);
 
 	// CRUD User
 	public List<User> getAllProf();

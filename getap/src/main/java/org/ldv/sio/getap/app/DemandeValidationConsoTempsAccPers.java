@@ -59,19 +59,18 @@ public class DemandeValidationConsoTempsAccPers {
 	 * Constructeur permettant de créer une demande complète.
 	 * 
 	 * @param id
-	 *            identifiant de la demande, est-ce une bonne idée ? En général
-	 *            c'est une valeur fournie par la couche de persistance
+	 *            peut être null (création)
 	 * @param anneeScolaire
 	 * @param date
 	 * @param minutes
 	 * @param prof
 	 * @param accPers
-	 * @param idEleve
+	 * @param eleve
 	 * @param etat
 	 */
-	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
-			Integer minutes, User prof, AccPersonalise accPers, User eleve,
-			int etat) {
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
+			Date date, Integer minutes, User prof, AccPersonalise accPers,
+			User eleve, int etat) {
 		super();
 		this.id = id;
 		this.anneeScolaire = anneeScolaire;
@@ -150,7 +149,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 *            prend ses valeur dans :
 	 *            <ul>
 	 *            <li>0 - demande créée par l'élève</li>
-	 *            <li>1 - demande confimée par l'élève aprés modification du
+	 *            <li>1 - demande acceptée par l'élève aprés modification du
 	 *            professeur</li>
 	 *            <li>2 - demande rejetée par l'élève aprés modification du
 	 *            professeur</li>

@@ -72,23 +72,23 @@ public class ProfPrinController {
 			if (user.getId().equals(utilisateur.get(i).getId())) {
 				Long idUser = user.getId();
 				model.addAttribute("sesDCTAPeleve",
-						manager.getAllDCTAPByEleve(user));
+						manager.getAllDVCTAPByEleve(user));
 				model.addAttribute("etat0",
-						manager.getAllDCTAPByEtat(0, idUser));
+						manager.getAllDVCTAPByEtat(0, idUser));
 				model.addAttribute("etat1",
-						manager.getAllDCTAPByEtat(1, idUser));
+						manager.getAllDVCTAPByEtat(1, idUser));
 				model.addAttribute("etat2",
-						manager.getAllDCTAPByEtat(2, idUser));
+						manager.getAllDVCTAPByEtat(2, idUser));
 				model.addAttribute("etat4",
-						manager.getAllDCTAPByEtat(4, idUser));
+						manager.getAllDVCTAPByEtat(4, idUser));
 				model.addAttribute("etat8",
-						manager.getAllDCTAPByEtat(8, idUser));
+						manager.getAllDVCTAPByEtat(8, idUser));
 				model.addAttribute("etat32",
-						manager.getAllDCTAPByEtat(32, idUser));
+						manager.getAllDVCTAPByEtat(32, idUser));
 				model.addAttribute("etat64",
-						manager.getAllDCTAPByEtat(64, idUser));
+						manager.getAllDVCTAPByEtat(64, idUser));
 				model.addAttribute("etatsup1000",
-						manager.getAllDCTAPModifByEtat(idUser));
+						manager.getAllDVCTAPModifByEtat(idUser));
 				return "prof-principal/detailUser";
 			}
 		}
