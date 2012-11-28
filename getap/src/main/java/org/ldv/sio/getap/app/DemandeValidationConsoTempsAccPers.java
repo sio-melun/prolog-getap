@@ -2,6 +2,9 @@ package org.ldv.sio.getap.app;
 
 import java.sql.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Demande de validation d'un temps d'accompagnement personnalisé
  * 
@@ -12,6 +15,9 @@ public class DemandeValidationConsoTempsAccPers {
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
+
+	private final Logger logger = LoggerFactory
+			.getLogger(DemandeValidationConsoTempsAccPers.class);
 
 	/**
 	 * Identifiant de la DCTAP
@@ -199,6 +205,7 @@ public class DemandeValidationConsoTempsAccPers {
 
 	public void setDctapAnnule() {
 		this.etat = 8;
+		logger.info("suppression : " + this.toString());
 	}
 
 	public void setDctapValide() {
@@ -266,6 +273,14 @@ public class DemandeValidationConsoTempsAccPers {
 				+ anneeScolaire + ", dateAction=" + dateAction + ", minutes="
 				+ minutes + ", prof=" + prof + ", accPers=" + accPers
 				+ ", eleve=" + eleve + ", etat=" + etat + "]";
+	}
+
+	public void transitionRejeteeParEleve() {
+		boolean ok = true;
+		if (ok)
+			this.etat = 2; // |= 2;
+		else
+			throw new DVCTAPException("rejeteeParEleve Impossible");
 	}
 
 }
