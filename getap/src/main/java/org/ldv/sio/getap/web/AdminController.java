@@ -20,8 +20,8 @@ import org.ldv.sio.getap.app.FormAjoutDiscipline;
 import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
-import org.ldv.sio.getap.app.JDBC;
-import org.ldv.sio.getap.app.PDF;
+import org.ldv.sio.getap.app.ImportFromSqlFile;
+import org.ldv.sio.getap.app.ExportPDF;
 import org.ldv.sio.getap.app.StatsPDF;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -49,9 +49,9 @@ public class AdminController {
 	private IFManagerGeTAP manager;
 
 	@Autowired
-	private JDBC jdbc;
+	private ImportFromSqlFile jdbc;
 	@Autowired
-	private PDF pdf;
+	private ExportPDF pdf;
 	@Autowired
 	private CSV csv;
 	@Autowired
@@ -67,11 +67,11 @@ public class AdminController {
 		this.manager = serviceManager;
 	}
 
-	public void setJdbc(JDBC jdbc) {
+	public void setJdbc(ImportFromSqlFile jdbc) {
 		this.jdbc = jdbc;
 	}
 
-	public void setPdf(PDF pdf) {
+	public void setPdf(ExportPDF pdf) {
 		this.pdf = pdf;
 	}
 
