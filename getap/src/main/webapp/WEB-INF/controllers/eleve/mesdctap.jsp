@@ -58,7 +58,9 @@
 										onmouseover="this.src='../../images/modifHover.png';"
 										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 								<td><a
-									href="<c:url value="/app/eleve/delete/${dctap.id}" />"><img
+									href="<c:url value="/app/eleve/delete/${dctap.id}" />"    
+									  onClick="return confirm('Confirmez-vous la suppression ?');" >
+									  <img
 										src="../../images/suppr.png" width="24" height="24"
 										onmouseover="this.src='../../images/supprHover.png';"
 										onmouseout="this.src='../../images/suppr.png';" /> </a></td>

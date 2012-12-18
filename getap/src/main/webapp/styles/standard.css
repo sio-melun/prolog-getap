@@ -1,8 +1,7 @@
 
-
 body {
-	background: -moz-radial-gradient(center,#F5F2E9 20% ,#79776D 100%);
-	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#79776D 100%);	
+	background: -moz-radial-gradient(center,#F5F2E9 20% ,#A4A4A4 100%);
+	background: -webkit-radial-gradient(center,#F5F2E9 20% ,#A4A4A4 100%);	
 	background-attachment:fixed;
 }
 div{
@@ -11,10 +10,11 @@ div{
 div#page {
 	width: 850px;
 	min-height:517px;
-    margin:  0 auto;
+    margin: 0 auto;
     padding: 30px;
 	border-radius:20px;
-    box-shadow: 0px 0px 15px grey; 
+	border:1px solid #A4A4A4;
+    /* box-shadow: 0px 0px 15px grey; */
     box-sizing: border-box;
 	color: black;
 	z-index:1;
@@ -28,7 +28,8 @@ div#footer {
     margin-top:20px;
     padding: 5px;
 	border-radius:15px;
-    box-shadow: 0px 0px 15px grey; 
+	border:1px solid #A4A4A4;
+    /* box-shadow: 0px 0px 15px grey; */
     box-sizing: border-box;
 	color: black;
 	z-index:1;
@@ -60,10 +61,10 @@ div#banniere {
 }
 
 div#logolycee {
-	text-align: right;
+	text-align: left;
 	position:relative;
+	margin:-25px 0 0 20px;
 	top:10px;
-	left:8px;
 }
 
 div#content input[type="submit"],
@@ -239,13 +240,14 @@ td .bouton{
 	/* border:2px solid rgb(102,0,50); */
 	/* box-shadow: 0 0 2px 1px rgb(102,0,50); */
 	/* border-top-right-radius: 20px; */
-	box-shadow:1px -1px 3px 1px grey;
+	border:1px solid #A4A4A4;
+	/* box-shadow:1px -1px 3px 1px grey; */
 	border-bottom-left-radius: 20px;
-	margin-left:-40px;
+	margin-left:-41px;
 	margin-top:-27px;
 	margin-right:30px;
 	width:340px;
-	height:540px
+	height:584px
 	
 }
 
@@ -289,5 +291,6 @@ td .bouton{
 .menuLogin{
 	text-align: left;
 	position:relative;
+	left:40px;
 	bottom:10px;
 }
