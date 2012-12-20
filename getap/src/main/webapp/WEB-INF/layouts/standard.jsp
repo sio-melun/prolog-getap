@@ -24,8 +24,8 @@
 			
 			<% if(userAgent.indexOf("Firefox") != -1) { %>
 				@import url("<c:url value="/styles/standard.css" />");
-			<% } else if(userAgent.indexOf("Chrome") != -1) { %>
-				@import url("<c:url value="/styles/standardChrome.css" />");
+			<% } else if(userAgent.indexOf("Chrome") != -1 || userAgent.indexOf("Safari") != -1) { %>
+				@import url("<c:url value="/styles/standardWebkit.css" />");
 			<% } %>
 		</style>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
