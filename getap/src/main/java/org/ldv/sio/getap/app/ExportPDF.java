@@ -33,13 +33,22 @@ public class ExportPDF {
 		this.ds = ds;
 	}
 
-	public void export(HttpServletResponse response) {
+	public void export(HttpServletResponse response, boolean profs) {
 
 		try {
 			Connection con = ds.getConnection();
 			Statement select = con.createStatement();
-			ResultSet rs = select
-					.executeQuery("SELECT nom, prenom, libelle, login, mdp FROM user, classe where role='eleve' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
+			String role = (profs) ? "prof%" : "eleve";
+			String sql;
+			if (profs)
+				sql = "SELECT nom, prenom, login, mdp FROM user where role like '"
+						+ role + "' order by user.nom, user.prenom";
+			else
+				sql = "SELECT nom, prenom, libelle, login, mdp FROM user, classe where role like '"
+						+ role
+						+ "' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom";
+
+			ResultSet rs = select.executeQuery(sql);
 
 			Document document = new Document(PageSize.A4);
 
@@ -58,9 +67,9 @@ public class ExportPDF {
 							+ rs.getString("nom")
 							+ ", Prenom :  "
 							+ rs.getString("prenom")
-							+ "    (Classe :  "
-							+ rs.getString("libelle")
-							+ ")\n Login : "
+							+ ((!profs) ? "    (Classe :  "
+									+ rs.getString("libelle") + ")" : "")
+							+ "\n Login : "
 							+ rs.getString("login")
 							+ ", Mot de passe : "
 							+ rs.getString("mdp")

@@ -13,6 +13,7 @@ import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.DemandesCSV;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.ExportPDF;
 import org.ldv.sio.getap.app.FormAccueilPerso;
 import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.FormAjoutClasse;
@@ -21,7 +22,6 @@ import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.ImportFromSqlFile;
-import org.ldv.sio.getap.app.ExportPDF;
 import org.ldv.sio.getap.app.StatsPDF;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -524,15 +524,24 @@ public class AdminController {
 	public void exportUserPdf(HttpServletResponse response) {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=utilisateurs.pdf");
-		pdf.export(response);
+				"attachment;filename=eleves.pdf");
+		pdf.export(response, false);
+	}
+
+	@RequestMapping(value = "exportProfPdf")
+	public void exportProfPdf(HttpServletResponse response) {
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=professeurs.pdf");
+		pdf.export(response, true);
 	}
 
 	@RequestMapping(value = "exportStats/{id}", method = RequestMethod.GET)
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDVCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager
+				.getAllDVCTAPByEleve(user);
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
@@ -543,7 +552,8 @@ public class AdminController {
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDVCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager
+				.getAllDVCTAPByEleve(user);
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom() + ".csv");

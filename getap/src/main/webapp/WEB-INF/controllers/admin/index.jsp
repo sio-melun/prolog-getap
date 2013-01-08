@@ -29,6 +29,11 @@
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
 						height="64" />
 						<div>Export PDF des élèves</div> </a></td>
+				<td><a href="<c:url value="/app/admin/exportProfPdf" />"><img
+						src="<c:url value="../../images/pdfdl.png"/>" width="64"
+						height="64" />
+						<div>Export PDF des prof</div> </a></td>
+						
 			</tr>
 		</table>
 	</div>
