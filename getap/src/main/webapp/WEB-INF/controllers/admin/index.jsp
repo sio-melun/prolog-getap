@@ -33,7 +33,7 @@
 		</table>
 	</div>
 	<h3>
-		<a href="#">Gestion de recherche d'utilisateurs</a>
+		<a href="#">Gestion des utilisateurs</a>
 	</h3>
 	<div>
 		<table>
