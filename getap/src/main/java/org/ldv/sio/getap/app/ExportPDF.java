@@ -39,7 +39,7 @@ public class ExportPDF {
 			Connection con = ds.getConnection();
 			Statement select = con.createStatement();
 			ResultSet rs = select
-					.executeQuery("SELECT nom, prenom, libelle, login, mdp FROM user, classe where user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
+					.executeQuery("SELECT nom, prenom, libelle, login, mdp FROM user, classe where role='eleve' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
 
 			Document document = new Document(PageSize.A4);
 

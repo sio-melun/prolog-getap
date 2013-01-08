@@ -24,11 +24,11 @@
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
 						height="64" />
-						<div>Export CSV d'élèves</div> </a></td>
+						<div>Export CSV des élèves</div> </a></td>
 				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
 						height="64" />
-						<div>Export PDF d'utilisateurs</div> </a></td>
+						<div>Export PDF des élèves</div> </a></td>
 			</tr>
 		</table>
 	</div>

@@ -33,22 +33,25 @@ public class CSV {
 			Connection con = ds.getConnection();
 			Statement select = con.createStatement();
 			ResultSet rs = select
-					.executeQuery("SELECT * FROM user, classe where user.idClasse = classe.id and role = 'eleve' order by classe.libelle, user.nom");
-
+					.executeQuery("SELECT nom, prenom, libelle, login, mdp, idEtab FROM user, classe where role='eleve' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
 			try {
 				PrintWriter writer = response.getWriter();
 				// FileWriter writer = new FileWriter("F:/test2.csv");
 
-				writer.println("nom;prenom;INE;Division");
+				writer.println("nom;prenom;idEtab;login;mdp;Classe");
 				while (rs.next()) {
 					writer.append(rs.getString("nom"));
 					writer.append(";");
 					writer.append(rs.getString("prenom"));
 					writer.append(";");
-					writer.append(rs.getString("INE"));
+					writer.append(rs.getString("idEtab"));
+					writer.append(";");
+					writer.append(rs.getString("login"));
+					writer.append(";");
+					writer.append(rs.getString("mdp"));
 					writer.append(";");
 					writer.append(rs.getString("libelle"));
-					writer.println("");
+					writer.println();
 				}
 				writer.flush();
 				writer.close();
