@@ -42,8 +42,8 @@ public class ProfInterController {
 
 		model.addAttribute("lesAP", manager.getAllAPForProf());
 
-		DemandeValidationConsoTempsAccPers currentDctap = manager.getDVCTAPById(Long
-				.valueOf(id));
+		DemandeValidationConsoTempsAccPers currentDctap = manager
+				.getDVCTAPById(Long.valueOf(id));
 		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 4
 				|| currentDctap.getEtat() > 1023) {
 			// valorise le bean de vue avec le dctap courant
@@ -89,8 +89,8 @@ public class ProfInterController {
 			return "prof-intervenant/edit";
 		else {
 
-			DemandeValidationConsoTempsAccPers dctapForUpdate = manager.getDVCTAPById(Long
-					.valueOf(formDctap.getId()));
+			DemandeValidationConsoTempsAccPers dctapForUpdate = manager
+					.getDVCTAPById(Long.valueOf(formDctap.getId()));
 
 			AccPersonalise acc = manager.getAPById(formDctap.getAccPersId());
 			String accPersNom = acc.getNom();
@@ -122,7 +122,8 @@ public class ProfInterController {
 
 	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
 	public String refuseDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long
+				.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
@@ -137,7 +138,8 @@ public class ProfInterController {
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
 	public String validDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long
+				.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())

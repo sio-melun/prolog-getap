@@ -134,9 +134,9 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
+				<td><fmt:formatNumber value="${(timeVal+timeAtt)/60-(timeTT%60/60)}"
 						pattern="#00" />h<fmt:formatNumber
-										value="${timeTT%60}"
+										value="${(timeVal+timeAtt)%60}"
 										pattern="#00" /></td>
 				<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
 						pattern="#00" />h<fmt:formatNumber
@@ -152,9 +152,8 @@
 										pattern="#00" /></td>
 			</tr>
 			<tr>
-
 				<td><div id="progressbar"></div> <fmt:formatNumber
-						value="${timeVal/(72*60)*100}" pattern="#0.00" />% - 72h requises</td>
+						value="${(timeVal+timeAtt)/(72*60)*100}" pattern="#0.00" />% - 72h requises</td>
 				<td id="statsValide"><fmt:formatNumber
 						value="${timeVal/timeTT*100}" pattern="#0.00" />%</td>
 				<td id="statsAttente"><fmt:formatNumber

@@ -160,6 +160,7 @@
 							<th>Detail</th>
 							<th>Nom/Prenom</th>
 							<th>Professeur</th>
+							<th>Modifier</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -177,6 +178,11 @@
 								<td><c:if test="${prof.role == 'prof-principal'}">Principal</c:if>
 									<c:if test="${prof.role == 'prof-intervenant'}">Intervenant</c:if>
 								</td>
+								<td><a
+									href="<c:url value="/app/admin/editUser?id=${prof.id}" />"><img
+										src="../../images/modif.png"
+										onmouseover="this.src='../../images/modifHover.png';"
+										onmouseout="this.src='../../images/modif.png';" /> </a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

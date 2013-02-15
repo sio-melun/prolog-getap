@@ -48,7 +48,7 @@
 		</h3>
 		<div id="demo">
 			<form:form modelAttribute="formListIdDctap" action="sendId"
-				method="post">
+				method="post">'
 				<form:errors path="*" cssClass="errors" />
 				<table class="display dataTable">
 					<thead>
@@ -86,11 +86,15 @@
 											src="../../images/modifValid.png" width="22" height="22"
 											onmouseover="this.src='../../images/modifValidHover.png';"
 											onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
-									<td><a href=""
-										onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
+									<td><a
+										href="<c:url value="/app/prof-intervenant/refuse/${dctap.id}" />" 									
+										onclick="return confirm('Voulez-vous vraiment refuser cette demande ?')">
+										<img
 											src="../../images/suppr.png" width="24" height="24"
 											onmouseover="this.src='../../images/supprHover.png';"
-											onmouseout="this.src='../../images/suppr.png';" /> </a></td>
+											onmouseout="this.src='../../images/suppr.png';" /> 
+										</a>
+									</td>
 									<td><input type="checkbox" name="ids" value="${dctap.id}" /></td>
 								</tr>
 							</c:if>
@@ -157,8 +161,10 @@
 											src="../../images/modifValid.png" width="22" height="22"
 											onmouseover="this.src='../../images/modifValidHover.png';"
 											onmouseout="this.src='../../images/modifValid.png';" /> </a></td>
-									<td><a href=""
-										onclick="if(confirm('Voulez-vous vraiment refuser cette demande ?')){window.location.href='refuse/${dctap.id}';}"><img
+									<td><a
+										href="<c:url value="/app/prof-intervenant/refuse/${dctap.id}" />" 									
+										onclick="return confirm('Voulez-vous vraiment refuser cette demande ?')">
+										<img
 											src="../../images/suppr.png" width="24" height="24"
 											onmouseover="this.src='../../images/supprHover.png';"
 											onmouseout="this.src='../../images/suppr.png';" /> </a></td>
