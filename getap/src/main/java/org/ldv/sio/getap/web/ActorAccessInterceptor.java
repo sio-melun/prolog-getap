@@ -22,14 +22,15 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("TEST  INTERCEPTOR 1:" + request.getContextPath());
+		// System.out.println("TEST  INTERCEPTOR 1:" +
+		// request.getContextPath());
 		String controllerName = request.getRequestURI().split("/")[3];
 		String controllerName2 = request.getRequestURI().split("/")[4];
 
-		System.out.println("TEST  INTERCEPTOR 2:" + request.getContextPath()
-				+ " servlet: " + controllerName + " " + controllerName2);
+		// System.out.println("TEST  INTERCEPTOR 2:" + request.getContextPath()
+		// + " servlet: " + controllerName + " " + controllerName2);
 
-		logger.info("TEST  INTERCEPTOR with LOGGER !:"
+		logger.info("TEST  INTERCEPTOR with LOGGER :"
 				+ request.getContextPath() + " servlet: " + controllerName);
 
 		User userInSession = UtilSession.getUserInSession();
