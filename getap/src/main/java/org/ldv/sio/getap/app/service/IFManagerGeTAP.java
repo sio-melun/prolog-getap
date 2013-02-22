@@ -19,13 +19,17 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
 public interface IFManagerGeTAP {
 
 	// CRUD DCTAP
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(User eleve);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
+			User eleve);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(User profi);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(
+			User profi);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(User profp);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp);
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(String classe);
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
+			String classe);
 
 	public int getAllDVCTAPByEtat(int etat, Long id);
 
@@ -148,5 +152,13 @@ public interface IFManagerGeTAP {
 	 * @return User havin login and pw or null
 	 */
 	public User getUserByLogin(String login, String pw);
+
+	/**
+	 * inscrit l'utilisateur dans le système de log
+	 * 
+	 * @param user
+	 *            utilisateur concerné
+	 */
+	public void logUser(User user);
 
 }

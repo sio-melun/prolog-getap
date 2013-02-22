@@ -35,25 +35,29 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(User eleve) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
+			User eleve) {
 		Long id = eleve.getId();
 		return this.jdbcTemplate.query("select * from dctap where idEleve = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(User profi) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(
+			User profi) {
 		Long id = profi.getId();
 		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(User profp) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp) {
 		Long id = profp.getId();
 		return this.jdbcTemplate.query("select * from dctap where idProf = "
 				+ id, new DemandeMapper());
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(String nomClasse) {
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
+			String nomClasse) {
 		return this.jdbcTemplate
 				.query("select * from dctap d, user u, classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
 						new DemandeMapper());
@@ -689,8 +693,8 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	private static final class DemandeMapper implements
 			RowMapper<DemandeValidationConsoTempsAccPers> {
-		public DemandeValidationConsoTempsAccPers mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
+		public DemandeValidationConsoTempsAccPers mapRow(ResultSet rs,
+				int rowNum) throws SQLException {
 			DemandeValidationConsoTempsAccPers dctap = new DemandeValidationConsoTempsAccPers();
 			dctap.setId(rs.getLong("id"));
 			dctap.setAnneeScolaire(rs.getString("anneeScolaire"));
@@ -853,6 +857,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			infos = null;
 		}
 		return infos;
+	}
+
+	public void logUser(User user) {
+		this.jdbcTemplate
+				.update("insert into log(nom, prenom, role) values (?, ?, ?)",
+						new Object[] { user.getNom(), user.getPrenom(),
+								user.getRole() });
 	}
 
 }
