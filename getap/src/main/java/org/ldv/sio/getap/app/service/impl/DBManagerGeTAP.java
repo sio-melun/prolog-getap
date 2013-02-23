@@ -860,10 +860,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public void logUser(User user) {
+		String classe = (user.getClasse() == null) ? "N/A" : user.getClasse()
+				.getNom();
 		this.jdbcTemplate
-				.update("insert into log(nom, prenom, role) values (?, ?, ?)",
+				.update("insert into log(nom, prenom, role, classe) values (?, ?, ?, ?)",
 						new Object[] { user.getNom(), user.getPrenom(),
-								user.getRole() });
+								user.getRole(), classe });
 	}
 
 }
