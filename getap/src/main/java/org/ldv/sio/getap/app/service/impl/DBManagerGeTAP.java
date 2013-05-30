@@ -30,6 +30,8 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	private static JdbcTemplate jdbcTemplate;
 
+	// private DisciplineDao disciplineDao; avec injecteur...
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -789,6 +791,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<Discipline> getAllDiscipline() {
+		//
+		// return this.disciplineDao.getAllDiscipline();
+		//
+
 		return this.jdbcTemplate.query(
 				"select * from discipline order by libelle",
 				new DisciplineMapper());

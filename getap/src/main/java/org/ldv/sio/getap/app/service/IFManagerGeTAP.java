@@ -19,6 +19,11 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
 public interface IFManagerGeTAP {
 
 	// CRUD DCTAP
+	/**
+	 * 
+	 * @param eleve
+	 * @return
+	 */
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
 			User eleve);
 
