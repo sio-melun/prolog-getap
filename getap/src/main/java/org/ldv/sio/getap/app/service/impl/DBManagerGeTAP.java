@@ -18,6 +18,7 @@ import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -30,11 +31,16 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	private static JdbcTemplate jdbcTemplate;
 
-	// private DisciplineDao disciplineDao; avec injecteur...
-
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	private IFDisciplineDAO disciplineDao;
+
+	@Autowired
+	public void setDisciplineDao(IFDisciplineDAO dao) {
+		this.disciplineDao = dao;
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
@@ -631,8 +637,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			}
 
 			DBManagerGeTAP manager = new DBManagerGeTAP();
+			DisciplineDAOJdbc disciplineDao = new DisciplineDAOJdbc();
 			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
-			Discipline dis = manager.getDisciplineById(rs
+			Discipline dis = disciplineDao.getDisciplineById(rs
 					.getInt("idDiscipline"));
 			user.setDiscipline(dis);
 			user.setClasse(classe);
@@ -791,26 +798,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<Discipline> getAllDiscipline() {
-		//
-		// return this.disciplineDao.getAllDiscipline();
-		//
-
-		return this.jdbcTemplate.query(
-				"select * from discipline order by libelle",
-				new DisciplineMapper());
+		return this.disciplineDao.getAllDiscipline();
 	}
 
 	public Discipline getDisciplineById(int id) {
-		Discipline dis;
-		try {
-			dis = this.jdbcTemplate.queryForObject(
-					"select * from discipline where id = ?",
-					new Object[] { id }, new DisciplineMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			dis = null;
-		}
-		return dis;
+		return this.disciplineDao.getDisciplineById(id);
 	}
 
 	public void addDiscipline(Discipline dis) {
