@@ -17,9 +17,10 @@ import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
-import org.ldv.sio.getap.utils.UtilSession;
+import org.ldv.sio.getap.app.service.dao.IFUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,6 +49,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	@Autowired
 	public void setDvctapDao(IFDvctapDAO dao) {
 		this.dvctapDao = dao;
+	}
+
+	private IFUserDAO userDao;
+
+	@Autowired
+	public void setUserDao(IFUserDAO dao) {
+		this.userDao = dao;
+	}
+
+	private IFAccPersonnaliseDAO accPersonnaliseDao;
+
+	@Autowired
+	public void setAccPersonnaliseDao(IFAccPersonnaliseDAO dao) {
+		this.accPersonnaliseDao = dao;
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
@@ -99,45 +114,30 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<User> getAllProf() {
-		return this.jdbcTemplate.query(
-				"select * from user where role like 'prof%'", new UserMapper());
-
+		return this.userDao.getAllProf();
 	}
 
 	public List<User> getAllProfInter() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'prof-intervenant'",
-				new UserMapper());
+		return this.userDao.getAllProfInter();
 	}
 
 	public List<User> getAllProfPrinc() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'prof-principal'",
-				new UserMapper());
+		return this.userDao.getAllProfPrinc();
 	}
 
 	public List<User> getAllEleve() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'eleve'", new UserMapper());
+		return this.userDao.getAllEleve();
 	}
 
 	public List<User> getAllEleveByClasse() {
-		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.dureeAP) as dureeTotal "
-						+ "from user "
-						+ "left join dctap on dctap.idEleve = user.id and (dctap.Etat = 1 or dctap.Etat = 32) "
-						+ "left join classe on classe.id = user.idClasse where user.role = 'eleve'"
-						+ "group by user.id order by dureeTotal DESC, user.nom",
-						new UserMapper());
+		return this.userDao.getAllEleveByClasse();
 	}
 
 	public List<User> getAllEleveByPP(User user) {
-		Long id = user.getId();
-		return this.jdbcTemplate
-				.query("select * from user where idClasse in (select idClasse from prof_principal where idUser ="
-						+ id + ")", new UserMapper());
+		return this.userDao.getAllEleveByPP(user);
 	}
 
+	// TODO régler le problème
 	public User getUserById(Long id) {
 		User user;
 		try {
@@ -152,136 +152,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public User addUser(User user) {
-		String nom = user.getNom();
-		String prenom = user.getPrenom();
-		String login;
-		if ((user.getPrenom().charAt(0) + user.getNom()).length() >= 6) {
-			login = (user.getPrenom().charAt(0) + user.getNom()).toLowerCase();
-		} else if ((user.getPrenom().charAt(0) + user.getNom()).length() == 5) {
-			login = (user.getPrenom().charAt(0) + "_" + user.getNom())
-					.toLowerCase();
-		} else if ((user.getPrenom() + user.getNom()).length() < 6) {
-			login = (user.getPrenom() + "_" + user.getNom()).toLowerCase();
-
-		} else {
-			login = (user.getPrenom() + user.getNom()).toLowerCase();
-		}
-		if (login.length() > 10) {
-			login = login.substring(0, 10);
-		}
-		if (login.contains('é' + "") || login.contains('è' + "")) {
-			login = login.replace('é', 'e');
-			login = login.replace('è', 'e');
-		}
-		if (login.contains('à' + "") || login.contains('â' + "")) {
-			login = login.replace('à', 'a');
-			login = login.replace('â', 'a');
-		}
-		if (login.contains("'" + "")) {
-			login = login.replace("'", "");
-		}
-		String mail = user.getMail();
-		try {
-			User user2 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login like "
-									+ "'"
-									+ login
-									+ "%'"
-									+ " and nom = ? and prenom = ? order by id desc limit 0,1",
-							new Object[] { nom, prenom }, new UserMapper());
-
-			if (user2 != null) {
-				int max = 2;
-				String log = user2.getLogin();
-				String sNb = log.charAt(log.length() - 1) + "";
-
-				if (isInteger(sNb)) {
-					int nb = Integer.parseInt(sNb);
-					max = nb + 1;
-				}
-				String sMax = String.valueOf(max);
-				login += sMax;
-			}
-		} catch (EmptyResultDataAccessException e) {
-
-		}
-		String mdp = generate(5);
-		String hash = getEncodedPassword(mdp);
-		String role = user.getRole();
-		int classe = 0;
-		if (role.equals("eleve"))
-			classe = user.getClasse().getId();
-
-		User user3;
-
-		if (role.equals("prof-principal")) {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp,hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									null, mail });
-			user3 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-							new Object[] { login, mdp }, new UserMapper());
-			Long idUser = user3.getId();
-
-			for (int i = 0; i < user.getLesClasses().length; i++) {
-				this.jdbcTemplate
-						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
-								new Object[] { idUser, user.getLesClasses()[i] });
-			}
-		} else if (!role.equals("eleve")) {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									null, mail });
-		} else {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									classe, mail });
-		}
-
-		if (role.startsWith("prof")) {
-			user3 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-							new Object[] { login, mdp }, new UserMapper());
-			this.jdbcTemplate
-					.update("update user set idDiscipline = ? where id = ?",
-							new Object[] { user.getDiscipline().getId(),
-									user3.getId() });
-		}
-
-		User userInfo = new User();
-		userInfo.setLogin(login);
-		userInfo.setPass(mdp);
-		return userInfo;
-
+		return this.userDao.addUser(user);
 	}
 
-	public boolean isInteger(String s) {
-		try {
-			Integer.parseInt(s);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
-
-	public String generate(int length) {
-		String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-		String pass = "";
-		for (int x = 0; x < length; x++) {
-			int i = (int) Math.floor(Math.random() * 36); // Si tu supprimes des
-															// lettres tu
-															// diminues ce nb
-			pass += chars.charAt(i);
-		}
-		return pass;
-	}
-
+	// TODO à retirer plus tard
 	public static String getEncodedPassword(String key) {
 		byte[] uniqueKey = key.getBytes();
 		byte[] hash = null;
@@ -304,72 +178,18 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public void updatePass(User user) {
-		Long id = user.getId();
-		String pass = user.getPass();
-		String hash = getEncodedPassword(pass);
-
-		this.jdbcTemplate.update("update user set hash = ? where id = ?",
-				new Object[] { hash, id });
-
+		this.userDao.updatePass(user);
 	}
 
 	public void updateUser(User user) {
-		Long id = user.getId();
-		String nom = user.getNom();
-		String prenom = user.getPrenom();
-		String role = user.getRole();
-		int idClasse = 0;
-		if (role.equals("eleve")) {
-			idClasse = user.getClasse().getId();
-		}
-		String login = user.getLogin();
-		String pass = user.getPass();
-		String hash = getEncodedPassword(pass);
-		String mail = user.getMail();
-		int dis = 0;
-		if (role.startsWith("prof")) {
-			dis = user.getDiscipline().getId();
-		}
-
-		this.jdbcTemplate.update("delete from prof_principal where idUser = ?",
-				new Object[] { id });
-
-		if (role.equals("prof-principal")) {
-			for (int i = 0; i < user.getLesClasses().length; i++) {
-				this.jdbcTemplate
-						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
-								new Object[] { id, user.getLesClasses()[i] });
-			}
-		}
-		if (role.equals("eleve")) {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?,hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, idClasse, login,
-									hash, mail, null, id });
-		} else if (role.equals("admin")) {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, null, login,
-									hash, mail, null, id });
-		} else {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, null, login,
-									hash, mail, dis, id });
-		}
-
+		this.userDao.updateUser(user);
 	}
 
 	public void updateProfil(User user) {
-		String login = user.getLogin();
-		String hash = user.getHash();
-		String mail = user.getMail();
-		Long id = user.getId();
-		this.jdbcTemplate.update(
-				"update user set login = ?, hash = ?, mail = ? where id = ?",
-				new Object[] { login, hash, mail, id });
+		this.userDao.updateProfil(user);
 	}
 
+	// TODO delete user ne fonctionne pas...
 	public void deleteUser(User user) {
 		Long id = user.getId();
 
@@ -384,24 +204,15 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<AccPersonalise> getAllAPForAdmin() {
-		return this.jdbcTemplate.query(
-				"select * from ap where origineEtat = 0", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForAdmin();
 	}
 
 	public List<AccPersonalise> getAllAPForProf() {
-		User user = UtilSession.getUserInSession();
-		Long id = user.getId();
-		return this.jdbcTemplate
-				.query("select distinct ap.id, ap.libelle, ap.origineEtat, ap.idUser from ap, dctap where origineEtat = 0 or (origineEtat = 1 and dctap.idAP = ap.id and dctap.idEleve = ap.idUser and dctap.idProf = "
-						+ id + ")", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForProf();
 	}
 
 	public List<AccPersonalise> getAllAPForEleve() {
-		User user = UtilSession.getUserInSession();
-		Long id = user.getId();
-		return this.jdbcTemplate.query(
-				"select * from ap where origineEtat = 0 or (origineEtat = 1 and idUser = "
-						+ id + ")", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForEleve();
 	}
 
 	/*
@@ -418,6 +229,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	 * + id + "))", new AccMapper()); }
 	 */
 
+	// TODO ne fonctionne pas en DAO
 	public AccPersonalise getAPById(int id) {
 		AccPersonalise acc;
 		try {
@@ -432,50 +244,23 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public AccPersonalise getAPByNom(String nom) {
-		AccPersonalise acc;
-		try {
-			acc = this.jdbcTemplate.queryForObject(
-					"select * from ap where libelle = ?", new Object[] { nom },
-					new AccMapper());
-		} catch (EmptyResultDataAccessException e) {
-			acc = null;
-		}
-
-		return acc;
+		return this.accPersonnaliseDao.getAPByNom(nom);
 	}
 
 	public void addAP(AccPersonalise ap) {
-		String libelle = ap.getNom();
-		int origineEtat = ap.getOrigineEtat();
-		Long idUser = ap.getIdUser();
-
-		this.jdbcTemplate.update(
-				"insert into ap(libelle, origineEtat, idUser) values(?,?,?)",
-				new Object[] { libelle, origineEtat, idUser });
-
+		this.accPersonnaliseDao.addAP(ap);
 	}
 
 	public void upDateAP(AccPersonalise ap) {
-		int id = ap.getId();
-		String libelle = ap.getNom();
-		int origineEtat = ap.getOrigineEtat();
-
-		this.jdbcTemplate.update(
-				"update ap set libelle = ?, origineEtat = ? where id = ?",
-				new Object[] { libelle, origineEtat, id });
-
+		this.accPersonnaliseDao.upDateAP(ap);
 	}
 
 	public void deleteAP(AccPersonalise ap) {
-		int id = ap.getId();
-		this.jdbcTemplate.update("delete from ap where id = ?",
-				new Object[] { id });
+		this.accPersonnaliseDao.deleteAP(ap);
 	}
 
 	public List<AccPersonalise> getApByType() {
-		return this.jdbcTemplate
-				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id and (dctap.Etat = 1 or dctap.Etat = 5) group by dctap.idEleve, ap.libelle",
-						new AccMapper());
+		return this.accPersonnaliseDao.getApByType();
 	}
 
 	public List<Classe> getAllClasse() {
