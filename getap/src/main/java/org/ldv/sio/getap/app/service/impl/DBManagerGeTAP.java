@@ -2,7 +2,6 @@ package org.ldv.sio.getap.app.service.impl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
+import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,114 +43,59 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.disciplineDao = dao;
 	}
 
+	private IFDvctapDAO dvctapDao;
+
+	@Autowired
+	public void setDvctapDao(IFDvctapDAO dao) {
+		this.dvctapDao = dao;
+	}
+
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
 			User eleve) {
-		Long id = eleve.getId();
-		return this.jdbcTemplate.query("select * from dctap where idEleve = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByEleve(eleve);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(
 			User profi) {
-		Long id = profi.getId();
-		return this.jdbcTemplate.query("select * from dctap where idProf = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByProfInterv(profi);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
 			User profp) {
-		Long id = profp.getId();
-		return this.jdbcTemplate.query("select * from dctap where idProf = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByProfPrinc(profp);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
 			String nomClasse) {
-		return this.jdbcTemplate
-				.query("select * from dctap d, user u, classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
-						new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByClasse(nomClasse);
 	}
 
 	public int getAllDVCTAPByEtat(int etat, Long id) {
-		int count = this.jdbcTemplate
-				.queryForInt(
-						"select count(id) from dctap where Etat = ? and (idProf = ? or idEleve = ?)",
-						new Object[] { etat, id, id });
-		return count;
+		return this.dvctapDao.getAllDVCTAPByEtat(etat, id);
 	}
 
 	public int getAllDVCTAPModifByEtat(Long id) {
-		int count = this.jdbcTemplate
-				.queryForInt(
-						"select count(id) from dctap where Etat >=1024 and (idProf = ? or idEleve = ?)",
-						new Object[] { id, id });
-		return count;
+		return this.dvctapDao.getAllDVCTAPModifByEtat(id);
 	}
 
 	public DemandeValidationConsoTempsAccPers getDVCTAPById(Long id) {
-		return this.jdbcTemplate.queryForObject(
-				"select * from dctap where id = ?", new Object[] { id },
-				new DemandeMapper());
+		return this.dvctapDao.getDVCTAPById(id);
 	}
 
 	public void addDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		String anneeScolaire = dctap.getAnneeScolaire();
-		Date dateAction = dctap.getDateAction();
-		int dureeAP = dctap.getMinutes();
-		int etat = dctap.getEtat();
-		Long idProf = dctap.getProf().getId();
-		Long idEleve = dctap.getEleve().getId();
-		int idAP;
-		if (dctap.getAccPers().getId() != null) {
-			idAP = dctap.getAccPers().getId();
-		} else {
-			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
-		}
-
-		this.jdbcTemplate
-				.update("insert into dctap(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
-						new Object[] { anneeScolaire, dateAction, dureeAP,
-								etat, idProf, idEleve, idAP });
-
+		this.dvctapDao.addDVCTAP(dctap);
 	}
 
 	public void updateDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		Long id = dctap.getId();
-		String anneeScolaire = dctap.getAnneeScolaire();
-		Date dateAction = dctap.getDateAction();
-		int dureeAP = dctap.getMinutes();
-		int etat = dctap.getEtat();
-		Long idProf = dctap.getProf().getId();
-		Long idEleve = dctap.getEleve().getId();
-		int idAP;
-		if (dctap.getAccPers().getId() != null) {
-			idAP = dctap.getAccPers().getId();
-		} else {
-			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
-		}
-
-		this.jdbcTemplate
-				.update("update dctap set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
-						new Object[] { anneeScolaire, dateAction, dureeAP,
-								etat, idProf, idEleve, idAP, id });
-
+		this.dvctapDao.updateDVCTAP(dctap);
 	}
 
 	public void deleteDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		Long id = dctap.getId();
-		this.jdbcTemplate.update("delete from dctap where id = ?",
-				new Object[] { id });
-
+		this.dvctapDao.deleteDVCTAP(dctap);
 	}
 
 	public boolean deleteDVCTAPById(Long id) {
-		int result = this.jdbcTemplate
-				.queryForInt("select count(id) from dctap where id = ?",
-						new Object[] { id });
-		if (result == 0)
-			return false;
-		else
-			return true;
+		return this.dvctapDao.deleteDVCTAPById(id);
 	}
 
 	public List<User> getAllProf() {
@@ -806,27 +751,15 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public void addDiscipline(Discipline dis) {
-		String libelle = dis.getNom();
-
-		this.jdbcTemplate.update("insert into discipline(libelle) values(?)",
-				new Object[] { libelle });
-
+		this.disciplineDao.addDiscipline(dis);
 	}
 
 	public void upDateDiscipline(Discipline dis) {
-		int id = dis.getId();
-		String libelle = dis.getNom();
-
-		this.jdbcTemplate.update(
-				"update discipline set libelle = ? where id = ?", new Object[] {
-						libelle, id });
-
+		this.disciplineDao.upDateDiscipline(dis);
 	}
 
 	public void deleteDiscipline(Discipline dis) {
-		int id = dis.getId();
-		this.jdbcTemplate.update("delete from discipline where id = ?",
-				new Object[] { id });
+		this.disciplineDao.deleteDiscipline(dis);
 	}
 
 	public void addAccueil(String img, String logo, String titre, String texte) {

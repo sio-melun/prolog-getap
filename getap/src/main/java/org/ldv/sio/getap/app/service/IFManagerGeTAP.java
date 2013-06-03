@@ -18,7 +18,7 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
  */
 public interface IFManagerGeTAP {
 
-	// CRUD DCTAP
+	// CRUD DVCTAP
 	/**
 	 * 
 	 * @param eleve

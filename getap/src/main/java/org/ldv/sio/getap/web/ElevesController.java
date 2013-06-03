@@ -7,7 +7,6 @@ import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormDemandeConsoTempsAccPers;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
-import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.utils.UtilSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,13 +29,6 @@ public class ElevesController {
 	@Qualifier("DBServiceMangager")
 	private IFManagerGeTAP manager;
 
-	@Autowired
-	private IFDvctapDAO userDAO;
-
-	public void setUserDAO(IFDvctapDAO userDAO) {
-		this.userDAO = userDAO;
-	}
-
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {
 		this.manager = serviceManager;
 	}
@@ -56,8 +48,6 @@ public class ElevesController {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("mesdctaps", manager.getAllDVCTAPByEleve(me));
 		Long id = me.getId();
-		model.addAttribute("hello", userDAO.test());
-
 		model.addAttribute("etat0", manager.getAllDVCTAPByEtat(0, id));
 		model.addAttribute("etat1", manager.getAllDVCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDVCTAPByEtat(2, id));
