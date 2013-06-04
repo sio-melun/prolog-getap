@@ -18,6 +18,7 @@ import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
+import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFUserDAO;
@@ -63,6 +64,43 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	@Autowired
 	public void setAccPersonnaliseDao(IFAccPersonnaliseDAO dao) {
 		this.accPersonnaliseDao = dao;
+	}
+
+	private IFClasseDAO classeDao;
+
+	@Autowired
+	public void setClasseDao(IFClasseDAO dao) {
+		this.classeDao = dao;
+	}
+
+	// TODO ne fonctionne pas pour l'instant, à faire plus tard...
+	// private IFSearchUserDAO searchUserDao;
+
+	// @Autowired
+	// public void setSearchUserDao(IFSearchUserDAO dao) {
+	// this.searchUserDao = dao;
+	// }
+
+	// TODO à retirer plus tard
+	public static String getEncodedPassword(String key) {
+		byte[] uniqueKey = key.getBytes();
+		byte[] hash = null;
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		StringBuffer hashString = new StringBuffer();
+		for (int i = 0; i < hash.length; ++i) {
+			String hex = Integer.toHexString(hash[i]);
+			if (hex.length() == 1) {
+				hashString.append('0');
+				hashString.append(hex.charAt(hex.length() - 1));
+			} else {
+				hashString.append(hex.substring(hex.length() - 2));
+			}
+		}
+		return hashString.toString();
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
@@ -137,7 +175,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.userDao.getAllEleveByPP(user);
 	}
 
-	// TODO régler le problème
+	// TODO ne fonctionne pas en DAO
 	public User getUserById(Long id) {
 		User user;
 		try {
@@ -153,28 +191,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public User addUser(User user) {
 		return this.userDao.addUser(user);
-	}
-
-	// TODO à retirer plus tard
-	public static String getEncodedPassword(String key) {
-		byte[] uniqueKey = key.getBytes();
-		byte[] hash = null;
-		try {
-			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		StringBuffer hashString = new StringBuffer();
-		for (int i = 0; i < hash.length; ++i) {
-			String hex = Integer.toHexString(hash[i]);
-			if (hex.length() == 1) {
-				hashString.append('0');
-				hashString.append(hex.charAt(hex.length() - 1));
-			} else {
-				hashString.append(hex.substring(hex.length() - 2));
-			}
-		}
-		return hashString.toString();
 	}
 
 	public void updatePass(User user) {
@@ -264,11 +280,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<Classe> getAllClasse() {
-		return this.jdbcTemplate
-				.query("select * from classe where libelle != 'null' order by libelle",
-						new ClasseMapper());
+		return this.classeDao.getAllClasse();
 	}
 
+	// TODO Ne fonctionne pas en DAO
 	public Classe getClasseById(int id) {
 		Classe classe;
 		try {
@@ -283,58 +298,24 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public int countClasses() {
-		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from classe order by libelle",
-				new Object[] {});
-		return count;
+		return this.classeDao.countClasses();
 	}
 
 	public List<Classe> getAllClasseByProf(Long id) {
-		return this.jdbcTemplate.query(
-				"select classe.* from user, classe, prof_principal p where user.id = "
-						+ id + " and p.idClasse = classe.id and p.idUser = "
-						+ id + " order by libelle", new ClasseMapper());
+		return this.classeDao.getAllClasseByProf(id);
 	}
 
 	public void addClasse(Classe classe) {
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update("insert into classe(libelle) values(?)",
-				new Object[] { libelle });
-
+		this.classeDao.addClasse(classe);
 	}
 
 	public void upDateClasse(Classe classe) {
-		int id = classe.getId();
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update("update classe set libelle = ? where id = ?",
-				new Object[] { libelle, id });
-
+		this.classeDao.upDateClasse(classe);
 	}
 
 	public void deleteClasse(Classe classe) {
-		int id = classe.getId();
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update(
-				"delete from classe where id = ? and libelle = ?",
-				new Object[] { id, libelle });
+		this.classeDao.deleteClasse(classe);
 
-	}
-
-	public String getCurrentAnneeScolaire() {
-		String annee;
-		try {
-			annee = this.jdbcTemplate.queryForObject(
-					"select * from param_annee order by id desc limit 0,1",
-					new Object[] {}, new StringMapper());
-		} catch (EmptyResultDataAccessException e) {
-			annee = null;
-		}
-
-		return annee;
-	}
-
-	public List<String> getAllAnneeScolaire() {
-		return null;
 	}
 
 	public User getUserByLogin(String login, String pw) {
@@ -467,16 +448,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		}
 	}
 
-	public List<Role> getAllRole() {
-		List<Role> listeRoles = new ArrayList<Role>();
-		listeRoles.add(new Role(1, "eleve"));
-		listeRoles.add(new Role(2, "prof-intervenant"));
-		listeRoles.add(new Role(3, "prof-principal"));
-		listeRoles.add(new Role(4, "admin"));
-
-		return listeRoles;
-	}
-
 	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
 		String query = userSearchCriteria.getQuery();
 		return this.jdbcTemplate.query(
@@ -527,6 +498,15 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return user;
 	}
 
+	public void logUser(User user) {
+		String classe = (user.getClasse() == null) ? "N/A" : user.getClasse()
+				.getNom();
+		this.jdbcTemplate
+				.update("insert into log(nom, prenom, role, classe) values (?, ?, ?, ?)",
+						new Object[] { user.getNom(), user.getPrenom(),
+								user.getRole(), classe });
+	}
+
 	public List<Discipline> getAllDiscipline() {
 		return this.disciplineDao.getAllDiscipline();
 	}
@@ -545,6 +525,33 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public void deleteDiscipline(Discipline dis) {
 		this.disciplineDao.deleteDiscipline(dis);
+	}
+
+	public List<Role> getAllRole() {
+		List<Role> listeRoles = new ArrayList<Role>();
+		listeRoles.add(new Role(1, "eleve"));
+		listeRoles.add(new Role(2, "prof-intervenant"));
+		listeRoles.add(new Role(3, "prof-principal"));
+		listeRoles.add(new Role(4, "admin"));
+
+		return listeRoles;
+	}
+
+	public String getCurrentAnneeScolaire() {
+		String annee;
+		try {
+			annee = this.jdbcTemplate.queryForObject(
+					"select * from param_annee order by id desc limit 0,1",
+					new Object[] {}, new StringMapper());
+		} catch (EmptyResultDataAccessException e) {
+			annee = null;
+		}
+
+		return annee;
+	}
+
+	public List<String> getAllAnneeScolaire() {
+		return null;
 	}
 
 	public void addAccueil(String img, String logo, String titre, String texte) {
@@ -573,15 +580,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			infos = null;
 		}
 		return infos;
-	}
-
-	public void logUser(User user) {
-		String classe = (user.getClasse() == null) ? "N/A" : user.getClasse()
-				.getNom();
-		this.jdbcTemplate
-				.update("insert into log(nom, prenom, role, classe) values (?, ?, ?, ?)",
-						new Object[] { user.getNom(), user.getPrenom(),
-								user.getRole(), classe });
 	}
 
 }

@@ -18,7 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service("dvctapDAO")
-public class DvctapDAOImpl implements IFDvctapDAO {
+public class DvctapDAOJdbc implements IFDvctapDAO {
 
 	private static JdbcTemplate jdbcTemplate;
 
