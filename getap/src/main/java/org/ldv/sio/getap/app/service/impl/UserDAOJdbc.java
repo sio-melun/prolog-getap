@@ -43,9 +43,9 @@ public class UserDAOJdbc implements IFUserDAO {
 
 			}
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
 			DisciplineDAOJdbc disciplineDao = new DisciplineDAOJdbc();
-			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
+			ClasseDAOJdbc classeDao = new ClasseDAOJdbc();
+			Classe classe = classeDao.getClasseById(rs.getInt("idClasse"));
 			Discipline dis = disciplineDao.getDisciplineById(rs
 					.getInt("idDiscipline"));
 			user.setDiscipline(dis);

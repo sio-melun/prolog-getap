@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service("accPersonnaliseDAO")
-public class AccPersonnaliseDAOjbdc implements IFAccPersonnaliseDAO {
+public class AccPersonnaliseDAOJdbc implements IFAccPersonnaliseDAO {
 
 	private static JdbcTemplate jdbcTemplate;
 

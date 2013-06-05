@@ -1,7 +1,5 @@
 package org.ldv.sio.getap.app.service.impl;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +19,7 @@ import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
+import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -73,34 +72,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.classeDao = dao;
 	}
 
-	// TODO ne fonctionne pas pour l'instant, à faire plus tard...
-	// private IFSearchUserDAO searchUserDao;
+	private IFSearchUserDAO searchUserDao;
 
-	// @Autowired
-	// public void setSearchUserDao(IFSearchUserDAO dao) {
-	// this.searchUserDao = dao;
-	// }
-
-	// TODO à retirer plus tard
-	public static String getEncodedPassword(String key) {
-		byte[] uniqueKey = key.getBytes();
-		byte[] hash = null;
-		try {
-			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		StringBuffer hashString = new StringBuffer();
-		for (int i = 0; i < hash.length; ++i) {
-			String hex = Integer.toHexString(hash[i]);
-			if (hex.length() == 1) {
-				hashString.append('0');
-				hashString.append(hex.charAt(hex.length() - 1));
-			} else {
-				hashString.append(hex.substring(hex.length() - 2));
-			}
-		}
-		return hashString.toString();
+	@Autowired
+	public void setSearchUserDao(IFSearchUserDAO dao) {
+		this.searchUserDao = dao;
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
@@ -176,17 +152,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	// TODO ne fonctionne pas en DAO
+	// mise à jour mercredi: modification apporté au usermapper. fonctionne? à
+	// tester plus amplement
 	public User getUserById(Long id) {
-		User user;
-		try {
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where id = ?", new Object[] { id },
-					new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
+		return this.userDao.getUserById(id);
+		// User user;
+		// try {
+		// user = this.jdbcTemplate.queryForObject(
+		// "select * from user where id = ?", new Object[] { id },
+		// new UserMapper());
+		//
+		// } catch (EmptyResultDataAccessException e) {
+		// user = null;
+		// }
+		// return user;
 	}
 
 	public User addUser(User user) {
@@ -205,17 +184,19 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.userDao.updateProfil(user);
 	}
 
-	// TODO delete user ne fonctionne pas...
+	// TODO fonctionne pour les élèves & prof & admin mais affiche un "Oups..".
+	// Ne fonctionne pas pour prof principaux.
 	public void deleteUser(User user) {
-		Long id = user.getId();
-
-		if (user.getRole().equals("prof-principal")) {
-			this.jdbcTemplate
-					.update("delete from prof_principal where idUser = ? and idClasse = ?",
-							new Object[] { id, user.getClasse().getId() });
-		}
-		this.jdbcTemplate.update("delete from user where id = ?",
-				new Object[] { id });
+		this.userDao.deleteUser(user);
+		// Long id = user.getId();
+		//
+		// if (user.getRole().equals("prof-principal")) {
+		// this.jdbcTemplate
+		// .update("delete from prof_principal where idUser = ? and idClasse = ?",
+		// new Object[] { id, user.getClasse().getId() });
+		// }
+		// this.jdbcTemplate.update("delete from user where id = ?",
+		// new Object[] { id });
 
 	}
 
@@ -246,17 +227,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	 */
 
 	// TODO ne fonctionne pas en DAO
+	// mise à jour mercredi: modification apporté au usermapper. fonctionne? à
+	// tester plus amplement
 	public AccPersonalise getAPById(int id) {
-		AccPersonalise acc;
-		try {
-			acc = this.jdbcTemplate.queryForObject(
-					"select * from ap where id = ?", new Object[] { id },
-					new AccMapper());
-		} catch (EmptyResultDataAccessException e) {
-			acc = null;
-		}
-
-		return acc;
+		return this.accPersonnaliseDao.getAPById(id);
+		// AccPersonalise acc;
+		// try {
+		// acc = this.jdbcTemplate.queryForObject(
+		// "select * from ap where id = ?", new Object[] { id },
+		// new AccMapper());
+		// } catch (EmptyResultDataAccessException e) {
+		// acc = null;
+		// }
+		//
+		// return acc;
 	}
 
 	public AccPersonalise getAPByNom(String nom) {
@@ -284,17 +268,21 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	// TODO Ne fonctionne pas en DAO
+	// mise à jour mercredi: modification apporté au usermapper. fonctionne? à
+	// tester plus amplement
 	public Classe getClasseById(int id) {
-		Classe classe;
-		try {
-			classe = this.jdbcTemplate.queryForObject(
-					"select * from classe where id = ?", new Object[] { id },
-					new ClasseMapper());
-		} catch (EmptyResultDataAccessException e) {
-			classe = null;
-		}
+		return this.classeDao.getClasseById(id);
 
-		return classe;
+		// Classe classe;
+		// try {
+		// classe = this.jdbcTemplate.queryForObject(
+		// "select * from classe where id = ?", new Object[] { id },
+		// new ClasseMapper());
+		// } catch (EmptyResultDataAccessException e) {
+		// classe = null;
+		// }
+		//
+		// return classe;
 	}
 
 	public int countClasses() {
@@ -319,17 +307,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public User getUserByLogin(String login, String pw) {
-		User user;
-		try {
-			String hash = getEncodedPassword(pw);
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where login = ? and hash = ?",
-					new Object[] { login, hash }, new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
+		return this.searchUserDao.getUserByLogin(login, pw);
 	}
 
 	// classe pour passage d'une ligne d'une table à un objet
@@ -347,9 +325,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 			}
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
 			DisciplineDAOJdbc disciplineDao = new DisciplineDAOJdbc();
-			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
+			ClasseDAOJdbc classeDao = new ClasseDAOJdbc();
+			Classe classe = classeDao.getClasseById(rs.getInt("idClasse"));
 			Discipline dis = disciplineDao.getDisciplineById(rs
 					.getInt("idDiscipline"));
 			user.setDiscipline(dis);
@@ -358,15 +336,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			user.setPass(rs.getString("mdp"));
 			user.setMail(rs.getString("mail"));
 			return user;
-		}
-	}
-
-	private static final class ClasseMapper implements RowMapper<Classe> {
-		public Classe mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Classe classe = new Classe();
-			classe.setId(rs.getInt("id"));
-			classe.setNom(rs.getString("libelle"));
-			return classe;
 		}
 	}
 
@@ -380,34 +349,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			string.add(rs.getString("titre"));
 			string.add(rs.getString("texte"));
 			return string;
-		}
-	}
-
-	private static final class DisciplineMapper implements
-			RowMapper<Discipline> {
-		public Discipline mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Discipline dis = new Discipline();
-			dis.setId(rs.getInt("id"));
-			dis.setNom(rs.getString("libelle"));
-			return dis;
-		}
-	}
-
-	private static final class AccMapper implements RowMapper<AccPersonalise> {
-		public AccPersonalise mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
-			AccPersonalise acc = new AccPersonalise();
-			acc.setId(rs.getInt("id"));
-			acc.setNom(rs.getString("libelle"));
-			acc.setOrigineEtat(rs.getInt("origineEtat"));
-			acc.setIdUser(rs.getLong("idUser"));
-			try {
-				acc.setCount(rs.getInt("apByType"));
-				acc.setIdEleve(rs.getInt("idEleve"));
-			} catch (SQLException ex) {
-
-			}
-			return acc;
 		}
 	}
 
@@ -426,10 +367,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			Long idEleve = rs.getLong("idEleve");
 			int idAP = rs.getInt("idAP");
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
-			User prof = manager.getUserById(idProf);
-			User eleve = manager.getUserById(idEleve);
-			AccPersonalise ap = manager.getAPById(idAP);
+			UserDAOJdbc userDao = new UserDAOJdbc();
+			AccPersonnaliseDAOJdbc accPersonnalise = new AccPersonnaliseDAOJdbc();
+			User prof = userDao.getUserById(idProf);
+			User eleve = userDao.getUserById(idEleve);
+			AccPersonalise ap = accPersonnalise.getAPById(idAP);
 
 			dctap.setProf(prof);
 			dctap.setEleve(eleve);
@@ -449,24 +391,15 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'eleve' and nom like " + "'"
-						+ query + "%'", new UserMapper());
+		return this.searchUserDao.searchEleve(userSearchCriteria);
 	}
 
 	public List<User> searchProf(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user where role like 'prof%' and nom like "
-						+ "'" + query + "%'", new UserMapper());
+		return this.searchUserDao.searchProf(userSearchCriteria);
 	}
 
 	public List<User> searchClasse(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user u, classe c where u.idClasse = c.id and c.libelle = "
-						+ "'" + query + "'", new UserMapper());
+		return this.searchUserDao.searchClasse(userSearchCriteria);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> searchDctap(
@@ -486,25 +419,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public User getUser(Long id) {
-		User user;
-		try {
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where id = ?", new Object[] { id },
-					new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
+		return this.searchUserDao.getUser(id);
 	}
 
 	public void logUser(User user) {
-		String classe = (user.getClasse() == null) ? "N/A" : user.getClasse()
-				.getNom();
-		this.jdbcTemplate
-				.update("insert into log(nom, prenom, role, classe) values (?, ?, ?, ?)",
-						new Object[] { user.getNom(), user.getPrenom(),
-								user.getRole(), classe });
+		this.searchUserDao.logUser(user);
 	}
 
 	public List<Discipline> getAllDiscipline() {

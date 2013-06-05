@@ -42,10 +42,11 @@ public class DvctapDAOJdbc implements IFDvctapDAO {
 			Long idEleve = rs.getLong("idEleve");
 			int idAP = rs.getInt("idAP");
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
-			User prof = manager.getUserById(idProf);
-			User eleve = manager.getUserById(idEleve);
-			AccPersonalise ap = manager.getAPById(idAP);
+			UserDAOJdbc userDao = new UserDAOJdbc();
+			AccPersonnaliseDAOJdbc accPersonnalise = new AccPersonnaliseDAOJdbc();
+			User prof = userDao.getUserById(idProf);
+			User eleve = userDao.getUserById(idEleve);
+			AccPersonalise ap = accPersonnalise.getAPById(idAP);
 
 			dctap.setProf(prof);
 			dctap.setEleve(eleve);

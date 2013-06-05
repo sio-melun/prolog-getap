@@ -14,6 +14,7 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
+import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +22,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service("searchUserDAO")
-public class SearchUserDAOJdbc {
+public class SearchUserDAOJdbc implements IFSearchUserDAO {
 
 	private static JdbcTemplate jdbcTemplate;
 
@@ -44,9 +45,9 @@ public class SearchUserDAOJdbc {
 
 			}
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
 			DisciplineDAOJdbc disciplineDao = new DisciplineDAOJdbc();
-			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
+			ClasseDAOJdbc classeDao = new ClasseDAOJdbc();
+			Classe classe = classeDao.getClasseById(rs.getInt("idClasse"));
 			Discipline dis = disciplineDao.getDisciplineById(rs
 					.getInt("idDiscipline"));
 			user.setDiscipline(dis);
@@ -73,10 +74,11 @@ public class SearchUserDAOJdbc {
 			Long idEleve = rs.getLong("idEleve");
 			int idAP = rs.getInt("idAP");
 
-			DBManagerGeTAP manager = new DBManagerGeTAP();
-			User prof = manager.getUserById(idProf);
-			User eleve = manager.getUserById(idEleve);
-			AccPersonalise ap = manager.getAPById(idAP);
+			UserDAOJdbc userDao = new UserDAOJdbc();
+			AccPersonnaliseDAOJdbc accPersonnalise = new AccPersonnaliseDAOJdbc();
+			User prof = userDao.getUserById(idProf);
+			User eleve = userDao.getUserById(idEleve);
+			AccPersonalise ap = accPersonnalise.getAPById(idAP);
 
 			dctap.setProf(prof);
 			dctap.setEleve(eleve);
