@@ -356,15 +356,16 @@ public class AdminController {
 	public String search(UserSearchCriteria userSearchCriteria,
 			BindingResult bindResult, Model model) {
 
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
+		String queryNomEleve = userSearchCriteria.getQuery();
+		if (queryNomEleve == null || "".equals(queryNomEleve)) {
 			bindResult.rejectValue("query", "required",
 					"Entrez un critère de recherche valide");
 		}
 		if (bindResult.hasErrors()) {
 			return "admin/searchUser";
+
 		} else {
-			model.addAttribute("users", manager.searchEleve(userSearchCriteria));
+			model.addAttribute("users", manager.searchEleve(queryNomEleve));
 			return "admin/dosearchUser";
 		}
 	}
@@ -373,15 +374,15 @@ public class AdminController {
 	public String searchProf(UserSearchCriteria userSearchCriteria,
 			BindingResult bindResult, Model model) {
 
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
+		String queryNomProf = userSearchCriteria.getQuery();
+		if (queryNomProf == null || "".equals(queryNomProf)) {
 			bindResult.rejectValue("query", "required",
 					"Entrez un critère de recherche valide");
 		}
 		if (bindResult.hasErrors()) {
 			return "admin/searchProf";
 		} else {
-			model.addAttribute("users", manager.searchProf(userSearchCriteria));
+			model.addAttribute("users", manager.searchProf(queryNomProf));
 			return "admin/dosearchUser";
 		}
 	}
@@ -390,16 +391,15 @@ public class AdminController {
 	public String searchClasse(UserSearchCriteria userSearchCriteria,
 			BindingResult bindResult, Model model) {
 
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
+		String queryClasse = userSearchCriteria.getQuery();
+		if (queryClasse == null || "".equals(queryClasse)) {
 			bindResult.rejectValue("query", "required",
 					"Entrez un critère de recherche valide");
 		}
 		if (bindResult.hasErrors()) {
 			return "admin/searchClasse";
 		} else {
-			model.addAttribute("users",
-					manager.searchClasse(userSearchCriteria));
+			model.addAttribute("users", manager.searchClasse(queryClasse));
 			return "admin/dosearchUser";
 		}
 	}

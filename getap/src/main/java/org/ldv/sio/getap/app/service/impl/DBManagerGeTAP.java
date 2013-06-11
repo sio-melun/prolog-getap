@@ -13,7 +13,6 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
-import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
@@ -280,27 +279,27 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.searchUserDao.getUserByLogin(login, pw);
 	}
 
-	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
-		return this.searchUserDao.searchEleve(userSearchCriteria);
+	public List<User> searchEleve(String queryNomEleve) {
+		return this.searchUserDao.searchEleve(queryNomEleve);
 	}
 
-	public List<User> searchProf(UserSearchCriteria userSearchCriteria) {
-		return this.searchUserDao.searchProf(userSearchCriteria);
+	public List<User> searchProf(String queryNomProf) {
+		return this.searchUserDao.searchProf(queryNomProf);
 	}
 
-	public List<User> searchClasse(UserSearchCriteria userSearchCriteria) {
-		return this.searchUserDao.searchClasse(userSearchCriteria);
+	public List<User> searchClasse(String queryClasse) {
+		return this.searchUserDao.searchClasse(queryClasse);
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> searchDctap(
-			UserSearchCriteria userSearchCriteria) {
-		return this.searchUserDao.searchDctap(userSearchCriteria);
-	}
-
-	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
-			UserSearchCriteria userSearchCriteria) {
-		return this.searchUserDao.searchDctapClasse(userSearchCriteria);
-	}
+	// public List<DemandeValidationConsoTempsAccPers> searchDctap(
+	// UserSearchCriteria userSearchCriteria) {
+	// return this.searchUserDao.searchDctap(userSearchCriteria);
+	// }
+	//
+	// public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
+	// UserSearchCriteria userSearchCriteria) {
+	// return this.searchUserDao.searchDctapClasse(userSearchCriteria);
+	// }
 
 	public User getUser(Long id) {
 		return this.searchUserDao.getUser(id);

@@ -13,7 +13,6 @@ import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.User;
-import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -109,42 +108,39 @@ public class SearchUserDAOJdbc implements IFSearchUserDAO {
 		return hashString.toString();
 	}
 
-	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
+	public List<User> searchEleve(String queryNomEleve) {
 		return this.jdbcTemplate.query(
 				"select * from user where role = 'eleve' and nom like " + "'"
-						+ query + "%'", new UserMapper());
+						+ queryNomEleve + "%'", new UserMapper());
 	}
 
-	public List<User> searchProf(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
+	public List<User> searchProf(String queryNomProf) {
 		return this.jdbcTemplate.query(
 				"select * from user where role like 'prof%' and nom like "
-						+ "'" + query + "%'", new UserMapper());
+						+ "'" + queryNomProf + "%'", new UserMapper());
 	}
 
-	public List<User> searchClasse(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
+	public List<User> searchClasse(String queryClasse) {
 		return this.jdbcTemplate.query(
 				"select * from user u, classe c where u.idClasse = c.id and c.libelle = "
-						+ "'" + query + "'", new UserMapper());
+						+ "'" + queryClasse + "'", new UserMapper());
 	}
 
-	public List<DemandeValidationConsoTempsAccPers> searchDctap(
-			UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate
-				.query("select * from user u, dctap d where (u.id = d.idEleve or u.id = d.idProf) and nom like "
-						+ "'" + query + "%'", new DemandeMapper());
-	}
-
-	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
-			UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate
-				.query("SELECT dctap.* FROM classe, user, dctap  where classe.id=user.idClasse and user.id=dctap.idEleve and classe.libelle = "
-						+ "'" + query + "'", new DemandeMapper());
-	}
+	// public List<DemandeValidationConsoTempsAccPers> searchDctap(
+	// UserSearchCriteria userSearchCriteria) {
+	// String query = userSearchCriteria.getQuery();
+	// return this.jdbcTemplate
+	// .query("select * from user u, dctap d where (u.id = d.idEleve or u.id = d.idProf) and nom like "
+	// + "'" + query + "%'", new DemandeMapper());
+	// }
+	//
+	// public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
+	// UserSearchCriteria userSearchCriteria) {
+	// String query = userSearchCriteria.getQuery();
+	// return this.jdbcTemplate
+	// .query("SELECT dctap.* FROM classe, user, dctap  where classe.id=user.idClasse and user.id=dctap.idEleve and classe.libelle = "
+	// + "'" + query + "'", new DemandeMapper());
+	// }
 
 	public User getUser(Long id) {
 		User user;
