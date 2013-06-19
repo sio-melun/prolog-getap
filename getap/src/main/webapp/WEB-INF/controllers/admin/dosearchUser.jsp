@@ -46,6 +46,9 @@
 							src="../../images/suppr.png"
 							onmouseover="this.src='../../images/supprHover.png';"
 							onmouseout="this.src='../../images/suppr.png';" />
+							<form method="post">
+							<input name=2 type="hidden" value=2 />
+							</form>
 						</a>
 					</td>
 				</tr>

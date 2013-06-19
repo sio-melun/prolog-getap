@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.CSV;
@@ -85,12 +87,18 @@ public class AdminController {
 			@ModelAttribute(value = "formAjoutUsers") FormAjoutUsers form,
 			UserSearchCriteria userSearchCriteria, FormAjoutAp formAjout,
 			FormAjoutDiscipline formAjoutDis, FormAjoutClasse formAjoutClasse,
-			Model model) {
+			HttpServletRequest httpRequest, Model model, HttpSession session) {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
 		model.addAttribute("lesClasses", manager.getAllClasse());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
 		model.addAttribute("lesProfs", manager.getAllProf());
+
+		if (session.getAttribute("eleveDeleted") != null) {
+			session.removeAttribute("eleveDeleted");
+			model.addAttribute("eleveDeleted", "DELETED");
+		}
+
 	}
 
 	@RequestMapping(value = "logiciel", method = RequestMethod.GET)
@@ -476,12 +484,15 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "delUser/{id}", method = RequestMethod.GET)
-	public String deleteUserById(@PathVariable String id, Model model) {
+	public String deleteUserById(@PathVariable String id, Model model,
+			HttpSession session) {
 		User user = manager.getUserById(Long.valueOf(id));
 
 		if (!user.getId().equals(null)) {
 			manager.deleteUser(user);
+			session.setAttribute("eleveDeleted", "DELETED");
 		}
+
 		return "redirect:/app/admin/index";
 	}
 
