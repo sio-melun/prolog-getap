@@ -25,6 +25,10 @@
 				<li><a href="<c:url value="/app/prof-intervenant/index" />"
 					target="_self"><b>Mes demandes</b></a></li>
 			</ul>
+			<ul class="select">
+				<li><a href="<c:url value="/app/prof-intervenant/prevalidation" />"
+					target="_self"><b>Mes Prevalidations</b></a></li>
+			</ul>
 		</c:if>
 
 

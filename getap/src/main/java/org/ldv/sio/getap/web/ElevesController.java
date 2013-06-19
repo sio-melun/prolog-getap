@@ -152,7 +152,7 @@ public class ElevesController {
 		System.out.println(manager.getAllAPForEleve());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
-		formAjout.setEleveId(UtilSession.getUserInSession().getId());
+		formAjout.setProfId(UtilSession.getUserInSession().getId());
 		formAjout.setEtat(0);
 
 		return "eleve/ajoutdctap";

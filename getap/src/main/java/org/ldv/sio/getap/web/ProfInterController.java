@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
+import org.ldv.sio.getap.app.FormAjoutDctap;
 import org.ldv.sio.getap.app.FormListConsoForProfInter;
 import org.ldv.sio.getap.app.FormListIdDctap;
 import org.ldv.sio.getap.app.User;
@@ -167,5 +168,22 @@ public class ProfInterController {
 		}
 
 		return "redirect:/app/prof-intervenant/index";
+	}
+
+	@RequestMapping(value = "ajoutprevalidation", method = RequestMethod.GET)
+	public String ajoutPrevalidation(FormAjoutDctap formAjout, Model model) {
+
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
+
+		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
+		formAjout.setProfNom(UtilSession.getUserInSession().getNom());
+		formAjout.setEtat(0);
+
+		return "prof-intervenant/ajoutprevalidation";
+	}
+
+	@RequestMapping(value = "prevalidation", method = RequestMethod.GET)
+	public void prevalidation() {
+
 	}
 }
