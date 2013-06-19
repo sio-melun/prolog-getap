@@ -6,7 +6,7 @@
 <h3 class="titre3">Création d'une liste<br/>de prevalidation</h3>
 
 <form:form modelAttribute="formAjoutDctap" action="doajout"
-	method="post" id="formulaireAjoutDCTAP">
+	method="post" id="formulaireAjoutPrevalidation" name="ajoutprevalidation">
 	<form:errors path="*" cssClass="errors" />
 
 	<div class="section">
@@ -64,8 +64,9 @@
 
 		<div id="buttonGroup">
 			<a href="index" style="text-decoration: none"><input
-				type="button" value="Retour"></a> <input type="submit"
-				value="Ajouter" />
+				type="button" value="Retour"> </a>
+			<a href="ajouteleves" style="text-decoration: none"><input
+				type="button" value="Ajouter des élèves"> </a>
 
 		</div>
 	</div>

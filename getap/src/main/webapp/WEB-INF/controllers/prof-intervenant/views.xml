@@ -42,5 +42,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/prof-intervenant/ajoutprevalidation.jsp" />
 	</definition>
+	
+	<definition name="prof-intervenant/ajouteleves" extends="standard-layout">
+		<put-attribute name="title" value="Ajout Eleves" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-intervenant/ajouteleves.jsp" />
+	</definition>
 
 </tiles-definitions>

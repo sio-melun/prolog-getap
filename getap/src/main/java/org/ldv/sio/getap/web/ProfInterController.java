@@ -186,4 +186,12 @@ public class ProfInterController {
 	public void prevalidation() {
 
 	}
+
+	@RequestMapping(value = "ajouteleves", method = RequestMethod.GET)
+	public String ajouteleves(Model model) {
+		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+		System.out.println("passage");
+
+		return "prof-intervenant/ajouteleves";
+	}
 }
