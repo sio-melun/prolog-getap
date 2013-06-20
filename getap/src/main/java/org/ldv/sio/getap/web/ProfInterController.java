@@ -187,10 +187,9 @@ public class ProfInterController {
 
 	}
 
-	@RequestMapping(value = "ajouteleves", method = RequestMethod.GET)
+	@RequestMapping(value = "ajouteleves", method = RequestMethod.POST)
 	public String ajouteleves(Model model) {
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
-		System.out.println("passage");
 
 		return "prof-intervenant/ajouteleves";
 	}
