@@ -19,10 +19,9 @@
 			</div>
 
 			<div class="form-row">
-				<label for="profNom">Professeur intervenant :</label>
-				<div class="input">
-					<form:input path="profNom" disabled="true" />
-				</div>
+				<label for="profId">Professeur intervenant :</label>
+				<form:select disabled="true" path="profId" items="${lesProfs}" itemValue="id"
+					itemLabel="nom"></form:select>
 			</div>
 
 			<div class="form-row">

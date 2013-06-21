@@ -149,7 +149,6 @@ public class ElevesController {
 
 		model.addAttribute("lesProfs", manager.getAllProf());
 		model.addAttribute("lesAP", manager.getAllAPForEleve());
-		System.out.println(manager.getAllAPForEleve());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setProfId(UtilSession.getUserInSession().getId());

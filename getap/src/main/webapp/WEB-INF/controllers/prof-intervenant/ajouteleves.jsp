@@ -1,7 +1,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	
+<h3 class="titre3">Récapitulatif</h3>
 
+<form:form modelAttribute="formAjoutDctap" action="ajouteleves"
+	method="post" id="formulaireAjoutPrevalidation" name="ajoutprevalidation">
+	
+	<div class="section">
+		<fieldset>
+
+			<div class="form-row">
+				<label for="anneeScolaire">Année scolaire courante :</label>
+				<div class="input">
+					<form:input path="anneeScolaire" disabled="true" />
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<label for="datepicker">Date : </label>
+				<div class="input">
+					<form:input id="datepicker" path="date" disabled="true" />
+				</div>
+			</div>
+
+			<div class="form-row">
+				<label for="profId">Professeur intervenant :</label>
+				<form:select disabled="true" path="profId" items="${lesProfs}" itemValue="id"
+					itemLabel="nom"></form:select>
+			</div>
+			
+			<div class="form-row">
+				<label for="AccPersId">Type d'accompagnement personnalisé :</label>
+				<form:select disabled="true" path="AccPersId" items="${lesAP}" itemValue="id"
+					itemLabel="nom"></form:select>
+			</div>
+			
+		</fieldset>
+	</div>
+			
+</form:form>
 	
 <h3 class="titre3">Selection des<br/>élèves</h3>
 
@@ -34,8 +72,4 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>
-
-<script>
-document.forms['ajoutprevalidation'].bidule.value
-</script>
+</table>

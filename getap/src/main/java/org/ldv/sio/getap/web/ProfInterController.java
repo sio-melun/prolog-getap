@@ -1,5 +1,7 @@
 package org.ldv.sio.getap.web;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.ldv.sio.getap.app.AccPersonalise;
@@ -170,27 +172,42 @@ public class ProfInterController {
 		return "redirect:/app/prof-intervenant/index";
 	}
 
-	@RequestMapping(value = "ajoutprevalidation", method = RequestMethod.GET)
-	public String ajoutPrevalidation(FormAjoutDctap formAjout, Model model) {
-
-		model.addAttribute("lesAP", manager.getAllAPForEleve());
-
-		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
-		formAjout.setProfNom(UtilSession.getUserInSession().getNom());
-		formAjout.setEtat(0);
-
-		return "prof-intervenant/ajoutprevalidation";
-	}
-
 	@RequestMapping(value = "prevalidation", method = RequestMethod.GET)
 	public void prevalidation() {
 
 	}
 
-	@RequestMapping(value = "ajouteleves", method = RequestMethod.POST)
-	public String ajouteleves(Model model) {
-		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+	@RequestMapping(value = "ajoutprevalidation", method = RequestMethod.GET)
+	public String ajoutPrevalidation(FormAjoutDctap formAjout, Model model) {
 
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
+		model.addAttribute("lesProfs", manager.getAllProf());
+
+		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
+		formAjout.setProfId(UtilSession.getUserInSession().getId());
+		formAjout.setEtat(128);
+
+		return "prof-intervenant/ajoutprevalidation";
+	}
+
+	@RequestMapping(value = "ajouteleves", method = RequestMethod.POST)
+	public String ajouteleves(FormAjoutDctap formAjout, Model model,
+			HttpServletRequest request) {
+		// Integer ap = Integer.parseInt(request.getParameter("accPers"));
+
+		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+		model.addAttribute("lesProfs", manager.getAllProf());
+		model.addAttribute("lesAP", manager.getAllAPForEleve());
+
+		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
+		formAjout.setProfId(UtilSession.getUserInSession().getId());
+		// formAjout.setAccPersId(ap);
+		formAjout.setEtat(128);
+
+		for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
+			String objet = (String) e.nextElement();
+			System.out.println(objet + request.getParameter(objet));
+		}
 		return "prof-intervenant/ajouteleves";
 	}
 }
