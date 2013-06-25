@@ -8,7 +8,6 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
-import org.ldv.sio.getap.app.UserSearchCriteria;
 
 /**
  * Contrat de services pour les cas d'utilisation
@@ -18,7 +17,12 @@ import org.ldv.sio.getap.app.UserSearchCriteria;
  */
 public interface IFManagerGeTAP {
 
-	// CRUD DCTAP
+	// CRUD DVCTAP
+	/**
+	 * 
+	 * @param eleve
+	 * @return
+	 */
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
 			User eleve);
 
@@ -129,17 +133,17 @@ public interface IFManagerGeTAP {
 	public List<String> getInfoAccueil();
 
 	// Opération Search User
-	public List<User> searchEleve(UserSearchCriteria userSearchCriteria);
+	public List<User> searchEleve(String queryNomEleve);
 
-	public List<User> searchProf(UserSearchCriteria userSearchCriteria);
+	public List<User> searchProf(String queryNomProf);
 
-	public List<User> searchClasse(UserSearchCriteria userSearchCriteria);
+	public List<User> searchClasse(String queryClasse);
 
-	public List<DemandeValidationConsoTempsAccPers> searchDctap(
-			UserSearchCriteria userSearchCriteria);
-
-	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
-			UserSearchCriteria userSearchCriteria);
+	// public List<DemandeValidationConsoTempsAccPers> searchDctap(
+	// UserSearchCriteria userSearchCriteria);
+	//
+	// public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
+	// UserSearchCriteria userSearchCriteria);
 
 	public User getUser(Long id);
 

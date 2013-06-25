@@ -38,11 +38,19 @@
 							src="../../images/modif.png"
 							onmouseover="this.src='../../images/modifHover.png';"
 							onmouseout="this.src='../../images/modif.png';" /></a></td>
-					<td><a href=""
-						onclick="if(confirm('Voulez-vous vraiment supprimer cet utilisateur ?')){window.location.href='delUser/${user.id}';}"><img
+					<td>
+						<a
+						href="<c:url value="/app/admin/delUser/${user.id}" />"
+						onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+						<img
 							src="../../images/suppr.png"
 							onmouseover="this.src='../../images/supprHover.png';"
-							onmouseout="this.src='../../images/suppr.png';" /></a></td>
+							onmouseout="this.src='../../images/suppr.png';" />
+							<form method="post">
+							<input name=2 type="hidden" value=2 />
+							</form>
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

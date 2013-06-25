@@ -43,16 +43,15 @@ public class ProfPrinController {
 	public String searchClasse(UserSearchCriteria userSearchCriteria,
 			BindingResult bindResult, Model model) {
 
-		if (userSearchCriteria.getQuery() == null
-				|| "".equals(userSearchCriteria.getQuery())) {
+		String queryClasse = userSearchCriteria.getQuery();
+		if (queryClasse == null || "".equals(queryClasse)) {
 			bindResult.rejectValue("query", "required",
 					"Entrez un critère de recherche valide");
 		}
 		if (bindResult.hasErrors()) {
 			return "prof-principal/index";
 		} else {
-			model.addAttribute("users",
-					manager.searchClasse(userSearchCriteria));
+			model.addAttribute("users", manager.searchClasse(queryClasse));
 			return "prof-principal/index";
 		}
 	}
