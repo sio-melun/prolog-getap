@@ -19,9 +19,8 @@
 			</div>
 
 			<div class="form-row">
-				<label for="profId">Professeur intervenant :</label>
-				<form:select disabled="true" path="profId" items="${lesProfs}" itemValue="id"
-					itemLabel="nom"></form:select>
+				<label for="nomProf">Professeur intervenant :</label>
+				<form:input path="profNom" disabled="true" />
 			</div>
 
 			<div class="form-row">
@@ -49,7 +48,8 @@
 			</div>
 
 			<div class="form-row">
-				<label for="accPersId">Type d'accompagnement personnalisé : </label> <select
+				<label for="accPersId">Type d'accompagnement personnalisé : </label> 
+				<select path = "accPersId"
 					id="accPersId" name="accPersId" onchange="testAcc()">
 					<c:forEach items="${lesAP}" var="ap">
 						<option value="${ap.id}" label="${ap.nom}">${ap.nom}</option>

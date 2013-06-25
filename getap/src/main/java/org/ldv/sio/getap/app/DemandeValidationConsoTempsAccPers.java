@@ -163,6 +163,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 *            <li>8 - demande annulée par l'élève</li>
 	 *            <li>32 - demande validée par le professeur</li>
 	 *            <li>64 - demande refusée par le professeur</li>
+	 *            <li>128 - demande prévalidée par le professeur</li>
 	 * 
 	 *            <li>1024 - demande où la date a été modifiée par le professeur
 	 *            </li>

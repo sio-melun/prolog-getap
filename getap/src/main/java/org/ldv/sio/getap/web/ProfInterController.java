@@ -181,10 +181,11 @@ public class ProfInterController {
 	public String ajoutPrevalidation(FormAjoutDctap formAjout, Model model) {
 
 		model.addAttribute("lesAP", manager.getAllAPForEleve());
-		model.addAttribute("lesProfs", manager.getAllProf());
+		// model.addAttribute("lesProfs", manager.getAllProf());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setProfId(UtilSession.getUserInSession().getId());
+		formAjout.setProfNom(UtilSession.getUserInSession().getNom());
 		formAjout.setEtat(128);
 
 		return "prof-intervenant/ajoutprevalidation";
@@ -196,12 +197,17 @@ public class ProfInterController {
 		// Integer ap = Integer.parseInt(request.getParameter("accPers"));
 
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
-		model.addAttribute("lesProfs", manager.getAllProf());
-		model.addAttribute("lesAP", manager.getAllAPForEleve());
+		model.addAttribute("ap", manager.getAPById(formAjout.getAccPersId()));
+		// model.addAttribute("lesProfs", manager.getAllProf());
+		// model.addAttribute("lesAP", manager.getAllAPForEleve());
+		// model.addAttribute("nomProf",
+		// UtilSession.getUserInSession().getNom());
 
 		formAjout.setAnneeScolaire(UtilSession.getAnneeScolaireInSession());
 		formAjout.setProfId(UtilSession.getUserInSession().getId());
-		// formAjout.setAccPersId(ap);
+		formAjout.setProfNom(UtilSession.getUserInSession().getNom());
+		// formAjout.setAccPersNom(request.getParameter("accPersNom"));
+		// // formAjout.setAccPersId(ap);
 		formAjout.setEtat(128);
 
 		for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {

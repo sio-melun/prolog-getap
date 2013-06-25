@@ -19,31 +19,43 @@
 			
 			<div class="form-row">
 				<label for="datepicker">Date : </label>
-				<div class="input">
-					<form:input id="datepicker" path="date" disabled="true" />
-				</div>
+				<form:input id="datepicker" path="date" disabled="true" />
 			</div>
 
 			<div class="form-row">
-				<label for="profId">Professeur intervenant :</label>
-				<form:select disabled="true" path="profId" items="${lesProfs}" itemValue="id"
-					itemLabel="nom"></form:select>
+				<label for="profNom">Professeur intervenant :</label>
+				<form:input path="profNom" disabled="true" />
 			</div>
 			
 			<div class="form-row">
-				<label for="AccPersId">Type d'accompagnement personnalisé :</label>
-				<form:select disabled="true" path="AccPersId" items="${lesAP}" itemValue="id"
-					itemLabel="nom"></form:select>
+				<label for="tempsAP">Durée :</label>
+				<input id="tempsAP" value="${ap.count}" disabled="true" />
+			</div>
+			
+			<div class="form-row">
+				<label for="AccPersNom">Type d'accompagnement personnalisé :</label>
+				<input type="text"  value="${ap.nom}" disabled="true" />
 			</div>
 			
 		</fieldset>
 	</div>
-			
-</form:form>
-	
-<h3 class="titre3">Selection des<br/>élèves</h3>
 
-<table class="display dataTable">
+	<h3 class="titre3">Élèves selectionnés</h3>
+
+	<table class="display dataTable" id="eleve_selection">
+					<thead>
+						<tr class="header">
+							<th>Detail</th>
+							<th>Nom/Prenom</th>
+							<th>Classe</th>
+							<th>Retirer</th>
+						</tr>
+					</thead>
+	</table>
+	
+	<h3 class="titre3">Selection des<br/>élèves</h3>
+
+	<table class="display dataTable" id="liste_eleve">
 					<thead>
 						<tr class="header">
 							<th>Detail</th>
@@ -72,4 +84,9 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-</table>
+	</table>
+
+<input type="submit"
+				value="Ajouter" />
+			
+</form:form>
