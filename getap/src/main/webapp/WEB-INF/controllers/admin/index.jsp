@@ -5,6 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <br />
 
+<script>
+<c:if test="${not empty eleveDeleted}">
+  $(document).ready(function() {
+	$("#accordion" ).accordion({ active: 1 });
+   });
+</c:if>
+</script>
+
 <h5 style="position: relative; top: 35px;">Gestion utilisateur</h5>
 <div id="accordion">
 	<h3>

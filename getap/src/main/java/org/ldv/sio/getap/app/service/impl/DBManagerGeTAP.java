@@ -1,8 +1,5 @@
 package org.ldv.sio.getap.app.service.impl;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,9 +13,13 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
-import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
-import org.ldv.sio.getap.utils.UtilSession;
+import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
+import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
+import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
+import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
+import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
+import org.ldv.sio.getap.app.service.dao.IFUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,427 +36,183 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	private IFDisciplineDAO disciplineDao;
+
+	@Autowired
+	public void setDisciplineDao(IFDisciplineDAO dao) {
+		this.disciplineDao = dao;
+	}
+
+	private IFDvctapDAO dvctapDao;
+
+	@Autowired
+	public void setDvctapDao(IFDvctapDAO dao) {
+		this.dvctapDao = dao;
+	}
+
+	private IFUserDAO userDao;
+
+	@Autowired
+	public void setUserDao(IFUserDAO dao) {
+		this.userDao = dao;
+	}
+
+	private IFAccPersonnaliseDAO accPersonnaliseDao;
+
+	@Autowired
+	public void setAccPersonnaliseDao(IFAccPersonnaliseDAO dao) {
+		this.accPersonnaliseDao = dao;
+	}
+
+	private IFClasseDAO classeDao;
+
+	@Autowired
+	public void setClasseDao(IFClasseDAO dao) {
+		this.classeDao = dao;
+	}
+
+	private IFSearchUserDAO searchUserDao;
+
+	@Autowired
+	public void setSearchUserDao(IFSearchUserDAO dao) {
+		this.searchUserDao = dao;
+	}
+
+	private static final class ArrayStringMapper implements
+			RowMapper<ArrayList<String>> {
+		public ArrayList<String> mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			ArrayList<String> string = new ArrayList<String>();
+			string.add(rs.getString("img"));
+			string.add(rs.getString("logo"));
+			string.add(rs.getString("titre"));
+			string.add(rs.getString("texte"));
+			return string;
+		}
+	}
+
+	private static final class StringMapper implements RowMapper<String> {
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			String annee = null;
+			annee = rs.getString("anneeScolaire");
+
+			return annee;
+		}
+	}
+
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByEleve(
 			User eleve) {
-		Long id = eleve.getId();
-		return this.jdbcTemplate.query("select * from dctap where idEleve = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByEleve(eleve);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfInterv(
 			User profi) {
-		Long id = profi.getId();
-		return this.jdbcTemplate.query("select * from dctap where idProf = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByProfInterv(profi);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
 			User profp) {
-		Long id = profp.getId();
-		return this.jdbcTemplate.query("select * from dctap where idProf = "
-				+ id, new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByProfPrinc(profp);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
 			String nomClasse) {
-		return this.jdbcTemplate
-				.query("select * from dctap d, user u, classe c where d.idEleve = u.id and u.idClasse = c.id and libelle = 'nomClasse' ",
-						new DemandeMapper());
+		return this.dvctapDao.getAllDVCTAPByClasse(nomClasse);
 	}
 
 	public int getAllDVCTAPByEtat(int etat, Long id) {
-		int count = this.jdbcTemplate
-				.queryForInt(
-						"select count(id) from dctap where Etat = ? and (idProf = ? or idEleve = ?)",
-						new Object[] { etat, id, id });
-		return count;
+		return this.dvctapDao.getAllDVCTAPByEtat(etat, id);
 	}
 
 	public int getAllDVCTAPModifByEtat(Long id) {
-		int count = this.jdbcTemplate
-				.queryForInt(
-						"select count(id) from dctap where Etat >=1024 and (idProf = ? or idEleve = ?)",
-						new Object[] { id, id });
-		return count;
+		return this.dvctapDao.getAllDVCTAPModifByEtat(id);
 	}
 
 	public DemandeValidationConsoTempsAccPers getDVCTAPById(Long id) {
-		return this.jdbcTemplate.queryForObject(
-				"select * from dctap where id = ?", new Object[] { id },
-				new DemandeMapper());
+		return this.dvctapDao.getDVCTAPById(id);
 	}
 
 	public void addDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		String anneeScolaire = dctap.getAnneeScolaire();
-		Date dateAction = dctap.getDateAction();
-		int dureeAP = dctap.getMinutes();
-		int etat = dctap.getEtat();
-		Long idProf = dctap.getProf().getId();
-		Long idEleve = dctap.getEleve().getId();
-		int idAP;
-		if (dctap.getAccPers().getId() != null) {
-			idAP = dctap.getAccPers().getId();
-		} else {
-			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
-		}
-
-		this.jdbcTemplate
-				.update("insert into dctap(anneeScolaire, dateAction, dureeAP, Etat, idProf, idEleve, idAP) values(?,?,?,?,?,?,?)",
-						new Object[] { anneeScolaire, dateAction, dureeAP,
-								etat, idProf, idEleve, idAP });
-
+		this.dvctapDao.addDVCTAP(dctap);
 	}
 
 	public void updateDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		Long id = dctap.getId();
-		String anneeScolaire = dctap.getAnneeScolaire();
-		Date dateAction = dctap.getDateAction();
-		int dureeAP = dctap.getMinutes();
-		int etat = dctap.getEtat();
-		Long idProf = dctap.getProf().getId();
-		Long idEleve = dctap.getEleve().getId();
-		int idAP;
-		if (dctap.getAccPers().getId() != null) {
-			idAP = dctap.getAccPers().getId();
-		} else {
-			idAP = this.getAPByNom(dctap.getAccPers().getNom()).getId();
-		}
-
-		this.jdbcTemplate
-				.update("update dctap set anneeScolaire = ?, dateAction = ?, dureeAP = ?, Etat = ?, idProf = ?, idEleve = ?, idAP = ? where id = ?",
-						new Object[] { anneeScolaire, dateAction, dureeAP,
-								etat, idProf, idEleve, idAP, id });
-
+		this.dvctapDao.updateDVCTAP(dctap);
 	}
 
 	public void deleteDVCTAP(DemandeValidationConsoTempsAccPers dctap) {
-		Long id = dctap.getId();
-		this.jdbcTemplate.update("delete from dctap where id = ?",
-				new Object[] { id });
-
+		this.dvctapDao.deleteDVCTAP(dctap);
 	}
 
 	public boolean deleteDVCTAPById(Long id) {
-		int result = this.jdbcTemplate
-				.queryForInt("select count(id) from dctap where id = ?",
-						new Object[] { id });
-		if (result == 0)
-			return false;
-		else
-			return true;
+		return this.dvctapDao.deleteDVCTAPById(id);
 	}
 
 	public List<User> getAllProf() {
-		return this.jdbcTemplate.query(
-				"select * from user where role like 'prof%'", new UserMapper());
-
+		return this.userDao.getAllProf();
 	}
 
 	public List<User> getAllProfInter() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'prof-intervenant'",
-				new UserMapper());
+		return this.userDao.getAllProfInter();
 	}
 
 	public List<User> getAllProfPrinc() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'prof-principal'",
-				new UserMapper());
+		return this.userDao.getAllProfPrinc();
 	}
 
 	public List<User> getAllEleve() {
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'eleve'", new UserMapper());
+		return this.userDao.getAllEleve();
 	}
 
 	public List<User> getAllEleveByClasse() {
-		return this.jdbcTemplate
-				.query("select user.*, sum(dctap.dureeAP) as dureeTotal "
-						+ "from user "
-						+ "left join dctap on dctap.idEleve = user.id and (dctap.Etat = 1 or dctap.Etat = 32) "
-						+ "left join classe on classe.id = user.idClasse where user.role = 'eleve'"
-						+ "group by user.id order by dureeTotal DESC, user.nom",
-						new UserMapper());
+		return this.userDao.getAllEleveByClasse();
 	}
 
 	public List<User> getAllEleveByPP(User user) {
-		Long id = user.getId();
-		return this.jdbcTemplate
-				.query("select * from user where idClasse in (select idClasse from prof_principal where idUser ="
-						+ id + ")", new UserMapper());
+		return this.userDao.getAllEleveByPP(user);
 	}
 
 	public User getUserById(Long id) {
-		User user;
-		try {
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where id = ?", new Object[] { id },
-					new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
+		return this.userDao.getUserById(id);
 	}
 
 	public User addUser(User user) {
-		String nom = user.getNom();
-		String prenom = user.getPrenom();
-		String login;
-		if ((user.getPrenom().charAt(0) + user.getNom()).length() >= 6) {
-			login = (user.getPrenom().charAt(0) + user.getNom()).toLowerCase();
-		} else if ((user.getPrenom().charAt(0) + user.getNom()).length() == 5) {
-			login = (user.getPrenom().charAt(0) + "_" + user.getNom())
-					.toLowerCase();
-		} else if ((user.getPrenom() + user.getNom()).length() < 6) {
-			login = (user.getPrenom() + "_" + user.getNom()).toLowerCase();
-
-		} else {
-			login = (user.getPrenom() + user.getNom()).toLowerCase();
-		}
-		if (login.length() > 10) {
-			login = login.substring(0, 10);
-		}
-		if (login.contains('é' + "") || login.contains('è' + "")) {
-			login = login.replace('é', 'e');
-			login = login.replace('è', 'e');
-		}
-		if (login.contains('à' + "") || login.contains('â' + "")) {
-			login = login.replace('à', 'a');
-			login = login.replace('â', 'a');
-		}
-		if (login.contains("'" + "")) {
-			login = login.replace("'", "");
-		}
-		String mail = user.getMail();
-		try {
-			User user2 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login like "
-									+ "'"
-									+ login
-									+ "%'"
-									+ " and nom = ? and prenom = ? order by id desc limit 0,1",
-							new Object[] { nom, prenom }, new UserMapper());
-
-			if (user2 != null) {
-				int max = 2;
-				String log = user2.getLogin();
-				String sNb = log.charAt(log.length() - 1) + "";
-
-				if (isInteger(sNb)) {
-					int nb = Integer.parseInt(sNb);
-					max = nb + 1;
-				}
-				String sMax = String.valueOf(max);
-				login += sMax;
-			}
-		} catch (EmptyResultDataAccessException e) {
-
-		}
-		String mdp = generate(5);
-		String hash = getEncodedPassword(mdp);
-		String role = user.getRole();
-		int classe = 0;
-		if (role.equals("eleve"))
-			classe = user.getClasse().getId();
-
-		User user3;
-
-		if (role.equals("prof-principal")) {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp,hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									null, mail });
-			user3 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-							new Object[] { login, mdp }, new UserMapper());
-			Long idUser = user3.getId();
-
-			for (int i = 0; i < user.getLesClasses().length; i++) {
-				this.jdbcTemplate
-						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
-								new Object[] { idUser, user.getLesClasses()[i] });
-			}
-		} else if (!role.equals("eleve")) {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									null, mail });
-		} else {
-			this.jdbcTemplate
-					.update("insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
-							new Object[] { nom, prenom, login, mdp, hash, role,
-									classe, mail });
-		}
-
-		if (role.startsWith("prof")) {
-			user3 = this.jdbcTemplate
-					.queryForObject(
-							"select * from user where login = ? and mdp = ? order by id desc limit 0,1",
-							new Object[] { login, mdp }, new UserMapper());
-			this.jdbcTemplate
-					.update("update user set idDiscipline = ? where id = ?",
-							new Object[] { user.getDiscipline().getId(),
-									user3.getId() });
-		}
-
-		User userInfo = new User();
-		userInfo.setLogin(login);
-		userInfo.setPass(mdp);
-		return userInfo;
-
-	}
-
-	public boolean isInteger(String s) {
-		try {
-			Integer.parseInt(s);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
-
-	public String generate(int length) {
-		String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-		String pass = "";
-		for (int x = 0; x < length; x++) {
-			int i = (int) Math.floor(Math.random() * 36); // Si tu supprimes des
-															// lettres tu
-															// diminues ce nb
-			pass += chars.charAt(i);
-		}
-		return pass;
-	}
-
-	public static String getEncodedPassword(String key) {
-		byte[] uniqueKey = key.getBytes();
-		byte[] hash = null;
-		try {
-			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		StringBuffer hashString = new StringBuffer();
-		for (int i = 0; i < hash.length; ++i) {
-			String hex = Integer.toHexString(hash[i]);
-			if (hex.length() == 1) {
-				hashString.append('0');
-				hashString.append(hex.charAt(hex.length() - 1));
-			} else {
-				hashString.append(hex.substring(hex.length() - 2));
-			}
-		}
-		return hashString.toString();
+		return this.userDao.addUser(user);
 	}
 
 	public void updatePass(User user) {
-		Long id = user.getId();
-		String pass = user.getPass();
-		String hash = getEncodedPassword(pass);
-
-		this.jdbcTemplate.update("update user set hash = ? where id = ?",
-				new Object[] { hash, id });
-
+		this.userDao.updatePass(user);
 	}
 
 	public void updateUser(User user) {
-		Long id = user.getId();
-		String nom = user.getNom();
-		String prenom = user.getPrenom();
-		String role = user.getRole();
-		int idClasse = 0;
-		if (role.equals("eleve")) {
-			idClasse = user.getClasse().getId();
-		}
-		String login = user.getLogin();
-		String pass = user.getPass();
-		String hash = getEncodedPassword(pass);
-		String mail = user.getMail();
-		int dis = 0;
-		if (role.startsWith("prof")) {
-			dis = user.getDiscipline().getId();
-		}
-
-		this.jdbcTemplate.update("delete from prof_principal where idUser = ?",
-				new Object[] { id });
-
-		if (role.equals("prof-principal")) {
-			for (int i = 0; i < user.getLesClasses().length; i++) {
-				this.jdbcTemplate
-						.update("insert into prof_principal(idUser,idClasse) values(?,?)",
-								new Object[] { id, user.getLesClasses()[i] });
-			}
-		}
-		if (role.equals("eleve")) {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?,hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, idClasse, login,
-									hash, mail, null, id });
-		} else if (role.equals("admin")) {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, null, login,
-									hash, mail, null, id });
-		} else {
-			this.jdbcTemplate
-					.update("update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
-							new Object[] { nom, prenom, role, null, login,
-									hash, mail, dis, id });
-		}
-
+		this.userDao.updateUser(user);
 	}
 
 	public void updateProfil(User user) {
-		String login = user.getLogin();
-		String hash = user.getHash();
-		String mail = user.getMail();
-		Long id = user.getId();
-		this.jdbcTemplate.update(
-				"update user set login = ?, hash = ?, mail = ? where id = ?",
-				new Object[] { login, hash, mail, id });
+		this.userDao.updateProfil(user);
 	}
 
+	// TODO ne fonctionne pas...
 	public void deleteUser(User user) {
-		Long id = user.getId();
-
-		if (user.getRole().equals("prof-principal")) {
-			this.jdbcTemplate
-					.update("delete from prof_principal where idUser = ? and idClasse = ?",
-							new Object[] { id, user.getClasse().getId() });
-		}
-		this.jdbcTemplate.update("delete from user where id = ?",
-				new Object[] { id });
+		this.userDao.deleteUser(user);
 
 	}
 
 	public List<AccPersonalise> getAllAPForAdmin() {
-		return this.jdbcTemplate.query(
-				"select * from ap where origineEtat = 0", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForAdmin();
 	}
 
 	public List<AccPersonalise> getAllAPForProf() {
-		User user = UtilSession.getUserInSession();
-		Long id = user.getId();
-		return this.jdbcTemplate
-				.query("select distinct ap.id, ap.libelle, ap.origineEtat, ap.idUser from ap, dctap where origineEtat = 0 or (origineEtat = 1 and dctap.idAP = ap.id and dctap.idEleve = ap.idUser and dctap.idProf = "
-						+ id + ")", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForProf();
 	}
 
 	public List<AccPersonalise> getAllAPForEleve() {
-		User user = UtilSession.getUserInSession();
-		Long id = user.getId();
-		return this.jdbcTemplate.query(
-				"select * from ap where origineEtat = 0 or (origineEtat = 1 and idUser = "
-						+ id + ")", new AccMapper());
+		return this.accPersonnaliseDao.getAllAPForEleve();
 	}
 
 	/*
 	 * Ancienne requête, la nouvelle ne marche pas chez moi un modif de la base
 	 * de données ??
-	 * 
-	 * 
 	 * 
 	 * 
 	 * public List<AccPersonalise> getAllAP() { User user =
@@ -466,120 +223,122 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	 */
 
 	public AccPersonalise getAPById(int id) {
-		AccPersonalise acc;
-		try {
-			acc = this.jdbcTemplate.queryForObject(
-					"select * from ap where id = ?", new Object[] { id },
-					new AccMapper());
-		} catch (EmptyResultDataAccessException e) {
-			acc = null;
-		}
-
-		return acc;
+		return this.accPersonnaliseDao.getAPById(id);
 	}
 
 	public AccPersonalise getAPByNom(String nom) {
-		AccPersonalise acc;
-		try {
-			acc = this.jdbcTemplate.queryForObject(
-					"select * from ap where libelle = ?", new Object[] { nom },
-					new AccMapper());
-		} catch (EmptyResultDataAccessException e) {
-			acc = null;
-		}
-
-		return acc;
+		return this.accPersonnaliseDao.getAPByNom(nom);
 	}
 
 	public void addAP(AccPersonalise ap) {
-		String libelle = ap.getNom();
-		int origineEtat = ap.getOrigineEtat();
-		Long idUser = ap.getIdUser();
-
-		this.jdbcTemplate.update(
-				"insert into ap(libelle, origineEtat, idUser) values(?,?,?)",
-				new Object[] { libelle, origineEtat, idUser });
-
+		this.accPersonnaliseDao.addAP(ap);
 	}
 
 	public void upDateAP(AccPersonalise ap) {
-		int id = ap.getId();
-		String libelle = ap.getNom();
-		int origineEtat = ap.getOrigineEtat();
-
-		this.jdbcTemplate.update(
-				"update ap set libelle = ?, origineEtat = ? where id = ?",
-				new Object[] { libelle, origineEtat, id });
-
+		this.accPersonnaliseDao.upDateAP(ap);
 	}
 
 	public void deleteAP(AccPersonalise ap) {
-		int id = ap.getId();
-		this.jdbcTemplate.update("delete from ap where id = ?",
-				new Object[] { id });
+		this.accPersonnaliseDao.deleteAP(ap);
 	}
 
 	public List<AccPersonalise> getApByType() {
-		return this.jdbcTemplate
-				.query("select dctap.idEleve as idEleve, count(dctap.id) as apByType, ap.* from dctap, ap where dctap.idAP = ap.id and (dctap.Etat = 1 or dctap.Etat = 5) group by dctap.idEleve, ap.libelle",
-						new AccMapper());
+		return this.accPersonnaliseDao.getApByType();
 	}
 
 	public List<Classe> getAllClasse() {
-		return this.jdbcTemplate
-				.query("select * from classe where libelle != 'null' order by libelle",
-						new ClasseMapper());
+		return this.classeDao.getAllClasse();
 	}
 
 	public Classe getClasseById(int id) {
-		Classe classe;
-		try {
-			classe = this.jdbcTemplate.queryForObject(
-					"select * from classe where id = ?", new Object[] { id },
-					new ClasseMapper());
-		} catch (EmptyResultDataAccessException e) {
-			classe = null;
-		}
-
-		return classe;
+		return this.classeDao.getClasseById(id);
 	}
 
 	public int countClasses() {
-		int count = this.jdbcTemplate.queryForInt(
-				"select count(id) from classe order by libelle",
-				new Object[] {});
-		return count;
+		return this.classeDao.countClasses();
 	}
 
 	public List<Classe> getAllClasseByProf(Long id) {
-		return this.jdbcTemplate.query(
-				"select classe.* from user, classe, prof_principal p where user.id = "
-						+ id + " and p.idClasse = classe.id and p.idUser = "
-						+ id + " order by libelle", new ClasseMapper());
+		return this.classeDao.getAllClasseByProf(id);
 	}
 
 	public void addClasse(Classe classe) {
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update("insert into classe(libelle) values(?)",
-				new Object[] { libelle });
-
+		this.classeDao.addClasse(classe);
 	}
 
 	public void upDateClasse(Classe classe) {
-		int id = classe.getId();
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update("update classe set libelle = ? where id = ?",
-				new Object[] { libelle, id });
-
+		this.classeDao.upDateClasse(classe);
 	}
 
 	public void deleteClasse(Classe classe) {
-		int id = classe.getId();
-		String libelle = classe.getNom();
-		this.jdbcTemplate.update(
-				"delete from classe where id = ? and libelle = ?",
-				new Object[] { id, libelle });
+		this.classeDao.deleteClasse(classe);
 
+	}
+
+	public User getUserByLogin(String login, String pw) {
+		return this.searchUserDao.getUserByLogin(login, pw);
+	}
+
+	public List<User> searchEleve(String queryNomEleve) {
+		return this.searchUserDao.searchEleve(queryNomEleve);
+	}
+
+	public List<User> searchProf(String queryNomProf) {
+		return this.searchUserDao.searchProf(queryNomProf);
+	}
+
+	public List<User> searchClasse(String queryClasse) {
+		return this.searchUserDao.searchClasse(queryClasse);
+	}
+
+	// public List<DemandeValidationConsoTempsAccPers> searchDctap(
+	// UserSearchCriteria userSearchCriteria) {
+	// return this.searchUserDao.searchDctap(userSearchCriteria);
+	// }
+	//
+	// public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
+	// UserSearchCriteria userSearchCriteria) {
+	// return this.searchUserDao.searchDctapClasse(userSearchCriteria);
+	// }
+
+	public User getUser(Long id) {
+		return this.searchUserDao.getUser(id);
+	}
+
+	public void logUser(User user) {
+		this.searchUserDao.logUser(user);
+	}
+
+	public List<Discipline> getAllDiscipline() {
+		return this.disciplineDao.getAllDiscipline();
+	}
+
+	public Discipline getDisciplineById(int id) {
+		return this.disciplineDao.getDisciplineById(id);
+	}
+
+	public void addDiscipline(Discipline dis) {
+		this.disciplineDao.addDiscipline(dis);
+	}
+
+	public void upDateDiscipline(Discipline dis) {
+		this.disciplineDao.upDateDiscipline(dis);
+	}
+
+	public void deleteDiscipline(Discipline dis) {
+		this.disciplineDao.deleteDiscipline(dis);
+	}
+
+	// TODO trouver un tri pour les méthodes suivantes.
+
+	public List<Role> getAllRole() {
+		List<Role> listeRoles = new ArrayList<Role>();
+		listeRoles.add(new Role(1, "eleve"));
+		listeRoles.add(new Role(2, "prof-intervenant"));
+		listeRoles.add(new Role(3, "prof-principal"));
+		listeRoles.add(new Role(4, "admin"));
+
+		return listeRoles;
 	}
 
 	public String getCurrentAnneeScolaire() {
@@ -597,238 +356,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<String> getAllAnneeScolaire() {
 		return null;
-	}
-
-	public User getUserByLogin(String login, String pw) {
-		User user;
-		try {
-			String hash = getEncodedPassword(pw);
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where login = ? and hash = ?",
-					new Object[] { login, hash }, new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
-	}
-
-	// classe pour passage d'une ligne d'une table à un objet
-	private static final class UserMapper implements RowMapper<User> {
-		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-			User user = new User();
-			user.setId(rs.getLong("id"));
-			user.setPrenom(rs.getString("prenom"));
-			user.setNom(rs.getString("nom"));
-			user.setRole(rs.getString("role"));
-			user.setHash(rs.getString("hash"));
-			try {
-				user.setDureeTotal(rs.getInt("dureeTotal"));
-			} catch (SQLException ex) {
-
-			}
-
-			DBManagerGeTAP manager = new DBManagerGeTAP();
-			Classe classe = manager.getClasseById(rs.getInt("idClasse"));
-			Discipline dis = manager.getDisciplineById(rs
-					.getInt("idDiscipline"));
-			user.setDiscipline(dis);
-			user.setClasse(classe);
-			user.setLogin(rs.getString("login"));
-			user.setPass(rs.getString("mdp"));
-			user.setMail(rs.getString("mail"));
-			return user;
-		}
-	}
-
-	private static final class ClasseMapper implements RowMapper<Classe> {
-		public Classe mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Classe classe = new Classe();
-			classe.setId(rs.getInt("id"));
-			classe.setNom(rs.getString("libelle"));
-			return classe;
-		}
-	}
-
-	private static final class ArrayStringMapper implements
-			RowMapper<ArrayList<String>> {
-		public ArrayList<String> mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
-			ArrayList<String> string = new ArrayList<String>();
-			string.add(rs.getString("img"));
-			string.add(rs.getString("logo"));
-			string.add(rs.getString("titre"));
-			string.add(rs.getString("texte"));
-			return string;
-		}
-	}
-
-	private static final class DisciplineMapper implements
-			RowMapper<Discipline> {
-		public Discipline mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Discipline dis = new Discipline();
-			dis.setId(rs.getInt("id"));
-			dis.setNom(rs.getString("libelle"));
-			return dis;
-		}
-	}
-
-	private static final class AccMapper implements RowMapper<AccPersonalise> {
-		public AccPersonalise mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
-			AccPersonalise acc = new AccPersonalise();
-			acc.setId(rs.getInt("id"));
-			acc.setNom(rs.getString("libelle"));
-			acc.setOrigineEtat(rs.getInt("origineEtat"));
-			acc.setIdUser(rs.getLong("idUser"));
-			try {
-				acc.setCount(rs.getInt("apByType"));
-				acc.setIdEleve(rs.getInt("idEleve"));
-			} catch (SQLException ex) {
-
-			}
-			return acc;
-		}
-	}
-
-	private static final class DemandeMapper implements
-			RowMapper<DemandeValidationConsoTempsAccPers> {
-		public DemandeValidationConsoTempsAccPers mapRow(ResultSet rs,
-				int rowNum) throws SQLException {
-			DemandeValidationConsoTempsAccPers dctap = new DemandeValidationConsoTempsAccPers();
-			dctap.setId(rs.getLong("id"));
-			dctap.setAnneeScolaire(rs.getString("anneeScolaire"));
-			dctap.setDateAction(rs.getDate("dateAction"));
-			dctap.setMinutes(rs.getInt("dureeAP"));
-			dctap.setEtat(rs.getInt("Etat"));
-
-			Long idProf = rs.getLong("idProf");
-			Long idEleve = rs.getLong("idEleve");
-			int idAP = rs.getInt("idAP");
-
-			DBManagerGeTAP manager = new DBManagerGeTAP();
-			User prof = manager.getUserById(idProf);
-			User eleve = manager.getUserById(idEleve);
-			AccPersonalise ap = manager.getAPById(idAP);
-
-			dctap.setProf(prof);
-			dctap.setEleve(eleve);
-			dctap.setAccPers(ap);
-
-			return dctap;
-		}
-	}
-
-	private static final class StringMapper implements RowMapper<String> {
-		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-			String annee = null;
-			annee = rs.getString("anneeScolaire");
-
-			return annee;
-		}
-	}
-
-	public List<Role> getAllRole() {
-		List<Role> listeRoles = new ArrayList<Role>();
-		listeRoles.add(new Role(1, "eleve"));
-		listeRoles.add(new Role(2, "prof-intervenant"));
-		listeRoles.add(new Role(3, "prof-principal"));
-		listeRoles.add(new Role(4, "admin"));
-
-		return listeRoles;
-	}
-
-	public List<User> searchEleve(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user where role = 'eleve' and nom like " + "'"
-						+ query + "%'", new UserMapper());
-	}
-
-	public List<User> searchProf(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user where role like 'prof%' and nom like "
-						+ "'" + query + "%'", new UserMapper());
-	}
-
-	public List<User> searchClasse(UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate.query(
-				"select * from user u, classe c where u.idClasse = c.id and c.libelle = "
-						+ "'" + query + "'", new UserMapper());
-	}
-
-	public List<DemandeValidationConsoTempsAccPers> searchDctap(
-			UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate
-				.query("select * from user u, dctap d where (u.id = d.idEleve or u.id = d.idProf) and nom like "
-						+ "'" + query + "%'", new DemandeMapper());
-	}
-
-	public List<DemandeValidationConsoTempsAccPers> searchDctapClasse(
-			UserSearchCriteria userSearchCriteria) {
-		String query = userSearchCriteria.getQuery();
-		return this.jdbcTemplate
-				.query("SELECT dctap.* FROM classe, user, dctap  where classe.id=user.idClasse and user.id=dctap.idEleve and classe.libelle = "
-						+ "'" + query + "'", new DemandeMapper());
-	}
-
-	public User getUser(Long id) {
-		User user;
-		try {
-			user = this.jdbcTemplate.queryForObject(
-					"select * from user where id = ?", new Object[] { id },
-					new UserMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			user = null;
-		}
-		return user;
-	}
-
-	public List<Discipline> getAllDiscipline() {
-		return this.jdbcTemplate.query(
-				"select * from discipline order by libelle",
-				new DisciplineMapper());
-	}
-
-	public Discipline getDisciplineById(int id) {
-		Discipline dis;
-		try {
-			dis = this.jdbcTemplate.queryForObject(
-					"select * from discipline where id = ?",
-					new Object[] { id }, new DisciplineMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			dis = null;
-		}
-		return dis;
-	}
-
-	public void addDiscipline(Discipline dis) {
-		String libelle = dis.getNom();
-
-		this.jdbcTemplate.update("insert into discipline(libelle) values(?)",
-				new Object[] { libelle });
-
-	}
-
-	public void upDateDiscipline(Discipline dis) {
-		int id = dis.getId();
-		String libelle = dis.getNom();
-
-		this.jdbcTemplate.update(
-				"update discipline set libelle = ? where id = ?", new Object[] {
-						libelle, id });
-
-	}
-
-	public void deleteDiscipline(Discipline dis) {
-		int id = dis.getId();
-		this.jdbcTemplate.update("delete from discipline where id = ?",
-				new Object[] { id });
 	}
 
 	public void addAccueil(String img, String logo, String titre, String texte) {
@@ -857,15 +384,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			infos = null;
 		}
 		return infos;
-	}
-
-	public void logUser(User user) {
-		String classe = (user.getClasse() == null) ? "N/A" : user.getClasse()
-				.getNom();
-		this.jdbcTemplate
-				.update("insert into log(nom, prenom, role, classe) values (?, ?, ?, ?)",
-						new Object[] { user.getNom(), user.getPrenom(),
-								user.getRole(), classe });
 	}
 
 }

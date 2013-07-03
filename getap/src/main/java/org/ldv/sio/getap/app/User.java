@@ -14,7 +14,10 @@ public class User {
 	private String pass;
 	private String hash;
 	private String mail;
+
+	// TODO : à changer en tableau de type Classe
 	private String[] lesClasses;
+
 	private Discipline discipline;
 	private int dureeTotal;
 

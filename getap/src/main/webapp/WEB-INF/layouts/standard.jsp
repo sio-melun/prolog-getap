@@ -1,3 +1,4 @@
+<%@page import="com.itextpdf.text.log.SysoLogger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
@@ -75,11 +76,13 @@
    				$("#accordion").accordion({ collapsible: true, activate: false, autoHeight:false});
   			}); */
   			
+  			
   			$(function(){
   			// Accordion
   			$("#accordion").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion3").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
+  			
   			});
   		</script>
   		
