@@ -333,10 +333,14 @@ public class UserDAOJdbc implements IFUserDAO {
     Long id = user.getId();
 
     if (user.getRole().equals("prof-principal")) {
-      this.jdbcTemplate.update(
-          "delete from prof_principal where idUser = ? and idClasse = ?",
-          new Object[] { id, user.getClasse().getId() });
+      this.jdbcTemplate.update("delete from prof_principal where idUser = ? ",
+          new Object[] { id });
     }
+
+    this.jdbcTemplate.update(
+        "update from dctap set idProf = null where idProf = ?",
+        new Object[] { id });
+
     this.jdbcTemplate.update("delete from user where id = ?",
         new Object[] { id });
 
