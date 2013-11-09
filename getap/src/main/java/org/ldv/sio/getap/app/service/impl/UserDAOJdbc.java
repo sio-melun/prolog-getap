@@ -338,7 +338,7 @@ public class UserDAOJdbc implements IFUserDAO {
           new Object[] { id });
     }
 
-    jdbcTemplate.update("update from dctap set idProf = null where idProf = ?",
+    jdbcTemplate.update("update dctap set idProf = null where idProf = ?",
         new Object[] { id });
 
     jdbcTemplate.update("delete from user where id = ?", new Object[] { id });
