@@ -25,7 +25,7 @@ public class UserDAOJdbc implements IFUserDAO {
 
   @Autowired
   public void setDataSource(DataSource dataSource) {
-    this.jdbcTemplate = new JdbcTemplate(dataSource);
+    jdbcTemplate = new JdbcTemplate(dataSource);
   }
 
   // classe pour passage d'une ligne d'une table à un objet
@@ -67,12 +67,10 @@ public class UserDAOJdbc implements IFUserDAO {
   }
 
   public String generate(int length) {
-    String chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+    String chars = "abcdefghijkmnopqrstuvwxyz1234567890";
     String pass = "";
     for (int x = 0; x < length; x++) {
-      int i = (int) Math.floor(Math.random() * 36); // Si tu supprimes des
-      // lettres tu
-      // diminues ce nb
+      int i = (int) Math.floor(Math.random() * chars.length());
       pass += chars.charAt(i);
     }
     return pass;
@@ -100,32 +98,32 @@ public class UserDAOJdbc implements IFUserDAO {
   }
 
   public List<User> getAllProf() {
-    return this.jdbcTemplate.query(
+    return jdbcTemplate.query(
         "select * from user where hash <> '' AND role like 'prof%'",
         new UserMapper());
 
   }
 
   public List<User> getAllProfInter() {
-    return this.jdbcTemplate.query(
+    return jdbcTemplate.query(
         "select * from user where hash <> '' AND role = 'prof-intervenant'",
         new UserMapper());
   }
 
   public List<User> getAllProfPrinc() {
-    return this.jdbcTemplate.query(
+    return jdbcTemplate.query(
         "select * from user where hash <> '' AND role = 'prof-principal'",
         new UserMapper());
   }
 
   public List<User> getAllEleve() {
-    return this.jdbcTemplate.query(
+    return jdbcTemplate.query(
         "select * from user where hash <> '' AND role = 'eleve'",
         new UserMapper());
   }
 
   public List<User> getAllEleveByClasse() {
-    return this.jdbcTemplate
+    return jdbcTemplate
         .query(
             "select user.*, sum(dctap.dureeAP) as dureeTotal "
                 + "from user "
@@ -137,7 +135,7 @@ public class UserDAOJdbc implements IFUserDAO {
 
   public List<User> getAllEleveByPP(User user) {
     Long id = user.getId();
-    return this.jdbcTemplate
+    return jdbcTemplate
         .query(
             "select * from user where hash <> '' AND idClasse in (select idClasse from prof_principal where idUser ="
                 + id + ")", new UserMapper());
@@ -146,9 +144,8 @@ public class UserDAOJdbc implements IFUserDAO {
   public User getUserById(Long id) {
     User user;
     try {
-      user = this.jdbcTemplate.queryForObject(
-          "select * from user where id = ?", new Object[] { id },
-          new UserMapper());
+      user = jdbcTemplate.queryForObject("select * from user where id = ?",
+          new Object[] { id }, new UserMapper());
 
     } catch (EmptyResultDataAccessException e) {
       user = null;
@@ -186,7 +183,7 @@ public class UserDAOJdbc implements IFUserDAO {
     }
     String mail = user.getMail();
     try {
-      User user2 = this.jdbcTemplate.queryForObject(
+      User user2 = jdbcTemplate.queryForObject(
           "select * from user where login like " + "'" + login + "%'"
               + " and nom = ? and prenom = ? order by id desc limit 0,1",
           new Object[] { nom, prenom }, new UserMapper());
@@ -216,39 +213,39 @@ public class UserDAOJdbc implements IFUserDAO {
     User user3;
 
     if (role.equals("prof-principal")) {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "insert into user(nom,prenom,login,mdp,hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
               new Object[] { nom, prenom, login, mdp, hash, role, null, mail });
-      user3 = this.jdbcTemplate
+      user3 = jdbcTemplate
           .queryForObject(
               "select * from user where login = ? and mdp = ? order by id desc limit 0,1",
               new Object[] { login, mdp }, new UserMapper());
       Long idUser = user3.getId();
 
       for (int i = 0; i < user.getLesClasses().length; i++) {
-        this.jdbcTemplate.update(
+        jdbcTemplate.update(
             "insert into prof_principal(idUser,idClasse) values(?,?)",
             new Object[] { idUser, user.getLesClasses()[i] });
       }
     } else if (!role.equals("eleve")) {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
               new Object[] { nom, prenom, login, mdp, hash, role, null, mail });
     } else {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "insert into user(nom,prenom,login,mdp, hash, role,idClasse, mail) values(?,?,?,?,?,?,?,?)",
               new Object[] { nom, prenom, login, mdp, hash, role, classe, mail });
     }
 
     if (role.startsWith("prof")) {
-      user3 = this.jdbcTemplate
+      user3 = jdbcTemplate
           .queryForObject(
               "select * from user where login = ? and mdp = ? order by id desc limit 0,1",
               new Object[] { login, mdp }, new UserMapper());
-      this.jdbcTemplate.update("update user set idDiscipline = ? where id = ?",
+      jdbcTemplate.update("update user set idDiscipline = ? where id = ?",
           new Object[] { user.getDiscipline().getId(), user3.getId() });
     }
 
@@ -259,13 +256,17 @@ public class UserDAOJdbc implements IFUserDAO {
 
   }
 
+  /**
+   * rétablit le mot de passe initial de l'utilisateur (écrase l'ancien dans le
+   * cas où il aurait été modifié par l'utilisateur)
+   */
   public void updatePass(User user) {
     Long id = user.getId();
     String pass = user.getPass();
     String hash = getEncodedPassword(pass);
 
-    this.jdbcTemplate.update("update user set hash = ? where id = ?",
-        new Object[] { hash, id });
+    jdbcTemplate.update("update user set hash = ? where id = ?", new Object[] {
+        hash, id });
 
   }
 
@@ -287,30 +288,30 @@ public class UserDAOJdbc implements IFUserDAO {
       dis = user.getDiscipline().getId();
     }
 
-    this.jdbcTemplate.update("delete from prof_principal where idUser = ?",
+    jdbcTemplate.update("delete from prof_principal where idUser = ?",
         new Object[] { id });
 
     if (role.equals("prof-principal")) {
       for (int i = 0; i < user.getLesClasses().length; i++) {
-        this.jdbcTemplate.update(
+        jdbcTemplate.update(
             "insert into prof_principal(idUser,idClasse) values(?,?)",
             new Object[] { id, user.getLesClasses()[i] });
       }
     }
     if (role.equals("eleve")) {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?,hash = ?, mail = ?, idDiscipline= ? where id = ?",
               new Object[] { nom, prenom, role, idClasse, login, hash, mail,
                   null, id });
     } else if (role.equals("admin")) {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
               new Object[] { nom, prenom, role, null, login, hash, mail, null,
                   id });
     } else {
-      this.jdbcTemplate
+      jdbcTemplate
           .update(
               "update user set nom = ?, prenom = ?, role = ?, idClasse = ?, login = ?, hash = ?, mail = ?, idDiscipline= ? where id = ?",
               new Object[] { nom, prenom, role, null, login, hash, mail, dis,
@@ -324,7 +325,7 @@ public class UserDAOJdbc implements IFUserDAO {
     String hash = user.getHash();
     String mail = user.getMail();
     Long id = user.getId();
-    this.jdbcTemplate.update(
+    jdbcTemplate.update(
         "update user set login = ?, hash = ?, mail = ? where id = ?",
         new Object[] { login, hash, mail, id });
   }
@@ -333,16 +334,14 @@ public class UserDAOJdbc implements IFUserDAO {
     Long id = user.getId();
 
     if (user.getRole().equals("prof-principal")) {
-      this.jdbcTemplate.update("delete from prof_principal where idUser = ? ",
+      jdbcTemplate.update("delete from prof_principal where idUser = ? ",
           new Object[] { id });
     }
 
-    this.jdbcTemplate.update(
-        "update from dctap set idProf = null where idProf = ?",
+    jdbcTemplate.update("update from dctap set idProf = null where idProf = ?",
         new Object[] { id });
 
-    this.jdbcTemplate.update("delete from user where id = ?",
-        new Object[] { id });
+    jdbcTemplate.update("delete from user where id = ?", new Object[] { id });
 
   }
 

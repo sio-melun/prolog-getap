@@ -50,7 +50,7 @@
 	</h3>
 	<div>
 		<table>
-			<tr>
+			<tr><td>
 				<form:form modelAttribute="userSearchCriteria" action="dosearchUser"
 					method="get">
 					<form:errors path="*" cssClass="errors" />
@@ -69,8 +69,8 @@
 						</fieldset>
 					</div>
 				</form:form>
-			</tr>
-			<tr>
+			</td></tr>
+			<tr><td>
 				<form:form modelAttribute="userSearchCriteria" action="dosearchProf"
 					method="get">
 					<form:errors path="*" cssClass="errors" />
@@ -89,8 +89,8 @@
 						</fieldset>
 					</div>
 				</form:form>
-			</tr>
-			<tr>
+			</td></tr>
+			<tr><td>
 				<form:form modelAttribute="userSearchCriteria"
 					action="dosearchForClasse" method="get">
 					<form:errors path="*" cssClass="errors" />
@@ -110,7 +110,7 @@
 						</fieldset>
 					</div>
 				</form:form>
-			</tr>
+			</td></tr>
 		</table>
 	</div>
 	<h3>
@@ -118,7 +118,7 @@
 	</h3>
 	<div>
 		<table>
-			<tr>
+			<tr><td>
 				<table class="display dataTable">
 					<thead>
 						<tr class="header">
@@ -153,7 +153,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</tr>
+			</td></tr>
 		</table>
 	</div>
 	<h3>
@@ -161,7 +161,7 @@
 	</h3>
 	<div>
 		<table>
-			<tr>
+			<tr><td>
 				<table class="display dataTable">
 					<thead>
 						<tr class="header">
@@ -195,7 +195,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</tr>
+			</td></tr>
 		</table>
 	</div>
 </div>

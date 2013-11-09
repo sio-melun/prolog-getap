@@ -10,12 +10,10 @@
 
 	<div class="section">
 		<fieldset>
-			<div class="form-row">
-				<label for="id">ID : </label>
+			   <label> </label>
 				<div class="input">
-					<form:input path="id" disabled="true" />
+					<form:hidden path="id" disabled="true" />
 				</div>
-			</div>
 			<div class="form-row">
 				<label for="prenom">Prénom : </label>
 				<div class="input">
@@ -65,9 +63,8 @@
 					<table>
 						<%
 							int begin = 0;
-								int end = 3;
-
-								for (int i = 0; i < 50; i++) {
+							int end = 3;
+							for (int i = 0; i < 50; i++) {
 						%>
 						<tr>
 
@@ -79,12 +76,20 @@
 										value="${classe.id}" id="${classe.nom}" checked="checked"/></td>
 									</c:if>
 								</c:forEach>
+								
+								
+								<%-- TODO: pourquoi cette deuxième itération ? ne pouvons nous
+								           pas gérer cpt dans la première boucle ?
+								--%>
+								
 								<% int cpt = 0; %>
 								<c:forEach items="${mesClasses}" var="maClasse">
 									<c:if test="${maClasse.nom == classe.nom}">
 											<% cpt++; %>
 									</c:if>
 								</c:forEach>
+								
+								
 								<c:set var="compteur" value="<%=cpt%>"/>
 								<c:if test="${compteur == 0}">
 									<td><form:checkbox path="classe" name="${classe.nom}"
@@ -99,8 +104,8 @@
 						</tr>
 						<%
 							begin += 4;
-									end += 4;
-								}
+							end += 4;
+						  }
 						%>
 					</table>
 				</div>
@@ -125,7 +130,7 @@
 			onmouseover="this.src='../../images/recycledHover.png';"
 			onmouseout="this.src='../../images/recycled.png';" />
 			<br>
-			<label for="recycled" id="lRecycled">Réinitialiser le mot de passe</label>
+			<label for="recycled" id="lRecycled">Réinitialiser le mot de passe (<strong>${mdp}</strong>)</label>
 	</div>
 	<form:hidden path="id" />
 </form:form>

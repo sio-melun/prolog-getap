@@ -364,13 +364,13 @@ public class AdminController {
       bindResult.rejectValue("query", "required",
           "Entrez un critère de recherche valide");
     }
-    if (bindResult.hasErrors()) {
-      return "admin/searchUser";
-
-    } else {
-      model.addAttribute("users", manager.searchEleve(queryNomEleve));
-      return "admin/dosearchUser";
-    }
+    // if (bindResult.hasErrors()) {
+    // return "redirect:/app/admin/index";
+    //
+    // } else {
+    model.addAttribute("users", manager.searchEleve(queryNomEleve));
+    return "admin/dosearchUser";
+    // }
   }
 
   @RequestMapping(value = "dosearchProf", method = RequestMethod.GET)
@@ -382,12 +382,12 @@ public class AdminController {
       bindResult.rejectValue("query", "required",
           "Entrez un critère de recherche valide");
     }
-    if (bindResult.hasErrors()) {
-      return "admin/searchProf";
-    } else {
-      model.addAttribute("users", manager.searchProf(queryNomProf));
-      return "admin/dosearchUser";
-    }
+    // if (bindResult.hasErrors()) {
+    // return "redirect:/app/admin/index";
+    // } else {
+    model.addAttribute("users", manager.searchProf(queryNomProf));
+    return "admin/dosearchUser";
+    // }
   }
 
   @RequestMapping(value = "dosearchForClasse", method = RequestMethod.GET)
@@ -400,7 +400,7 @@ public class AdminController {
           "Entrez un critère de recherche valide");
     }
     if (bindResult.hasErrors()) {
-      return "admin/searchClasse";
+      return "redirect:/app/admin/index";
     } else {
       model.addAttribute("users", manager.searchClasse(queryClasse));
       return "admin/dosearchUser";
@@ -411,18 +411,16 @@ public class AdminController {
   public String editUserById(@RequestParam("id") String id,
       FormEditUser formUser, Model model) {
 
-    System.out.println("TEST id recu :" + formUser.getId());
+    // System.out.println("TEST id recu :" + formUser.getId());
 
     User currentUser = manager.getUserById(Long.valueOf(id));
     System.out.println(currentUser);
 
     formUser.setId(currentUser.getId());
-    System.out.println("TEST id : " + currentUser.getId());
+    System.out.println("editUserById : id = " + currentUser.getId());
     formUser.setNom(currentUser.getNom());
-    System.out.println("TEST nom : " + currentUser.getNom());
+    System.out.println("editUserById : nom = " + currentUser.getNom());
     formUser.setPrenom(currentUser.getPrenom());
-    System.out.println("TEST prenom : " + currentUser.getPrenom());
-    System.out.println("TEST role : " + currentUser.getRole());
     formUser.setRole(currentUser.getRole());
     model.addAttribute("fonction", currentUser.getRole());
     if (currentUser.getRole().startsWith("prof")) {
@@ -572,15 +570,15 @@ public class AdminController {
   @RequestMapping(value = "doEditPass", method = RequestMethod.POST)
   public String doEditPass(FormEditUser formUser, BindingResult bindResult,
       Model model) {
-    System.out.println("TEST :" + model);
+    // System.out.println("TEST :" + model);
 
     if (bindResult.hasErrors())
       return "admin/ajoutUsers";
     else {
       User user = manager.getUserById(Long.valueOf(formUser.getId()));
       manager.updatePass(user);
+      return "redirect:/app/admin/index";
     }
-    return "redirect:/app/admin/index";
   }
 
   @RequestMapping(value = "doPerso", method = RequestMethod.POST)
