@@ -477,14 +477,14 @@ public class AdminController {
   @RequestMapping(value = "delUser/{id}", method = RequestMethod.GET)
   public String deleteUserById(@PathVariable String id, Model model,
       HttpSession session) {
+
     User user = manager.getUserById(Long.valueOf(id));
 
     if (!user.getId().equals(null)) {
       manager.deleteUser(user);
       session.setAttribute("eleveDeleted", "DELETED");
     }
-
-    return "redirect:/app/admin/index";
+    return "redirect:/app/admin/dosearchProf?query=";
   }
 
   @RequestMapping(value = "ajoutUsers", method = RequestMethod.GET)
