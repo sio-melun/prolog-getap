@@ -435,7 +435,8 @@ public class AdminController {
     model.addAttribute("lesDisciplines", manager.getAllDiscipline());
     model.addAttribute("mesClasses",
         manager.getAllClasseByProf(currentUser.getId()));
-    model.addAttribute("mdp", currentUser.getPass());
+    // model.addAttribute("mdp", currentUser.getPass());
+    model.addAttribute("user", currentUser);
 
     return "admin/editUser";
   }
@@ -443,9 +444,9 @@ public class AdminController {
   @RequestMapping(value = "doEditUser", method = RequestMethod.POST)
   public String doeditUserById(FormEditUser formUser, BindingResult bindResult,
       Model model) {
-    System.out.println("TEST :" + formUser.getId());
-    System.out.println("TEST :" + model);
-    System.out.println("TEST role :" + formUser.getRole());
+    // System.out.println("TEST :" + formUser.getId());
+    // System.out.println("TEST :" + model);
+    // System.out.println("TEST role :" + formUser.getRole());
 
     if (bindResult.hasErrors()) {
       return "admin/editUser";
@@ -461,7 +462,7 @@ public class AdminController {
       userForUpdate.setPrenom(formUser.getPrenom());
       userForUpdate.setRole(formUser.getRoleNom());
       userForUpdate.setDiscipline(dis);
-      System.out.println("ROLE : " + formUser.getRoleNom());
+      // System.out.println("ROLE : " + formUser.getRoleNom());
       if (formUser.getRoleNom().equals("eleve")) {
         userForUpdate.setClasse(manager.getClasseById(formUser.getClasseId()));
       } else if (formUser.getRoleNom().equals("prof-principal")) {
@@ -469,8 +470,7 @@ public class AdminController {
       }
 
       manager.updateUser(userForUpdate);
-
-      return "admin/doEditUser";
+      return "redirect:/app/admin/index";
     }
   }
 

@@ -15,6 +15,12 @@
 					<form:hidden path="id" disabled="true" />
 				</div>
 			<div class="form-row">
+				<label for="login"> Login : </label>
+				<div class="input">
+					<form:input path="login" disabled="true"  value='${user.login}'/>
+				</div>
+			</div>
+			<div class="form-row">
 				<label for="prenom">Prénom : </label>
 				<div class="input">
 					<form:input path="prenom" />
@@ -62,21 +68,23 @@
 				<div>
 					<table>
 						<%
-							int begin = 0;
-							int end = 3;
-							for (int i = 0; i < 50; i++) {
+							int ligne = 0; 
 						%>
 						<tr>
-
-							<c:forEach items="${lesClasses}" var="classe" begin="<%=begin%>"
-								end="<%=end%>">
+							<c:forEach items="${lesClasses}" var="classe" >
+							   <% ligne++; %>
+							   <c:if test="${nbLigne % 4 == 0}"> 
+							   	  </tr><tr> 
+							   	</c:if> 
+							   
+							   <c:set var="nbLigne" value="<%=ligne%>" />
+							   
 								<c:forEach items="${mesClasses}" var="maClasse">
 									<c:if test="${maClasse.nom == classe.nom}">
-										<td><form:checkbox path="classe" name="${classe.nom}"
+									<td><form:checkbox path="classe" name="${classe.nom}"
 										value="${classe.id}" id="${classe.nom}" checked="checked"/></td>
 									</c:if>
-								</c:forEach>
-								
+								</c:forEach>								
 								
 								<%-- TODO: pourquoi cette deuxième itération ? ne pouvons nous
 								           pas gérer cpt dans la première boucle ?
@@ -88,25 +96,19 @@
 											<% cpt++; %>
 									</c:if>
 								</c:forEach>
-								
-								
+																
 								<c:set var="compteur" value="<%=cpt%>"/>
 								<c:if test="${compteur == 0}">
-									<td><form:checkbox path="classe" name="${classe.nom}"
+							        <td><form:checkbox path="classe" name="${classe.nom}"
 											value="${classe.id}" id="${classe.nom}" />
 									</td>
 								</c:if>
+								
 								<td><label for="${classe.nom}" class="checkbox">${classe.nom}</label>
 								</td>
-
 							</c:forEach>
-
 						</tr>
-						<%
-							begin += 4;
-							end += 4;
-						  }
-						%>
+						
 					</table>
 				</div>
 			</div>
@@ -125,12 +127,13 @@
 	<form:errors path="*" cssClass="errors" />
 	<div class="form-row">
 		<input type="image" name="recycled" id="recycled"
-			onclick="alert('mot de passe initial : ${mdp}')"
+			onclick="alert('mot de passe initial : ${user.pass}')"
 			src="../../images/recycled.png"
 			onmouseover="this.src='../../images/recycledHover.png';"
 			onmouseout="this.src='../../images/recycled.png';" />
 			<br>
-			<label for="recycled" id="lRecycled">Réinitialiser le mot de passe (<strong>${mdp}</strong>)</label>
+			<label for="recycled" id="lRecycled">Réinitialiser le mot de passe</label>
+			 <pre style="font-size: 150%">${user.pass}</pre>
 	</div>
 	<form:hidden path="id" />
 </form:form>
