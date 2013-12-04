@@ -8,7 +8,7 @@
 <title>Ajout utilisateur</title>
 </head>
 <body>
-	<form:form modelAttribute="formAjoutUser" action="doajout"
+	<form:form modelAttribute="formEditUser" action="doajout"
 		method="post">
 		<form:errors path="*" cssClass="errors" />
 		<h3 class="titre3">Ajout d'utilisateur</h3>
@@ -56,29 +56,27 @@
 					<label for="classeId">Les Classes :</label><br>
 					<div>
 						<table>
-							<%
-								int begin = 0;
-								int end = 3;
-							
-							 	for (int i=0;i<50;i++){ 
-							 %>
-									<tr>
+						<%
+							int ligne = 0; 
+						%>
+
+						<tr>
+							<c:forEach items="${lesClasses}" var="classe" >
+							   <% ligne++; %>
+							   <c:if test="${nbLigne % 4 == 0}"> 
+							   	  </tr><tr> 
+							   	</c:if> 
+							   	<c:set var="nbLigne" value="<%=ligne%>" />					
+									<td><form:checkbox path="classe" name="${classe.nom}"
+										value="${classe.id}" id="${classe.nom}" /></td>
 									
-										<c:forEach items="${lesClasses}" var="classe" begin="<%=begin%>" end="<%=end%>">
-											
-												<td>
-												<form:checkbox path="classe" name="${classe.nom}"
-														value="${classe.id}" id="${classe.nom}"/></td><td> <label for="${classe.nom}" class="checkbox">${classe.nom}</label></td>
-											
-										</c:forEach>
-										
-									</tr>
-							<% 
-									begin += 4; 
-									end +=4; 
-								}
-							%>
-						</table>		
+								
+								<td><label for="${classe.nom}" class="checkbox">${classe.nom}</label>
+								</td>
+							</c:forEach>
+						</tr>
+						
+					</table>
 					</div>
 				</div>
 			</fieldset>

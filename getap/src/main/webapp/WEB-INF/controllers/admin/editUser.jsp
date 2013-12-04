@@ -70,6 +70,7 @@
 						<%
 							int ligne = 0; 
 						%>
+
 						<tr>
 							<c:forEach items="${lesClasses}" var="classe" >
 							   <% ligne++; %>

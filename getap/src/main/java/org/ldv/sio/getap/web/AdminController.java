@@ -20,7 +20,6 @@ import org.ldv.sio.getap.app.FormAccueilPerso;
 import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.FormAjoutClasse;
 import org.ldv.sio.getap.app.FormAjoutDiscipline;
-import org.ldv.sio.getap.app.FormAjoutUser;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.ImportFromSqlFile;
@@ -112,7 +111,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "ajoutUser", method = RequestMethod.GET)
-  public String ajoutUser(FormAjoutUser formAjout, Model model) {
+  public String ajoutUser(FormEditUser formAjout, Model model) {
 
     model.addAttribute("lesClasses", manager.getAllClasse());
     model.addAttribute("lesDisciplines", manager.getAllDiscipline());
@@ -123,10 +122,10 @@ public class AdminController {
   }
 
   @RequestMapping(value = "doajout", method = RequestMethod.POST)
-  public String doajoutUser(FormAjoutUser formAjout, BindingResult bindResult,
+  public String doajoutUser(FormEditUser formAjout, BindingResult bindResult,
       Model model) {
     System.out.println("TEST :" + formAjout.getId());
-    System.out.println("TEST classe ID et Nom :" + formAjout.classe());
+    // System.out.println("TEST classe ID et Nom :" + formAjout.etclasse());
     System.out.println("TEST role :" + formAjout.getRoleNom());
     System.out.println("TEST :" + model);
 
@@ -145,8 +144,11 @@ public class AdminController {
           || formAjout.getRoleNom().equals("admin"))
         classe = null;
       if (formAjout.getRoleNom().equals("prof-principal")) {
+
+        System.out.println("TEST CLASSES :" + formAjout.getClasse());
+
         user = new User(null, formAjout.getPrenom(), formAjout.getNom(), null,
-            formAjout.getRoleNom(), formAjout.getClasses(), dis);
+            formAjout.getRoleNom(), formAjout.getClasse(), dis);
       } else {
         user = new User(null, formAjout.getPrenom(), formAjout.getNom(),
             classe, formAjout.getRoleNom(), dis);
