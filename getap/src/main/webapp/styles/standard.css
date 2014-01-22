@@ -79,7 +79,7 @@ div#content input[type="button"] {
 #erreur{
 	position:relative;
 	bottom: 27px;
-	right: 350px;
+	right: 290px;
 	z-index:-1;
 }
 .errors {
