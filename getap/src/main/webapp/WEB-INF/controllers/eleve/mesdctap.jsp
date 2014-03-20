@@ -200,7 +200,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refusées (${etat2})</a>
+			<a href="#">Vos demandes rejetées (${etat2})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
