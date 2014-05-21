@@ -32,13 +32,38 @@
 					<form:input path="minutes" />
 				</div> --%>
 				<select name="minutes" id="minutes">
-				<% for(int i=5; i<=300; i+=5) {
-					if( (int) i/60 != 0 ){%>
-						<option value="<%=i%>"><%=(int)i/60 %>h <%=(int)i%60 %>min</option>
-					<% } else { %>
-						<option value="<%=i%>"><%=(int)i%60 %>min</option>
-					<% } 
-				}%>
+				<% 
+				        for(int i = 1; i <= 10; i++)
+				        {
+				        	%>
+				        	<option value="<%=i*30%>">
+				        	   <%
+				        	   if(i%2 == 0)
+				        	   {
+				        		   %>
+				        		   0<%=i/2%> h 00 minute
+				        		   <%
+				        	   }
+				        	   else
+				        	   {
+				        		   if((i-1) < 2)
+				        		   {
+				        			   %>
+				        			   00 h 30 minutes
+				        			   <%
+				        		   }
+				        		   else
+				        		   {
+				        			   %>
+				        			   0<%=((i-1)/2)%> h 30 minutes
+				        			   <%
+				        		   }
+				        	   }
+				        	   %>
+				        	</option>
+				        	<%
+				        }
+				    %>
 				</select>
 			</div>
 
