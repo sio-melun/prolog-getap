@@ -3,7 +3,7 @@
 <%@page import="org.ldv.sio.getap.app.service.impl.DBManagerGeTAP"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<h3 class="titre3">Mes demandes de validations (test : ${hello})</h3>
+<h3 class="titre3">Mes demandes de validations</h3>
 
 <c:if test="${empty mesdctaps}">
 	Il n'y a encore aucune demande. 

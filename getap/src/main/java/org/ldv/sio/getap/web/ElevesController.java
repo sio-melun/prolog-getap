@@ -190,7 +190,14 @@ public class ElevesController {
 					manager.getUserById(formAjout.getEleveId()),
 					formAjout.getEtat());
 
-			manager.addDVCTAP(dctap);
+			if (dctap.getMinutes() % 30 == 0 && dctap.getMinutes() <= 300
+					&& dctap.getMinutes() != 0) {
+				manager.addDVCTAP(dctap);
+			} else {
+				bindResult.rejectValue("date", "required",
+						"La durée de l'AP est invalid !");
+				return "eleve/doajout";
+			}
 
 			return "redirect:/app/eleve/index";
 		}
