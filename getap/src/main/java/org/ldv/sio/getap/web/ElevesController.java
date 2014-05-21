@@ -195,7 +195,7 @@ public class ElevesController {
 				manager.addDVCTAP(dctap);
 			} else {
 				bindResult.rejectValue("date", "required",
-						"La durée de l'AP est invalid !");
+						"La durée de l'AP est invalide !");
 				return "eleve/doajout";
 			}
 
