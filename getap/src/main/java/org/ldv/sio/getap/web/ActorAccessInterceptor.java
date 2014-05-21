@@ -24,28 +24,30 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		// System.out.println("TEST  INTERCEPTOR 1:" +
 		// request.getContextPath());
-		String controllerName = request.getRequestURI().split("/")[3];
-		String controllerName2 = request.getRequestURI().split("/")[4];
+		String controllerCutFromURL = request.getRequestURI().split("/")[3];
+		String controllerCutFromURL2 = request.getRequestURI().split("/")[4];
 
 		// System.out.println("TEST  INTERCEPTOR 2:" + request.getContextPath()
-		// + " servlet: " + controllerName + " " + controllerName2);
+		// + " servlet: " + controllerCutFromURL + " " + controllerCutFromURL2);
 
 		logger.info("TEST  INTERCEPTOR with LOGGER :"
-				+ request.getContextPath() + " servlet: " + controllerName);
+				+ request.getContextPath() + " servlet: "
+				+ controllerCutFromURL);
 
 		User userInSession = UtilSession.getUserInSession();
 		String role = (userInSession != null) ? userInSession.getRole() : "";
 
 		boolean ok = true;
-		if (controllerName.equals("ws"))
+		if (controllerCutFromURL.equals("ws"))
 			return true;
-		if (!controllerName.equals("login") && null == userInSession) {
+		if (!controllerCutFromURL.equals("login") && null == userInSession) {
 			response.sendRedirect(request.getContextPath() + "/app/login/index");
 			ok = false;
 		}
 
-		else if (controllerName.equals("login")
-				&& !controllerName2.equals("apropos") && null != userInSession) {
+		else if (controllerCutFromURL.equals("login")
+				&& !controllerCutFromURL2.equals("apropos")
+				&& null != userInSession) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 
@@ -53,30 +55,31 @@ public class ActorAccessInterceptor extends HandlerInterceptorAdapter {
 
 		// Redirige l'user vers son répertoire si page != de son role pour le
 		// cas eleve ou prof-intervenant
-		else if (!controllerName.equals(role)
-				&& !controllerName.equals("login") && !role.equals("admin")
-				&& !role.equals("prof-principal")
-				&& !controllerName.equals("profil")) {
+		else if (!controllerCutFromURL.equals(role)
+				&& !controllerCutFromURL.equals("login")
+				&& !role.equals("admin") && !role.equals("prof-principal")
+				&& !controllerCutFromURL.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;
 		}
 
 		// cas spécial admin
-		else if (!controllerName.equals(role)
-				&& !controllerName.equals("login") && role.equals("admin")
-				&& !controllerName.equals("profil")) {
+		else if (!controllerCutFromURL.equals(role)
+				&& !controllerCutFromURL.equals("login")
+				&& role.equals("admin")
+				&& !controllerCutFromURL.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;
 		}
 
 		// cas spécial prof-principal
-		else if (!controllerName.equals(role)
-				&& !controllerName.equals("prof-intervenant")
-				&& !controllerName.equals("login")
+		else if (!controllerCutFromURL.equals(role)
+				&& !controllerCutFromURL.equals("prof-intervenant")
+				&& !controllerCutFromURL.equals("login")
 				&& role.equals("prof-principal")
-				&& !controllerName.equals("profil")) {
+				&& !controllerCutFromURL.equals("profil")) {
 			response.sendRedirect(request.getContextPath() + "/app/" + role
 					+ "/index");
 			ok = false;
