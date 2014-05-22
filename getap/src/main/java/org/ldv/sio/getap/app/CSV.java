@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class CSV {
 
 	private DataSource ds;
+	private ResultSet rs;
 
 	public DataSource getDs() {
 		return ds;
@@ -27,18 +28,29 @@ public class CSV {
 		this.ds = ds;
 	}
 
-	public void export(HttpServletResponse response) {
+	public void export(HttpServletResponse response, String role) {
 
 		try {
 			Connection con = ds.getConnection();
 			Statement select = con.createStatement();
-			ResultSet rs = select
-					.executeQuery("SELECT nom, prenom, libelle, login, mdp, idEtab FROM user, classe where role='eleve' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
+			if (role == "prof-principal") {
+				rs = select
+						.executeQuery("SELECT id, nom, prenom, login, mdp, idEtab, idClasse FROM user where role='"
+								+ role + "' order by nom");
+			} else {
+				rs = select
+						.executeQuery("SELECT nom, prenom, libelle, login, mdp, idEtab FROM user, classe where role='"
+								+ role
+								+ "' and user.idClasse = classe.id order by classe.libelle, user.nom, user.prenom");
+			}
 			try {
 				PrintWriter writer = response.getWriter();
 				// FileWriter writer = new FileWriter("F:/test2.csv");
-
-				writer.println("nom;prenom;idEtab;login;mdp;Classe");
+				if (role == "prof-principal") {
+					writer.println("nom;prenom;idEtab;login;mdp");
+				} else {
+					writer.println("nom;prenom;idEtab;login;mdp;Classe");
+				}
 				while (rs.next()) {
 					writer.append(rs.getString("nom"));
 					writer.append(";");
@@ -49,8 +61,10 @@ public class CSV {
 					writer.append(rs.getString("login"));
 					writer.append(";");
 					writer.append(rs.getString("mdp"));
-					writer.append(";");
-					writer.append(rs.getString("libelle"));
+					if (role != "prof-principal") {
+						writer.append(";");
+						writer.append(rs.getString("libelle"));
+					}
 					writer.println();
 				}
 				writer.flush();

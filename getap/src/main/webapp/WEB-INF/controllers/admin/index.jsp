@@ -36,15 +36,15 @@
 						height="64" />
 						<div>Export CSV des élèves</div> </a></td>
 				
-				<td><a href="<c:url value="/app/admin/ajoutUserCsv" />"><img
+				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/importcsv.png"/>" width="64"
 						height="64" />
-						<div>Import CSV des prof</div> </a></td>
+						<div>Import CSV des profs</div> </a></td>
 				
-				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
+				<td><a href="<c:url value="/app/admin/exportUserCsvProf" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
 						height="64" />
-						<div>Export CSV des prof</div> </a></td>
+						<div>Export CSV des profs</div> </a></td>
 				
 				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
