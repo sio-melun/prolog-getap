@@ -273,5 +273,35 @@
 				</tbody>
 			</table>
 		</div>
+		<h3>
+			<a href="#">Demandes annulées par l'élève (${etat8})</a>
+		</h3>
+		<div id="demo">
+			<table class="display dataTable">
+				<thead>
+					<tr class="header">
+						<th>Élèves</th>
+						<th>Date</th>
+						<th>Temps</th>
+						<th>Type d'aide</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${listdctaps}" var="dctap">
+						<c:if test="${dctap.etat == 8}">
+							<tr>
+								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+								<td>${dctap.dateAction}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}" pattern="#00" /></td>
+								<td>${dctap.accPers.nom}</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </c:if>

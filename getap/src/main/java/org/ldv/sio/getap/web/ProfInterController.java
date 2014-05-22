@@ -75,7 +75,7 @@ public class ProfInterController {
 		model.addAttribute("etat1", manager.getAllDVCTAPByEtat(1, id));
 		model.addAttribute("etat2", manager.getAllDVCTAPByEtat(2, id));
 		model.addAttribute("etat4", manager.getAllDVCTAPByEtat(4, id));
-
+		model.addAttribute("etat8", manager.getAllDVCTAPByEtat(8, id));
 		model.addAttribute("etat16", manager.getAllDVCTAPByEtat(16, id));
 		model.addAttribute("etat32", manager.getAllDVCTAPByEtat(32, id));
 		model.addAttribute("etat64", manager.getAllDVCTAPByEtat(64, id));
