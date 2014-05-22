@@ -19,7 +19,8 @@
 				<p>
 					Ligne type : Nom;Prénom;idEtab;Division<br>
 					<br> ABADE;Mathilde;AZ04005182M;1CTA1<br>
-					ABDALLAH;Florence;BR06022996Y;1SCT<br>
+					ABDALLAH;Florence;BR06022996Y;1SCT<br><br>
+					/!\ : Le nom de votre fichier déterminera le rôle des utilisateurs envoyés !<br>Pensez donc bien à nommer vos fichiers eleve.csv, prof-principal.csv ou admin.csv. (L'export le fera automatiquement)
 				</p>
 				<div class="form-row">
 					<label for="file">Fichier : </label>

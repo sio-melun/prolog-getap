@@ -575,7 +575,7 @@ public class AdminController {
 	public void exportUserCsv(HttpServletResponse response) {
 		response.setContentType("text/x-csv; charset=UTF-8");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=eleves.csv");
+				"attachment;filename=eleve.csv");
 		csv.export(response, "eleve");
 	}
 
@@ -583,7 +583,7 @@ public class AdminController {
 	public void exportUserCsvProf(HttpServletResponse response) {
 		response.setContentType("text/x-csv; charset=UTF-8");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=profs.csv");
+				"attachment;filename=prof-principal.csv");
 		csv.export(response, "prof-principal");
 	}
 
