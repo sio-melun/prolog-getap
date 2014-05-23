@@ -17,6 +17,9 @@
 	<!-- Scan for annotation based controllers -->
 	<context:component-scan base-package="org.ldv.sio.getap" />
 
+	<mvc:interceptors>
+		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
+	</mvc:interceptors>
 
 	<!-- Configure Apache Tiles for the view -->
 	<bean id="tilesConfigurer"
@@ -44,9 +47,6 @@
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</bean>
 
-	<mvc:interceptors>
-		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
-	</mvc:interceptors>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">

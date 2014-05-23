@@ -137,6 +137,7 @@ public class ImportFromSqlFile {
 				// Nom du fichier reçu : /tmp/lerole.csv
 				String roleInFileName = file.substring(0, file.length() - 4);
 				roleInFileName = roleInFileName.substring("/tmp/".length());
+
 				// System.out.println("Fichier : " + filename);
 				param.setNString(7, roleInFileName);
 
