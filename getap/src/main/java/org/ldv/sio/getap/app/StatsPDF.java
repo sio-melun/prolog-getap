@@ -83,12 +83,13 @@ public class StatsPDF {
 
 				int timeTT = 0, timeVal = 0, timeAtt = 0, timeRef = 0;
 				for (int i = 0; i < dctap.size(); i++) {
-					timeTT += dctap.get(i).getMinutes();
+					if (dctap.get(i).getEtat() != 8) {
+						timeTT += dctap.get(i).getMinutes();
+					}
 					if (dctap.get(i).getEtat() == 1
 							|| dctap.get(i).getEtat() == 32) {
 						timeVal += dctap.get(i).getMinutes();
 					} else if (dctap.get(i).getEtat() == 2
-							|| dctap.get(i).getEtat() == 8
 							|| dctap.get(i).getEtat() == 64) {
 						timeRef += dctap.get(i).getMinutes();
 					} else if (dctap.get(i).getEtat() == 0
@@ -98,7 +99,10 @@ public class StatsPDF {
 					}
 
 				}
-				double timeTTpercent = timeVal, timeValPercent = timeVal, timeAttPercent = timeAtt, timeRefPercent = timeRef;
+
+				System.out.println("Coucou : " + timeRef);
+
+				double timeTTpercent = timeTT, timeValPercent = timeVal, timeAttPercent = timeAtt, timeRefPercent = timeRef;
 				timeTTpercent = Math.round((timeTTpercent / (72 * 60) * 100)
 						* Math.pow(10.0, 2))
 						/ Math.pow(10.0, 2);

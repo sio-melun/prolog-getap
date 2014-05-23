@@ -33,7 +33,9 @@
 		<tbody>
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat != 8}">
+						<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					</c:if>
 					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
@@ -122,7 +124,10 @@
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
-						<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						<c:if test="${dctap.etat != 8}">
+							<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						</c:if>
+
 					</c:if>
 				</c:forEach>
 			</c:if>
@@ -148,7 +153,9 @@
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
-						<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						<c:if test="${dctap.etat != 8}">
+							<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						</c:if>
 					</c:if>
 				</c:forEach>
 			</c:if>
@@ -194,7 +201,7 @@
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
 					<td><div id="progressbar"></div> <fmt:formatNumber
-							value="${timeVal/(72*60)*100}" pattern="#0.00" />% - 72h
+							value="${(timeVal+timeAtt)/(72*60)*100}" pattern="#0.00" />% - 72h
 						requises</td>
 				</c:if>
 				<td id="statsValide"><fmt:formatNumber

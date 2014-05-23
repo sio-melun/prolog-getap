@@ -230,15 +230,48 @@
 				</tbody>
 			</table>
 		</div>
+		<h3>
+			<a href="#">Vos demandes annulées (${etat8})</a>
+		</h3>
+		<div id="demo">
+			<table class="display dataTable">
+				<thead>
+					<tr class="header">
+						<th>Professeurs</th>
+						<th>Date</th>
+						<th>Temps</th>
+						<th>Type d'aide</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${mesdctaps}" var="dctap">
+						<c:if test="${dctap.etat == 8}">
+							<tr>
+								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
+								<td>${dctap.dateAction}</td>
+								<td><fmt:formatNumber
+										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
+										pattern="#00" />h<fmt:formatNumber
+										value="${dctap.minutes%60}"
+										pattern="#00" /></td>
+								<td>${dctap.accPers.nom}</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 		<c:forEach items="${mesdctaps}" var="dctap">
-		<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+		<c:if test="${dctap.etat != 8}">
+			<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+		</c:if>
 		<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
 			<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
-		<c:if test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+		<c:if test="${dctap.etat == 2 || dctap.etat == 64}">
 			<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
