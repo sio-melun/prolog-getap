@@ -134,10 +134,11 @@ public class ImportFromSqlFile {
 
 				param.setNString(6, listUser.get(i).hashPass);
 
-				String filename = file.substring(0, file.length() - 4);
-				filename = filename.substring(5);
-				System.out.println("Fichier : " + filename);
-				param.setNString(7, filename);
+				// Nom du fichier reçu : /tmp/lerole.csv
+				String roleInFileName = file.substring(0, file.length() - 4);
+				roleInFileName = roleInFileName.substring("/tmp/".length());
+				// System.out.println("Fichier : " + filename);
+				param.setNString(7, roleInFileName);
 
 				// Requete retournant l'id de la classe de l'utilisateur
 				Statement classe = con.createStatement();
