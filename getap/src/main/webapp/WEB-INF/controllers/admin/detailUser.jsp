@@ -173,9 +173,7 @@
 	<table class="display" id="stats">
 		<thead>
 			<tr>
-				<c:if test="${utilisateur.role == 'eleve'}">
-					<th>Temps total effectué</th>
-				</c:if>
+				<th>Temps total effectué</th>
 				<th>Temps total validé</th>
 				<th>Temps total en attente</th>
 				<th>Temps total refusé</th>
@@ -184,9 +182,18 @@
 		<tbody>
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
-					<td><fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
+					<td>
+						<fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
 							pattern="#00" />h<fmt:formatNumber value="${timeTT%60}"
-							pattern="#00" /></td>
+							pattern="#00" />
+					</td>
+				</c:if>
+				<c:if test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
+					<td rowspan="2">
+						<fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeTT%60}"
+							pattern="#00" />
+					</td>
 				</c:if>
 				<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
 						pattern="#00" />h<fmt:formatNumber value="${timeVal%60}"
