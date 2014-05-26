@@ -61,14 +61,17 @@ public class StatsPDF {
 				rs.last();
 				String eleve = "Nom : " + rs.getString("nom");
 				eleve += "\nPrénom : " + rs.getString("prenom");
-				int idClasse = rs.getInt("idClasse");
-				rs.beforeFirst();
-				ResultSet rs2 = select
-						.executeQuery("SELECT classe.* from classe where id = "
-								+ idClasse);
-				rs2.last();
-				eleve += "\nClasse : " + rs2.getString("libelle") + "\n\n\n";
-				rs2.beforeFirst();
+				if (rs.getString("role").equals("eleve")) {
+					int idClasse = rs.getInt("idClasse");
+					rs.beforeFirst();
+					ResultSet rs2 = select
+							.executeQuery("SELECT classe.* from classe where id = "
+									+ idClasse);
+					rs2.last();
+					eleve += "\nClasse : " + rs2.getString("libelle")
+							+ "\n\n\n";
+					rs2.beforeFirst();
+				}
 
 				Paragraph paragraph = new Paragraph(eleve);
 				paragraph.setAlignment(Element.ALIGN_LEFT);
@@ -99,8 +102,6 @@ public class StatsPDF {
 					}
 
 				}
-
-				System.out.println("Coucou : " + timeRef);
 
 				double timeTTpercent = timeTT, timeValPercent = timeVal, timeAttPercent = timeAtt, timeRefPercent = timeRef;
 				timeTTpercent = Math.round((timeTTpercent / (72 * 60) * 100)

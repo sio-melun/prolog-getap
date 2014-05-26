@@ -60,6 +60,8 @@ public class AdminController {
 	@Autowired
 	private DemandesCSV demandes;
 
+	private List<DemandeValidationConsoTempsAccPers> dctap;
+
 	public void setCsv(CSV csv) {
 		this.csv = csv;
 	}
@@ -551,8 +553,13 @@ public class AdminController {
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager
-				.getAllDVCTAPByEleve(user);
+		if (user.getRole().equals("prof-principal")) {
+			dctap = manager.getAllDVCTAPByProfPrinc(user);
+		} else if (user.getRole().equals("prof-intervenant")) {
+			dctap = manager.getAllDVCTAPByProfInterv(user);
+		} else if (user.getRole().equals("eleve")) {
+			dctap = manager.getAllDVCTAPByEleve(user);
+		}
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
@@ -563,8 +570,13 @@ public class AdminController {
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager
-				.getAllDVCTAPByEleve(user);
+		if (user.getRole().equals("prof-principal")) {
+			dctap = manager.getAllDVCTAPByProfPrinc(user);
+		} else if (user.getRole().equals("prof-intervenant")) {
+			dctap = manager.getAllDVCTAPByProfInterv(user);
+		} else if (user.getRole().equals("eleve")) {
+			dctap = manager.getAllDVCTAPByEleve(user);
+		}
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom() + ".csv");
