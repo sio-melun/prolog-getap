@@ -55,7 +55,9 @@
 			<c:if
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
-					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat != 8}">
+						<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					</c:if>
 					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
