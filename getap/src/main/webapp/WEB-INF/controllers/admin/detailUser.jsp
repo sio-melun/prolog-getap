@@ -214,11 +214,11 @@
 						requises</td>
 				</c:if>
 				<td id="statsValide"><fmt:formatNumber
-						value="${timeVal/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeVal/(timeTT+timeRef)*100}" pattern="#0.00" />%</td>
 				<td id="statsAttente"><fmt:formatNumber
-						value="${timeAtt/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeAtt/(timeTT+timeRef)*100}" pattern="#0.00" />%</td>
 				<td id="statsRefuse"><fmt:formatNumber
-						value="${timeRef/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeRef/(timeTT+timeRef)*100}" pattern="#0.00" />%</td>
 			</tr>
 		</tbody>
 	</table>
