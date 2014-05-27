@@ -538,7 +538,7 @@ public class AdminController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=eleves.pdf");
-		pdf.export(response, false);
+		pdf.export(response, "eleve");
 	}
 
 	@RequestMapping(value = "exportProfPdf")
@@ -546,7 +546,7 @@ public class AdminController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=professeurs.pdf");
-		pdf.export(response, true);
+		pdf.export(response, "prof-principal");
 	}
 
 	@RequestMapping(value = "exportStats/{id}", method = RequestMethod.GET)
