@@ -65,7 +65,7 @@ public class DemandesCSV {
 					writer.append(dctap.get(i).getAnneeScolaire() + ";");
 					writer.append(dctap.get(i).getDateAction() + ";");
 					writer.append(dctap.get(i).getMinutes() + ";");
-					writer.append("En cour;");
+					writer.append("En cours;");
 					writer.append(dctap.get(i).getProf().getNom() + " "
 							+ dctap.get(i).getProf().getPrenom() + ";");
 					writer.append(dctap.get(i).getEleve().getNom() + " "
