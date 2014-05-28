@@ -60,8 +60,6 @@ public class AdminController {
 	@Autowired
 	private DemandesCSV demandes;
 
-	private List<DemandeValidationConsoTempsAccPers> dctap;
-
 	public void setCsv(CSV csv) {
 		this.csv = csv;
 	}
@@ -552,35 +550,37 @@ public class AdminController {
 	@RequestMapping(value = "exportStats/{id}", method = RequestMethod.GET)
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
+		List<DemandeValidationConsoTempsAccPers> dctaps;
 		User user = manager.getUserById(Long.valueOf(id));
 		if (user.getRole().equals("prof-principal")) {
-			dctap = manager.getAllDVCTAPByProfPrinc(user);
+			dctaps = manager.getAllDVCTAPByProfPrinc(user);
 		} else if (user.getRole().equals("prof-intervenant")) {
-			dctap = manager.getAllDVCTAPByProfInterv(user);
-		} else if (user.getRole().equals("eleve")) {
-			dctap = manager.getAllDVCTAPByEleve(user);
+			dctaps = manager.getAllDVCTAPByProfInterv(user);
+		} else /* user.getRole().equals("eleve") */{
+			dctaps = manager.getAllDVCTAPByEleve(user);
 		}
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
-		statsPdf.export(response, user.getId(), dctap);
+		statsPdf.export(response, user.getId(), dctaps);
 	}
 
 	@RequestMapping(value = "exportDemandeCsv/{id}", method = RequestMethod.GET)
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
+		List<DemandeValidationConsoTempsAccPers> dctaps;
 		User user = manager.getUserById(Long.valueOf(id));
 		if (user.getRole().equals("prof-principal")) {
-			dctap = manager.getAllDVCTAPByProfPrinc(user);
+			dctaps = manager.getAllDVCTAPByProfPrinc(user);
 		} else if (user.getRole().equals("prof-intervenant")) {
-			dctap = manager.getAllDVCTAPByProfInterv(user);
-		} else if (user.getRole().equals("eleve")) {
-			dctap = manager.getAllDVCTAPByEleve(user);
+			dctaps = manager.getAllDVCTAPByProfInterv(user);
+		} else /* user.getRole().equals("eleve") */{
+			dctaps = manager.getAllDVCTAPByEleve(user);
 		}
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=demandes" + user.getNom() + ".csv");
-		demandes.export(response, dctap);
+				"attachment;filename=demandes" + user.getNom().trim() + ".csv");
+		demandes.export(response, dctaps);
 	}
 
 	@RequestMapping(value = "exportUserCsv")
