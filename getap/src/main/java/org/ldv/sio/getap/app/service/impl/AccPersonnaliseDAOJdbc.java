@@ -2,6 +2,7 @@ package org.ldv.sio.getap.app.service.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -55,6 +56,26 @@ public class AccPersonnaliseDAOJdbc implements IFAccPersonnaliseDAO {
 		return this.jdbcTemplate
 				.query("select distinct ap.id, ap.libelle, ap.origineEtat, ap.idUser from ap, dctap where origineEtat = 0 or (origineEtat = 1 and dctap.idAP = ap.id and dctap.idEleve = ap.idUser and dctap.idProf = "
 						+ id + ")", new AccMapper());
+	}
+
+	public List<Integer> getAllAPForStatsProf() {
+		List<Integer> StatsProf = new ArrayList<Integer>();
+		StatsProf.add(0,
+				this.jdbcTemplate.queryForInt("select count(*) FROM dctap"));
+		StatsProf
+				.add(1,
+						this.jdbcTemplate
+								.queryForInt("select count(*) FROM dctap WHERE Etat=1 OR Etat=32"));
+		StatsProf
+				.add(2,
+						this.jdbcTemplate
+								.queryForInt("select count(*) FROM dctap WHERE Etat=0 OR Etat=4 OR Etat>1000"));
+		StatsProf
+				.add(3,
+						this.jdbcTemplate
+								.queryForInt("select count(*) FROM dctap WHERE Etat=2 OR Etat=8 OR Etat=64"));
+
+		return StatsProf;
 	}
 
 	public List<AccPersonalise> getAllAPForEleve() {

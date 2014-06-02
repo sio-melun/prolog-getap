@@ -184,6 +184,20 @@ public class AdminController {
 		return "admin/detailUser";
 	}
 
+	// CHEVAL
+	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
+	public String statsProfesseurs(Model model) {
+		List<Integer> statsAP = manager.getAllAPForStatsProf();
+		model.addAttribute("demandeTTProfs", statsAP.get(0));
+		model.addAttribute("demandeValProfs", statsAP.get(1));
+		model.addAttribute("demandeAttProfs", statsAP.get(2));
+		model.addAttribute("demandeRefProfs", statsAP.get(3));
+
+		return "admin/statsProfesseurs";
+	}
+
+	// /CHEVAL
+
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
 	public String ajoutAp(FormAjoutAp formAjout, Model model) {
 

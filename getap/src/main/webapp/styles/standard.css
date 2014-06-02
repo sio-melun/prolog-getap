@@ -298,9 +298,24 @@ td .bouton{
 .percentZero{
 	background-color:#E0F0FE;
 }
+
 .menuLogin{
 	text-align: left;
 	position:relative;
 	left:40px;
 	bottom:10px;
+}
+
+.tableStats{
+	width:100%;
+	border:1px solid black;
+}
+
+.tdStatsTitle{
+	font-weight:bold;
+}
+
+.tdStats{
+	width:50%;
+	border:1px solid grey;
 }
