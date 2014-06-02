@@ -110,6 +110,16 @@ div#accordion{
 	margin: 40px 0px;
 }
 
+.stats
+{
+	width:100%;
+}
+
+.tdstats
+{
+	width:25%;
+}
+
 a{
 	color:black;
 }
