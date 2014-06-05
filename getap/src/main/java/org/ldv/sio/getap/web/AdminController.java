@@ -60,8 +60,6 @@ public class AdminController {
 	@Autowired
 	private DemandesCSV demandes;
 
-	private List<DemandeValidationConsoTempsAccPers> dctap;
-
 	public void setCsv(CSV csv) {
 		this.csv = csv;
 	}
@@ -185,6 +183,23 @@ public class AdminController {
 
 		return "admin/detailUser";
 	}
+
+	// CHEVAL
+	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
+	public String statsProfesseurs(Model model) {
+		List<Integer> statsAP = manager.getAllAPForStatsProfs();
+		model.addAttribute("demandeTTProfs", statsAP.get(0));
+		model.addAttribute("demandeValProfs", statsAP.get(1));
+		model.addAttribute("demandeAttProfs", statsAP.get(2));
+		model.addAttribute("demandeRefProfs", statsAP.get(3));
+
+		List<AccPersonalise> lesProfStats = manager.getAllAPForEachProf();
+		model.addAttribute("eachProf", lesProfStats);
+
+		return "admin/statsProfesseurs";
+	}
+
+	// /CHEVAL
 
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
 	public String ajoutAp(FormAjoutAp formAjout, Model model) {
@@ -538,7 +553,7 @@ public class AdminController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=eleves.pdf");
-		pdf.export(response, false);
+		pdf.export(response, "eleve");
 	}
 
 	@RequestMapping(value = "exportProfPdf")
@@ -546,41 +561,43 @@ public class AdminController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=professeurs.pdf");
-		pdf.export(response, true);
+		pdf.export(response, "prof-principal");
 	}
 
 	@RequestMapping(value = "exportStats/{id}", method = RequestMethod.GET)
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
+		List<DemandeValidationConsoTempsAccPers> dctaps;
 		User user = manager.getUserById(Long.valueOf(id));
 		if (user.getRole().equals("prof-principal")) {
-			dctap = manager.getAllDVCTAPByProfPrinc(user);
+			dctaps = manager.getAllDVCTAPByProfPrinc(user);
 		} else if (user.getRole().equals("prof-intervenant")) {
-			dctap = manager.getAllDVCTAPByProfInterv(user);
-		} else if (user.getRole().equals("eleve")) {
-			dctap = manager.getAllDVCTAPByEleve(user);
+			dctaps = manager.getAllDVCTAPByProfInterv(user);
+		} else /* user.getRole().equals("eleve") */{
+			dctaps = manager.getAllDVCTAPByEleve(user);
 		}
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
-		statsPdf.export(response, user.getId(), dctap);
+		statsPdf.export(response, user.getId(), dctaps);
 	}
 
 	@RequestMapping(value = "exportDemandeCsv/{id}", method = RequestMethod.GET)
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
+		List<DemandeValidationConsoTempsAccPers> dctaps;
 		User user = manager.getUserById(Long.valueOf(id));
 		if (user.getRole().equals("prof-principal")) {
-			dctap = manager.getAllDVCTAPByProfPrinc(user);
+			dctaps = manager.getAllDVCTAPByProfPrinc(user);
 		} else if (user.getRole().equals("prof-intervenant")) {
-			dctap = manager.getAllDVCTAPByProfInterv(user);
-		} else if (user.getRole().equals("eleve")) {
-			dctap = manager.getAllDVCTAPByEleve(user);
+			dctaps = manager.getAllDVCTAPByProfInterv(user);
+		} else /* user.getRole().equals("eleve") */{
+			dctaps = manager.getAllDVCTAPByEleve(user);
 		}
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
-				"attachment;filename=demandes" + user.getNom() + ".csv");
-		demandes.export(response, dctap);
+				"attachment;filename=demandes" + user.getNom().trim() + ".csv");
+		demandes.export(response, dctaps);
 	}
 
 	@RequestMapping(value = "exportUserCsv")

@@ -11,6 +11,9 @@
 	$("#accordion" ).accordion({ active: 1 });
    });
 </c:if>
+$(document).ready(function() {
+	$("#accordionStats" ).accordion({ active: 1 });
+   });
 </script>
 
 <h5 style="position: relative; top: 35px;">Gestion utilisateur</h5>
@@ -208,3 +211,39 @@
 		</table>
 	</div>
 </div>
+
+<!-- CHEVAL -->
+
+<h5 style="position: relative; top: 0px;">Statistiques</h5>
+<div id="accordionStats">
+	<h3>
+		<a href="#">Voir les statistiques</a>
+	</h3>
+	<div>
+		<table class="stats">
+			<tr>
+				<td class="tdstats"><a href="<c:url value="/app/admin/statsTotales" />"><img
+						src="<c:url value="../../images/stats.png"/>" width="64"
+						height="64" />
+						<div>Totales</div> </a></td>
+				
+				<td class="tdstats"><a href="<c:url value="/app/admin/statsClasses" />"><img
+						src="<c:url value="../../images/stats.png"/>" width="64"
+						height="64" />
+						<div>Par classe</div> </a></td>
+				
+				<td class="tdstats"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
+						src="<c:url value="../../images/stats.png"/>" width="64"
+						height="64" />
+						<div>Par professeurs</div> </a></td>
+				
+				<td class="tdstats"><a href="<c:url value="/app/admin/statsTypes" />"><img
+						src="<c:url value="../../images/stats.png"/>" width="64"
+						height="64" />
+						<div>Par type d'AP</div> </a></td>				
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!--  /CHEVAL -->

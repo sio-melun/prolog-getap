@@ -110,6 +110,17 @@ div#accordion{
 	margin: 40px 0px;
 }
 
+.stats
+{
+	width:100%;
+}
+
+.tdstats
+{
+	width:25%;
+	text-align:left;
+}
+
 a{
 	color:black;
 }
@@ -288,9 +299,45 @@ td .bouton{
 .percentZero{
 	background-color:#E0F0FE;
 }
+
 .menuLogin{
 	text-align: left;
 	position:relative;
 	left:40px;
 	bottom:10px;
+}
+
+.tableStats{
+	width:100%;
+	border:1px solid black;
+	padding:1em;
+}
+
+.tdStatsTitle{
+	font-weight:bold;
+}
+
+.tdStats{
+	width:50%;
+	border:1px solid grey;
+	vertical-align: middle;
+}
+
+.tdStatsIdentity
+{
+	width:32%;
+	border:1px solid grey;
+	text-align:left;
+}
+
+.tdStatsIdentityPrimary
+{
+	width:32%;
+	border:1px solid grey;
+	text-align:center;
+}
+
+.tdStatsProf{
+	width:16%;
+	border:1px solid grey;
 }

@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
-<c:set var="timeTT" value="0" />
+<c:set var="timeTotEffec" value="0" />
 <c:set var="timeVal" value="0" />
 <c:set var="timeRef" value="0" />
 <c:set var="timeAtt" value="0" />
@@ -33,8 +33,8 @@
 		<tbody>
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
-					<c:if test="${dctap.etat != 8}">
-						<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat != 8 && dctap.etat != 2 && dctap.etat != 64}">
+						<c:set var="timeTotEffec" value="${timeTotEffec + dctap.minutes}" />
 					</c:if>
 					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
@@ -55,7 +55,9 @@
 			<c:if
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
-					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
+					<c:if test="${dctap.etat != 8 && dctap.etat != 2 && dctap.etat != 64}">
+						<c:set var="timeTotEffec" value="${timeTotEffec + dctap.minutes}" />
+					</c:if>
 					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
@@ -82,6 +84,85 @@
 			});
 		</script>
 	</c:if>
+
+	<h3>
+		<a href="#">Demandes en attente (${etat0 + etat4 + etatsup1000})</a>
+	</h3>
+	<table class="display dataTable">
+		<thead>
+			<tr class="header">
+				<c:if test="${utilisateur.role == 'eleve'}">
+					<th>Nom du Professeur</th>
+				</c:if>
+				<c:if
+					test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
+					<th>Nom de l'élève</th>
+				</c:if>
+				<th>Type d'accompagnement</th>
+				<th>Temps</th>
+				<th>Date</th>
+				<th>Cause</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:if test="${utilisateur.role == 'eleve'}">
+				<c:forEach items="${sesDCTAPeleve}" var="dctap">
+					<c:if
+						test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+						<tr>
+							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
+							<td>${dctap.accPers.nom}</td>
+							<td><fmt:formatNumber
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
+							<td>${dctap.dateAction}</td>
+							<c:if test="${dctap.etat == 0}">
+								<td>Non traité</td>
+							</c:if>
+							<c:if test="${dctap.etat == 4}">
+								<td>Non traité (Modifié)</td>
+							</c:if>
+							<c:if test="${dctap.etat > 1023}">
+								<td>En attente de l'élève</td>
+							</c:if>
+						</tr>
+						<c:if test="${dctap.etat != 8}">
+							<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						</c:if>
+
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<c:if
+				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
+				<c:forEach items="${sesDCTAPprof}" var="dctap">
+					<c:if
+						test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+						<tr>
+							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
+							<td>${dctap.accPers.nom}</td>
+							<td><fmt:formatNumber
+									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
+									value="${dctap.minutes%60}" pattern="#00" /></td>
+							<td>${dctap.dateAction}</td>
+							<c:if test="${dctap.etat == 0}">
+								<td>Non traité</td>
+							</c:if>
+							<c:if test="${dctap.etat == 4}">
+								<td>Non traité (Modifié)</td>
+							</c:if>
+							<c:if test="${dctap.etat > 1023}">
+								<td>En attente de l'élève</td>
+							</c:if>
+						</tr>
+						<c:if test="${dctap.etat != 8}">
+							<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
+						</c:if>
+					</c:if>
+				</c:forEach>
+			</c:if>
+		</tbody>
+	</table>
 
 	<h3>
 		<a href="#">Demandes Refusées (${etat2 + etat8 + etat64})</a>
@@ -183,15 +264,15 @@
 			<tr>
 				<c:if test="${utilisateur.role == 'eleve'}">
 					<td>
-						<fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
-							pattern="#00" />h<fmt:formatNumber value="${timeTT%60}"
+						<fmt:formatNumber value="${timeTotEffec/60-(timeTotEffec%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeTotEffec%60}"
 							pattern="#00" />
 					</td>
 				</c:if>
 				<c:if test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 					<td rowspan="2">
-						<fmt:formatNumber value="${timeTT/60-(timeTT%60/60)}"
-							pattern="#00" />h<fmt:formatNumber value="${timeTT%60}"
+						<fmt:formatNumber value="${timeTotEffec/60-(timeTotEffec%60/60)}"
+							pattern="#00" />h<fmt:formatNumber value="${timeTotEffec%60}"
 							pattern="#00" />
 					</td>
 				</c:if>
@@ -212,11 +293,11 @@
 						requises</td>
 				</c:if>
 				<td id="statsValide"><fmt:formatNumber
-						value="${timeVal/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeVal/(timeTotEffec+timeRef)*100}" pattern="#0.00" />%</td>
 				<td id="statsAttente"><fmt:formatNumber
-						value="${timeAtt/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeAtt/(timeTotEffec+timeRef)*100}" pattern="#0.00" />%</td>
 				<td id="statsRefuse"><fmt:formatNumber
-						value="${timeRef/timeTT*100}" pattern="#0.00" />%</td>
+						value="${timeRef/(timeTotEffec+timeRef)*100}" pattern="#0.00" />%</td>
 			</tr>
 		</tbody>
 	</table>

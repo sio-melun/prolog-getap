@@ -138,6 +138,7 @@ public class StatsPDF {
 				c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 				c1.setPaddingBottom(7);
 				table.addCell(c1);
+
 				c1 = new PdfPCell(new Phrase("Temps total refusé",
 						FontFactory.getFont(FontFactory.TIMES_ROMAN, 15,
 								com.itextpdf.text.Font.BOLD)));
