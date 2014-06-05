@@ -309,6 +309,7 @@ td .bouton{
 .tableStats{
 	width:100%;
 	border:1px solid black;
+	padding:1em;
 }
 
 .tdStatsTitle{
@@ -317,5 +318,24 @@ td .bouton{
 
 .tdStats{
 	width:50%;
+	border:1px solid grey;
+}
+
+.tdStatsIdentity
+{
+	width:32%;
+	border:1px solid grey;
+	text-align:left;
+}
+
+.tdStatsIdentityPrimary
+{
+	width:32%;
+	border:1px solid grey;
+	text-align:center;
+}
+
+.tdStatsProf{
+	width:16%;
 	border:1px solid grey;
 }

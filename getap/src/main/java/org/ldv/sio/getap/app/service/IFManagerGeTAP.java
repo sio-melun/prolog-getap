@@ -79,7 +79,9 @@ public interface IFManagerGeTAP {
 
 	public List<AccPersonalise> getAllAPForProf();
 
-	public List<Integer> getAllAPForStatsProf();
+	public List<Integer> getAllAPForStatsProfs();
+
+	public List<AccPersonalise> getAllAPForEachProf();
 
 	public List<AccPersonalise> getAllAPForAdmin();
 

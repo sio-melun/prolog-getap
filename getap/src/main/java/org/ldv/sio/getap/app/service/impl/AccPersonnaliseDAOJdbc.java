@@ -45,6 +45,21 @@ public class AccPersonnaliseDAOJdbc implements IFAccPersonnaliseDAO {
 		}
 	}
 
+	private static final class AccStatsMapper implements
+			RowMapper<AccPersonalise> {
+		public AccPersonalise mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			AccPersonalise acc = new AccPersonalise();
+			acc.setNom(rs.getString("nomProf"));
+			acc.setPrenom(rs.getString("prenomProf"));
+			acc.setCountap(rs.getInt("countap"));
+			acc.setDctapval(rs.getInt("dctapval"));
+			acc.setDctapatt(rs.getInt("dctapatt"));
+			acc.setDctapref(rs.getInt("dctapref"));
+			return acc;
+		}
+	}
+
 	public List<AccPersonalise> getAllAPForAdmin() {
 		return this.jdbcTemplate.query(
 				"select * from ap where origineEtat = 0", new AccMapper());
@@ -56,6 +71,36 @@ public class AccPersonnaliseDAOJdbc implements IFAccPersonnaliseDAO {
 		return this.jdbcTemplate
 				.query("select distinct ap.id, ap.libelle, ap.origineEtat, ap.idUser from ap, dctap where origineEtat = 0 or (origineEtat = 1 and dctap.idAP = ap.id and dctap.idEleve = ap.idUser and dctap.idProf = "
 						+ id + ")", new AccMapper());
+	}
+
+	public List<AccPersonalise> getAllAPForEachProfs() {
+		/*
+		 * SELECT user.nom AS nomProf, user.prenom AS prenomProf,
+		 * 
+		 * (SELECT count( dctap.id ) FROM dctap WHERE dctap.Etat =1 AND idProf =
+		 * user.id OR dctap.Etat =32 AND idProf = user.id ) AS dctapval,
+		 * 
+		 * (SELECT count( dctap.id ) FROM dctap WHERE dctap.Etat =2 AND idProf =
+		 * user.id OR dctap.Etat =8 AND idProf = user.id OR dctap.Etat =64 AND
+		 * idProf = user.id ) AS dctapref,
+		 * 
+		 * (SELECT count( dctap.id ) FROM dctap WHERE dctap.Etat =0 AND idProf =
+		 * user.id OR dctap.Etat =4 AND idProf = user.id OR dctap.Etat >1023 AND
+		 * idProf = user.id ) AS dctapatt,
+		 * 
+		 * count( dctap.id ) AS countap
+		 * 
+		 * FROM user, dctap
+		 * 
+		 * WHERE dctap.idProf = user.id
+		 * 
+		 * GROUP BY user.id
+		 * 
+		 * ORDER BY dctapval DESC , user.nom
+		 */
+		return this.jdbcTemplate
+				.query("Select user.nom as nomProf, user.prenom as prenomProf, (SELECT count(dctap.id) FROM dctap WHERE dctap.Etat = 1 AND idProf = user.id OR dctap.Etat = 32 AND idProf = user.id) AS dctapval, (SELECT count(dctap.id) FROM dctap WHERE dctap.Etat = 2 AND idProf = user.id OR dctap.Etat = 8 AND idProf = user.id OR dctap.Etat = 64 AND idProf = user.id) AS dctapref, (SELECT count(dctap.id) FROM dctap WHERE dctap.Etat = 0 AND idProf = user.id OR dctap.Etat = 4 AND idProf = user.id OR dctap.Etat > 1023 AND idProf = user.id) AS dctapatt, count(dctap.id) AS countap FROM user, dctap WHERE dctap.idProf = user.id GROUP BY user.id ORDER BY dctapval DESC, user.nom",
+						new AccStatsMapper());
 	}
 
 	public List<Integer> getAllAPForStatsProf() {
@@ -74,7 +119,6 @@ public class AccPersonnaliseDAOJdbc implements IFAccPersonnaliseDAO {
 				.add(3,
 						this.jdbcTemplate
 								.queryForInt("select count(*) FROM dctap WHERE Etat=2 OR Etat=8 OR Etat=64"));
-
 		return StatsProf;
 	}
 
