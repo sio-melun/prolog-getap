@@ -206,8 +206,12 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.accPersonnaliseDao.getAllAPForProf();
 	}
 
-	public List<Integer> getAllAPForStatsProf() {
+	public List<Integer> getAllAPForStatsProfs() {
 		return this.accPersonnaliseDao.getAllAPForStatsProf();
+	}
+
+	public List<AccPersonalise> getAllAPForEachProf() {
+		return this.accPersonnaliseDao.getAllAPForEachProfs();
 	}
 
 	public List<AccPersonalise> getAllAPForEleve() {

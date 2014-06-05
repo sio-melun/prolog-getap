@@ -187,11 +187,14 @@ public class AdminController {
 	// CHEVAL
 	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
 	public String statsProfesseurs(Model model) {
-		List<Integer> statsAP = manager.getAllAPForStatsProf();
+		List<Integer> statsAP = manager.getAllAPForStatsProfs();
 		model.addAttribute("demandeTTProfs", statsAP.get(0));
 		model.addAttribute("demandeValProfs", statsAP.get(1));
 		model.addAttribute("demandeAttProfs", statsAP.get(2));
 		model.addAttribute("demandeRefProfs", statsAP.get(3));
+
+		List<AccPersonalise> lesProfStats = manager.getAllAPForEachProf();
+		model.addAttribute("eachProf", lesProfStats);
 
 		return "admin/statsProfesseurs";
 	}
