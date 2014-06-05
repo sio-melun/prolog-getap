@@ -82,6 +82,8 @@
   			$("#accordion").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion3").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
+			$("#accordionTest").accordion({autoHeight: true, header: "h3",  event: "click", collapsible : true , active:"false"});
+  			
   			
   			});
   		</script>
