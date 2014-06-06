@@ -23,7 +23,7 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	private static final class AccStatsMapper implements RowMapper<ProfStats> {
+	private static final class AccProfStatsMapper implements RowMapper<ProfStats> {
 		public ProfStats mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ProfStats profStats = new ProfStats();
 			profStats.setNom(rs.getString("nomProf"));
@@ -63,7 +63,7 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 		 */
 		return this.jdbcTemplate
 				.query("Select user.nom as nomProf, user.prenom as prenomProf, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 1 OR dctap.Etat = 32) AND idProf = user.id) AS dctapvalide, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 2 OR dctap.Etat = 8 OR dctap.Etat = 64) AND idProf = user.id) AS dctaprefuse, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 0 OR dctap.Etat = 4 OR dctap.Etat > 1023) AND idProf = user.id) AS dctapattente, count(dctap.id) AS countap FROM user, dctap WHERE dctap.idProf = user.id GROUP BY user.id ORDER BY dctapvalide DESC, user.nom",
-						new AccStatsMapper());
+						new AccProfStatsMapper());
 	}
 
 	public List<Integer> getAllAPForStatsProf() {

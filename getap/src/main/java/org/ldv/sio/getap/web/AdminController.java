@@ -25,6 +25,7 @@ import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.ImportFromSqlFile;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.StatsPDF;
+import org.ldv.sio.getap.app.TypeStats;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -185,15 +186,14 @@ public class AdminController {
 		return "admin/detailUser";
 	}
 
-	// CHEVAL
 	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
 	public String statsProfesseurs(Model model) {
 
-		List<Integer> statsAP = manager.getAllAPForStatsProf();
-		model.addAttribute("demandeTTProfs", statsAP.get(0));
-		model.addAttribute("demandeValProfs", statsAP.get(1));
-		model.addAttribute("demandeAttProfs", statsAP.get(2));
-		model.addAttribute("demandeRefProfs", statsAP.get(3));
+		List<Integer> statsAPProf = manager.getAllAPForStatsProf();
+		model.addAttribute("demandeTTProfs", statsAPProf.get(0));
+		model.addAttribute("demandeValProfs", statsAPProf.get(1));
+		model.addAttribute("demandeAttProfs", statsAPProf.get(2));
+		model.addAttribute("demandeRefProfs", statsAPProf.get(3));
 
 		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
 		model.addAttribute("eachProf", lesProfStats);
@@ -201,7 +201,14 @@ public class AdminController {
 		return "admin/statsProfesseurs";
 	}
 
-	// /CHEVAL
+	@RequestMapping(value = "statsTypes", method = RequestMethod.GET)
+	public String statsTypes(Model model) {
+
+		List<TypeStats> lesTypeStats = manager.getAllAPForEachType();
+		model.addAttribute("eachType", lesTypeStats);
+
+		return "admin/statsTypes";
+	}
 
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)
 	public String ajoutAp(FormAjoutAp formAjout, Model model) {

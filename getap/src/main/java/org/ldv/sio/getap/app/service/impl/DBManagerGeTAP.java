@@ -13,6 +13,7 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.Role;
+import org.ldv.sio.getap.app.TypeStats;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
@@ -21,6 +22,7 @@ import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
+import org.ldv.sio.getap.app.service.dao.IFTypeStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -344,6 +346,17 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<ProfStats> getAllAPForEachProf() {
 		return this.profStatsDao.getAllAPForEachProf();
+	}
+
+	private IFTypeStatsDAO typeStatsDao;
+
+	@Autowired
+	public void setTypeStatsDAO(IFTypeStatsDAO dao) {
+		this.typeStatsDao = dao;
+	}
+
+	public List<TypeStats> getAllAPForEachType() {
+		return this.typeStatsDao.getAllAPForEachType();
 	}
 
 	// TODO trouver un tri pour les méthodes suivantes.

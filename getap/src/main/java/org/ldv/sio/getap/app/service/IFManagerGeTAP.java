@@ -8,6 +8,7 @@ import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.Role;
+import org.ldv.sio.getap.app.TypeStats;
 import org.ldv.sio.getap.app.User;
 
 /**
@@ -83,6 +84,8 @@ public interface IFManagerGeTAP {
 	public List<Integer> getAllAPForStatsProf();
 
 	public List<ProfStats> getAllAPForEachProf();
+
+	public List<TypeStats> getAllAPForEachType();
 
 	public List<AccPersonalise> getAllAPForAdmin();
 

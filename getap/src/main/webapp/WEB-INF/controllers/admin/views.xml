@@ -116,6 +116,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/statsProfesseurs.jsp" />
 	</definition>
+	
+	<definition name="admin/statsTypes" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : Statistiques par type d'AP" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/statsTypes.jsp" />
+	</definition>
 	<!-- /CHEVAL -->
 	
 

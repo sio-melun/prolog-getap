@@ -20,7 +20,7 @@
 	<mvc:interceptors>
 		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
 	</mvc:interceptors>
-
+	
 	<!-- Configure Apache Tiles for the view -->
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
