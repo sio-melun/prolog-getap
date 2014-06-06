@@ -222,22 +222,18 @@ $(document).ready(function() {
 	<div>
 		<table class="stats">
 			<tr>
-				<td class="tdstats"><a href="<c:url value="/app/admin/statsTotales" />"><img
-						src="<c:url value="../../images/stats.png"/>" width="64"
-						height="64" />
-						<div>Totales</div> </a></td>
 				
-				<td class="tdstats"><a href="<c:url value="/app/admin/statsClasses" />"><img
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasses" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" />
 						<div>Par classe</div> </a></td>
 				
-				<td class="tdstats"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" />
 						<div>Par professeurs</div> </a></td>
 				
-				<td class="tdstats"><a href="<c:url value="/app/admin/statsTypes" />"><img
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsTypes" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" />
 						<div>Par type d'AP</div> </a></td>				

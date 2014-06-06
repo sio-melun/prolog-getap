@@ -313,14 +313,24 @@ td .bouton{
 	padding:1em;
 }
 
+.stats
+{
+	width:100%;
+}
+
 .tdStatsTitle{
 	font-weight:bold;
+}
+
+.tdStatsIndex{
+	width:33%;
+	border:1px solid grey;
+	vertical-align: middle;
 }
 
 .tdStats{
 	width:50%;
 	border:1px solid grey;
-	vertical-align: middle;
 }
 
 .tdStatsIdentity
