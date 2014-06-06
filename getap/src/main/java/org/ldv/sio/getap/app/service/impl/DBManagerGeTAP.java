@@ -11,6 +11,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -18,6 +19,7 @@ import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
+import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFUserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,14 +208,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.accPersonnaliseDao.getAllAPForProf();
 	}
 
-	public List<Integer> getAllAPForStatsProfs() {
-		return this.accPersonnaliseDao.getAllAPForStatsProf();
-	}
-
-	public List<AccPersonalise> getAllAPForEachProf() {
-		return this.accPersonnaliseDao.getAllAPForEachProfs();
-	}
-
 	public List<AccPersonalise> getAllAPForEleve() {
 		return this.accPersonnaliseDao.getAllAPForEleve();
 	}
@@ -335,6 +329,21 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public void deleteDiscipline(Discipline dis) {
 		this.disciplineDao.deleteDiscipline(dis);
+	}
+
+	private IFProfStatsDAO profStatsDao;
+
+	@Autowired
+	public void setProfStatsDAO(IFProfStatsDAO dao) {
+		this.profStatsDao = dao;
+	}
+
+	public List<Integer> getAllAPForStatsProf() {
+		return this.profStatsDao.getAllAPForStatsProf();
+	}
+
+	public List<ProfStats> getAllAPForEachProf() {
+		return this.profStatsDao.getAllAPForEachProf();
 	}
 
 	// TODO trouver un tri pour les méthodes suivantes.

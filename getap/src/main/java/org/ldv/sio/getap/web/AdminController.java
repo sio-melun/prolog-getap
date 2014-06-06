@@ -23,6 +23,7 @@ import org.ldv.sio.getap.app.FormAjoutDiscipline;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.ImportFromSqlFile;
+import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.StatsPDF;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -187,13 +188,14 @@ public class AdminController {
 	// CHEVAL
 	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
 	public String statsProfesseurs(Model model) {
-		List<Integer> statsAP = manager.getAllAPForStatsProfs();
+
+		List<Integer> statsAP = manager.getAllAPForStatsProf();
 		model.addAttribute("demandeTTProfs", statsAP.get(0));
 		model.addAttribute("demandeValProfs", statsAP.get(1));
 		model.addAttribute("demandeAttProfs", statsAP.get(2));
 		model.addAttribute("demandeRefProfs", statsAP.get(3));
 
-		List<AccPersonalise> lesProfStats = manager.getAllAPForEachProf();
+		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
 		model.addAttribute("eachProf", lesProfStats);
 
 		return "admin/statsProfesseurs";

@@ -10,10 +10,6 @@ public interface IFAccPersonnaliseDAO {
 
 	public List<AccPersonalise> getAllAPForProf();
 
-	public List<Integer> getAllAPForStatsProf();
-
-	public List<AccPersonalise> getAllAPForEachProfs();
-
 	public List<AccPersonalise> getAllAPForAdmin();
 
 	public AccPersonalise getAPById(int id);

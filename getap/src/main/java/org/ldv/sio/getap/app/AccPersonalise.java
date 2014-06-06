@@ -3,7 +3,7 @@ package org.ldv.sio.getap.app;
 /**
  * type d'accompagnement personnalisé. Ex : "SOS Matière"
  * 
- * Map la table AP + ...
+ * Map la table AP
  */
 public class AccPersonalise {
 	private Integer id;
@@ -14,13 +14,6 @@ public class AccPersonalise {
 	// transiant
 	private int count;
 	private int idEleve;
-
-	// transiant
-	private String prenom;
-	private int countap;
-	private int dctapval;
-	private int dctapref;
-	private int dctapatt;
 
 	public AccPersonalise() {
 	}
@@ -80,55 +73,4 @@ public class AccPersonalise {
 	public void setIdUser(Long idUser) {
 		this.idUser = idUser;
 	}
-
-	public void setPrenom(String prenom) {
-		// CHEVAL
-		this.prenom = prenom;
-	}
-
-	public void setCountap(int countap) {
-		// TODO Auto-generated method stub
-		this.countap = countap;
-	}
-
-	public String getPrenom() {
-		// TODO Auto-generated method stub
-		return prenom;
-	}
-
-	public int getCountap() {
-		// TODO Auto-generated method stub
-		return countap;
-	}
-
-	public void setDctapval(int dctapval) {
-		// TODO Auto-generated method stub
-		this.dctapval = dctapval;
-	}
-
-	public int getDctapval() {
-		// TODO Auto-generated method stub
-		return dctapval;
-	}
-
-	public void setDctapatt(int dctapatt) {
-		// TODO Auto-generated method stub
-		this.dctapatt = dctapatt;
-	}
-
-	public int getDctapatt() {
-		// TODO Auto-generated method stub
-		return dctapatt;
-	}
-
-	public void setDctapref(int dctapref) {
-		// TODO Auto-generated method stub
-		this.dctapref = dctapref;
-	}
-
-	public int getDctapref() {
-		// TODO Auto-generated method stub
-		return dctapref;
-	}
-
 }
