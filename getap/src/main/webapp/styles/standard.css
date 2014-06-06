@@ -118,6 +118,7 @@ div#accordion{
 .tdstats
 {
 	width:25%;
+	text-align:left;
 }
 
 a{
@@ -319,6 +320,7 @@ td .bouton{
 .tdStats{
 	width:50%;
 	border:1px solid grey;
+	vertical-align: middle;
 }
 
 .tdStatsIdentity
