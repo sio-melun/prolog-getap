@@ -45,9 +45,9 @@
 		
 			<tr>
 				<td class="tdStatsIdentity">${prof.nom} ${prof.prenom}</td>
-				<td class="tdStatsProf">${prof.dctapval}</td>
-				<td class="tdStatsProf">${prof.dctapatt}</td>
-				<td class="tdStatsProf">${prof.dctapref}</td>
+				<td class="tdStatsProf">${prof.dctapvalide}</td>
+				<td class="tdStatsProf">${prof.dctapattente}</td>
+				<td class="tdStatsProf">${prof.dctaprefuse}</td>
 				<td class="tdStatsProf">${prof.countap}</td>
 			</tr>
 		</c:forEach>
