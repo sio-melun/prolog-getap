@@ -33,11 +33,8 @@ public class LoginInfoDAOJdbc implements IFLoginInfoDAO {
 	}
 
 	public List<LoginInfo> getLoginInfoById(String id) {
-		return this.jdbcTemplate
-				.query("SELECT (SELECT datein FROM log WHERE idUser="
-						+ id
-						+ " ORDER BY id DESC LIMIT 1) AS lastlog, (SELECT count(*) FROM log WHERE idUser="
-						+ id + ") AS countlog FROM log LIMIT 1;",
-						new AccProfStatsMapper());
+		return this.jdbcTemplate.query(
+				"SELECT MAX(datein) AS lastlog, COUNT(*) AS countlog FROM log WHERE idUser= "
+						+ id + ";", new AccProfStatsMapper());
 	}
 }
