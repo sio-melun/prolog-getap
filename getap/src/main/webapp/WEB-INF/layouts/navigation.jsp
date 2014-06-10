@@ -4,6 +4,12 @@
 <div class="nav">
 	<div class="table">
 
+		<c:if test="${user.role != null}">
+			<ul class="select">
+					<li><a href="#" onClick="history.back();"><img src="../../images/retour.png"></a></li>
+			</ul>
+		</c:if>
+
 		<c:if test="${user.role == 'eleve'}">
 			<ul class="select">
 				<li><a href="<c:url value="/app/eleve/index" />" target="_self"><b>Menu</b> </a></li>

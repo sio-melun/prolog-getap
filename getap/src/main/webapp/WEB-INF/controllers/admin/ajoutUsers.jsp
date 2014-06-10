@@ -19,7 +19,7 @@
 				<p>
 					Ligne type : <strong>Nom;Prénom;idEtab;Division</strong><br><br>
 					
-					Représentation graphique sous excel (schéma a respecter en pointillés) :<br>
+					Représentation graphique sous excel (schéma a respecter en pointillés, NE PAS AJOUTER D'AUTRES COLONNES !) :
 					<table class="stats">
 						<tr>
 							<td class="ligneTypeExcel"></td>
