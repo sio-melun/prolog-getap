@@ -6,6 +6,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.LoginInfo;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.TypeStats;
@@ -172,5 +173,7 @@ public interface IFManagerGeTAP {
 	 *            utilisateur concerné
 	 */
 	public void logUser(User user);
+
+	public List<LoginInfo> getLoginInfoById(String id);
 
 }

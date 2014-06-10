@@ -23,6 +23,7 @@ import org.ldv.sio.getap.app.FormAjoutDiscipline;
 import org.ldv.sio.getap.app.FormAjoutUsers;
 import org.ldv.sio.getap.app.FormEditUser;
 import org.ldv.sio.getap.app.ImportFromSqlFile;
+import org.ldv.sio.getap.app.LoginInfo;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.StatsPDF;
 import org.ldv.sio.getap.app.TypeStats;
@@ -168,6 +169,9 @@ public class AdminController {
 	@RequestMapping(value = "detailUser", method = RequestMethod.GET)
 	public String detailUser(@RequestParam("id") String id, Model model) {
 		User user = manager.getUserById(Long.valueOf(id));
+		List<LoginInfo> loginInfo = manager.getLoginInfoById(id);
+		model.addAttribute("loginInfo", loginInfo);
+
 		model.addAttribute("utilisateur", user);
 		model.addAttribute("sesDCTAPeleve", manager.getAllDVCTAPByEleve(user));
 		model.addAttribute("sesDCTAPprof",

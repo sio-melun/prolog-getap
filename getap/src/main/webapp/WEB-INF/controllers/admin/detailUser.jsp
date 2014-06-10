@@ -285,6 +285,19 @@
 				<td id="statsRefuse"><fmt:formatNumber
 						value="${timeRef/(timeTotEffec+timeRef)*100}" pattern="#0.00" />%</td>
 			</tr>
+			<tr>
+				<td colspan="4" class="hrStats"></td>
+			</tr>
+			<c:forEach items="${loginInfo}" var="log">
+				<tr>
+					<td colspan="2">Dernière connexion :</td>
+					<td colspan="2">${log.lastlog}</td>
+				</tr>
+				<tr>
+					<td colspan="2">Nombre de connexion :</td>
+					<td colspan="2">${log.countlog}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

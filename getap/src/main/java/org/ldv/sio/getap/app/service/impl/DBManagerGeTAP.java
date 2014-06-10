@@ -11,6 +11,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
+import org.ldv.sio.getap.app.LoginInfo;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.Role;
 import org.ldv.sio.getap.app.TypeStats;
@@ -20,6 +21,7 @@ import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
+import org.ldv.sio.getap.app.service.dao.IFLoginInfoDAO;
 import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFTypeStatsDAO;
@@ -357,6 +359,17 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<TypeStats> getAllAPForEachType() {
 		return this.typeStatsDao.getAllAPForEachType();
+	}
+
+	private IFLoginInfoDAO loginInfoDao;
+
+	@Autowired
+	public void setLoginInfoDAO(IFLoginInfoDAO dao) {
+		this.loginInfoDao = dao;
+	}
+
+	public List<LoginInfo> getLoginInfoById(String id) {
+		return this.loginInfoDao.getLoginInfoById(id);
 	}
 
 	// TODO trouver un tri pour les méthodes suivantes.

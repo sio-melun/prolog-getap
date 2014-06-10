@@ -58,7 +58,7 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<h3>
-		<a href="#">Gestion des utilisateurs</a>
+		<a href="#">Modifier un utilisateur (Gestion)</a>
 	</h3>
 	<div>
 		<table>

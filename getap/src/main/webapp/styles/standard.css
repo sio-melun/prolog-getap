@@ -364,3 +364,8 @@ td .bouton{
 	background-color:lightgrey;
 	border:1px solid black;
 }
+
+.hrStats{
+	height:1px;
+	background-color:black;
+}
