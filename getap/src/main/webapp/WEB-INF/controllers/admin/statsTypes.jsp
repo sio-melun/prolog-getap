@@ -4,19 +4,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<br />
-<table class="tableStats">
-	<tr>
-		<td class="tdStatsTitle" colspan="2">Statistiques par AP</td>
-	</tr>
-	<tr>
-		<td class="tdStatsProf">MATIERE</td>
-		<td class="tdStatsProf">NOMBRE D'AP</td>
-	</tr>
-	<c:forEach items="${eachType}" var="type">
-		<tr>
-			<td class="tdStatsIdentity">${type.libelle}</td>
-			<td class="tdStatsProf">${type.countap}</td>
+Note : des accompagnements personnalisés peuvent être ajoutés par les élèves.
+
+<table class="display dataTable" >
+	<thead>
+		<tr class=header>
+			<th> MATIERE</th>
+			<th> DEMANDE D'AP</th>
 		</tr>
-	</c:forEach>
+	</thead>
+	<tbody>
+	<c:forEach items="${eachType}" var="type">
+			<tr>
+				<td class="tdStatsProf">${type.libelle}</td>
+				<td class="tdStatsProf">${type.countap}</td>
+			</tr>
+		</c:forEach>
+	</tbody>
 </table>
