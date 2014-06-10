@@ -16,8 +16,8 @@ Note : des accompagnements personnalisés peuvent être ajoutés par les élève
 	<tbody>
 	<c:forEach items="${eachType}" var="type">
 			<tr>
-				<td class="tdStatsProf">${type.libelle}</td>
-				<td class="tdStatsProf">${type.countap}</td>
+				<td>${type.libelle}</td>
+				<td>${type.countap}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

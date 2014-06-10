@@ -17,9 +17,32 @@
 		<div class="section">
 			<fieldset>
 				<p>
-					Ligne type : Nom;Prénom;idEtab;Division<br>
-					<br> ABADE;Mathilde;AZ04005182M;1CTA1<br>
-					ABDALLAH;Florence;BR06022996Y;1SCT<br><br>
+					Ligne type : <strong>Nom;Prénom;idEtab;Division</strong><br><br>
+					
+					Représentation graphique sous excel (schéma a respecter en pointillés) :<br>
+					<table class="stats">
+						<tr>
+							<td class="ligneTypeExcel"></td>
+							<td class="ligneTypeExcel">A</td>
+							<td class="ligneTypeExcel">B</td>
+							<td class="ligneTypeExcel">C</td>
+							<td class="ligneTypeExcel">D</td>
+						</tr>
+						<tr>
+							<td class="ligneTypeExcel">1</td>
+							<td class="ligneType">ABADE</td>
+							<td class="ligneType">Mathilde</td>
+							<td class="ligneType">AZ04005182M</td>
+							<td class="ligneType">1CTA1</td>
+						</tr>
+						<tr>
+							<td class="ligneTypeExcel">2</td>
+							<td class="ligneType">ABDALLAH</td>
+							<td class="ligneType">Florence</td>
+							<td class="ligneType">BR06022996Y</td>
+							<td class="ligneType">1SCT</td>
+						</tr>
+					</table>
 					/!\ : Le nom de votre fichier déterminera le rôle des utilisateurs envoyés !<br>Pensez donc bien à nommer vos fichiers eleve.csv, prof-principal.csv ou admin.csv. (L'export le fera automatiquement)
 				</p>
 				<div class="form-row">

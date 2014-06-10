@@ -351,3 +351,16 @@ td .bouton{
 	width:16%;
 	border:1px solid grey;
 }
+
+.ligneType{
+	border:1px dashed black;
+	text-align:center;
+	background-color:white;
+	color:black;
+}
+
+.ligneTypeExcel{
+	text-align:center;
+	background-color:lightgrey;
+	border:1px solid black;
+}
