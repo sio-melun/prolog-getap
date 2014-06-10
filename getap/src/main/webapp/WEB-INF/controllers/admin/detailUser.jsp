@@ -262,20 +262,11 @@
 		</thead>
 		<tbody>
 			<tr>
-				<c:if test="${utilisateur.role == 'eleve'}">
-					<td>
-						<fmt:formatNumber value="${timeTotEffec/60-(timeTotEffec%60/60)}"
-							pattern="#00" />h<fmt:formatNumber value="${timeTotEffec%60}"
-							pattern="#00" />
-					</td>
-				</c:if>
-				<c:if test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
-					<td rowspan="2">
-						<fmt:formatNumber value="${timeTotEffec/60-(timeTotEffec%60/60)}"
-							pattern="#00" />h<fmt:formatNumber value="${timeTotEffec%60}"
-							pattern="#00" />
-					</td>
-				</c:if>
+				<td rowspan="2">
+					<fmt:formatNumber value="${timeTotEffec/60-(timeTotEffec%60/60)}"
+						pattern="#00" />h<fmt:formatNumber value="${timeTotEffec%60}"
+						pattern="#00" />
+				</td>
 				<td><fmt:formatNumber value="${timeVal/60-(timeVal%60/60)}"
 						pattern="#00" />h<fmt:formatNumber value="${timeVal%60}"
 						pattern="#00" /></td>
@@ -287,11 +278,6 @@
 						pattern="#00" /></td>
 			</tr>
 			<tr>
-				<c:if test="${utilisateur.role == 'eleve'}">
-					<td><div id="progressbar"></div> <fmt:formatNumber
-							value="${(timeVal+timeAtt)/(72*60)*100}" pattern="#0.00" />% - 72h
-						requises</td>
-				</c:if>
 				<td id="statsValide"><fmt:formatNumber
 						value="${timeVal/(timeTotEffec+timeRef)*100}" pattern="#0.00" />%</td>
 				<td id="statsAttente"><fmt:formatNumber
