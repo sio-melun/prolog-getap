@@ -11,6 +11,7 @@ public class ProfStats {
 	private int dctapvalide;
 	private int dctapattente;
 	private int dctaprefuse;
+	private int id;
 
 	public ProfStats() {
 	}
@@ -82,5 +83,14 @@ public class ProfStats {
 	public int getDctaprefuse() {
 		// TODO Auto-generated method stub
 		return dctaprefuse;
+	}
+
+	public void setId(int id) {
+		// TODO Auto-generated method stub
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

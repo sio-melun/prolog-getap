@@ -23,9 +23,11 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	private static final class AccProfStatsMapper implements RowMapper<ProfStats> {
+	private static final class AccProfStatsMapper implements
+			RowMapper<ProfStats> {
 		public ProfStats mapRow(ResultSet rs, int rowNum) throws SQLException {
 			ProfStats profStats = new ProfStats();
+			profStats.setId(rs.getInt("id"));
 			profStats.setNom(rs.getString("nomProf"));
 			profStats.setPrenom(rs.getString("prenomProf"));
 			profStats.setCountap(rs.getInt("countap"));
@@ -62,7 +64,7 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 		 * ORDER BY dctapval DESC , user.nom
 		 */
 		return this.jdbcTemplate
-				.query("Select user.nom as nomProf, user.prenom as prenomProf, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 1 OR dctap.Etat = 32) AND idProf = user.id) AS dctapvalide, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 2 OR dctap.Etat = 8 OR dctap.Etat = 64) AND idProf = user.id) AS dctaprefuse, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 0 OR dctap.Etat = 4 OR dctap.Etat > 1023) AND idProf = user.id) AS dctapattente, count(dctap.id) AS countap FROM user, dctap WHERE dctap.idProf = user.id GROUP BY user.id ORDER BY dctapvalide DESC, user.nom",
+				.query("Select user.id, user.nom as nomProf, user.prenom as prenomProf, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 1 OR dctap.Etat = 32) AND idProf = user.id) AS dctapvalide, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 2 OR dctap.Etat = 8 OR dctap.Etat = 64) AND idProf = user.id) AS dctaprefuse, (SELECT count(dctap.id) FROM dctap WHERE (dctap.Etat = 0 OR dctap.Etat = 4 OR dctap.Etat > 1023) AND idProf = user.id) AS dctapattente, count(dctap.id) AS countap FROM user, dctap WHERE dctap.idProf = user.id GROUP BY user.id ORDER BY dctapvalide DESC, user.nom",
 						new AccProfStatsMapper());
 	}
 

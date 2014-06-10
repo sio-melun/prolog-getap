@@ -33,6 +33,7 @@
 <table class="display dataTable" >
 	<thead>
 		<tr class=header>
+			<th> DETAIL</th>
 			<th> PROFESSEURS</th>
 			<th> AP VALIDÉES</th>
 			<th> AP EN ATTENTE</th>
@@ -44,11 +45,16 @@
 	<c:forEach items="${eachProf}" var="prof">
 		
 			<tr>
-				<td class="tdStatsIdentity">${prof.nom} ${prof.prenom}</td>
-				<td class="tdStatsProf">${prof.dctapvalide}</td>
-				<td class="tdStatsProf">${prof.dctapattente}</td>
-				<td class="tdStatsProf">${prof.dctaprefuse}</td>
-				<td class="tdStatsProf">${prof.countap}</td>
+				<td><a
+									href="<c:url value="/app/admin/detailUser?id=${prof.id}" />"><img
+										src="../../images/detail.png"
+										onmouseover="this.src='../../images/detailHover.png';"
+										onmouseout="this.src='../../images/detail.png';" /> </a></td>
+				<td>${prof.nom} ${prof.prenom}</td>
+				<td>${prof.dctapvalide}</td>
+				<td>${prof.dctapattente}</td>
+				<td>${prof.dctaprefuse}</td>
+				<td>${prof.countap}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
