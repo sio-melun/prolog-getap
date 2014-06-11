@@ -60,3 +60,10 @@
 	</tbody>
 </table>
 
+<br><br><br>
+
+<center><a href="<c:url value="/app/admin/exportStatsProfesseurCSV" />"><img
+						src="<c:url value="../../images/exportcsv.png"/>" width="64"
+						height="64" />
+						<div>Export CSV des profs</div></a></center>
+

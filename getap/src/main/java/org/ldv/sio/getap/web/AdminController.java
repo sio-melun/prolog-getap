@@ -26,6 +26,7 @@ import org.ldv.sio.getap.app.ImportFromSqlFile;
 import org.ldv.sio.getap.app.LoginInfo;
 import org.ldv.sio.getap.app.ProfStats;
 import org.ldv.sio.getap.app.StatsPDF;
+import org.ldv.sio.getap.app.StatsProfesseurCSV;
 import org.ldv.sio.getap.app.TypeStats;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
@@ -62,6 +63,8 @@ public class AdminController {
 	private StatsPDF statsPdf;
 	@Autowired
 	private DemandesCSV demandes;
+	@Autowired
+	private StatsProfesseurCSV demandesStatsProfesseur;
 
 	public void setCsv(CSV csv) {
 		this.csv = csv;
@@ -611,6 +614,19 @@ public class AdminController {
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom().trim() + ".csv");
 		demandes.export(response, dctaps);
+	}
+
+	@RequestMapping(value = "exportStatsProfesseurCSV", method = RequestMethod.GET)
+	public void exportStatsProfesseurCSV(HttpServletResponse response) {
+
+		System.out.println("MON CHIEN EST SIDNEY");
+
+		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
+
+		response.setContentType("application/csv");
+		response.setHeader("Content-Disposition",
+				"attachment;filename=statsProfesseur.csv");
+		demandesStatsProfesseur.export(response, lesProfStats);
 	}
 
 	@RequestMapping(value = "exportUserCsv")
