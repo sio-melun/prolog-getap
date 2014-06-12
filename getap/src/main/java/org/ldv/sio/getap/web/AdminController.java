@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ldv.sio.getap.app.AccPersonalise;
+import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
@@ -194,7 +195,12 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
-	public String statsProfesseurs(Model model) {
+	public String statsProfesseurs(
+			@RequestParam(value = "annee", required = false, defaultValue = "default") String annee,
+			Model model) {
+
+		List<AnneeScolaire> allYears = manager.getAllYearsForStatsProf();
+		model.addAttribute("allYears", allYears);
 
 		List<Integer> statsAPProf = manager.getAllAPForStatsProf();
 		model.addAttribute("demandeTTProfs", statsAPProf.get(0));
@@ -202,11 +208,36 @@ public class AdminController {
 		model.addAttribute("demandeAttProfs", statsAPProf.get(2));
 		model.addAttribute("demandeRefProfs", statsAPProf.get(3));
 
-		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
-		model.addAttribute("eachProf", lesProfStats);
+		if (annee.equals("default")) {
+			List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
+			model.addAttribute("eachProf", lesProfStats);
+		} else {
+			List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
+			model.addAttribute("eachProf", lesProfStats);
+		}
 
 		return "admin/statsProfesseurs";
 	}
+
+	/*
+	 * @RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
+	 * public String statsProfesseur(@RequestParam("id") String id, Model model)
+	 * {
+	 * 
+	 * List<AnneeScolaire> allYears = manager.getAllYearsForStatsProf();
+	 * model.addAttribute("allYears", allYears);
+	 * 
+	 * List<Integer> statsAPProf = manager.getAllAPForStatsProf();
+	 * model.addAttribute("demandeTTProfs", statsAPProf.get(0));
+	 * model.addAttribute("demandeValProfs", statsAPProf.get(1));
+	 * model.addAttribute("demandeAttProfs", statsAPProf.get(2));
+	 * model.addAttribute("demandeRefProfs", statsAPProf.get(3));
+	 * 
+	 * List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
+	 * model.addAttribute("eachProf", lesProfStats);
+	 * 
+	 * return "admin/statsProfesseurs"; }
+	 */
 
 	@RequestMapping(value = "statsTypes", method = RequestMethod.GET)
 	public String statsTypes(Model model) {

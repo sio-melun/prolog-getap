@@ -8,6 +8,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.ldv.sio.getap.app.AccPersonalise;
+import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
@@ -348,6 +349,15 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<ProfStats> getAllAPForEachProf() {
 		return this.profStatsDao.getAllAPForEachProf();
+	}
+
+	public List<ProfStats> getAllAPForEachProf(String annee) {
+		return this.profStatsDao.getAllAPForEachProf(annee);
+	}
+
+	public List<AnneeScolaire> getAllYearsForStatsProf() {
+		// TODO Auto-generated method stub
+		return this.profStatsDao.getAllYearsForStatsProf();
 	}
 
 	private IFTypeStatsDAO typeStatsDao;

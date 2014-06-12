@@ -3,6 +3,7 @@ package org.ldv.sio.getap.app.service;
 import java.util.List;
 
 import org.ldv.sio.getap.app.AccPersonalise;
+import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
@@ -175,5 +176,9 @@ public interface IFManagerGeTAP {
 	public void logUser(User user);
 
 	public List<LoginInfo> getLoginInfoById(String id);
+
+	public List<AnneeScolaire> getAllYearsForStatsProf();
+
+	public List<ProfStats> getAllAPForEachProf(String annee);
 
 }

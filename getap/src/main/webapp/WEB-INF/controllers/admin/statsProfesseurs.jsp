@@ -4,6 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<script type="text/javascript"> 
+function redirect() {
+	window.location='statsProfesseurs?annee='+document.getElementById('idAnnee').value+'';
+}
+</script>
+
 <br />
 <table class="tableStats">
 	<tr>
@@ -26,7 +32,13 @@
 		<td class="tdStats">${demandeTTProfs}</td>
 	</tr>
 </table>
-<br>
+Visualiser l'année : 
+	<select id="idAnnee" name="idAnnee">
+		<c:forEach items="${allYears}" var="years">
+			<option value="${years.anneescolaire}">${years.anneescolaire}</option>
+		</c:forEach>
+	</select>
+	<input type="submit" value="Go" onclick="redirect();">
 
 <h3 style="position: relative; top: 10px;">Liste des professeurs solicités : </h3>
 
