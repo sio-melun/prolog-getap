@@ -619,8 +619,6 @@ public class AdminController {
 	@RequestMapping(value = "exportStatsProfesseurCSV", method = RequestMethod.GET)
 	public void exportStatsProfesseurCSV(HttpServletResponse response) {
 
-		System.out.println("MON CHIEN EST SIDNEY");
-
 		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
 
 		response.setContentType("application/csv");
