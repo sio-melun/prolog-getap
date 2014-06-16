@@ -5,6 +5,7 @@ import java.util.List;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
+import org.ldv.sio.getap.app.ClasseStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.LoginInfo;
@@ -87,9 +88,17 @@ public interface IFManagerGeTAP {
 
 	public List<ProfStats> getAllAPForEachProf();
 
+	public List<ClasseStats> getAllAPByIdClasse(String idClasse);
+
+	public List<ClasseStats> getAllProfesseursForOneClasse(String idClasse);
+
+	public List<Integer> getAlldctapByClasse(String idClasse);
+
 	public List<TypeStats> getAllAPForEachType();
 
 	public List<AccPersonalise> getAllAPForAdmin();
+
+	public int getFirstIdClasse();
 
 	public AccPersonalise getAPById(int id);
 
@@ -115,7 +124,7 @@ public interface IFManagerGeTAP {
 	public void deleteDiscipline(Discipline dis);
 
 	// CRUD de classe
-	public List<Classe> getAllClasse();
+	public List<Classe> getAllClasses();
 
 	public Classe getClasseById(int id);
 
@@ -179,6 +188,8 @@ public interface IFManagerGeTAP {
 
 	public List<AnneeScolaire> getAllYearsForStatsProf();
 
-	public List<ProfStats> getAllAPForEachProf(String annee);
+	public List<ProfStats> getAllAPByProf(String annee);
+
+	public List<ClasseStats> getAllClassesForStats();
 
 }

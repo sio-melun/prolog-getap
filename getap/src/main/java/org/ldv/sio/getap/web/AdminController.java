@@ -13,6 +13,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
+import org.ldv.sio.getap.app.ClasseStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.DemandesCSV;
 import org.ldv.sio.getap.app.Discipline;
@@ -95,10 +96,11 @@ public class AdminController {
 			FormAjoutDiscipline formAjoutDis, FormAjoutClasse formAjoutClasse,
 			HttpServletRequest httpRequest, Model model, HttpSession session) {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
-		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesClasses", manager.getAllClasses());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
 		model.addAttribute("lesProfs", manager.getAllProf());
+		model.addAttribute("firstClasse", manager.getFirstIdClasse());
 
 		if (session.getAttribute("eleveDeleted") != null) {
 			session.removeAttribute("eleveDeleted");
@@ -113,14 +115,14 @@ public class AdminController {
 			FormAjoutDiscipline formAjoutDis, FormAjoutClasse formAjoutClasse,
 			Model model) {
 		model.addAttribute("lesAP", manager.getAllAPForAdmin());
-		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesClasses", manager.getAllClasses());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 	}
 
 	@RequestMapping(value = "ajoutUser", method = RequestMethod.GET)
 	public String ajoutUser(FormEditUser formAjout, Model model) {
 
-		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesClasses", manager.getAllClasses());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("lesRoles", manager.getAllRole());
 		model.addAttribute("nbClasse", manager.countClasses());
@@ -131,10 +133,6 @@ public class AdminController {
 	@RequestMapping(value = "doajout", method = RequestMethod.POST)
 	public String doajoutUser(FormEditUser formAjout, BindingResult bindResult,
 			Model model) {
-		System.out.println("TEST :" + formAjout.getId());
-		// System.out.println("TEST classe ID et Nom :" + formAjout.etclasse());
-		System.out.println("TEST role :" + formAjout.getRoleNom());
-		System.out.println("TEST :" + model);
 
 		if (bindResult.hasErrors())
 			return "admin/ajoutUser";
@@ -142,7 +140,6 @@ public class AdminController {
 			Classe classe = manager.getClasseById(formAjout.getClasseId());
 			User user = null;
 			Discipline dis = null;
-			System.out.println(classe);
 			if (formAjout.getRoleNom().startsWith("prof")) {
 				dis = new Discipline(formAjout.getDisciplineId(),
 						formAjout.getDisciplineNom());
@@ -151,8 +148,6 @@ public class AdminController {
 					|| formAjout.getRoleNom().equals("admin"))
 				classe = null;
 			if (formAjout.getRoleNom().equals("prof-principal")) {
-
-				System.out.println("TEST CLASSES :" + formAjout.getClasse());
 
 				user = new User(null, formAjout.getPrenom(),
 						formAjout.getNom(), null, formAjout.getRoleNom(),
@@ -212,32 +207,72 @@ public class AdminController {
 			List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
 			model.addAttribute("eachProf", lesProfStats);
 		} else {
-			List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
+			List<ProfStats> lesProfStats = manager.getAllAPByProf(annee);
 			model.addAttribute("eachProf", lesProfStats);
 		}
 
 		return "admin/statsProfesseurs";
 	}
 
-	/*
-	 * @RequestMapping(value = "statsProfesseurs", method = RequestMethod.GET)
-	 * public String statsProfesseur(@RequestParam("id") String id, Model model)
-	 * {
-	 * 
-	 * List<AnneeScolaire> allYears = manager.getAllYearsForStatsProf();
-	 * model.addAttribute("allYears", allYears);
-	 * 
-	 * List<Integer> statsAPProf = manager.getAllAPForStatsProf();
-	 * model.addAttribute("demandeTTProfs", statsAPProf.get(0));
-	 * model.addAttribute("demandeValProfs", statsAPProf.get(1));
-	 * model.addAttribute("demandeAttProfs", statsAPProf.get(2));
-	 * model.addAttribute("demandeRefProfs", statsAPProf.get(3));
-	 * 
-	 * List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
-	 * model.addAttribute("eachProf", lesProfStats);
-	 * 
-	 * return "admin/statsProfesseurs"; }
-	 */
+	@RequestMapping(value = "statsClasse", method = RequestMethod.GET)
+	public String statsClasse(
+			@RequestParam(value = "idClasse", required = false, defaultValue = "default") String idClasse,
+			Model model) {
+
+		if (idClasse.equals("default")) {
+			List<ClasseStats> classeStats = manager.getAllAPByIdClasse(String
+					.valueOf(manager.getFirstIdClasse()));
+			model.addAttribute("classeStats", classeStats);
+
+			List<ClasseStats> profsParClasseStats = manager
+					.getAllProfesseursForOneClasse(String.valueOf((manager
+							.getFirstIdClasse())));
+			model.addAttribute("eachProfForEachClasse", profsParClasseStats);
+
+			List<Integer> statsTotalEleveByClasse = manager
+					.getAlldctapByClasse(idClasse);
+			model.addAttribute("countapTotalElevesByClasse",
+					statsTotalEleveByClasse.get(0));
+			model.addAttribute("dctapvalideTotalElevesByClasse",
+					statsTotalEleveByClasse.get(1));
+			model.addAttribute("dctapattenteTotalElevesByClasse",
+					statsTotalEleveByClasse.get(2));
+			model.addAttribute("dctaprefuseTotalElevesByClasse",
+					statsTotalEleveByClasse.get(3));
+
+			List<ClasseStats> allClasses = manager.getAllClassesForStats();
+			model.addAttribute("allClasses", allClasses);
+
+		} else {
+			List<ClasseStats> classeStats = manager
+					.getAllAPByIdClasse(idClasse);
+			model.addAttribute("classeStats", classeStats);
+
+			List<ClasseStats> profsParClasseStats = manager
+					.getAllProfesseursForOneClasse(idClasse);
+			model.addAttribute("eachProfForEachClasse", profsParClasseStats);
+
+			int intIDClasse = Integer.parseInt(idClasse);
+			String nomClasse = manager.getClasseById(intIDClasse).getNom();
+			model.addAttribute("nomClasse", nomClasse);
+
+			List<Integer> statsTotalEleveByClasse = manager
+					.getAlldctapByClasse(idClasse);
+			model.addAttribute("countapTotalElevesByClasse",
+					statsTotalEleveByClasse.get(0));
+			model.addAttribute("dctapvalideTotalElevesByClasse",
+					statsTotalEleveByClasse.get(1));
+			model.addAttribute("dctapattenteTotalElevesByClasse",
+					statsTotalEleveByClasse.get(2));
+			model.addAttribute("dctaprefuseTotalElevesByClasse",
+					statsTotalEleveByClasse.get(3));
+
+			List<ClasseStats> allClasses = manager.getAllClassesForStats();
+			model.addAttribute("allClasses", allClasses);
+		}
+
+		return "admin/statsClasse";
+	}
 
 	@RequestMapping(value = "statsTypes", method = RequestMethod.GET)
 	public String statsTypes(Model model) {
@@ -417,7 +452,7 @@ public class AdminController {
 	@RequestMapping(value = "searchDctapClasse", method = RequestMethod.GET)
 	public void searchDctapClasse(UserSearchCriteria userSearchCriteria,
 			Model model) {
-		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesClasses", manager.getAllClasses());
 	}
 
 	/**
@@ -501,7 +536,7 @@ public class AdminController {
 			formUser.setClasseId(currentUser.getClasse().getId());
 		}
 
-		model.addAttribute("lesClasses", manager.getAllClasse());
+		model.addAttribute("lesClasses", manager.getAllClasses());
 		model.addAttribute("lesRoles", manager.getAllRole());
 		model.addAttribute("lesDisciplines", manager.getAllDiscipline());
 		model.addAttribute("mesClasses",

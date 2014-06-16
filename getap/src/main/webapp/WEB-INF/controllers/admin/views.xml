@@ -110,6 +110,13 @@
 			value="/WEB-INF/controllers/admin/detailUser.jsp" />
 	</definition>
 	
+
+	<definition name="admin/statsClasse" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : Statistiques des élèves d'une classe" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/statsParClasse.jsp" />
+	</definition>
+	
 	<definition name="admin/statsProfesseurs" extends="standard-layout">
 		<put-attribute name="title" value="GETAP : Statistiques professeurs" />
 		<put-attribute name="body"
@@ -121,7 +128,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/statsTypes.jsp" />
 	</definition>
-	<!-- /CHEVAL -->
+<!-- /CHEVAL -->
 	
 
 </tiles-definitions>

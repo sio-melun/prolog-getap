@@ -223,7 +223,7 @@ $(document).ready(function() {
 		<table class="stats">
 			<tr>
 				
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasses" />"><img
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasse?" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" />
 						<div>Par classe</div> </a></td>

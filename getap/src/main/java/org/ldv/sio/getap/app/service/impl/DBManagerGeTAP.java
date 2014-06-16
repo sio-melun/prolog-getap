@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
+import org.ldv.sio.getap.app.ClasseStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.LoginInfo;
@@ -23,6 +24,7 @@ import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFLoginInfoDAO;
+import org.ldv.sio.getap.app.service.dao.IFParClasseStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFTypeStatsDAO;
@@ -253,10 +255,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.accPersonnaliseDao.getApByType();
 	}
 
-	public List<Classe> getAllClasse() {
-		return this.classeDao.getAllClasse();
-	}
-
 	public Classe getClasseById(int id) {
 		return this.classeDao.getClasseById(id);
 	}
@@ -351,13 +349,24 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.profStatsDao.getAllAPForEachProf();
 	}
 
-	public List<ProfStats> getAllAPForEachProf(String annee) {
+	public List<ProfStats> getAllAPByProf(String annee) {
 		return this.profStatsDao.getAllAPForEachProf(annee);
 	}
 
 	public List<AnneeScolaire> getAllYearsForStatsProf() {
 		// TODO Auto-generated method stub
 		return this.profStatsDao.getAllYearsForStatsProf();
+	}
+
+	private IFParClasseStatsDAO parClasseStatsDao;
+
+	@Autowired
+	public void setParClasseStatsDAO(IFParClasseStatsDAO dao) {
+		this.parClasseStatsDao = dao;
+	}
+
+	public List<ClasseStats> getAllAPByIdClasse(String classe) {
+		return this.parClasseStatsDao.getAllAPByClasse(classe);
 	}
 
 	private IFTypeStatsDAO typeStatsDao;
@@ -437,6 +446,28 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			infos = null;
 		}
 		return infos;
+	}
+
+	public int getFirstIdClasse() {
+		int firstClasse = this.jdbcTemplate
+				.queryForInt("SELECT MIN(classe.id) FROM classe;");
+		return firstClasse;
+	}
+
+	public List<ClasseStats> getAllProfesseursForOneClasse(String classe) {
+		return this.parClasseStatsDao.getAllProfesseursByClasse(classe);
+	}
+
+	public List<Integer> getAlldctapByClasse(String idClasse) {
+		return this.parClasseStatsDao.getAlldctapByClasse(idClasse);
+	}
+
+	public List<ClasseStats> getAllClassesForStats() {
+		return this.parClasseStatsDao.getAllClassesForStats();
+	}
+
+	public List<Classe> getAllClasses() {
+		return this.classeDao.getAllClasse();
 	}
 
 }

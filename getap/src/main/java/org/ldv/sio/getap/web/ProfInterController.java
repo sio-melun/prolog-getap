@@ -41,8 +41,6 @@ public class ProfInterController {
 	public String editDCTAPById(@RequestParam("id") String id,
 			FormListConsoForProfInter dctap, Model model) {
 
-		System.out.println("TEST id recu :" + dctap.getId());
-
 		model.addAttribute("lesAP", manager.getAllAPForProf());
 
 		DemandeValidationConsoTempsAccPers currentDctap = manager

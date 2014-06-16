@@ -135,15 +135,15 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 		StatsProf
 				.add(1,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE Etat=1 OR Etat=32 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=1 OR Etat=32) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
 		StatsProf
 				.add(2,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE Etat=0 OR Etat=4 OR Etat>1000 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=0 OR Etat=4 OR Etat>1000) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
 		StatsProf
 				.add(3,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE Etat=2 OR Etat=8 OR Etat=64 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=2 OR Etat=8 OR Etat=64) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
 		return StatsProf;
 	}
 }
