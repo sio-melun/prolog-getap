@@ -341,15 +341,20 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.profStatsDao = dao;
 	}
 
-	public List<Integer> getAllAPForStatsProf() {
-		return this.profStatsDao.getAllAPForStatsProf();
+	// public List<Integer> getAllAPForStatsProf() {
+	// return this.profStatsDao.getAllAPForStatsProf();
+	// }
+
+	public List<Integer> getAllAPForStatsProf(String annee) {
+		// TODO Auto-generated method stub
+		return this.profStatsDao.getAllAPForStatsProf(annee);
 	}
 
 	public List<ProfStats> getAllAPForEachProf() {
 		return this.profStatsDao.getAllAPForEachProf();
 	}
 
-	public List<ProfStats> getAllAPByProf(String annee) {
+	public List<ProfStats> getAllAPForEachProf(String annee) {
 		return this.profStatsDao.getAllAPForEachProf(annee);
 	}
 

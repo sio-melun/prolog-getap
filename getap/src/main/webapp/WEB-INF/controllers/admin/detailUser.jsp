@@ -288,16 +288,14 @@
 			<tr>
 				<td colspan="4" class="hrStats"></td>
 			</tr>
-			<c:forEach items="${loginInfo}" var="log">
 				<tr>
 					<td colspan="2">Dernière connexion :</td>
-					<td colspan="2">${log.lastlog}</td>
+					<td colspan="2">${lastlog}</td>
 				</tr>
 				<tr>
 					<td colspan="2">Nombre de connexion :</td>
-					<td colspan="2">${log.countlog}</td>
+					<td colspan="2">${countlog}</td>
 				</tr>
-			</c:forEach>
 		</tbody>
 	</table>
 </div>

@@ -28,6 +28,7 @@ public class LoginInfoDAOJdbc implements IFLoginInfoDAO {
 			LoginInfo loginInfo = new LoginInfo();
 			loginInfo.setLastlog(rs.getString("lastlog"));
 			loginInfo.setCountlog(rs.getString("countlog"));
+
 			return loginInfo;
 		}
 	}

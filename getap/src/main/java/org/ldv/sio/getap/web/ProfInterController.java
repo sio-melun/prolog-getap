@@ -67,6 +67,7 @@ public class ProfInterController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(Model model) {
 		User me = UtilSession.getUserInSession();
+
 		model.addAttribute("listdctaps", manager.getAllDVCTAPByProfInterv(me));
 		Long id = me.getId();
 		model.addAttribute("etat0", manager.getAllDVCTAPByEtat(0, id));

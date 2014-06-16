@@ -169,7 +169,8 @@ public class AdminController {
 	public String detailUser(@RequestParam("id") String id, Model model) {
 		User user = manager.getUserById(Long.valueOf(id));
 		List<LoginInfo> loginInfo = manager.getLoginInfoById(id);
-		model.addAttribute("loginInfo", loginInfo);
+		model.addAttribute("lastlog", loginInfo.get(0).getLastlog());
+		model.addAttribute("countlog", loginInfo.get(0).getCountlog());
 
 		model.addAttribute("utilisateur", user);
 		model.addAttribute("sesDCTAPeleve", manager.getAllDVCTAPByEleve(user));
@@ -197,19 +198,24 @@ public class AdminController {
 		List<AnneeScolaire> allYears = manager.getAllYearsForStatsProf();
 		model.addAttribute("allYears", allYears);
 
-		List<Integer> statsAPProf = manager.getAllAPForStatsProf();
+		if (annee.equals("default")) {
+			annee = org.ldv.sio.getap.utils.UtilSession
+					.getAnneeScolaireInSession();
+		}
+
+		// Récupération des AP des professeurs (personnel)
+		List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
+		model.addAttribute("eachProf", lesProfStats);
+
+		// Récupération des AP globaux des professeurs (totaux)
+		List<Integer> statsAPProf = manager.getAllAPForStatsProf(annee);
 		model.addAttribute("demandeTTProfs", statsAPProf.get(0));
 		model.addAttribute("demandeValProfs", statsAPProf.get(1));
 		model.addAttribute("demandeAttProfs", statsAPProf.get(2));
 		model.addAttribute("demandeRefProfs", statsAPProf.get(3));
 
-		if (annee.equals("default")) {
-			List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
-			model.addAttribute("eachProf", lesProfStats);
-		} else {
-			List<ProfStats> lesProfStats = manager.getAllAPByProf(annee);
-			model.addAttribute("eachProf", lesProfStats);
-		}
+		// Récupérer l'année visualisée.
+		model.addAttribute("anneeCourante", annee);
 
 		return "admin/statsProfesseurs";
 	}
@@ -685,7 +691,10 @@ public class AdminController {
 	@RequestMapping(value = "exportStatsProfesseurCSV", method = RequestMethod.GET)
 	public void exportStatsProfesseurCSV(HttpServletResponse response) {
 
-		List<ProfStats> lesProfStats = manager.getAllAPForEachProf();
+		String annee = org.ldv.sio.getap.utils.UtilSession
+				.getAnneeScolaireInSession();
+
+		List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
 
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",

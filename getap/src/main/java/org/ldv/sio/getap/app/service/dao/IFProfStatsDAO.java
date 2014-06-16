@@ -7,12 +7,12 @@ import org.ldv.sio.getap.app.ProfStats;
 
 public interface IFProfStatsDAO {
 
-	public List<Integer> getAllAPForStatsProf();
-
 	public List<ProfStats> getAllAPForEachProf();
 
 	public List<AnneeScolaire> getAllYearsForStatsProf();
 
 	public List<ProfStats> getAllAPForEachProf(String annee);
+
+	public List<Integer> getAllAPForStatsProf(String annee);
 
 }

@@ -84,9 +84,9 @@ public interface IFManagerGeTAP {
 
 	public List<AccPersonalise> getAllAPForProf();
 
-	public List<Integer> getAllAPForStatsProf();
+	// public List<Integer> getAllAPForStatsProf();
 
-	public List<ProfStats> getAllAPForEachProf();
+	public List<ProfStats> getAllAPForEachProf(String annee);
 
 	public List<ClasseStats> getAllAPByIdClasse(String idClasse);
 
@@ -188,8 +188,8 @@ public interface IFManagerGeTAP {
 
 	public List<AnneeScolaire> getAllYearsForStatsProf();
 
-	public List<ProfStats> getAllAPByProf(String annee);
-
 	public List<ClasseStats> getAllClassesForStats();
+
+	public List<Integer> getAllAPForStatsProf(String annee);
 
 }

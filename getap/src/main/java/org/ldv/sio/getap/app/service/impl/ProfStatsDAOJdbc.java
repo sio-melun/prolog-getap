@@ -126,24 +126,49 @@ public class ProfStatsDAOJdbc implements IFProfStatsDAO {
 				"SELECT DISTINCT anneeScolaire FROM dctap", new YearsMapper());
 	}
 
-	public List<Integer> getAllAPForStatsProf() {
+	// public List<Integer> getAllAPForStatsProf() {
+	// List<Integer> StatsProf = new ArrayList<Integer>();
+	// StatsProf
+	// .add(0,
+	// this.jdbcTemplate
+	// .queryForInt("select count(*) FROM dctap WHERE anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+	// StatsProf
+	// .add(1,
+	// this.jdbcTemplate
+	// .queryForInt("select count(*) FROM dctap WHERE Etat=1 OR Etat=32 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+	// StatsProf
+	// .add(2,
+	// this.jdbcTemplate
+	// .queryForInt("select count(*) FROM dctap WHERE Etat=0 OR Etat=4 OR Etat>1000 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+	// StatsProf
+	// .add(3,
+	// this.jdbcTemplate
+	// .queryForInt("select count(*) FROM dctap WHERE Etat=2 OR Etat=8 OR Etat=64 AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+	// return StatsProf;
+	// }
+
+	public List<Integer> getAllAPForStatsProf(String annee) {
 		List<Integer> StatsProf = new ArrayList<Integer>();
 		StatsProf
 				.add(0,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE anneeScolaire = '"
+										+ annee + "'"));
 		StatsProf
 				.add(1,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE (Etat=1 OR Etat=32) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=1 OR Etat=32) AND anneeScolaire = '"
+										+ annee + "'"));
 		StatsProf
 				.add(2,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE (Etat=0 OR Etat=4 OR Etat>1000) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=0 OR Etat=4 OR Etat>1000) AND anneeScolaire = '"
+										+ annee + "'"));
 		StatsProf
 				.add(3,
 						this.jdbcTemplate
-								.queryForInt("select count(*) FROM dctap WHERE (Etat=2 OR Etat=8 OR Etat=64) AND anneeScolaire = (SELECT MAX(anneeScolaire) FROM dctap)"));
+								.queryForInt("select count(*) FROM dctap WHERE (Etat=2 OR Etat=8 OR Etat=64) AND anneeScolaire = '"
+										+ annee + "'"));
 		return StatsProf;
 	}
 }

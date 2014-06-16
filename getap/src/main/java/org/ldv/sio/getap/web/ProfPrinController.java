@@ -32,7 +32,9 @@ public class ProfPrinController {
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public void index(UserSearchCriteria userSearchCriteria, Model model) {
+
 		User user = UtilSession.getUserInSession();
+
 		model.addAttribute("lesClasses",
 				manager.getAllClasseByProf(user.getId()));
 

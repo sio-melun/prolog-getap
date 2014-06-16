@@ -1,11 +1,5 @@
 package org.ldv.sio.getap.app;
 
-/**
- * Permet d'obtenir les statistiques des professeurs. SELECT ap.libelle AS
- * libelle, count(dctap.id) AS countap FROM dctap, ap WHERE ap.id = dctap.idAP
- * GROUP BY ap.libelle
- */
-
 public class LoginInfo {
 	private String lastlog;
 	private String countlog;
@@ -13,9 +7,9 @@ public class LoginInfo {
 	public LoginInfo() {
 	}
 
-	public LoginInfo(String libelle, String countap) {
+	public LoginInfo(String lastlog, String countap) {
 		super();
-		this.lastlog = libelle;
+		this.lastlog = lastlog;
 		this.countlog = countap;
 	}
 

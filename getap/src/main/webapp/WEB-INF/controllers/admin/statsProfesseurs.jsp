@@ -35,7 +35,14 @@ function redirect() {
 Visualiser l'année : 
 	<select id="idAnnee" name="idAnnee">
 		<c:forEach items="${allYears}" var="years">
-			<option value="${years.anneescolaire}">${years.anneescolaire}</option>
+			<c:choose>
+				<c:when test="${years.anneescolaire == anneeCourante}">
+					<option value="${years.anneescolaire}" selected>${years.anneescolaire}</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${years.anneescolaire}">${years.anneescolaire}</option>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</select>
 	<input type="submit" value="Go" onclick="redirect();">
@@ -77,5 +84,6 @@ Visualiser l'année :
 <center><a href="<c:url value="/app/admin/exportStatsProfesseurCSV" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
 						height="64" />
-						<div>Export CSV des profs</div></a></center>
+						<div>Export CSV des profs</div></a><br><br></center>
+<i>Notes : Lors de l'ouverture du fichier CSV, pensez à décocher "Séparer par les espaces" et ne laisser cocher que "Séparer par un point virgule".</i>
 
