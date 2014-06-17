@@ -128,7 +128,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/controllers/admin/statsTypes.jsp" />
 	</definition>
-<!-- /CHEVAL -->
 	
 
 </tiles-definitions>
