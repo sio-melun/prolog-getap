@@ -20,22 +20,18 @@ public class TypeStats {
 	}
 
 	public void setCountap(int countap) {
-		// TODO Auto-generated method stub
 		this.countap = countap;
 	}
 
 	public int getCountap() {
-		// TODO Auto-generated method stub
 		return countap;
 	}
 
 	public void setLibelle(String libelle) {
-		// TODO Auto-generated method stub
 		this.libelle = libelle;
 	}
 
 	public String getLibelle() {
-		// TODO Auto-generated method stub
 		return libelle;
 	}
 }

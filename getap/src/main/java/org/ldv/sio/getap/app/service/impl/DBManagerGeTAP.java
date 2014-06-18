@@ -35,7 +35,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-@Service("DBServiceMangager")
+@Service("DBServiceManager")
 public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	private static JdbcTemplate jdbcTemplate;
@@ -346,7 +346,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	// }
 
 	public List<Integer> getAllAPForStatsProf(String annee) {
-		// TODO Auto-generated method stub
 		return this.profStatsDao.getAllAPForStatsProf(annee);
 	}
 
@@ -359,7 +358,6 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	public List<AnneeScolaire> getAllYearsForStatsProf() {
-		// TODO Auto-generated method stub
 		return this.profStatsDao.getAllYearsForStatsProf();
 	}
 

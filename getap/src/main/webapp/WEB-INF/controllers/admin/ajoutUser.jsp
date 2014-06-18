@@ -65,7 +65,7 @@
 							   <% ligne++; %>
 							   <c:if test="${nbLigne % 4 == 0}"> 
 							   	  </tr><tr> 
-							   	</c:if> 
+							   </c:if> 
 							   	<c:set var="nbLigne" value="<%=ligne%>" />					
 									<td><form:checkbox path="classe" name="${classe.nom}"
 										value="${classe.id}" id="${classe.nom}" /></td>

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service("typeStatsDao")
 public class TypeStatsDAOJdbc implements IFTypeStatsDAO {
+
 	private static JdbcTemplate jdbcTemplate;
 
 	@Autowired

@@ -1,6 +1,5 @@
 package org.ldv.sio.getap.cron;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -53,7 +52,6 @@ public class ScheduledJobs {
 	 * secondes, etc..
 	 */
 
-	@Autowired
 	public void notifyMail() {
 		// Code a exécuter pour la notification par E-mail
 		String format = "dd/MM/yy H:mm:ss";

@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 
 	@Autowired
-	@Qualifier("DBServiceMangager")
+	@Qualifier("DBServiceManager")
 	private IFManagerGeTAP manager;
 
 	@Autowired

@@ -304,11 +304,11 @@
 		<td><a
 			href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
 				src="<c:url value="../../images/pdfdl.png"/>" width="64"
-				height="64" />
-				<div>Export PDF statistiques</div> </a></td>
+				height="64" /><br>
+				Export PDF statistiques </a></td>
 		<td><a href="<c:url value="/app/admin/exportDemandeCsv/${utilisateur.id}" />"><img
 				src="<c:url value="../../images/exportcsv.png"/>" width="64"
-				height="64" />
-				<div>Export CSV des demandes</div> </a></td>
+				height="64" /><br>
+				Export CSV des demandes </a></td>
 	</tr>
 </table>

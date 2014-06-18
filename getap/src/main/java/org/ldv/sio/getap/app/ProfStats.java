@@ -36,57 +36,46 @@ public class ProfStats {
 	}
 
 	public void setPrenom(String prenom) {
-		// CHEVAL
 		this.prenom = prenom;
 	}
 
 	public void setCountap(int countap) {
-		// TODO Auto-generated method stub
 		this.countap = countap;
 	}
 
 	public String getPrenom() {
-		// TODO Auto-generated method stub
 		return prenom;
 	}
 
 	public int getCountap() {
-		// TODO Auto-generated method stub
 		return countap;
 	}
 
 	public void setDctapvalide(int dctapvalide) {
-		// TODO Auto-generated method stub
 		this.dctapvalide = dctapvalide;
 	}
 
 	public int getDctapvalide() {
-		// TODO Auto-generated method stub
 		return dctapvalide;
 	}
 
 	public void setDctapattente(int dctapattente) {
-		// TODO Auto-generated method stub
 		this.dctapattente = dctapattente;
 	}
 
 	public int getDctapattente() {
-		// TODO Auto-generated method stub
 		return dctapattente;
 	}
 
 	public void setDctaprefuse(int dctaprefuse) {
-		// TODO Auto-generated method stub
 		this.dctaprefuse = dctaprefuse;
 	}
 
 	public int getDctaprefuse() {
-		// TODO Auto-generated method stub
 		return dctaprefuse;
 	}
 
 	public void setId(int id) {
-		// TODO Auto-generated method stub
 		this.id = id;
 	}
 

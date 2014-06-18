@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProfInterController {
 
 	@Autowired
-	@Qualifier("DBServiceMangager")
+	@Qualifier("DBServiceManager")
 	private IFManagerGeTAP manager;
 
 	public void setManagerEleve(IFManagerGeTAP serviceManager) {

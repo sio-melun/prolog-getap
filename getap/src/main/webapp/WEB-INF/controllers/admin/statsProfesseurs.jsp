@@ -83,7 +83,7 @@ Visualiser l'année :
 
 <center><a href="<c:url value="/app/admin/exportStatsProfesseurCSV" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
-						height="64" />
-						<div>Export CSV des profs</div></a><br><br></center>
+						height="64" /><br>
+						Export CSV des profs</a><br><br></center>
 <i>Notes : Lors de l'ouverture du fichier CSV, pensez à décocher "Séparer par les espaces" et ne laisser cocher que "Séparer par un point virgule".</i>
 

@@ -14,12 +14,10 @@ public class LoginInfo {
 	}
 
 	public void setLastlog(String lastlog) {
-		// TODO Auto-generated method stub
 		this.lastlog = lastlog;
 	}
 
 	public void setCountlog(String countlog) {
-		// TODO Auto-generated method stub
 		this.countlog = countlog;
 	}
 

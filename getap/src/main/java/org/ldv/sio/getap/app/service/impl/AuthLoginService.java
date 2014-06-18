@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class AuthLoginService implements IFHauthLoginService {
 
 	@Autowired
-	@Qualifier("DBServiceMangager")
+	@Qualifier("DBServiceManager")
 	IFManagerGeTAP managerGeTAP;
 
 	List<User> users;

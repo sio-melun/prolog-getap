@@ -29,7 +29,7 @@ public class LoginController {
 	private IFHauthLoginService hauthLoginService;
 
 	@Autowired
-	@Qualifier("DBServiceMangager")
+	@Qualifier("DBServiceManager")
 	private IFManagerGeTAP manager;
 
 	public void setHauthLoginService(IFHauthLoginService hauthLoginService) {
@@ -92,6 +92,8 @@ public class LoginController {
 			UtilSession.setAnneeScolaireInSession(anneeScolaire);
 			model.addAttribute("userAuth", user);
 			User userIn = UtilSession.getUserInSession();
+
+			// TODO notifyMail
 
 			return "redirect:/app/" + userIn.getRole() + "/index";
 		}

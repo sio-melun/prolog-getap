@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service("parClasseStatsDao")
 public class ParClasseStatsDAOJdbc implements IFParClasseStatsDAO {
+
 	private static JdbcTemplate jdbcTemplate;
 
 	@Autowired

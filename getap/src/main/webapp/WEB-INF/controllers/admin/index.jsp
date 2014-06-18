@@ -26,33 +26,33 @@ $(document).ready(function() {
 			<tr>
 				<td><a href="<c:url value="/app/admin/ajoutUser" />"><img
 						src="<c:url value="../../images/AjouterUser.png"/>" width="64"
-						height="68" />
-						<div>Ajouter un Utilisateur</div> </a></td>
+						height="68" /><br>
+						Ajouter un Utilisateur </a></td>
 				
 				<td><a href="<c:url value="/app/admin/ajoutUsers" />"><img
 						src="<c:url value="../../images/importcsv.png"/>" width="64"
-						height="64" />
-						<div>Import CSV élèves/profs</div> </a></td>
+						height="64" /><br>
+						Import CSV élèves/profs </a></td>
 				
 				<td><a href="<c:url value="/app/admin/exportUserCsv" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
-						height="64" />
-						<div>Export CSV des élèves</div> </a></td>
+						height="64" /><br>
+						Export CSV des élèves </a></td>
 				
 				<td><a href="<c:url value="/app/admin/exportUserCsvProf" />"><img
 						src="<c:url value="../../images/exportcsv.png"/>" width="64"
-						height="64" />
-						<div>Export CSV des profs</div> </a></td>
+						height="64" /><br>
+						Export CSV des profs </a></td>
 				
 				<td><a href="<c:url value="/app/admin/exportUserPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
-						height="64" />
-						<div>Export PDF des élèves</div> </a></td>
+						height="64" /><br>
+						Export PDF des élèves </a></td>
 				
 				<td><a href="<c:url value="/app/admin/exportProfPdf" />"><img
 						src="<c:url value="../../images/pdfdl.png"/>" width="64"
-						height="64" />
-						<div>Export PDF des prof</div> </a></td>
+						height="64" /><br>
+						Export PDF des prof </a></td>
 						
 			</tr>
 		</table>
@@ -212,8 +212,6 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<!-- CHEVAL -->
-
 <h5 style="position: relative; top: 0px;">Statistiques</h5>
 <div id="accordionStats">
 	<h3>
@@ -225,21 +223,19 @@ $(document).ready(function() {
 				
 				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasse?" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
-						height="64" />
-						<div>Par classe</div> </a></td>
+						height="64" /><br>
+						Par classe </a></td>
 				
 				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
-						height="64" />
-						<div>Par professeurs</div> </a></td>
+						height="64" /><br>
+						Par professeurs </a></td>
 				
 				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsTypes" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
-						height="64" />
-						<div>Par type d'AP</div> </a></td>				
+						height="64" /><br>
+						Par type d'AP </a></td>				
 			</tr>
 		</table>
 	</div>
 </div>
-
-<!--  /CHEVAL -->
