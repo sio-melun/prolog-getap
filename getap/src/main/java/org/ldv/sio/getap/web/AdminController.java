@@ -223,59 +223,51 @@ public class AdminController {
 	@RequestMapping(value = "statsClasse", method = RequestMethod.GET)
 	public String statsClasse(
 			@RequestParam(value = "idClasse", required = false, defaultValue = "default") String idClasse,
+			@RequestParam(value = "annee", required = false, defaultValue = "default") String annee,
 			Model model) {
 
-		if (idClasse.equals("default")) {
-			List<ClasseStats> classeStats = manager.getAllAPByIdClasse(String
-					.valueOf(manager.getFirstIdClasse()));
-			model.addAttribute("classeStats", classeStats);
+		List<AnneeScolaire> allYears = manager.getAllYearsForClasseStats();
+		model.addAttribute("allYears", allYears);
 
-			List<ClasseStats> profsParClasseStats = manager
-					.getAllProfesseursForOneClasse(String.valueOf((manager
-							.getFirstIdClasse())));
-			model.addAttribute("eachProfForEachClasse", profsParClasseStats);
+		if (annee.equals("default")) {
 
-			List<Integer> statsTotalEleveByClasse = manager
-					.getAlldctapByClasse(idClasse);
-			model.addAttribute("countapTotalElevesByClasse",
-					statsTotalEleveByClasse.get(0));
-			model.addAttribute("dctapvalideTotalElevesByClasse",
-					statsTotalEleveByClasse.get(1));
-			model.addAttribute("dctapattenteTotalElevesByClasse",
-					statsTotalEleveByClasse.get(2));
-			model.addAttribute("dctaprefuseTotalElevesByClasse",
-					statsTotalEleveByClasse.get(3));
-
-			List<ClasseStats> allClasses = manager.getAllClassesForStats();
-			model.addAttribute("allClasses", allClasses);
-
-		} else {
-			List<ClasseStats> classeStats = manager
-					.getAllAPByIdClasse(idClasse);
-			model.addAttribute("classeStats", classeStats);
-
-			List<ClasseStats> profsParClasseStats = manager
-					.getAllProfesseursForOneClasse(idClasse);
-			model.addAttribute("eachProfForEachClasse", profsParClasseStats);
-
-			int intIDClasse = Integer.parseInt(idClasse);
-			String nomClasse = manager.getClasseById(intIDClasse).getNom();
-			model.addAttribute("nomClasse", nomClasse);
-
-			List<Integer> statsTotalEleveByClasse = manager
-					.getAlldctapByClasse(idClasse);
-			model.addAttribute("countapTotalElevesByClasse",
-					statsTotalEleveByClasse.get(0));
-			model.addAttribute("dctapvalideTotalElevesByClasse",
-					statsTotalEleveByClasse.get(1));
-			model.addAttribute("dctapattenteTotalElevesByClasse",
-					statsTotalEleveByClasse.get(2));
-			model.addAttribute("dctaprefuseTotalElevesByClasse",
-					statsTotalEleveByClasse.get(3));
-
-			List<ClasseStats> allClasses = manager.getAllClassesForStats();
-			model.addAttribute("allClasses", allClasses);
+			annee = org.ldv.sio.getap.utils.UtilSession
+					.getAnneeScolaireInSession();
 		}
+
+		if (idClasse.equals("default")) {
+
+			idClasse = String.valueOf(manager.getFirstIdClasse());
+
+		}
+
+		List<ClasseStats> profsParClasseStats = manager
+				.getAllProfesseursForOneClasse((idClasse), annee);
+		model.addAttribute("eachProfForEachClasse", profsParClasseStats);
+
+		List<Integer> statsTotalEleveByClasse = manager.getAlldctapByClasse(
+				idClasse, annee);
+		model.addAttribute("countapTotalElevesByClasse",
+				statsTotalEleveByClasse.get(0));
+		model.addAttribute("dctapvalideTotalElevesByClasse",
+				statsTotalEleveByClasse.get(1));
+		model.addAttribute("dctapattenteTotalElevesByClasse",
+				statsTotalEleveByClasse.get(2));
+		model.addAttribute("dctaprefuseTotalElevesByClasse",
+				statsTotalEleveByClasse.get(3));
+
+		List<ClasseStats> allClasses = manager.getAllClassesForStats();
+		model.addAttribute("allClasses", allClasses);
+
+		List<ClasseStats> classeStats = manager.getAllAPByIdClasse(idClasse,
+				annee);
+		model.addAttribute("classeStats", classeStats);
+
+		int intIDClasse = Integer.parseInt(idClasse);
+		String nomClasse = manager.getClasseById(intIDClasse).getNom();
+		model.addAttribute("nomClasse", nomClasse);
+
+		model.addAttribute("anneeCourante", annee);
 
 		return "admin/statsClasse";
 	}

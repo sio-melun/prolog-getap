@@ -9,8 +9,9 @@ function redirect() {
 	window.location='statsClasse?idClasse='+document.getElementById('idClasse').value+'';
 }
 </script>
+
 <div>
-	Choisisez une classe : 
+	Choisissez une classe : 
 	<select id="idClasse" name="idClasse">
 		<c:forEach items="${allClasses}" var="classes">
 			<option value="${classes.idClasse}">${classes.libelleClasse}</option>
@@ -18,8 +19,7 @@ function redirect() {
 	</select>
 	<input type="submit" value="Go" onclick="redirect();">
 </div>
-	
-	
+
 <c:if test="${nomClasse != null}" >
 	<div>
 		<table class="tableStats">

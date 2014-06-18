@@ -88,11 +88,12 @@ public interface IFManagerGeTAP {
 
 	public List<ProfStats> getAllAPForEachProf(String annee);
 
-	public List<ClasseStats> getAllAPByIdClasse(String idClasse);
+	public List<ClasseStats> getAllAPByIdClasse(String idClasse, String annee);
 
-	public List<ClasseStats> getAllProfesseursForOneClasse(String idClasse);
+	public List<ClasseStats> getAllProfesseursForOneClasse(String idClasse,
+			String annee);
 
-	public List<Integer> getAlldctapByClasse(String idClasse);
+	public List<Integer> getAlldctapByClasse(String idClasse, String annee);
 
 	public List<TypeStats> getAllAPForEachType();
 
@@ -187,6 +188,8 @@ public interface IFManagerGeTAP {
 	public List<LoginInfo> getLoginInfoById(String id);
 
 	public List<AnneeScolaire> getAllYearsForStatsProf();
+
+	public List<AnneeScolaire> getAllYearsForClasseStats();
 
 	public List<ClasseStats> getAllClassesForStats();
 

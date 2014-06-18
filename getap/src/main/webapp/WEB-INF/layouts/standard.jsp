@@ -42,7 +42,7 @@
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
 				"oLanguage": {
-					"sEmptyTable": "Aucune donnée correspondante",
+		        	"sEmptyTable": "Aucune donnée correspondante",
 					"sLoadingRecords": "Traitement en cour...",
 					"sProcessing": "Traitement en cour...",
 					"sZeroRecords": "Aucune donnée correspondante",
@@ -69,6 +69,8 @@
 				"sPaginationType": "full_numbers"
 			} );
 		} );
+		
+		
 		</script>
 		
      	<script>
@@ -82,15 +84,17 @@
   			$("#accordion").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion2").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
   			$("#accordion3").accordion({autoHeight: false, header: "h3",  event: "click", collapsible : "true", active:"false"});
-			$("#accordionTest").accordion({autoHeight: true, header: "h3",  event: "click", collapsible : true , active:"false"});
   			
   			
   			});
+  			
+  			
   		</script>
   		
         <script>
 		  $(document).ready(function() {
-		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd", 
+		    $("#datepicker" ).datepicker({dateFormat: "yy-mm-dd",
+		    						      maxDate: "+0d",
 		    	                          monthNames: ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
 		    	                          dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
 		    	                          dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"] 

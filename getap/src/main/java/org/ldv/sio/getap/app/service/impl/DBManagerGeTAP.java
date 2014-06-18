@@ -21,10 +21,10 @@ import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
+import org.ldv.sio.getap.app.service.dao.IFClasseStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFLoginInfoDAO;
-import org.ldv.sio.getap.app.service.dao.IFParClasseStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFTypeStatsDAO;
@@ -361,15 +361,23 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.profStatsDao.getAllYearsForStatsProf();
 	}
 
-	private IFParClasseStatsDAO parClasseStatsDao;
+	private IFClasseStatsDAO parClasseStatsDao;
 
 	@Autowired
-	public void setParClasseStatsDAO(IFParClasseStatsDAO dao) {
+	public void setParClasseStatsDAO(IFClasseStatsDAO dao) {
 		this.parClasseStatsDao = dao;
 	}
 
-	public List<ClasseStats> getAllAPByIdClasse(String classe) {
-		return this.parClasseStatsDao.getAllAPByClasse(classe);
+	public List<ClasseStats> getAllAPByIdClasse(String classe, String annee) {
+		return this.parClasseStatsDao.getAllAPByClasse(classe, annee);
+	}
+
+	public List<ClasseStats> getAllClassesForStats() {
+		return this.parClasseStatsDao.getAllClassesForStats();
+	}
+
+	public List<AnneeScolaire> getAllYearsForClasseStats() {
+		return this.parClasseStatsDao.getAllYearsForClasseStats();
 	}
 
 	private IFTypeStatsDAO typeStatsDao;
@@ -457,16 +465,13 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return firstClasse;
 	}
 
-	public List<ClasseStats> getAllProfesseursForOneClasse(String classe) {
-		return this.parClasseStatsDao.getAllProfesseursByClasse(classe);
+	public List<ClasseStats> getAllProfesseursForOneClasse(String classe,
+			String annee) {
+		return this.parClasseStatsDao.getAllProfesseursByClasse(classe, annee);
 	}
 
-	public List<Integer> getAlldctapByClasse(String idClasse) {
-		return this.parClasseStatsDao.getAlldctapByClasse(idClasse);
-	}
-
-	public List<ClasseStats> getAllClassesForStats() {
-		return this.parClasseStatsDao.getAllClassesForStats();
+	public List<Integer> getAlldctapByClasse(String idClasse, String annee) {
+		return this.parClasseStatsDao.getAlldctapByClasse(idClasse, annee);
 	}
 
 	public List<Classe> getAllClasses() {
