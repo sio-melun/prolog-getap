@@ -197,6 +197,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.userDao.updateUser(user);
 	}
 
+	public void updateMailUser(User userModif) {
+		this.userDao.updateMailUser(userModif);
+	}
+
 	public void updateProfil(User user) {
 		this.userDao.updateProfil(user);
 	}

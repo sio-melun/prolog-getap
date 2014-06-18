@@ -93,7 +93,10 @@ public class LoginController {
 			model.addAttribute("userAuth", user);
 			User userIn = UtilSession.getUserInSession();
 
-			// TODO notifyMail
+			if (userIn.getMail() == null
+					&& userIn.getRole().equals("prof-principal")) {
+				return "redirect:/app/" + userIn.getRole() + "/mail";
+			}
 
 			return "redirect:/app/" + userIn.getRole() + "/index";
 		}

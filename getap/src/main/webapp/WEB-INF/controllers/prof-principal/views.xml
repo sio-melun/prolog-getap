@@ -18,4 +18,10 @@
 			value="/WEB-INF/controllers/prof-principal/detailUser.jsp" />
 	</definition>
 	
+	<definition name="prof-principal/mail" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : E-Mail" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/prof-principal/mail.jsp" />
+	</definition>
+	
 </tiles-definitions>

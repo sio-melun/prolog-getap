@@ -1,7 +1,10 @@
 package org.ldv.sio.getap.web;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.ldv.sio.getap.app.FormMail;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
@@ -39,6 +42,36 @@ public class ProfPrinController {
 				manager.getAllClasseByProf(user.getId()));
 
 		model.addAttribute("lesEleves", manager.getAllEleveByClasse());
+	}
+
+	@RequestMapping(value = "mail", method = RequestMethod.GET)
+	public String mailGet(Model model) {
+
+		model.addAttribute("error", "");
+		return "prof-principal/mail";
+	}
+
+	@RequestMapping(value = "mail", method = RequestMethod.POST)
+	public String mailPost(FormMail formMail, BindingResult bindResult,
+			Model model) {
+
+		Pattern pattern = Pattern
+				.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+		Matcher matcher = pattern.matcher(formMail.getMail());
+		if (matcher.matches() == true) {
+			// TODO Modification de l'Email du professeur.
+			User userModif = UtilSession.getUserInSession();
+			userModif.setMail(formMail.getMail());
+
+			manager.updateMailUser(userModif);
+			return "prof-principal/index";
+		} else {
+			model.addAttribute("error", "Votre E-mail est incorrect !");
+			return "prof-principal/mail";
+		}
+
 	}
 
 	@RequestMapping(value = "dosearchForClasse", method = RequestMethod.GET)

@@ -369,3 +369,9 @@ td .bouton{
 	height:1px;
 	background-color:black;
 }
+
+.error{
+	font-weight:bold;
+	color:red;
+	text-align:center;
+}

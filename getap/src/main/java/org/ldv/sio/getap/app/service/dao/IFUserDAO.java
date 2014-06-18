@@ -29,4 +29,6 @@ public interface IFUserDAO {
 	public void updateProfil(User user);
 
 	public void deleteUser(User user);
+
+	public void updateMailUser(User userModif);
 }
