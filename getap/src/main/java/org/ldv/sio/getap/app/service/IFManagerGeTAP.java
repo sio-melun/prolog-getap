@@ -192,4 +192,6 @@ public interface IFManagerGeTAP {
 
 	public List<Integer> getAllAPForStatsProf(String annee);
 
+	public void updateMailUser(User userModif);
+
 }

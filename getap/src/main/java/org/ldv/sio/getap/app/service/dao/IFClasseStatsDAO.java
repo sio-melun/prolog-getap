@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ldv.sio.getap.app.ClasseStats;
 
-public interface IFParClasseStatsDAO {
+public interface IFClasseStatsDAO {
 
 	public List<ClasseStats> getAllAPByClasse(String idClasse);
 

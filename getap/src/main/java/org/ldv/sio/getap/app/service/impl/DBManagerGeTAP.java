@@ -21,10 +21,10 @@ import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
+import org.ldv.sio.getap.app.service.dao.IFClasseStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFLoginInfoDAO;
-import org.ldv.sio.getap.app.service.dao.IFParClasseStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFProfStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFSearchUserDAO;
 import org.ldv.sio.getap.app.service.dao.IFTypeStatsDAO;
@@ -197,6 +197,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		this.userDao.updateUser(user);
 	}
 
+	public void updateMailUser(User userModif) {
+		this.userDao.updateMailUser(userModif);
+	}
+
 	public void updateProfil(User user) {
 		this.userDao.updateProfil(user);
 	}
@@ -361,10 +365,10 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.profStatsDao.getAllYearsForStatsProf();
 	}
 
-	private IFParClasseStatsDAO parClasseStatsDao;
+	private IFClasseStatsDAO parClasseStatsDao;
 
 	@Autowired
-	public void setParClasseStatsDAO(IFParClasseStatsDAO dao) {
+	public void setParClasseStatsDAO(IFClasseStatsDAO dao) {
 		this.parClasseStatsDao = dao;
 	}
 

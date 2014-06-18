@@ -32,7 +32,7 @@
 	<task:scheduler id="taskScheduler" />
 
 	<task:scheduled-tasks scheduler="taskScheduler">
-	 	<task:scheduled ref="ScheduledJobs" method="notifyMail" cron="0 * * * * *" />
+	 	<task:scheduled ref="ScheduledJobs" method="notifyMail" cron="0 0 * * * *" />
 	</task:scheduled-tasks>
 	<!-- /Beans CRON (2014) -->
 	

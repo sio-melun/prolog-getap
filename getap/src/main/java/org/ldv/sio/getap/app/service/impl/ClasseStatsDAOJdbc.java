@@ -8,14 +8,14 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.ldv.sio.getap.app.ClasseStats;
-import org.ldv.sio.getap.app.service.dao.IFParClasseStatsDAO;
+import org.ldv.sio.getap.app.service.dao.IFClasseStatsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service("parClasseStatsDao")
-public class ParClasseStatsDAOJdbc implements IFParClasseStatsDAO {
+public class ClasseStatsDAOJdbc implements IFClasseStatsDAO {
 
 	private static JdbcTemplate jdbcTemplate;
 
