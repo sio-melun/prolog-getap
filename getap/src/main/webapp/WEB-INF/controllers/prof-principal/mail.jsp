@@ -6,7 +6,7 @@
 
 <h3 class="titre3">Entrer votre E-mail</h3>
 <p class="error">${error}</p><br>
-<i>Pour accéder à GeTAP, il est essentiel de renseigner votre E-mail valide. Il sera utilisé pour vous envoyer les compte rendu/alertes des demandes vous concernant.</i>
+<i>Pour accéder à GeTAP, il est essentiel de renseigner votre E-mail valide. Il sera utilisé pour vous envoyer les comptes rendus et les alertes des demandes vous concernant. Vous pourrez modifier cet E-mail à tout moment dans la gestion de votre compte.</i>
 <br><br><br>
 <center>
 	<form action="mail" method="post">
