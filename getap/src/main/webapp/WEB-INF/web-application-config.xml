@@ -23,18 +23,6 @@
 	<mvc:interceptors>
 		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
 	</mvc:interceptors>
-
-	<!-- Beans CRON (2014) - Lire la documentation sur org.ldv.sio.getap.cron.ScheduledJobs.java -->
-	<bean id="ScheduledJobs"
-		class="org.ldv.sio.getap.cron.ScheduledJobs">
-	</bean>
-	
-	<task:scheduler id="taskScheduler" />
-
-	<task:scheduled-tasks scheduler="taskScheduler">
-	 	<task:scheduled ref="ScheduledJobs" method="notifyMail" cron="0 0 * * * *" />
-	</task:scheduled-tasks>
-	<!-- /Beans CRON (2014) -->
 	
 	<!-- Configure Apache Tiles for the view -->
 	<bean id="tilesConfigurer"
@@ -77,6 +65,18 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="100000"></property>
 	</bean>
+	
+	<!-- Beans CRON (2014) - Lire la documentation sur org.ldv.sio.getap.cron.ScheduledJobs.java -->
+	<bean id="ScheduledJobs"
+		class="org.ldv.sio.getap.cron.ScheduledJobs">
+	</bean>
+	
+	<task:scheduler id="taskScheduler" />
 
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<task:scheduled-tasks scheduler="taskScheduler">
+	 	<task:scheduled ref="ScheduledJobs" method="notifyMail" cron="${cron.notifyMail}" />
+	</task:scheduled-tasks>
+	<!-- /Beans CRON (2014) -->
+
+	<context:property-placeholder location="classpath:cron.properties, classpath:jdbc.properties" />
 </beans>
