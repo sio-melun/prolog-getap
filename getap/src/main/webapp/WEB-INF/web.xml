@@ -58,6 +58,9 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/WEB-INF/error/layout-404.jsp</location>
 	</error-page>
-
-
+	
+	<listener>
+        <listener-class>org.ldv.sio.getap.cron.InitCron</listener-class>
+    </listener>
+	
 </web-app>
