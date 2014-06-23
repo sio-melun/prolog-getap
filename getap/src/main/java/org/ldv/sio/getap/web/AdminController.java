@@ -733,20 +733,20 @@ public class AdminController {
 				+ form.getLogo().getOriginalFilename();
 
 		try {
-			List<String> tab = manager.getInfoAccueil();
+			List<List<String>> tab = manager.getParameter();
 			try {
 				img = new FileOutputStream(new File(imgPath));
 				img.write(form.getImg().getFileItem().get());
 				img.close();
 			} catch (FileNotFoundException p) {
-				imgPath = tab.get(0);
+				imgPath = tab.get(0).get(0);
 			}
 			try {
 				logo = new FileOutputStream(new File(logoPath));
 				logo.write(form.getLogo().getFileItem().get());
 				logo.close();
 			} catch (FileNotFoundException p) {
-				logoPath = tab.get(1);
+				logoPath = tab.get(1).get(0);
 
 			}
 			String titre;
@@ -755,13 +755,13 @@ public class AdminController {
 				System.out.println(form.getTitre());
 				titre = form.getTitre();
 			} else {
-				titre = tab.get(2);
+				titre = tab.get(2).get(0);
 			}
 			if (!form.getTexte().equals(null) && !form.getTexte().equals("")) {
 				System.out.println(form.getTexte());
 				texte = form.getTexte();
 			} else {
-				texte = tab.get(3);
+				texte = tab.get(3).get(0);
 			}
 
 			// String[] urlimg = imgPath.split("\\");
@@ -769,7 +769,7 @@ public class AdminController {
 			// String split = urlimg[-1];
 			// System.out.println(split);
 
-			manager.addAccueil(imgPath, logoPath, titre, texte);
+			manager.updateAccueil(imgPath, logoPath, titre, texte);
 		} catch (Exception e) {
 			System.out.println("Error while saving file : ");
 			e.printStackTrace();

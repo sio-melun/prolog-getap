@@ -88,14 +88,26 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	private static final class ArrayStringMapper implements
-			RowMapper<ArrayList<String>> {
-		public ArrayList<String> mapRow(ResultSet rs, int rowNum)
+			RowMapper<List<String>> {
+		public List<String> mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			ArrayList<String> string = new ArrayList<String>();
-			string.add(rs.getString("img"));
-			string.add(rs.getString("logo"));
-			string.add(rs.getString("titre"));
-			string.add(rs.getString("texte"));
+			// TODO : A corriger : List<List<String>> reçu, en List<String>;
+
+			List<String> string = new ArrayList<String>();
+
+			if (rs.getString("keyName").equals("img")) {
+				string.add(rs.getString("keyValue"));
+			}
+			if (rs.getString("keyName").equals("logo")) {
+				string.add(rs.getString("keyValue"));
+			}
+			if (rs.getString("keyName").equals("titre")) {
+				string.add(rs.getString("keyValue"));
+			}
+			if (rs.getString("keyName").equals("texte")) {
+				string.add(rs.getString("keyValue"));
+			}
+
 			return string;
 		}
 	}
@@ -435,32 +447,24 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return null;
 	}
 
-	public void addAccueil(String img, String logo, String titre, String texte) {
-		int count = this.jdbcTemplate.queryForInt(
-				"select count(img) from param_accueil", new Object[] {});
-
-		if (count == 0) {
-			this.jdbcTemplate
-					.update("insert into param_accueil(img, logo, titre, texte) values(?,?,?,?)",
-							new Object[] { img, logo, titre, texte });
-		} else {
-			this.jdbcTemplate
-					.update("update param_accueil set img = ?, logo = ?, titre = ?, texte = ?",
-							new Object[] { img, logo, titre, texte });
-		}
+	public void updateAccueil(String img, String logo, String titre, String texte) {
+		this.jdbcTemplate.update(
+				"UPDATE parameter SET keyValue = ? WHERE keyName='img';",
+				new Object[] { img });
+		this.jdbcTemplate.update(
+				"UPDATE parameter SET keyValue = ? WHERE keyName='logo';",
+				new Object[] { logo });
+		this.jdbcTemplate.update(
+				"UPDATE parameter SET keyValue = ? WHERE keyName='titre';",
+				new Object[] { titre });
+		this.jdbcTemplate.update(
+				"UPDATE parameter SET keyValue = ? WHERE keyName='texte';",
+				new Object[] { texte });
 	}
 
-	public List<String> getInfoAccueil() {
-		List<String> infos;
-		try {
-			infos = this.jdbcTemplate.queryForObject(
-					"select * from param_accueil", new Object[] {},
-					new ArrayStringMapper());
-
-		} catch (EmptyResultDataAccessException e) {
-			infos = null;
-		}
-		return infos;
+	public List<List<String>> getParameter() {
+		return this.jdbcTemplate.query("SELECT * FROM parameter",
+				new ArrayStringMapper());
 	}
 
 	public int getFirstIdClasse() {

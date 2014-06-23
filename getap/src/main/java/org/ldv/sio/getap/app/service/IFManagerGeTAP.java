@@ -148,9 +148,9 @@ public interface IFManagerGeTAP {
 	public List<String> getAllAnneeScolaire();
 
 	// Opération sur la personnalisation de l'accueil
-	public void addAccueil(String img, String logo, String titre, String texte);
+	public void updateAccueil(String img, String logo, String titre, String texte);
 
-	public List<String> getInfoAccueil();
+	public List<List<String>> getParameter();
 
 	// Opération Search User
 	public List<User> searchEleve(String queryNomEleve);

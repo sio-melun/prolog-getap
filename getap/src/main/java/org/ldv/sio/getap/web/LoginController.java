@@ -121,11 +121,12 @@ public class LoginController {
 	// methodes
 
 	public void addParamAcc(Model model) {
-		List<String> infos = manager.getInfoAccueil();
-		model.addAttribute("img", infos.get(0));
-		model.addAttribute("logo", infos.get(1));
-		model.addAttribute("titre", infos.get(2));
-		model.addAttribute("texte", infos.get(3));
+		List<List<String>> infos = manager.getParameter();
+
+		model.addAttribute("img", infos.get(0).get(0));
+		model.addAttribute("logo", infos.get(1).get(0));
+		model.addAttribute("titre", infos.get(2).get(0));
+		model.addAttribute("texte", infos.get(3).get(0));
 
 	}
 
