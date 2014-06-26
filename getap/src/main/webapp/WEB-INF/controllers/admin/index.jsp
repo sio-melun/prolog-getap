@@ -221,7 +221,7 @@ $(document).ready(function() {
 		<table class="stats">
 			<tr>
 				
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasse?" />"><img
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasse" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
 						Par classe </a></td>
@@ -234,7 +234,11 @@ $(document).ready(function() {
 				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsTypes" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
-						Par type d'AP </a></td>				
+						Par type d'AP </a></td>		
+				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsDate" />"><img
+						src="<c:url value="../../images/stats.png"/>" width="64"
+						height="64" /><br>
+						Par Date </a></td>			
 			</tr>
 		</table>
 	</div>

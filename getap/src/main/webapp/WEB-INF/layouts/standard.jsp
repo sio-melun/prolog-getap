@@ -36,11 +36,19 @@
 		<script type="text/javascript" src="../../styles/javascript/fonctions.js"></script>	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/dataTables.tableTools.min.js"></script>
+		<script type="text/javascript" src="../../styles/javascript/dataTables.tableTools.js"></script>
 		<script type="text/javascript" src="../../styles/javascript/jquery-ui.verymin.js"></script>
 		<!-- <script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>-->		
 		<script>
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
+				"sDom ": 'T<"clear ">lfrtip',
+		        "oTableTools ": {
+		            "aButtons ": [
+		                "csv "
+		            ]
+		        },
 				"oLanguage": {
 		        	"sEmptyTable": "Aucune donnée correspondante",
 					"sLoadingRecords": "Traitement en cour...",

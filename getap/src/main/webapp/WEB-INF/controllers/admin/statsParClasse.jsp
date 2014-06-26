@@ -14,18 +14,23 @@ function redirect() {
 	Choisissez une classe : 
 	<select id="idClasse" name="idClasse">
 		<c:forEach items="${allClasses}" var="classes">
-			<option value="${classes.idClasse}">${classes.libelleClasse}</option>
+			<c:choose>
+				<c:when test="${classes.idClasse == idClasseCourante}">
+					<option value="${classes.idClasse}" selected>${classes.libelleClasse}</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${classes.idClasse}">${classes.libelleClasse}</option>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</select>
 	<input type="submit" value="Go" onclick="redirect();">
 </div>
 
 <c:if test="${nomClasse != null}" >
+	<h3><center>Statistiques des élèves de ${nomClasse}</center></h3>
 	<div>
 		<table class="tableStats">
-			<tr>
-				<td colspan="2">Statistiques des élèves de ${nomClasse} </td>
-			</tr>
 			<tr>
 				<td class="tdStats">Demandes validées</td>
 				<td class="tdStats">${dctapvalideTotalElevesByClasse}</td>

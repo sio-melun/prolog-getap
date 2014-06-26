@@ -14,6 +14,7 @@ import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.CSV;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.ClasseStats;
+import org.ldv.sio.getap.app.DateStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.DemandesCSV;
 import org.ldv.sio.getap.app.Discipline;
@@ -267,6 +268,8 @@ public class AdminController {
 		String nomClasse = manager.getClasseById(intIDClasse).getNom();
 		model.addAttribute("nomClasse", nomClasse);
 
+		model.addAttribute("idClasseCourante", idClasse);
+
 		model.addAttribute("anneeCourante", annee);
 
 		return "admin/statsClasse";
@@ -279,6 +282,33 @@ public class AdminController {
 		model.addAttribute("eachType", lesTypeStats);
 
 		return "admin/statsTypes";
+	}
+
+	@RequestMapping(value = "statsDate", method = RequestMethod.GET)
+	public String statsDate(
+			@RequestParam(value = "annee", required = false, defaultValue = "default") String annee,
+			@RequestParam(value = "mois", required = false, defaultValue = "default") String numMois,
+			Model model) {
+
+		if (annee.equals("default")) {
+			annee = org.ldv.sio.getap.utils.UtilSession
+					.getAnneeScolaireInSession();
+		}
+
+		if (numMois.equals("default")) {
+			numMois = "" + manager.getFirstMois(annee) + "";
+		}
+
+		List<DateStats> typeApParMois = manager.getAllDemandeByMois(numMois,
+				annee);
+		model.addAttribute("typeApParMois", typeApParMois);
+
+		List<DateStats> allMois = manager.getAllMois(annee);
+		model.addAttribute("tousMois", allMois);
+
+		model.addAttribute("moisCourante", numMois);
+
+		return "admin/statsDate";
 	}
 
 	@RequestMapping(value = "ajoutAp", method = RequestMethod.GET)

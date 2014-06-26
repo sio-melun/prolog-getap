@@ -11,6 +11,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.ClasseStats;
+import org.ldv.sio.getap.app.DateStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.LoginInfo;
@@ -22,6 +23,7 @@ import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.app.service.dao.IFAccPersonnaliseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseDAO;
 import org.ldv.sio.getap.app.service.dao.IFClasseStatsDAO;
+import org.ldv.sio.getap.app.service.dao.IFDateStatsDAO;
 import org.ldv.sio.getap.app.service.dao.IFDisciplineDAO;
 import org.ldv.sio.getap.app.service.dao.IFDvctapDAO;
 import org.ldv.sio.getap.app.service.dao.IFLoginInfoDAO;
@@ -91,10 +93,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 			RowMapper<List<String>> {
 		public List<String> mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			// TODO : A corriger : List<List<String>> reçu, en List<String>;
-
 			List<String> string = new ArrayList<String>();
-
 			if (rs.getString("keyName").equals("img")) {
 				string.add(rs.getString("keyValue"));
 			}
@@ -105,6 +104,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 				string.add(rs.getString("keyValue"));
 			}
 			if (rs.getString("keyName").equals("texte")) {
+				string.add(rs.getString("keyValue"));
+			}
+			if (rs.getString("keyName").equals("cronMail")) {
 				string.add(rs.getString("keyValue"));
 			}
 
@@ -447,7 +449,8 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return null;
 	}
 
-	public void updateAccueil(String img, String logo, String titre, String texte) {
+	public void updateAccueil(String img, String logo, String titre,
+			String texte) {
 		this.jdbcTemplate.update(
 				"UPDATE parameter SET keyValue = ? WHERE keyName='img';",
 				new Object[] { img });
@@ -484,6 +487,25 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 
 	public List<Classe> getAllClasses() {
 		return this.classeDao.getAllClasse();
+	}
+
+	private IFDateStatsDAO dateDao;
+
+	@Autowired
+	public void setDateStatsDAO(IFDateStatsDAO dao) {
+		this.dateDao = dao;
+	}
+
+	public List<DateStats> getAllDemandeByMois(String mois, String annee) {
+		return this.dateDao.getAllDemandeByMois(mois, annee);
+	}
+
+	public List<DateStats> getAllMois(String annee) {
+		return this.dateDao.getAllMois(annee);
+	}
+
+	public int getFirstMois(String annee) {
+		return this.dateDao.getFirstMois(annee);
 	}
 
 }

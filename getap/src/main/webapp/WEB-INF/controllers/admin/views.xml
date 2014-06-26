@@ -129,5 +129,11 @@
 			value="/WEB-INF/controllers/admin/statsTypes.jsp" />
 	</definition>
 	
+	<definition name="admin/statsDate" extends="standard-layout">
+		<put-attribute name="title" value="GETAP : Statistiques par date" />
+		<put-attribute name="body"
+			value="/WEB-INF/controllers/admin/statsDate.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

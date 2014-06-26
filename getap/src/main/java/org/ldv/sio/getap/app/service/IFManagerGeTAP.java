@@ -6,6 +6,7 @@ import org.ldv.sio.getap.app.AccPersonalise;
 import org.ldv.sio.getap.app.AnneeScolaire;
 import org.ldv.sio.getap.app.Classe;
 import org.ldv.sio.getap.app.ClasseStats;
+import org.ldv.sio.getap.app.DateStats;
 import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.app.Discipline;
 import org.ldv.sio.getap.app.LoginInfo;
@@ -101,6 +102,12 @@ public interface IFManagerGeTAP {
 
 	public int getFirstIdClasse();
 
+	public List<DateStats> getAllDemandeByMois(String mois, String annee);
+
+	public List<DateStats> getAllMois(String annee);
+
+	public int getFirstMois(String annee);
+
 	public AccPersonalise getAPById(int id);
 
 	public AccPersonalise getAPByNom(String nom);
@@ -148,7 +155,8 @@ public interface IFManagerGeTAP {
 	public List<String> getAllAnneeScolaire();
 
 	// Opération sur la personnalisation de l'accueil
-	public void updateAccueil(String img, String logo, String titre, String texte);
+	public void updateAccueil(String img, String logo, String titre,
+			String texte);
 
 	public List<List<String>> getParameter();
 
