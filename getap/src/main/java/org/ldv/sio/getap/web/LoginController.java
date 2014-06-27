@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.web;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.ldv.sio.getap.app.FormAjoutAp;
@@ -121,12 +122,12 @@ public class LoginController {
 	// methodes
 
 	public void addParamAcc(Model model) {
-		List<List<String>> infos = manager.getParameter();
+		List<HashMap<String, String>> infos = manager.getParameter();
 
-		model.addAttribute("img", infos.get(0).get(0));
-		model.addAttribute("logo", infos.get(1).get(0));
-		model.addAttribute("titre", infos.get(2).get(0));
-		model.addAttribute("texte", infos.get(3).get(0));
+		model.addAttribute("img", infos.get(0).get("img"));
+		model.addAttribute("logo", infos.get(1).get("logo"));
+		model.addAttribute("titre", infos.get(2).get("titre"));
+		model.addAttribute("texte", infos.get(3).get("texte"));
 
 	}
 

@@ -1,5 +1,6 @@
 package org.ldv.sio.getap.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.ldv.sio.getap.app.AccPersonalise;
@@ -37,6 +38,9 @@ public interface IFManagerGeTAP {
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
 			User profp);
+
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp, String annee);
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
 			String classe);
@@ -85,9 +89,7 @@ public interface IFManagerGeTAP {
 
 	public List<AccPersonalise> getAllAPForProf();
 
-	// public List<Integer> getAllAPForStatsProf();
-
-	public List<ProfStats> getAllAPForEachProf(String annee);
+	public List<ProfStats> getAllStatsProfs(String annee);
 
 	public List<ClasseStats> getAllAPByIdClasse(String idClasse, String annee);
 
@@ -158,7 +160,7 @@ public interface IFManagerGeTAP {
 	public void updateAccueil(String img, String logo, String titre,
 			String texte);
 
-	public List<List<String>> getParameter();
+	public List<HashMap<String, String>> getParameter();
 
 	// Opération Search User
 	public List<User> searchEleve(String queryNomEleve);

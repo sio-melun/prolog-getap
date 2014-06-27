@@ -9,10 +9,12 @@ public class InitCron implements ServletContextListener {
 
 	@Autowired
 	public void contextInitialized(ServletContextEvent servletcontextevent) {
-		System.out.println("contextInitialized works perfectly !");
+		// Insérez ici le code à exécuter au démarrage du serveur.
+
 	}
 
 	public void contextDestroyed(ServletContextEvent servletcontextevent) {
+		// Insérez ici le code à exécuter à l'arrêt manuel du serveur.
 
 	}
 }

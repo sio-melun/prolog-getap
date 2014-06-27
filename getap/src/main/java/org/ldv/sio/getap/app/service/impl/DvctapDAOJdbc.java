@@ -105,12 +105,17 @@ public class DvctapDAOJdbc implements IFDvctapDAO {
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
-			User profp) {
+			User profp, String annee) {
 		Long id = profp.getId();
 		return this.jdbcTemplate.query(
-				"select * from dctap where anneeScolaire = '"
-						+ UtilSession.getAnneeScolaireInSession()
+				"select * from dctap where anneeScolaire = '" + annee
 						+ "' AND idProf = " + id, new DemandeMapper());
+	}
+
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp) {
+		return getAllDVCTAPByProfPrinc(profp,
+				UtilSession.getAnneeScolaireInSession());
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(

@@ -3,6 +3,7 @@ package org.ldv.sio.getap.app.service.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -90,27 +91,30 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	}
 
 	private static final class ArrayStringMapper implements
-			RowMapper<List<String>> {
-		public List<String> mapRow(ResultSet rs, int rowNum)
+			RowMapper<HashMap<String, String>> {
+		public HashMap<String, String> mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			List<String> string = new ArrayList<String>();
-			if (rs.getString("keyName").equals("img")) {
-				string.add(rs.getString("keyValue"));
-			}
-			if (rs.getString("keyName").equals("logo")) {
-				string.add(rs.getString("keyValue"));
-			}
-			if (rs.getString("keyName").equals("titre")) {
-				string.add(rs.getString("keyValue"));
-			}
-			if (rs.getString("keyName").equals("texte")) {
-				string.add(rs.getString("keyValue"));
-			}
-			if (rs.getString("keyName").equals("cronMail")) {
-				string.add(rs.getString("keyValue"));
-			}
+			// TODO : A corriger : List<List<String>> reçu, en List<String>;
 
-			return string;
+			HashMap<String, String> res = new HashMap<String, String>(1);
+			res.put(rs.getString("keyName"), rs.getString("keyValue"));
+			return res;
+			/*
+			 * List<String> string = new ArrayList<String>();
+			 * 
+			 * if (rs.getString("keyName").equals("img")) {
+			 * string.add(rs.getString("keyValue")); } if
+			 * (rs.getString("keyName").equals("logo")) {
+			 * string.add(rs.getString("keyValue")); } if
+			 * (rs.getString("keyName").equals("titre")) {
+			 * string.add(rs.getString("keyValue")); } if
+			 * (rs.getString("keyName").equals("texte")) {
+			 * string.add(rs.getString("keyValue")); } if
+			 * (rs.getString("keyName").equals("cronMail")) {
+			 * string.add(rs.getString("keyValue")); }
+			 * 
+			 * return string;
+			 */
 		}
 	}
 
@@ -136,6 +140,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
 			User profp) {
 		return this.dvctapDao.getAllDVCTAPByProfPrinc(profp);
+	}
+
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp, String annee) {
+		return this.dvctapDao.getAllDVCTAPByProfPrinc(profp, annee);
 	}
 
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
@@ -367,11 +376,7 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.profStatsDao.getAllAPForStatsProf(annee);
 	}
 
-	public List<ProfStats> getAllAPForEachProf() {
-		return this.profStatsDao.getAllAPForEachProf();
-	}
-
-	public List<ProfStats> getAllAPForEachProf(String annee) {
+	public List<ProfStats> getAllStatsProfs(String annee) {
 		return this.profStatsDao.getAllAPForEachProf(annee);
 	}
 
@@ -465,8 +470,9 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 				new Object[] { texte });
 	}
 
-	public List<List<String>> getParameter() {
-		return this.jdbcTemplate.query("SELECT * FROM parameter",
+	public List<HashMap<String, String>> getParameter() {
+		return this.jdbcTemplate.query(
+				"SELECT keyName, keyValue FROM parameter",
 				new ArrayStringMapper());
 	}
 

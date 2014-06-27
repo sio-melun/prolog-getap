@@ -16,6 +16,9 @@ public interface IFDvctapDAO {
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
 			User profp);
 
+	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByProfPrinc(
+			User profp, String annee);
+
 	public List<DemandeValidationConsoTempsAccPers> getAllDVCTAPByClasse(
 			String classe);
 

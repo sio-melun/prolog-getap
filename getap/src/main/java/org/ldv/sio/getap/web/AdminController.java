@@ -3,6 +3,7 @@ package org.ldv.sio.getap.web;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -205,7 +206,7 @@ public class AdminController {
 		}
 
 		// Récupération des AP des professeurs (personnel)
-		List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
+		List<ProfStats> lesProfStats = manager.getAllStatsProfs(annee);
 		model.addAttribute("eachProf", lesProfStats);
 
 		// Récupération des AP globaux des professeurs (totaux)
@@ -716,7 +717,7 @@ public class AdminController {
 		String annee = org.ldv.sio.getap.utils.UtilSession
 				.getAnneeScolaireInSession();
 
-		List<ProfStats> lesProfStats = manager.getAllAPForEachProf(annee);
+		List<ProfStats> lesProfStats = manager.getAllStatsProfs(annee);
 
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
@@ -763,20 +764,20 @@ public class AdminController {
 				+ form.getLogo().getOriginalFilename();
 
 		try {
-			List<List<String>> tab = manager.getParameter();
+			List<HashMap<String, String>> tab = manager.getParameter();
 			try {
 				img = new FileOutputStream(new File(imgPath));
 				img.write(form.getImg().getFileItem().get());
 				img.close();
 			} catch (FileNotFoundException p) {
-				imgPath = tab.get(0).get(0);
+				imgPath = tab.get(0).get("img");
 			}
 			try {
 				logo = new FileOutputStream(new File(logoPath));
 				logo.write(form.getLogo().getFileItem().get());
 				logo.close();
 			} catch (FileNotFoundException p) {
-				logoPath = tab.get(1).get(0);
+				logoPath = tab.get(1).get("logo");
 
 			}
 			String titre;
@@ -785,13 +786,13 @@ public class AdminController {
 				System.out.println(form.getTitre());
 				titre = form.getTitre();
 			} else {
-				titre = tab.get(2).get(0);
+				titre = tab.get(2).get("titre");
 			}
 			if (!form.getTexte().equals(null) && !form.getTexte().equals("")) {
 				System.out.println(form.getTexte());
 				texte = form.getTexte();
 			} else {
-				texte = tab.get(3).get(0);
+				texte = tab.get(3).get("texte");
 			}
 
 			// String[] urlimg = imgPath.split("\\");

@@ -1,5 +1,19 @@
 package org.ldv.sio.getap.cron;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
+import org.ldv.sio.getap.app.DemandeValidationConsoTempsAccPers;
+import org.ldv.sio.getap.app.ProfStats;
+import org.ldv.sio.getap.app.User;
+import org.ldv.sio.getap.app.service.IFManagerGeTAP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -52,14 +66,80 @@ public class ScheduledJobs {
 	 * secondes, etc..
 	 */
 
-	public void notifyMail() {
-		// Code a exécuter pour la notification par E-mail
-		String format = "dd/MM/yy H:mm:ss";
-		java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(
-				format);
-		java.util.Date date = new java.util.Date();
-		System.out.println("Cron notifyMail exécutée à : "
-				+ formater.format(date));
-	}
+	private String destinataireMail;
+	private String subjectMail;
+	private String contentMail = "";
+	public SimpleDateFormat dateFormatEnvoi = new SimpleDateFormat("yyyy-MM-dd");
 
+	@Autowired
+	@Qualifier("DBServiceManager")
+	private IFManagerGeTAP manager;
+
+	public void notifyMail() throws ParseException {
+
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+
+		int dateToday = (Calendar.DAY_OF_WEEK - 1);
+
+		if (dateToday == Calendar.MONDAY || dateToday == Calendar.THURSDAY) {
+			List<ProfStats> lesProfStats = manager.getAllStatsProfs(manager
+					.getCurrentAnneeScolaire());
+
+			if (dateToday == cal.get(Calendar.MONDAY)) {
+
+			} else if (dateToday == Calendar.THURSDAY) {
+
+				DateFormat dateFormatEnvoi = new SimpleDateFormat("dd/MM/yyyy");
+				dateFormatEnvoi.setTimeZone(TimeZone
+						.getTimeZone("Europe/Paris"));
+				Date dateEnvoi = new Date();
+
+				subjectMail = "[GeTAP] [" + dateFormatEnvoi.format(dateEnvoi)
+						+ "] Récapitulatif et rappel de vos demandes";
+
+				for (Object object : lesProfStats) {
+					ProfStats statsProf = (ProfStats) object;
+
+					if (statsProf.getDctapattente() > 10) {
+
+						User professeur = manager.getUser((long) statsProf
+								.getId());
+
+						if (professeur.getMail() != null) {
+
+							contentMail += "Bonjour " + statsProf.getNom()
+									+ " " + statsProf.getPrenom()
+									+ ",\n\nVoici vos demandes en attente :\n";
+
+							List<DemandeValidationConsoTempsAccPers> lesDvctapProf = manager
+									.getAllDVCTAPByProfPrinc(professeur,
+											manager.getCurrentAnneeScolaire());
+
+							for (int i = 0; i < lesDvctapProf.size(); i++) {
+								int dvctapEtat = lesDvctapProf.get(i).getEtat();
+								if (dvctapEtat == 0 || dvctapEtat == 4
+										|| dvctapEtat > 1023) {
+									contentMail += "- ["
+											+ lesDvctapProf.get(i).getAccPers()
+													.getNom()
+											+ "] ["
+											+ lesDvctapProf.get(i)
+													.getDateAction()
+											+ "] "
+											+ lesDvctapProf.get(i).getEleve()
+													.getPrenom()
+											+ " "
+											+ lesDvctapProf.get(i).getEleve()
+													.getNom() + "\n";
+								}
+							}
+							contentMail += "\nVous pouvez accéder à GeTAP par le lien suivant :\nhttp://getap.vinci-melun.org/getap/app/login/index\n\nBonne journée !";
+							System.out.println(contentMail);
+							contentMail = "";
+						}
+					}
+				}
+			}
+		}
+	}
 }

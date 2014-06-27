@@ -11,7 +11,7 @@ public class ProfStats {
 	private int dctapvalide;
 	private int dctapattente;
 	private int dctaprefuse;
-	private int id;
+	private int idProf;
 
 	public ProfStats() {
 	}
@@ -75,11 +75,11 @@ public class ProfStats {
 		return dctaprefuse;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int idProf) {
+		this.idProf = idProf;
 	}
 
 	public int getId() {
-		return id;
+		return idProf;
 	}
 }
