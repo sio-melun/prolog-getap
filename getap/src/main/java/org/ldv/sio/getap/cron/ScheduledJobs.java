@@ -197,7 +197,7 @@ public class ScheduledJobs {
 				for (Object object : lesProfStats) {
 					ProfStats statsProf = (ProfStats) object;
 
-					if (statsProf.getDctapattente() > 0) {
+					if (statsProf.getDctapattente() > 10) {
 
 						User professeur = manager.getUser((long) statsProf
 								.getId());
