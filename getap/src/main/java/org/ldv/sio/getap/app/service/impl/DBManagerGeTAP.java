@@ -2,9 +2,13 @@ package org.ldv.sio.getap.app.service.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.sql.DataSource;
 
@@ -514,4 +518,32 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 		return this.dateDao.getFirstMois(annee);
 	}
 
+	public void setDateEnvoiMail(int idDvctap) {
+
+		DateFormat dateFormatEnvoi = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormatEnvoi.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
+		Date dateEnvoi = new Date();
+
+		// Nouvelle entrée.
+		this.jdbcTemplate.update(
+				"insert into sendmail(idDvctap, dateEnvoi) values(?,?)",
+				new Object[] { idDvctap, dateFormatEnvoi.format(dateEnvoi) });
+	}
+
+	public int getCountDateEnvoiMail(int idDvctap) {
+		return this.jdbcTemplate
+				.queryForInt("SELECT count(*) FROM sendmail WHERE idDvctap = '"
+						+ idDvctap + "'");
+	}
+
+	public void sendMail(String destinataire, String sujet, String contenu) {
+		String expediteur = "getap@getap.vinci-melun.org";
+
+		System.out
+				.println("--------------------------------------------------------\nMail généré !\n--------------------------------------------------------\n");
+		System.out.println("Expediteur : " + expediteur);
+		System.out.println("Destinataire : " + destinataire);
+		System.out.println("Sujet : " + sujet);
+		System.out.println("\nContenu : " + contenu);
+	}
 }

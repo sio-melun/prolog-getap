@@ -221,21 +221,22 @@ $(document).ready(function() {
 		<table class="stats">
 			<tr>
 				
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsClasse" />"><img
+				<td class="tdStatsIndex"><a href="<c:url value="/app/admin/statsClasse" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
 						Par classe </a></td>
 				
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
+				<td class="tdStatsIndex"><a href="<c:url value="/app/admin/statsProfesseurs" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
 						Par professeurs </a></td>
 				
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsTypes" />"><img
+				<td class="tdStatsIndex"><a href="<c:url value="/app/admin/statsTypes" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
 						Par type d'AP </a></td>		
-				<td class="tdstatsIndex"><a href="<c:url value="/app/admin/statsDate" />"><img
+						
+				<td class="tdStatsIndex"><a href="<c:url value="/app/admin/statsDate" />"><img
 						src="<c:url value="../../images/stats.png"/>" width="64"
 						height="64" /><br>
 						Par Date </a></td>			

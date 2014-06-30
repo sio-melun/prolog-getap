@@ -60,7 +60,7 @@
 	</error-page>
 	
 	<listener>
-        <listener-class>org.ldv.sio.getap.cron.InitCron</listener-class>
+        <listener-class>org.ldv.sio.getap.init.Initialisation</listener-class>
     </listener>
 	
 </web-app>

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -69,6 +70,8 @@ public class ScheduledJobs {
 	private String destinataireMail;
 	private String subjectMail;
 	private String contentMail = "";
+	private String nouvellesDemandes = "";
+	private String demandesRappelees = "";
 	public SimpleDateFormat dateFormatEnvoi = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Autowired
@@ -77,30 +80,27 @@ public class ScheduledJobs {
 
 	public void notifyMail() throws ParseException {
 
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-
-		int dateToday = (Calendar.DAY_OF_WEEK - 1);
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(new Date());
+		int dateToday = calendar.get(calendar.DAY_OF_WEEK);
 
 		if (dateToday == Calendar.MONDAY || dateToday == Calendar.THURSDAY) {
 			List<ProfStats> lesProfStats = manager.getAllStatsProfs(manager
 					.getCurrentAnneeScolaire());
 
-			if (dateToday == cal.get(Calendar.MONDAY)) {
-
-			} else if (dateToday == Calendar.THURSDAY) {
-
+			if (dateToday == GregorianCalendar.MONDAY) {
 				DateFormat dateFormatEnvoi = new SimpleDateFormat("dd/MM/yyyy");
 				dateFormatEnvoi.setTimeZone(TimeZone
 						.getTimeZone("Europe/Paris"));
 				Date dateEnvoi = new Date();
 
 				subjectMail = "[GeTAP] [" + dateFormatEnvoi.format(dateEnvoi)
-						+ "] Récapitulatif et rappel de vos demandes";
+						+ "] Récapitulatif de vos demandes";
 
 				for (Object object : lesProfStats) {
 					ProfStats statsProf = (ProfStats) object;
 
-					if (statsProf.getDctapattente() > 10) {
+					if (statsProf.getDctapattente() > 0) {
 
 						User professeur = manager.getUser((long) statsProf
 								.getId());
@@ -108,8 +108,7 @@ public class ScheduledJobs {
 						if (professeur.getMail() != null) {
 
 							contentMail += "Bonjour " + statsProf.getNom()
-									+ " " + statsProf.getPrenom()
-									+ ",\n\nVoici vos demandes en attente :\n";
+									+ " " + statsProf.getPrenom() + ",\n\n";
 
 							List<DemandeValidationConsoTempsAccPers> lesDvctapProf = manager
 									.getAllDVCTAPByProfPrinc(professeur,
@@ -119,23 +118,165 @@ public class ScheduledJobs {
 								int dvctapEtat = lesDvctapProf.get(i).getEtat();
 								if (dvctapEtat == 0 || dvctapEtat == 4
 										|| dvctapEtat > 1023) {
-									contentMail += "- ["
-											+ lesDvctapProf.get(i).getAccPers()
-													.getNom()
-											+ "] ["
-											+ lesDvctapProf.get(i)
-													.getDateAction()
-											+ "] "
-											+ lesDvctapProf.get(i).getEleve()
-													.getPrenom()
-											+ " "
-											+ lesDvctapProf.get(i).getEleve()
-													.getNom() + "\n";
+
+									int countMail = manager
+											.getCountDateEnvoiMail(lesDvctapProf
+													.get(i).getId().intValue());
+
+									if (countMail == 0) {
+										nouvellesDemandes += "- ["
+												+ lesDvctapProf.get(i)
+														.getAccPers().getNom()
+												+ "] ["
+												+ dateFormatEnvoi
+														.format(lesDvctapProf
+																.get(i)
+																.getDateAction())
+												+ "] "
+												+ lesDvctapProf.get(i)
+														.getEleve().getPrenom()
+												+ " "
+												+ lesDvctapProf.get(i)
+														.getEleve().getNom()
+												+ "\n";
+									} else {
+										demandesRappelees = "- ["
+												+ lesDvctapProf.get(i)
+														.getAccPers().getNom()
+												+ "] ["
+												+ dateFormatEnvoi
+														.format(lesDvctapProf
+																.get(i)
+																.getDateAction())
+												+ "] "
+												+ lesDvctapProf.get(i)
+														.getEleve().getPrenom()
+												+ " "
+												+ lesDvctapProf.get(i)
+														.getEleve().getNom()
+												+ "\n";
+									}
+
+									manager.setDateEnvoiMail(lesDvctapProf
+											.get(i).getId().intValue());
 								}
 							}
-							contentMail += "\nVous pouvez accéder à GeTAP par le lien suivant :\nhttp://getap.vinci-melun.org/getap/app/login/index\n\nBonne journée !";
-							System.out.println(contentMail);
+
+							if (nouvellesDemandes != "") {
+								contentMail += "Vos nouvelles demandes :\n"
+										+ nouvellesDemandes + "\n";
+							}
+
+							if (demandesRappelees != "") {
+								contentMail += "Vos demandes toujours en attente :\n"
+										+ demandesRappelees + "\n";
+							}
+
+							contentMail += "Vous pouvez accéder à GeTAP par le lien suivant :\nhttp://getap.vinci-melun.org/getap/app/login/index\n\nBonne journée !";
+
+							manager.sendMail(professeur.getMail(), subjectMail,
+									contentMail);
+
 							contentMail = "";
+							nouvellesDemandes = "";
+							demandesRappelees = "";
+						}
+					}
+				}
+
+			} else if (dateToday == GregorianCalendar.THURSDAY) {
+
+				DateFormat dateFormatEnvoi = new SimpleDateFormat("dd/MM/yyyy");
+				dateFormatEnvoi.setTimeZone(TimeZone
+						.getTimeZone("Europe/Paris"));
+				Date dateEnvoi = new Date();
+
+				subjectMail = "[GeTAP] [" + dateFormatEnvoi.format(dateEnvoi)
+						+ "] Récapitulatif de vos demandes";
+
+				for (Object object : lesProfStats) {
+					ProfStats statsProf = (ProfStats) object;
+
+					if (statsProf.getDctapattente() > 0) {
+
+						User professeur = manager.getUser((long) statsProf
+								.getId());
+
+						if (professeur.getMail() != null) {
+
+							contentMail += "Bonjour " + statsProf.getNom()
+									+ " " + statsProf.getPrenom() + ",\n\n";
+
+							List<DemandeValidationConsoTempsAccPers> lesDvctapProf = manager
+									.getAllDVCTAPByProfPrinc(professeur,
+											manager.getCurrentAnneeScolaire());
+
+							for (int i = 0; i < lesDvctapProf.size(); i++) {
+								int dvctapEtat = lesDvctapProf.get(i).getEtat();
+								if (dvctapEtat == 0 || dvctapEtat == 4
+										|| dvctapEtat > 1023) {
+
+									int countMail = manager
+											.getCountDateEnvoiMail(lesDvctapProf
+													.get(i).getId().intValue());
+
+									if (countMail == 0) {
+										nouvellesDemandes += "- ["
+												+ lesDvctapProf.get(i)
+														.getAccPers().getNom()
+												+ "] ["
+												+ dateFormatEnvoi
+														.format(lesDvctapProf
+																.get(i)
+																.getDateAction())
+												+ "] "
+												+ lesDvctapProf.get(i)
+														.getEleve().getPrenom()
+												+ " "
+												+ lesDvctapProf.get(i)
+														.getEleve().getNom()
+												+ "\n";
+									} else {
+										demandesRappelees = "- ["
+												+ lesDvctapProf.get(i)
+														.getAccPers().getNom()
+												+ "] ["
+												+ dateFormatEnvoi
+														.format(lesDvctapProf
+																.get(i)
+																.getDateAction())
+												+ "] "
+												+ lesDvctapProf.get(i)
+														.getEleve().getPrenom()
+												+ " "
+												+ lesDvctapProf.get(i)
+														.getEleve().getNom()
+												+ "\n";
+									}
+
+									manager.setDateEnvoiMail(lesDvctapProf
+											.get(i).getId().intValue());
+								}
+							}
+
+							if (nouvellesDemandes != "") {
+								contentMail += "Vos nouvelles demandes :\n"
+										+ nouvellesDemandes + "\n";
+							}
+
+							if (demandesRappelees != "") {
+								contentMail += "Vos demandes toujours en attente :\n"
+										+ demandesRappelees + "\n";
+							}
+
+							contentMail += "Vous pouvez accéder à GeTAP par le lien suivant :\nhttp://getap.vinci-melun.org/getap/app/login/index\n\nBonne journée !";
+
+							manager.sendMail(professeur.getMail(), subjectMail,
+									contentMail);
+
+							contentMail = "";
+							nouvellesDemandes = "";
+							demandesRappelees = "";
 						}
 					}
 				}

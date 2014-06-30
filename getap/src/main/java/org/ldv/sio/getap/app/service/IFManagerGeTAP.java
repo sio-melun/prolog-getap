@@ -207,4 +207,10 @@ public interface IFManagerGeTAP {
 
 	public void updateMailUser(User userModif);
 
+	public void setDateEnvoiMail(int id);
+
+	public int getCountDateEnvoiMail(int idDvctap);
+
+	public void sendMail(String destinataire, String sujet, String contenu);
+
 }

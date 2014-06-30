@@ -1,11 +1,11 @@
-package org.ldv.sio.getap.cron;
+package org.ldv.sio.getap.init;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InitCron implements ServletContextListener {
+public class Initialisation implements ServletContextListener {
 
 	@Autowired
 	public void contextInitialized(ServletContextEvent servletcontextevent) {

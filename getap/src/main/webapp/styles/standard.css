@@ -316,6 +316,9 @@ td .bouton{
 .stats
 {
 	width:100%;
+	border:0;
+	border-spacing : 0;
+	border-collapse : collapse;
 }
 
 .tdStatsTitle{
@@ -323,8 +326,8 @@ td .bouton{
 }
 
 .tdStatsIndex{
-	width:33%;
-	border:1px solid grey;
+	width:25%;
+	border:0;
 	vertical-align: middle;
 }
 
