@@ -77,6 +77,21 @@
 	 	<task:scheduled ref="ScheduledJobs" method="notifyMail" cron="${cron.notifyMail}" />
 	</task:scheduled-tasks>
 	<!-- /Beans CRON (2014) -->
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="${mail.host}"/>
+	    <property name="port" value="${mail.port}"/>
+	    <property name="username" value="${mail.user}"/>
+	    <property name="password" value="${mail.pass}"/>
+	    <property name="javaMailProperties">
+	        <props>
+	            <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+	            <prop key="mail.smtp.auth">true</prop>
+	            <!-- Use TLS to encrypt communication with SMTP server -->
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	        </props>
+	    </property>
+	</bean>
 
-	<context:property-placeholder location="classpath:cron.properties, classpath:jdbc.properties" />
+	<context:property-placeholder location="classpath:cron.properties, classpath:jdbc.properties, classpath:mail.properties" />
 </beans>

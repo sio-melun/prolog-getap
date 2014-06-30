@@ -67,7 +67,6 @@ public class ScheduledJobs {
 	 * secondes, etc..
 	 */
 
-	private String destinataireMail;
 	private String subjectMail;
 	private String contentMail = "";
 	private String nouvellesDemandes = "";
@@ -89,6 +88,7 @@ public class ScheduledJobs {
 					.getCurrentAnneeScolaire());
 
 			if (dateToday == GregorianCalendar.MONDAY) {
+
 				DateFormat dateFormatEnvoi = new SimpleDateFormat("dd/MM/yyyy");
 				dateFormatEnvoi.setTimeZone(TimeZone
 						.getTimeZone("Europe/Paris"));
