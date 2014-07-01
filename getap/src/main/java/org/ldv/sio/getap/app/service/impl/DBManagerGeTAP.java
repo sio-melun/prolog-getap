@@ -40,10 +40,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 @Service("DBServiceManager")
 public class DBManagerGeTAP implements IFManagerGeTAP {
+
+	@Autowired
+	private MailSender mailSender;
+
+	@Autowired
+	private SimpleMailMessage message;
 
 	private static JdbcTemplate jdbcTemplate;
 
@@ -539,11 +547,11 @@ public class DBManagerGeTAP implements IFManagerGeTAP {
 	public void sendMail(String destinataire, String sujet, String contenu) {
 		String expediteur = "getap@getap.vinci-melun.org";
 
-		System.out
-				.println("--------------------------------------------------------\nMail généré !\n--------------------------------------------------------\n");
-		System.out.println("Expediteur : " + expediteur);
-		System.out.println("Destinataire : " + destinataire);
-		System.out.println("Sujet : " + sujet);
-		System.out.println("\nContenu : " + contenu);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom(expediteur);
+		message.setTo(destinataire);
+		message.setSubject(sujet);
+		message.setText(contenu);
+		mailSender.send(message);
 	}
 }
