@@ -59,8 +59,10 @@
 		<location>/WEB-INF/error/layout-404.jsp</location>
 	</error-page>
 	
+<!-- 
 	<listener>
         <listener-class>org.ldv.sio.getap.init.Initialisation</listener-class>
-    </listener>
-	
+  </listener>
+ -->	
+ 
 </web-app>

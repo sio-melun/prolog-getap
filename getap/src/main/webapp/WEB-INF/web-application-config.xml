@@ -86,9 +86,9 @@
 	    <property name="javaMailProperties">
 	        <props>
 	            <!-- Use SMTP-AUTH to authenticate to SMTP server -->
-	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.auth">false</prop>
 	            <!-- Use TLS to encrypt communication with SMTP server -->
-	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.starttls.enable">false</prop>
 	        </props>
 	    </property>
 	</bean>

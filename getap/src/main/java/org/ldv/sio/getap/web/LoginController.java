@@ -25,110 +25,109 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/login/*")
 public class LoginController {
 
-	@Autowired
-	@Qualifier("serviceAuth")
-	private IFHauthLoginService hauthLoginService;
+  @Autowired
+  @Qualifier("serviceAuth")
+  private IFHauthLoginService hauthLoginService;
 
-	@Autowired
-	@Qualifier("DBServiceManager")
-	private IFManagerGeTAP manager;
+  @Autowired
+  @Qualifier("DBServiceManager")
+  private IFManagerGeTAP manager;
 
-	public void setHauthLoginService(IFHauthLoginService hauthLoginService) {
-		this.hauthLoginService = hauthLoginService;
-	}
+  public void setHauthLoginService(IFHauthLoginService hauthLoginService) {
+    this.hauthLoginService = hauthLoginService;
+  }
 
-	@RequestMapping(value = "apropos", method = RequestMethod.GET)
-	public String apropos(UserLoginCriteria userLoginCriteria) {
+  @RequestMapping(value = "apropos", method = RequestMethod.GET)
+  public String apropos(UserLoginCriteria userLoginCriteria) {
 
-		return "login/apropos";
-	}
+    return "login/apropos";
+  }
 
-	/**
-	 * Default action, displays the login page.
-	 * 
-	 * @param UserLoginCriteria
-	 *            The criteria to authenticate
-	 */
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public void index(UserLoginCriteria userSearchCriteria, Model model) {
-		addParamAcc(model);
-	}
+  /**
+   * Default action, displays the login page.
+   * 
+   * @param UserLoginCriteria
+   *          The criteria to authenticate
+   */
+  @RequestMapping(value = "index", method = RequestMethod.GET)
+  public void index(UserLoginCriteria userSearchCriteria, Model model) {
+    addParamAcc(model);
+  }
 
-	/**
-	 * Valide user puis l'authentifie via le bean injecté hauthLoginService
-	 * 
-	 * @param userLoginCriteria
-	 *            The criteria to validate for
-	 * @param bindResult
-	 *            Holds userLoginCriteria validation errors
-	 * @param model
-	 *            Holds the resulting user (is authenticate)
-	 * @return Success or index view
-	 */
-	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
-	public String authenticate(FormAjoutAp formAjout,
-			UserLoginCriteria userLoginCriteria, BindingResult bindResult,
-			Model model, UserSearchCriteria userSearchCriteria) {
+  /**
+   * Valide user puis l'authentifie via le bean injecté hauthLoginService
+   * 
+   * @param userLoginCriteria
+   *          The criteria to validate for
+   * @param bindResult
+   *          Holds userLoginCriteria validation errors
+   * @param model
+   *          Holds the resulting user (is authenticate)
+   * @return Success or index view
+   */
+  @RequestMapping(value = "authenticate", method = RequestMethod.POST)
+  public String authenticate(FormAjoutAp formAjout,
+      UserLoginCriteria userLoginCriteria, BindingResult bindResult,
+      Model model, UserSearchCriteria userSearchCriteria) {
 
-		addParamAcc(model);
+    addParamAcc(model);
 
-		if (userLoginCriteria.getLogin() == null
-				|| "".equals(userLoginCriteria.getLogin().trim())) {
-			bindResult.rejectValue("login", "required",
-					"Un identifiant est attendu !");
-			return "login/authenticate";
-		}
-		if (bindResult.hasErrors()) {
-			return "login/index";
-		} else {
-			User user = hauthLoginService.getAuthUser(userLoginCriteria);
-			if (user == null) {
-				bindResult.rejectValue("login", "required",
-						"Entrez un identifiant valide");
-				return "login/authenticate";
-			}
-			UtilSession.setUserInSession(user);
-			manager.logUser(user);
-			String anneeScolaire = manager.getCurrentAnneeScolaire();
-			UtilSession.setAnneeScolaireInSession(anneeScolaire);
-			model.addAttribute("userAuth", user);
-			User userIn = UtilSession.getUserInSession();
+    if (userLoginCriteria.getLogin() == null
+        || "".equals(userLoginCriteria.getLogin().trim())) {
+      bindResult.rejectValue("login", "required",
+          "Un identifiant est attendu !");
+      return "login/authenticate";
+    }
+    if (bindResult.hasErrors()) {
+      return "login/index";
+    } else {
+      User user = hauthLoginService.getAuthUser(userLoginCriteria);
+      if (user == null) {
+        bindResult.rejectValue("login", "required",
+            "Entrez un identifiant valide");
+        return "login/authenticate";
+      }
+      UtilSession.setUserInSession(user);
+      manager.logUser(user);
+      String anneeScolaire = manager.getCurrentAnneeScolaire();
+      UtilSession.setAnneeScolaireInSession(anneeScolaire);
+      model.addAttribute("userAuth", user);
+      // User userIn = UtilSession.getUserInSession();
 
-			if (userIn.getMail() == null
-					&& userIn.getRole().equals("prof-principal")) {
-				return "redirect:/app/" + userIn.getRole() + "/mail";
-			}
+      if (user.getMail() == null && user.getRole().startsWith("pro")) {
+        return "redirect:/app/prof-principal/mail";
+      }
 
-			return "redirect:/app/" + userIn.getRole() + "/index";
-		}
-	}
+      return "redirect:/app/" + user.getRole() + "/index";
+    }
+  }
 
-	/**
-	 * supprime user de la session, et retourne au login
-	 * 
-	 * @param userLoginCriteria
-	 *            (pour fournir cette instance à la vue 'login/index')
-	 * @return Success view
-	 */
-	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(UserLoginCriteria userLoginCriteria, Model model) {
-		UtilSession.setUserInSession(null);
+  /**
+   * supprime user de la session, et retourne au login
+   * 
+   * @param userLoginCriteria
+   *          (pour fournir cette instance à la vue 'login/index')
+   * @return Success view
+   */
+  @RequestMapping(value = "logout", method = RequestMethod.GET)
+  public String logout(UserLoginCriteria userLoginCriteria, Model model) {
+    UtilSession.setUserInSession(null);
 
-		addParamAcc(model);
+    addParamAcc(model);
 
-		return "login/index";
-	}
+    return "login/index";
+  }
 
-	// methodes
+  // methodes
 
-	public void addParamAcc(Model model) {
-		List<HashMap<String, String>> infos = manager.getParameter();
+  public void addParamAcc(Model model) {
+    List<HashMap<String, String>> infos = manager.getParameter();
 
-		model.addAttribute("img", infos.get(0).get("img"));
-		model.addAttribute("logo", infos.get(1).get("logo"));
-		model.addAttribute("titre", infos.get(2).get("titre"));
-		model.addAttribute("texte", infos.get(3).get("texte"));
+    model.addAttribute("img", infos.get(0).get("img"));
+    model.addAttribute("logo", infos.get(1).get("logo"));
+    model.addAttribute("titre", infos.get(2).get("titre"));
+    model.addAttribute("texte", infos.get(3).get("texte"));
 
-	}
+  }
 
 }

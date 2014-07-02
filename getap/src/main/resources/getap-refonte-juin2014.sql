@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS `sendmail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idDvctap` int(11) NOT NULL,
   `dateEnvoi` date NOT NULL,
-  PRIMARY KEY (`id`,`dateEnvoi`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
