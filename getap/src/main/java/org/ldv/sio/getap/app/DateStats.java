@@ -1,11 +1,13 @@
 package org.ldv.sio.getap.app;
 
+import java.util.List;
+
 public class DateStats {
 
 	private String nomProf;
 	private String prenomProf;
 	private String dateAP;
-	private int nbParticipant;
+	private int nbSolicitant;
 	private String typeAP;
 	private int firstMois;
 
@@ -15,22 +17,34 @@ public class DateStats {
 			"Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre",
 			"Novembre", "decembre" };
 
+	private List<User> listEleve;
+	private String prenomEleve;
+	private String nomEleve;
+	private String nomClasse;
+
 	public DateStats() {
 
 	}
 
-	public DateStats(String mois, int nbParticipant, String typeAP,
+	public DateStats(String mois, int nbSolicitant, String typeAP,
 			int firstMois, String nomProf, String prenomProf, String dateAP,
 			String numMois, String[] tabLibMois) {
 		super();
 		this.numMois = numMois;
 		this.mois = tabLibMois[Integer.parseInt(numMois)];
-		this.nbParticipant = nbParticipant;
+		this.nbSolicitant = nbSolicitant;
 		this.typeAP = typeAP;
 		this.firstMois = firstMois;
 		this.nomProf = nomProf;
 		this.prenomProf = prenomProf;
 		this.dateAP = dateAP;
+	}
+
+	public DateStats(String prenomEleve, String nomEleve, String nomClasse) {
+		super();
+		this.prenomEleve = prenomEleve;
+		this.nomEleve = nomEleve;
+		this.nomClasse = nomClasse;
 	}
 
 	public String getMois() {
@@ -51,12 +65,12 @@ public class DateStats {
 		this.firstMois = firstMois;
 	}
 
-	public int getNbParticipant() {
-		return nbParticipant;
+	public int getNbSolicitant() {
+		return nbSolicitant;
 	}
 
-	public void setNbParticipant(int nbParticipant) {
-		this.nbParticipant = nbParticipant;
+	public void setNbSolicitant(int nbSolicitant) {
+		this.nbSolicitant = nbSolicitant;
 	}
 
 	public String getTypeAP() {
@@ -105,6 +119,38 @@ public class DateStats {
 
 	public static void setTabLibMois(String[] tabLibMois) {
 		DateStats.tabLibMois = tabLibMois;
+	}
+
+	public String getPrenomEleve() {
+		return prenomEleve;
+	}
+
+	public void setPrenomEleve(String prenomEleve) {
+		this.prenomEleve = prenomEleve;
+	}
+
+	public String getNomEleve() {
+		return nomEleve;
+	}
+
+	public void setNomEleve(String nomEleve) {
+		this.nomEleve = nomEleve;
+	}
+
+	public String getNomClasse() {
+		return nomClasse;
+	}
+
+	public void setNomClasse(String nomClasse) {
+		this.nomClasse = nomClasse;
+	}
+
+	public List<User> getListEleve() {
+		return listEleve;
+	}
+
+	public void setListEleve(List<User> listEleve) {
+		this.listEleve = listEleve;
 	}
 
 }

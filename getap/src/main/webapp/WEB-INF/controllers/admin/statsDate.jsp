@@ -37,7 +37,7 @@ function redirect() {
 				<th>PRENOM</th>
 				<th>DATE</th>
 				<th>TYPE D'AP</th>
-				<th>NOMBRE DE PARTICIPANT(élève)</th>
+				<th>NOMBRE DE SOLICITANT(élève)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,11 +47,13 @@ function redirect() {
 					<td>${tApParMois.prenomProf}</td>
 					<td>${tApParMois.dateAP}</td>
 					<td>${tApParMois.typeAP}</td>
-					<td>${tApParMois.nbParticipant}</td>
+					<td><c:forEach items="${tApParMois.listEleve}" var="eleve">
+					${eleve.prenom} ${eleve.nom} ${eleve.classe}, 
+					</c:forEach></td>
+					<!-- <td>${tApParMois.nbSolicitant}</td>  -->
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
-
-

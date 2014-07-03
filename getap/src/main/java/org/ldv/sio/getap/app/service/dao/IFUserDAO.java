@@ -18,6 +18,9 @@ public interface IFUserDAO {
 
 	public List<User> getAllEleveByPP(User user);
 
+	public List<User> getAllEleveByAAP(String annee, String dateAction,
+			int idProf, String ap);
+
 	public User getUserById(Long id);
 
 	public User addUser(User user);

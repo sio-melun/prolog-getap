@@ -108,6 +108,9 @@ public interface IFManagerGeTAP {
 
 	public List<DateStats> getAllMois(String annee);
 
+	public List<User> getAllEleveByAAP(String annee, String dateAction,
+			int idProf, String ap);
+
 	public int getFirstMois(String annee);
 
 	public AccPersonalise getAPById(int id);

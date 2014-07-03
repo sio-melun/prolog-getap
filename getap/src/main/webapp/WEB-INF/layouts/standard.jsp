@@ -41,15 +41,11 @@
 		<script type="text/javascript" src="../../styles/javascript/jquery-ui.verymin.js"></script>
 		<!-- <script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>-->		
 		<script>
+		$.fn.dataTable.TableTools.defaults.aButtons = [ "copy", "csv", "xls" ];
 		$(document).ready(function() {
 			$('.dataTable').dataTable( {
-				"sDom ": 'T<"clear ">lfrtip',
-		        "oTableTools ": {
-		            "aButtons ": [
-		                "csv "
-		            ]
-		        },
-				"oLanguage": {
+				"dom": 'T<"clear">lfrtip',
+		    	"oLanguage": {
 		        	"sEmptyTable": "Aucune donnée correspondante",
 					"sLoadingRecords": "Traitement en cour...",
 					"sProcessing": "Traitement en cour...",

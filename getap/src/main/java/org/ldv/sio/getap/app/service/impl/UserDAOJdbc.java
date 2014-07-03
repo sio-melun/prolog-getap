@@ -357,4 +357,14 @@ public class UserDAOJdbc implements IFUserDAO {
 
 	}
 
+	public List<User> getAllEleveByAAP(String annee, String dateAction,
+			int idProf, String ap) {
+		return jdbcTemplate.query("SELECT user.* " + "FROM user, dctap, ap "
+				+ "WHERE dctap.idEleve = user.id AND dctap.idAP = ap.id "
+				+ "AND dctap.anneeScolaire = '" + annee + "' "
+				+ "AND dctap.dateAction = '" + dateAction + "' "
+				+ "AND ap.libelle = '" + ap + "' " + "AND dctap.idProf = "
+				+ idProf + " " + "GROUP BY user.id "
+				+ "ORDER BY dctap.dateAction", new UserMapper());
+	}
 }

@@ -291,6 +291,8 @@ public class AdminController {
 			@RequestParam(value = "mois", required = false, defaultValue = "default") String numMois,
 			Model model) {
 
+		java.sql.Date dateAction;
+
 		if (annee.equals("default")) {
 			annee = org.ldv.sio.getap.utils.UtilSession
 					.getAnneeScolaireInSession();
