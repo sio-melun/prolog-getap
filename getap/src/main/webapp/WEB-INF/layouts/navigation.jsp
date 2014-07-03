@@ -1,14 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="nav">
 	<div class="table">
-
-		<c:if test="${user.role != null}">
-			<ul class="select">
-					<li><a href="#" onClick="history.back();"><img src="../../images/retour.png"></a></li>
-			</ul>
-		</c:if>
 
 		<c:if test="${user.role == 'eleve'}">
 			<ul class="select">

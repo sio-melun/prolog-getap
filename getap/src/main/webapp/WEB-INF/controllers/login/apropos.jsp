@@ -19,6 +19,11 @@
 	<li>Florian Laforest</li>
 	<li>Nicolas Barroso</li>
 	<li>Grégoire Robert</li>
+	<li>(Classe SIO SLAM du Lycée Léonard de Vinci – Melun 2012-2013)</li>
+	<li>Mélanie Baptistia</li>
+	<li>(Classe SIO SLAM du Lycée Léonard de Vinci – Melun 2013-2014)</li>
+	<li>Vyach Sellathurai</li>
+  <li>Jérôme Pros</li>
 </ul>
 
 <h3>Test de l'infrastructure système (Tomcat)</h3>
