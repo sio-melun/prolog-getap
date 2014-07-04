@@ -6,7 +6,6 @@ import java.util.List;
 import org.ldv.sio.getap.app.FormAjoutAp;
 import org.ldv.sio.getap.app.User;
 import org.ldv.sio.getap.app.UserLoginCriteria;
-import org.ldv.sio.getap.app.UserSearchCriteria;
 import org.ldv.sio.getap.app.service.IFHauthLoginService;
 import org.ldv.sio.getap.app.service.IFManagerGeTAP;
 import org.ldv.sio.getap.utils.UtilSession;
@@ -50,7 +49,7 @@ public class LoginController {
    *          The criteria to authenticate
    */
   @RequestMapping(value = "index", method = RequestMethod.GET)
-  public void index(UserLoginCriteria userSearchCriteria, Model model) {
+  public void index(UserLoginCriteria userLoginCriteria, Model model) {
     addParamAcc(model);
   }
 
@@ -67,8 +66,7 @@ public class LoginController {
    */
   @RequestMapping(value = "authenticate", method = RequestMethod.POST)
   public String authenticate(FormAjoutAp formAjout,
-      UserLoginCriteria userLoginCriteria, BindingResult bindResult,
-      Model model, UserSearchCriteria userSearchCriteria) {
+      UserLoginCriteria userLoginCriteria, BindingResult bindResult, Model model) {
 
     addParamAcc(model);
 
@@ -91,6 +89,13 @@ public class LoginController {
       manager.logUser(user);
       String anneeScolaire = manager.getCurrentAnneeScolaire();
       UtilSession.setAnneeScolaireInSession(anneeScolaire);
+
+      // suppression des anciennes données du modèle
+      // sinon elles sont passées par url
+      // pour vérifier cela, il suffit de commenter la ligne ci-dessous
+      // et d'observer l'url juste après un login réussi
+      model.asMap().clear();
+
       model.addAttribute("userAuth", user);
       // User userIn = UtilSession.getUserInSession();
 

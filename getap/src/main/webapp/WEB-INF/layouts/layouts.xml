@@ -8,14 +8,10 @@
 	
 	<!-- Layout -->
 	<definition name="standard-layout" template="/WEB-INF/layouts/standard.jsp">
+	  <put-attribute name="title" value="titre" />
 		<put-attribute name="header" value="/WEB-INF/layouts/header.jsp" />
 		<put-attribute name="navigation" value="/WEB-INF/layouts/navigation.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
-	</definition>
-	
-	<definition name="404" extends="standard-layout">
-	    <put-attribute name="title" value="Erreur" />
-  		<put-attribute name="body" value="/WEB-INF/error/404.jsp" />
 	</definition>
 	
 </tiles-definitions>

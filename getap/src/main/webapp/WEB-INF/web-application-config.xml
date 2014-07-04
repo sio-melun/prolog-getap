@@ -24,33 +24,6 @@
 		<bean class="org.ldv.sio.getap.web.ActorAccessInterceptor" />
 	</mvc:interceptors>
 	
-	<!-- Configure Apache Tiles for the view -->
-	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/layouts/layouts.xml</value>
-				<value>/WEB-INF/controllers/eleve/views.xml</value>
-				<value>/WEB-INF/controllers/prof-intervenant/views.xml</value>
-				<value>/WEB-INF/controllers/prof-principal/views.xml</value>
-				<value>/WEB-INF/controllers/admin/views.xml</value>
-				<value>/WEB-INF/controllers/login/views.xml</value>
-				<value>/WEB-INF/controllers/profil/views.xml</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		
-		<!-- <property name="contentType" value="text/html;charset=UTF-8" /> -->
-				
-		<property name="requestContextAttribute" value="requestContext" />
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</bean>
-
-
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -94,4 +67,32 @@
 	</bean>
 
 	<context:property-placeholder location="classpath:cron.properties, classpath:jdbc.properties, classpath:mail.properties" />
+	
+  <bean id="viewResolver"
+    class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    
+    <!-- <property name="contentType" value="text/html;charset=UTF-8" /> -->
+        
+    <property name="requestContextAttribute" value="requestContext" />
+    <property name="viewClass"
+      value="org.springframework.web.servlet.view.tiles2.TilesView" />
+  </bean>
+
+	
+  <!-- Configure Apache Tiles for the view -->
+  <bean id="tilesConfigurer"
+    class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+    <property name="definitions">
+      <list>
+        <value>/WEB-INF/layouts/layouts.xml</value>
+        <value>/WEB-INF/controllers/eleve/views.xml</value>
+        <value>/WEB-INF/controllers/prof-intervenant/views.xml</value>
+        <value>/WEB-INF/controllers/prof-principal/views.xml</value>
+        <value>/WEB-INF/controllers/admin/views.xml</value>
+        <value>/WEB-INF/controllers/login/views.xml</value>
+        <value>/WEB-INF/controllers/profil/views.xml</value>
+        <value>/WEB-INF/error/views.xml</value>
+      </list>
+    </property>
+  </bean>
 </beans>
