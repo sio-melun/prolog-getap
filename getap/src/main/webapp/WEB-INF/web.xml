@@ -2,7 +2,7 @@
 
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee">
 
 	<!-- The front controller of the Spring MVC Web application, responsible 
 		for handling all application requests -->
@@ -28,17 +28,17 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/error/layout-404.jsp</location>
+		<location>/WEB-INF/error/404.jsp</location>
 	</error-page>
 
 	<error-page>
 		<error-code>405</error-code>
-		<location>/WEB-INF/error/layout-404.jsp</location>
+		<location>/WEB-INF/error/404.jsp</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
-		<location>/WEB-INF/error/layout-404.jsp</location>
+		<location>/WEB-INF/error/404.jsp</location>
 	</error-page>
 
   <filter>
@@ -57,12 +57,5 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-
-	
-<!-- 
-	<listener>
-        <listener-class>org.ldv.sio.getap.init.Initialisation</listener-class>
-  </listener>
- -->	
  
 </web-app>
