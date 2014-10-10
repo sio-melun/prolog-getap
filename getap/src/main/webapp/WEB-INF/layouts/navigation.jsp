@@ -62,6 +62,21 @@
       </form:form>
       </div>
 </c:if>
+<c:if test="${not empty user}">
+    <c:if test="${user.role != null}">
+      <ul class="select">
+        <li><a href="<c:url value="/app/profil/edit?id=${user.id}"/>"
+          target="_self"><b>Mon compte</b></a></li>
+        <li><a class="deco" href="<c:url value="/app/login/logout" />"
+          target="_self"><img
+            src="<c:url value="../../images/CoTransparent.png"/>"  width="131" height="23"/> </a></li>
+
+        <%-- <li><img class="deco" src="<c:url value="../../images/BoutonTransparent.png"/>" /></li> --%>
+      </ul>
+    </c:if>
+    
+ </c:if>
+
 
 	</div>
 </div>
