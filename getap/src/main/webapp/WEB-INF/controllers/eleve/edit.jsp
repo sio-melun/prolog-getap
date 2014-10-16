@@ -25,31 +25,22 @@
 	        </div> --%>
 	        <select name="minutes" id="minutes">
 				<% 
-				for(int i = 1; i <= 10; i++)
+				for(int i = 10; i <= 10*6*4; i+=10)
 				{
 				%>
-					<option value="<%=i*30%>">
+					<option value="<%=i%>">
 					<%
-					if(i%2 == 0)
+					if(i%60 == 0)
 					{
 					%>
-						0<%=i/2%> h 00 minute
+						0<%=i/60%> h 00 minute
 					<%
 					}
 					else
 					{
-						if((i-1) < 2)
-						{
 							%>
-							00 h 30 minutes
+							0<%=(i/60)%> h <%=(i%60)%> minutes
 							<%
-						}
-						else
-						{
-							%>
-							0<%=((i-1)/2)%> h 30 minutes
-							<%
-						}
 					}
 					%>
 					</option>
