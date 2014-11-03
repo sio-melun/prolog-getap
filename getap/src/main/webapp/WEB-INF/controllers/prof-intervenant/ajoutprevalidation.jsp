@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 	
 <h3 class="titre3">Création d'une liste<br/>de prevalidation</h3>
 
@@ -33,18 +33,27 @@
 			<div class="form-row">
 				<label for="minutes">Durée de l'activité :
 				</label>
-				<%-- <div class="input">
-					<form:input path="minutes" />
-				</div> --%>
-				<select name="minutes" id="minutes">
-				<% for(int i=5; i<=300; i+=5) {
-					if( (int) i/60 != 0 ){%>
-						<option value="<%=i%>"><%=(int)i/60 %>h <%=(int)i%60 %>min</option>
-					<% } else { %>
-						<option value="<%=i%>"><%=(int)i%60 %>min</option>
-					<% } 
-				}%>
-				</select>
+     <select name="minutes" id="minutes">
+                  <%-- end="10*6*4" --%>
+          <c:forEach var="i" begin="0" end="240" step="10">
+             <option value="${i}" <c:if test="${i == minute}"> selected </c:if> >
+             <c:choose>
+               <c:when test="${(i%60) == 0}">
+                <fmt:parseNumber var="mn" integerOnly="true" 
+                  type="number" value="${i/60}" />
+                 0${mn} h 00 minute
+              </c:when>
+              <c:otherwise>
+                <fmt:parseNumber var="hh" integerOnly="true" 
+                   type="number" value="${i/60}" />
+                <fmt:parseNumber var="mn" integerOnly="true" 
+                   type="number" value="${i%60}" />
+                 0${(hh)} h ${mn}  minutes
+            </c:otherwise>
+            </c:choose>
+          </option>
+          </c:forEach>
+      </select>
 			</div>
 
 			<div class="form-row">

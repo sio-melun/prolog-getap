@@ -94,7 +94,6 @@ public class ElevesController {
     formDctap.setAccPersId(currentDctap.getAccPers().getId());
     formDctap.setMinutes(currentDctap.getMinutes());
     model.addAttribute("minute", currentDctap.getMinutes());
-
     model.addAttribute("lesProfs", manager.getAllProf());
     model.addAttribute("etat", manager.getDVCTAPById(formDctap.getId())
         .getEtat());

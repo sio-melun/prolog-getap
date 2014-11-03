@@ -28,9 +28,7 @@
 			<div class="form-row">
 				<label for="minutes">Durée de l'activité :
 				</label>
-				<%-- <div class="input">
-					<form:input path="minutes" />
-				</div> --%>
+			
 				<select name="minutes" id="minutes">
 <% 
         for(int i = 10; i <= 10*6*4; i+=10)
